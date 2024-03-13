@@ -2,14 +2,16 @@
   <Carousel
     :itemsToShow="3.95"
     :wrapAround="true"
-    :autoplay="7000"
+    :autoplay="8000"
     :transition="500"
   >
     <Slide
-      v-for="certification in certifications.certificationsCollection"
-      :key="certification.id"
+      v-for="personalSkill in personalSkills.personalSkillsCollection"
+      :key="personalSkill.id"
     >
-      <div class="carousel__item"><Card :infoCard="certification" /></div>
+      <div class="carousel__item">
+        <Card :infoCard="personalSkill" />
+      </div>
     </Slide>
     <template #addons>
       <Navigation />
@@ -18,12 +20,12 @@
 </template>
 
 <script setup>
-import Card from "@/components/Card.vue";
-import { useCertifications } from "@/stores/certifications";
+import Card from "./Card.vue";
 import "vue3-carousel/dist/carousel.css";
+import { usePersonalSkills } from "@/stores/personalSkills";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
-const certifications = useCertifications();
+const personalSkills = usePersonalSkills();
 </script>
 
 <style scoped>

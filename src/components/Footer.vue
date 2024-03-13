@@ -1,7 +1,7 @@
 <template>
   <div
     data-aos="fade-up"
-    class="w-full h-44 md:h-60 bg-gray-200 flex flex-col justify-center items-center mt-7"
+    class="w-screen h-44 md:h-60 bg-gray-200 flex flex-col justify-center items-center mt-7"
   >
     <Nav />
 

@@ -1,6 +1,6 @@
 <template>
   <Header class="fixed z-10 top-0" />
-  <main class="container md:mx-auto space-y-5 mt-24 w-screen">
+  <main class="container md:mx-auto mt-24">
     <RouterView />
   </main>
   <Footer />

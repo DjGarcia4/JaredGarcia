@@ -1,125 +1,122 @@
 <template>
-  <div class="flex justify-center items-center md:w-5/6 mx-5 md:mx-auto">
-    <div
-      data-aos="fade-right"
-      class="text-center md:text-left md:w-7/12 space-y-3 w-1/2"
-    >
-      <p class="text-1xl md:text-4xl text-gray-400">
-        <span class="text-gray-600 font-bold">Hey there</span>
-        , if you've made it this far!
-      </p>
-      <p class="text-2xl md:text-4xl text-gray-400 hidden md:block">
-        Great to see you here! In this section, you can learn a bit more about
-        me and my passion for programming.
-      </p>
+  <div class="flex flex-col overflow-x-hidden">
+    <div class="flex justify-center items-center md:w-5/6 mx-5 md:mx-auto">
+      <div
+        data-aos="fade-right"
+        class="text-center md:text-left md:w-7/12 space-y-3 w-1/2"
+      >
+        <p class="text-1xl md:text-4xl text-gray-400">
+          <span class="text-gray-600 font-bold">Hey there</span>
+          , if you've made it this far!
+        </p>
+        <p class="text-2xl md:text-4xl text-gray-400 hidden md:block">
+          Great to see you here! In this section, you can learn a bit more about
+          me and my passion for programming.
+        </p>
 
-      <p class="tracking-in-expand text-2xl md:text-4xl text-gray-400">
-        <span class="text-2xl md:text-6xl text-green-500 font-bold"
-          >Enjoy reading!</span
-        >
-      </p>
-    </div>
-    <div data-aos="fade-left" class="w-1/2 md:w-auto">
-      <img
-        src="/img/memojis/party.png"
-        alt="Image Memoji Home"
-        class="w-44 h-44 md:w-80 md:h-80"
-      />
-    </div>
-  </div>
-  <div
-    class="flex gap-2 md:gap-14 flex-col md:flex-row justify-center items-center md:w-5/6 mx-5 md:mx-auto"
-  >
-    <div data-aos="fade-right" class="">
-      <img
-        src="/img/memojis/greeting.png"
-        alt="Image Memoji Home"
-        class="w-36 h-48 md:w-72 md:h-96"
-      />
-    </div>
-    <div
-      data-aos="fade-left"
-      class="tracking-in-expand text-center md:text-left md:w-7/12 space-y-1"
-    >
-      <p class="text-1xl md:text-4xl text-gray-400">
-        Alright, I'll introduce myself again...
-      </p>
-      <p class="text-1xl md:text-4xl text-gray-400">Hello, my name is</p>
-      <p class="text-2xl md:text-6xl text-gray-600 font-bold">Jared Garcia</p>
-      <p class="text-1xl md:text-4xl text-gray-400">
-        I am
-        <span class="text-2xl md:text-6xl text-green-500 font-bold"
-          >Frontend Developer</span
-        >
-      </p>
-    </div>
-  </div>
-  <div class="mx-8 pt-5 md:pt-10 md:mx-16">
-    <TitleSection>About Me</TitleSection>
-    <div class="flex gap-5 flex-col md:flex-row md:mx-auto">
-      <div data-aos="fade-right" class="text-left md:w-10/12 space-y-3">
-        <p class="text-[20px] md:text-3xl text-gray-400">
-          I'm a passionate
-          <span class="font-bold">computer science engineer</span> with
-          expertise in <span class="font-bold">web development</span>. I thrive
-          on creative challenges and
-          <span class="font-bold">constantly seek to expand my skills</span>. A
-          <span class="font-bold">team player</span> at heart, I excel in
-          <span class="font-bold">problem-solving</span> and aim to deliver
-          <span class="font-bold">quality</span> and
-          <span class="font-bold">reliability</span> in all my endeavors.
+        <p class="tracking-in-expand text-2xl md:text-4xl text-gray-400">
+          <span class="text-2xl md:text-6xl text-green-500 font-bold"
+            >Enjoy reading!</span
+          >
         </p>
       </div>
-      <div data-aos="fade-left" class="flex justify-center">
+      <div data-aos="fade-left" class="w-1/2 md:w-auto">
         <img
-          src="/img/memojis/like.png"
+          src="/img/memojis/party.png"
           alt="Image Memoji Home"
-          class="w-44 h-44 md:w-72 md:h-72"
+          class="w-44 h-44 md:w-80 md:h-80"
         />
       </div>
     </div>
-    <Skills />
-    <TitleSection>Personal Skills</TitleSection>
-    <!-- <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-28">
-      <SkillPersonal v-for="i in 3" />
-    </div> -->
-    <Carousel
-      :itemsToShow="3.95"
-      :wrapAround="true"
-      :autoplay="8000"
-      :transition="500"
+    <div
+      class="flex gap-2 md:gap-14 flex-col md:flex-row justify-center items-center md:w-5/6 mx-5 md:mx-auto"
     >
-      <Slide v-for="slide in 10" :key="slide">
-        <div class="carousel__item"><SkillPersonal /></div>
-      </Slide>
-      <template #addons>
-        <Navigation />
-      </template>
-    </Carousel>
-    <TitleSection>Certifications</TitleSection>
-    <Carousel
-      :itemsToShow="3.95"
-      :wrapAround="true"
-      :autoplay="7000"
-      :transition="500"
-    >
-      <Slide v-for="slide in 10" :key="slide">
-        <div class="carousel__item"><Certifications /></div>
-      </Slide>
-      <template #addons>
-        <Navigation />
-      </template>
-    </Carousel>
+      <div data-aos="fade-right" class="">
+        <img
+          src="/img/memojis/greeting.png"
+          alt="Image Memoji Home"
+          class="w-36 h-48 md:w-72 md:h-96"
+        />
+      </div>
+      <div
+        data-aos="fade-left"
+        class="tracking-in-expand text-center md:text-left md:w-7/12 space-y-1"
+      >
+        <p class="text-1xl md:text-4xl text-gray-400">
+          Alright, I'll introduce myself again...
+        </p>
+        <p class="text-1xl md:text-4xl text-gray-400">Hello, my name is</p>
+        <p class="text-2xl md:text-6xl text-gray-600 font-bold">Jared Garcia</p>
+        <p class="text-1xl md:text-4xl text-gray-400">
+          I am
+          <span class="text-2xl md:text-6xl text-green-500 font-bold"
+            >Frontend Developer</span
+          >
+        </p>
+      </div>
+    </div>
+    <div class="mx-8 pt-5 md:pt-10 md:mx-16">
+      <TitleSection>About Me</TitleSection>
+      <div class="flex gap-5 flex-col md:flex-row md:mx-auto">
+        <div data-aos="fade-right" class="text-left md:w-10/12 space-y-3">
+          <p class="text-[20px] md:text-3xl text-gray-400">
+            I'm a passionate
+            <span class="font-bold">computer science engineer</span> with
+            expertise in <span class="font-bold">web development</span>. I
+            thrive on creative challenges and
+            <span class="font-bold">constantly seek to expand my skills</span>.
+            A <span class="font-bold">team player</span> at heart, I excel in
+            <span class="font-bold">problem-solving</span> and aim to deliver
+            <span class="font-bold">quality</span> and
+            <span class="font-bold">reliability</span> in all my endeavors.
+          </p>
+        </div>
+        <div data-aos="fade-left" class="flex justify-center">
+          <img
+            src="/img/memojis/like.png"
+            alt="Image Memoji Home"
+            class="w-44 h-44 md:w-72 md:h-72"
+          />
+        </div>
+      </div>
+      <Skills />
+
+      <TitleSection>My Personal Skills</TitleSection>
+
+      <PersonalSkills />
+
+      <TitleSection>My Certifications</TitleSection>
+      <Certifications />
+      <div class="flex gap-5 flex-col mx-0 md:flex-row md:mx-auto mt-5">
+        <div data-aos="fade-right" class="flex justify-center">
+          <img
+            src="/img/memojis/secret.png"
+            alt="Image Memoji Home"
+            class="w-36 h-44 md:w-64 md:h-72"
+          />
+        </div>
+        <div data-aos="fade-left" class="text-left md:w-10/12 space-y-3">
+          <TitleSection>And stepping away from work...</TitleSection>
+          <p class="text-[20px] md:text-3xl text-gray-400">
+            I'm passionate about playing video games, especially FIFA, where I
+            enjoy competing and improving my skills. I also have a great
+            interest in reading, finding inspiration and learning in a wide
+            variety of genres. Additionally, I love playing sports like soccer,
+            volleyball, and basketball, which keep me active and fit. Lastly, I
+            greatly enjoy board games, with Monopoly being one of my favorites,
+            as it combines strategy and fun in a unique experience.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import TitleSection from "@/components/TitleSection.vue";
 import Skills from "@/components/Skills.vue";
-import SkillPersonal from "@/components/SkillPersonal.vue";
+import PersonalSkills from "@/components/PersonalSkills.vue";
 import Certifications from "@/components/Certifications.vue";
-import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 </script>
 <style scoped>
 .tracking-in-expand {
@@ -162,42 +159,5 @@ import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
   100% {
     opacity: 1;
   }
-}
-
-.carousel__slide {
-  padding: 5px;
-}
-
-.carousel__viewport {
-  perspective: 2000px;
-}
-
-.carousel__track {
-  transform-style: preserve-3d;
-}
-
-.carousel__slide--sliding {
-  transition: 0.5s;
-}
-
-.carousel__slide {
-  opacity: 0.5;
-  transform: rotateY(0) scale(0.8);
-}
-
-.carousel__slide--prev {
-  opacity: 1;
-  transform: rotateY(0) scale(0.8);
-}
-
-.carousel__slide--next {
-  opacity: 1;
-  transform: rotateY(0) scale(0.8);
-}
-
-.carousel__slide--active {
-  opacity: 1;
-  transform: rotateY(0) scale(1);
-  z-index: 10;
 }
 </style>

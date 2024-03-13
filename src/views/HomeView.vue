@@ -134,8 +134,8 @@
         :autoplay="3000"
         :transition="500"
       >
-        <Slide v-for="slide in 10" :key="slide">
-          <div class="carousel__item"><Project /></div>
+        <Slide v-for="project in projects.projectsCollection" :key="project.id">
+          <div class="carousel__item"><Project :project="project" /></div>
         </Slide>
         <template #addons>
           <Navigation />
@@ -160,6 +160,9 @@ import Skills from "@/components/Skills.vue";
 import "vue3-carousel/dist/carousel.css";
 import TitleSection from "@/components/TitleSection.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { useProjects } from "@/stores/projects";
+
+const projects = useProjects();
 const router = useRouter();
 </script>
 

@@ -1,14 +1,20 @@
 <template>
   <div class="bg-white rounded-xl shadow-xl w-80">
-    <img src="/img/project.jpg" alt="" class="rounded-t-xl" />
+    <img :src="project.image" alt="" class="rounded-t-xl" />
     <div class="px-5 pb-5 md:px-9 md:pb-9">
       <div class="my-3 flex">
-        <Skill v-for="i in 3" />
+        <SkillProject
+          v-for="(skill, index) in project.technologies"
+          :key="index"
+          :skill="skill"
+        />
       </div>
       <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-600">Title</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-600">
+          {{ project.title }}
+        </h2>
         <p class="text-gray-400">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora.
+          {{ project.description }}
         </p>
       </div>
       <div class="flex justify-end mt-4">
@@ -37,7 +43,11 @@
 
 <script setup>
 import ButtonMain from "./ButtonMain.vue";
-import Skill from "./SkillProject.vue";
+import SkillProject from "./SkillProject.vue";
+
+defineProps({
+  project: { type: Object },
+});
 </script>
 
 <style scoped></style>

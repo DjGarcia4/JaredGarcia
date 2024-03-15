@@ -1,11 +1,11 @@
 <template>
   <div
     data-aos="fade-up"
-    class="w-screen h-32 md:h-60 flex flex-col justify-center items-center mt-2 bg-gray-200"
+    class="w-screen h-48 md:h-60 flex flex-col justify-center items-center mt-2 bg-white"
   >
     <!-- <Nav /> -->
 
-    <div class="space-x-5 flex justify-center mt-5">
+    <div class="space-x-5 flex justify-center mt-2">
       <a
         href="https://github.com/DjGarcia4"
         target="_blank"

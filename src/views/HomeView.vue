@@ -152,6 +152,7 @@
 
       <!-- Skills -->
       <Skills />
+      <Reviews />
       <div id="contact">
         <TitleSection>Contact Me!</TitleSection>
         <FormContact />
@@ -169,12 +170,11 @@ import "vue3-carousel/dist/carousel.css";
 import TitleSection from "@/components/TitleSection.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { useProjects } from "@/stores/projects";
-import { useModalStore } from "@/stores/modal";
+import Reviews from "@/components/Reviews.vue";
 import FormContact from "@/components/FormContact.vue";
 
 const projects = useProjects();
 const router = useRouter();
-const modal = useModalStore();
 
 const scrollToContact = () => {
   const contactSection = document.getElementById("contact");

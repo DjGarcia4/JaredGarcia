@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TitleSection>Skills</TitleSection>
+    <TitleSection>My Skills</TitleSection>
     <div
       class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-24"
     >

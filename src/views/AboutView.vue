@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col overflow-x-hidden overflow-y-hidden">
+  <div class="flex flex-col overflow-hidden">
     <div class="flex justify-center items-center md:w-5/6 mx-5 md:mx-auto">
       <div
         data-aos="fade-right"

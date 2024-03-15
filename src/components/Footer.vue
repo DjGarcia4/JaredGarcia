@@ -1,7 +1,7 @@
 <template>
   <div
     data-aos="fade-up"
-    class="w-screen h-56 md:h-60 flex flex-col justify-center items-center mt-7"
+    class="w-screen h-32 md:h-60 flex flex-col justify-center items-center mt-2 bg-gray-200"
   >
     <!-- <Nav /> -->
 
@@ -79,7 +79,8 @@
         </svg>
       </a>
     </div>
-    <h1 class="text-gray-600">© 2024 Jared Garcia. All right reserved</h1>
+    <h1 class="text-gray-600">For more information!</h1>
+    <!-- <h1 class="text-gray-600">© 2024 Jared Garcia. All right reserved</h1> -->
   </div>
 </template>
 

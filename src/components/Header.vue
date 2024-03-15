@@ -7,3 +7,9 @@
 <script setup>
 import Nav from "@/components/Nav.vue";
 </script>
+
+<style scoped>
+.animate__animated {
+  --animate-duration: 0.2s;
+}
+</style>

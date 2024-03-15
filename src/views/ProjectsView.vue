@@ -10,19 +10,20 @@
       />
     </div>
     <div
-      class="tracking-in-expand text-center md:text-left md:w-7/12 space-y-3"
+      data-aos="fade-left"
+      class="text-center md:text-left md:w-7/12 space-y-3"
     >
-      <p class="text-2xl md:text-4xl text-gray-400">
+      <p class="text-2xl md:text-3xl text-gray-400">
         <span class="text-gray-600 font-bold"
           >Welcome to my project gallery!</span
         >
       </p>
-      <p class="text-2xl md:text-4xl text-gray-400">
+      <p class="text-2xl md:text-3xl text-gray-400">
         Where you can discover my work and passion for programming.
       </p>
 
-      <p class="text-2xl md:text-4xl text-gray-400">
-        <span class="text-3xl md:text-6xl text-green-500 font-bold"
+      <p class="text-2xl md:text-3xl text-gray-400">
+        <span class="text-3xl md:text-5xl text-green-500 font-bold"
           >Explore my projects!</span
         >
       </p>
@@ -34,13 +35,19 @@
   <div
     class="mx-8 md:mx-16 flex flex-col justify-center items-center text-left"
   >
-    <Projects :projects="{ amount: 12 }" />
+    <Projects />
   </div>
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import Projects from "@/components/Projects.vue";
 import TitleSection from "@/components/TitleSection.vue";
+onMounted(() => {
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 10);
+});
 </script>
 
 <style scoped>

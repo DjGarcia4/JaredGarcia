@@ -21,10 +21,11 @@
       </div>
       <div class="flex justify-end mt-4 gap-4 absolute bottom-5 right-5">
         <a
+          v-if="project.page"
           :href="project.page"
           target="_blank"
           rel="noopener noreferrer"
-          class="border-2 py-2 px-4 rounded-lg text-sm md:text-2xl text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all flex justify-center items-center"
+          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all flex justify-center items-center"
         >
           Visit
         </a>
@@ -33,7 +34,7 @@
           :href="project.code"
           target="_blank"
           rel="noopener noreferrer"
-          class="border-2 py-2 px-4 rounded-lg text-sm md:text-2xl text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all flex items-center"
+          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all flex items-center"
           >Code
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +60,6 @@
 </template>
 
 <script setup>
-import ButtonMain from "./ButtonMain.vue";
 import SkillProject from "./SkillProject.vue";
 
 defineProps({

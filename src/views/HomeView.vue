@@ -3,16 +3,16 @@
     class="bg-red flex flex-col md:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-14"
   >
     <div class="tracking-in-expand text-center md:text-left">
-      <p class="text-2xl md:text-4xl text-gray-400">Hello, my name is</p>
-      <p class="text-3xl md:text-6xl text-gray-600 font-bold">Jared Garcia</p>
-      <p class="text-2xl md:text-4xl text-gray-400">
+      <p class="text-2xl md:text-3xl text-gray-400">Hello, my name is</p>
+      <p class="text-3xl md:text-5xl text-gray-600 font-bold">Jared Garcia</p>
+      <p class="text-2xl md:text-3xl text-gray-400">
         I am
-        <span class="text-3xl md:text-6xl text-green-500 font-bold"
+        <span class="text-3xl md:text-5xl text-green-500 font-bold"
           >Frontend Developer</span
         >
       </p>
       <div class="flex flex-row justify-center my-5 space-x-5 items-center">
-        <ButtonMain> Contact Me! </ButtonMain>
+        <ButtonMain @click="modal.handleModal(true)"> Contact Me! </ButtonMain>
         <a
           href="https://drive.google.com/file/d/1GNi77TQDAXmsa0jGcdN3a_QELK-lA0ty/view?usp=drive_link"
           target="_blank"
@@ -106,7 +106,7 @@
     </div>
   </div>
   <div data-aos="fade-up" class="mx-8 py-5 md:py-14 flex justify-center">
-    <p class="text-center text-2xl md:text-4xl text-gray-400 md:w-8/12">
+    <p class="text-center text-2xl md:text-3xl text-gray-400 md:w-8/12">
       My <span class="font-bold text-gray-600">goal</span> is to utilize my
       <span class="font-bold text-gray-600">knowledge</span> and
       <span class="font-bold text-gray-600">experience</span> optimally to
@@ -153,6 +153,7 @@
   </div>
 </template>
 <script setup>
+import { onMounted } from "vue";
 import { useRouter, RouterLink } from "vue-router";
 import ButtonMain from "@/components/ButtonMain.vue";
 import Project from "@/components/Project.vue";
@@ -161,9 +162,17 @@ import "vue3-carousel/dist/carousel.css";
 import TitleSection from "@/components/TitleSection.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { useProjects } from "@/stores/projects";
+import { useModalStore } from "@/stores/modal";
 
 const projects = useProjects();
 const router = useRouter();
+const modal = useModalStore();
+
+onMounted(() => {
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 10);
+});
 </script>
 
 <style scoped>

@@ -1,9 +1,9 @@
 <template>
   <div
     data-aos="fade-up"
-    class="w-screen h-44 md:h-60 bg-gray-200 flex flex-col justify-center items-center mt-7"
+    class="w-screen h-56 md:h-60 flex flex-col justify-center items-center mt-7"
   >
-    <Nav />
+    <!-- <Nav /> -->
 
     <div class="space-x-5 flex justify-center mt-5">
       <a

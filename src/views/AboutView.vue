@@ -5,17 +5,17 @@
         data-aos="fade-right"
         class="text-center md:text-left md:w-7/12 space-y-3 w-1/2"
       >
-        <p class="text-1xl md:text-4xl text-gray-400">
+        <p class="text-1xl md:text-3xl text-gray-400">
           <span class="text-gray-600 font-bold">Hey there</span>
           , if you've made it this far!
         </p>
-        <p class="text-2xl md:text-4xl text-gray-400 hidden md:block">
+        <p class="text-2xl md:text-3xl text-gray-400 hidden md:block">
           Great to see you here! In this section, you can learn a bit more about
           me and my passion for programming.
         </p>
 
-        <p class="tracking-in-expand text-2xl md:text-4xl text-gray-400">
-          <span class="text-2xl md:text-6xl text-green-500 font-bold"
+        <p class="text-2xl md:text-2 3xl text-gray-400">
+          <span class="text-2xl md:text-5xl text-green-500 font-bold"
             >Enjoy reading!</span
           >
         </p>
@@ -40,16 +40,16 @@
       </div>
       <div
         data-aos="fade-left"
-        class="tracking-in-expand text-center md:text-left md:w-7/12 space-y-1"
+        class="text-center md:text-left md:w-7/12 space-y-1"
       >
-        <p class="text-1xl md:text-4xl text-gray-400">
+        <p class="text-1xl md:text-3xl text-gray-400">
           Alright, I'll introduce myself again...
         </p>
-        <p class="text-1xl md:text-4xl text-gray-400">Hello, my name is</p>
-        <p class="text-2xl md:text-6xl text-gray-600 font-bold">Jared Garcia</p>
-        <p class="text-1xl md:text-4xl text-gray-400">
+        <p class="text-1xl md:text-3xl text-gray-400">Hello, my name is</p>
+        <p class="text-2xl md:text-5xl text-gray-600 font-bold">Jared Garcia</p>
+        <p class="text-1xl md:text-3xl text-gray-400">
           I am
-          <span class="text-2xl md:text-6xl text-green-500 font-bold"
+          <span class="text-2xl md:text-5xl text-green-500 font-bold"
             >Frontend Developer</span
           >
         </p>
@@ -57,7 +57,9 @@
     </div>
     <div class="mx-8 pt-5 md:pt-10 md:mx-16">
       <TitleSection>About Me</TitleSection>
-      <div class="flex gap-5 flex-col md:flex-row md:mx-auto">
+      <div
+        class="flex gap-5 flex-col md:flex-row md:mx-auto justify-center items-center"
+      >
         <div data-aos="fade-right" class="text-left md:w-10/12 space-y-3">
           <p class="text-[20px] md:text-3xl text-gray-400">
             I'm a passionate
@@ -92,7 +94,7 @@
           <img
             src="/img/memojis/secret.png"
             alt="Image Memoji Home"
-            class="w-36 h-44 md:w-64 md:h-72"
+            class="w-36 h-44 md:w-60 md:h-72"
           />
         </div>
         <div data-aos="fade-left" class="text-left md:w-10/12 space-y-3">
@@ -113,10 +115,17 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import TitleSection from "@/components/TitleSection.vue";
 import Skills from "@/components/Skills.vue";
 import PersonalSkills from "@/components/PersonalSkills.vue";
 import Certifications from "@/components/Certifications.vue";
+
+onMounted(() => {
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, 10);
+});
 </script>
 <style scoped>
 .tracking-in-expand {

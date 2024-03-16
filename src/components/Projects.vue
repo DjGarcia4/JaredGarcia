@@ -16,5 +16,3 @@ import Project from "@/components/Project.vue";
 import { useProjects } from "@/stores/projects";
 const projects = useProjects();
 </script>
-
-<style scoped></style>

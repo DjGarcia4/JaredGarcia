@@ -67,7 +67,6 @@
 import {
   Dialog,
   DialogPanel,
-  DialogTitle,
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";

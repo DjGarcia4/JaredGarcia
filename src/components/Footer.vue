@@ -3,8 +3,6 @@
     data-aos="fade-up"
     class="w-screen h-48 md:h-60 flex flex-col justify-center items-center mt-2 bg-white"
   >
-    <!-- <Nav /> -->
-
     <div class="space-x-5 flex justify-center mt-2">
       <a
         href="https://github.com/DjGarcia4"
@@ -80,12 +78,5 @@
       </a>
     </div>
     <h1 class="text-gray-600">For more information!</h1>
-    <!-- <h1 class="text-gray-600">© 2024 Jared Garcia. All right reserved</h1> -->
   </div>
 </template>
-
-<script setup>
-import Nav from "./Nav.vue";
-</script>
-
-<style scoped></style>

@@ -127,10 +127,11 @@
 
 <script setup>
 import { ref } from "vue";
+
 import ButtonMain from "./ButtonMain.vue";
+
 import { useModalStore } from "@/stores/modal";
 import { useToast } from "vue-toast-notification";
-
 import emailjs from "@emailjs/browser";
 
 emailjs.init("IlTVG1X5-tzzsmG1i");
@@ -174,16 +175,15 @@ function sendEmail() {
       });
       modal.handleModal(false);
       buttonTextSend.value = "Send ";
+      form.reset();
     })
     .catch((err) => {
       button.textContent = "Send Email";
-      alert(JSON.stringify(err));
-      $toast.error("Oops... something went  wrong.", {
+      console.log(err);
+      $toast.error("Oops... something went  wrong. Try  again later.", {
         duration: 3000,
         position: "top",
       });
     });
 }
 </script>
-
-<style scoped></style>

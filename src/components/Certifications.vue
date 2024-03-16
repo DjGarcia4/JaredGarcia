@@ -21,46 +21,7 @@
 import Card from "@/components/Card.vue";
 import { useCertifications } from "@/stores/certifications";
 import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { Carousel, Slide, Navigation } from "vue3-carousel";
 
 const certifications = useCertifications();
 </script>
-
-<style scoped>
-.carousel__slide {
-  padding: 5px;
-}
-
-.carousel__viewport {
-  perspective: 2000px;
-}
-
-.carousel__track {
-  transform-style: preserve-3d;
-}
-
-.carousel__slide--sliding {
-  transition: 0.5s;
-}
-
-.carousel__slide {
-  opacity: 0.5;
-  transform: rotateY(0) scale(0.8);
-}
-
-.carousel__slide--prev {
-  opacity: 1;
-  transform: rotateY(0) scale(0.8);
-}
-
-.carousel__slide--next {
-  opacity: 1;
-  transform: rotateY(0) scale(0.8);
-}
-
-.carousel__slide--active {
-  opacity: 1;
-  transform: rotateY(0) scale(1);
-  z-index: 10;
-}
-</style>

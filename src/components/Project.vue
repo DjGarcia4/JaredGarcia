@@ -4,11 +4,13 @@
   >
     <img :src="project.image" alt="" class="rounded-t-xl" />
     <div class="px-5 pb-5 md:px-9 md:pb-9">
-      <div class="my-3 flex">
-        <SkillProject
+      <div class="my-3 flex gap-2">
+        <img
           v-for="(skill, index) in project.technologies"
           :key="index"
-          :skill="skill"
+          :src="'/img/skills/' + skill + '.svg'"
+          :alt="skill"
+          class="w-7 h-7"
         />
       </div>
       <div>
@@ -60,12 +62,7 @@
 </template>
 
 <script setup>
-import SkillProject from "./SkillProject.vue";
-
 defineProps({
   project: { type: Object },
 });
 </script>
-
-<style scoped></style>
-./SkillProject.vue

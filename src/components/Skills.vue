@@ -31,9 +31,7 @@ const skills = [
   { name: "Vue.js", bg: "bg-green-400", image: "vue" },
   { name: "React", bg: "bg-blue-400", image: "react" },
   { name: "Node.js", bg: "bg-green-400", image: "node" },
-
   { name: "MongoDB", bg: "bg-green-400", image: "mongo" },
-
   { name: "Git", bg: "bg-red-400", image: "git" },
   { name: "Git", bg: "bg-gray-400", image: "github" },
   { name: "Firebase", bg: "bg-orange-400", image: "firebase" },
@@ -45,5 +43,3 @@ const skills = [
   { name: "pinia", bg: "bg-purple-400", image: "pinia" },
 ];
 </script>
-
-<style scoped></style>

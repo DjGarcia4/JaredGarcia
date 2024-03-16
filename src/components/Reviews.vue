@@ -17,5 +17,3 @@ import Review from "@/components/Review.vue";
 import { useReviewsStore } from "@/stores/reviews";
 const reviews = useReviewsStore();
 </script>
-
-<style scoped></style>

@@ -1,6 +1,7 @@
 import "./assets/main.css";
 import "./assets/css/animate.css";
 import "aos/dist/aos.css";
+import "vue3-carousel/dist/carousel.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
@@ -16,10 +17,6 @@ import { VueFire, VueFireAuth } from "vuefire";
 import { firebaseApp } from "./config/firebase";
 
 const app = createApp(App);
-
-// const resend = new Resend("re_VeACvgkR_8nCTbCSYSXCAy8ojENUSYBtX");
-
-// app.config.globalProperties.$resend = resend;
 
 app.use(VueFire, {
   firebaseApp,

@@ -15,7 +15,7 @@
           class="w-32 h-32 md:w-[290px] md:h-72 mt-5"
         />
       </div>
-      <p data-aos="fade-up" class="text-xl md:text-3xl text-gray-400 my-3">
+      <p data-aos="fade-up" class="text-xl lg:text-3xl text-gray-400 my-3">
         denisjared286@gmail.com
       </p>
       <div data-aos="fade-right">

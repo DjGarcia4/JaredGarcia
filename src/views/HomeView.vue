@@ -1,15 +1,15 @@
 <template>
   <div class="overflow-hidden">
     <div
-      class="bg-red flex flex-col md:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-14"
+      class="bg-red flex flex-col lg:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-14"
     >
-      <div class="tracking-in-expand text-center md:text-left">
+      <div class="tracking-in-expand text-center lg:text-left">
         <p class="text-2xl md:text-3xl text-gray-400">Hello, my name is</p>
         <p class="text-3xl md:text-5xl text-gray-600 font-bold">Jared Garcia</p>
         <p class="text-2xl md:text-3xl text-gray-400">
           I am
           <span class="text-3xl md:text-5xl text-green-500 font-bold"
-            >Frontend Developer</span
+            >Jr. Full Stack Developer</span
           >
         </p>
         <div class="flex flex-row justify-center my-5 space-x-5 items-center">

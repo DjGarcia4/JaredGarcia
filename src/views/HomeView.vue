@@ -104,7 +104,7 @@
         <img
           src="/img/memojis/hello.png"
           alt="Image Memoji Home"
-          class="w-40 h-40 md:w-[300px] md:h-80"
+          class="w-40 h-40 md:w-[301px] md:h-80"
         />
       </div>
     </div>

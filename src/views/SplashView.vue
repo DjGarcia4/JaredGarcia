@@ -37,11 +37,12 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 onMounted(() => {
-  const target = sessionStorage.getItem("originalPath") || "/home";
+  const target = sessionStorage.getItem("originalPath");
+
   setTimeout(() => {
-    router.push(target);
+    router.push(target || "/home"); // Si no hay ruta guardada, manda a /home
     sessionStorage.removeItem("originalPath");
-  }, 5000);
+  }, 3000);
 });
 const icons = [
   "fa-solid fa-code",

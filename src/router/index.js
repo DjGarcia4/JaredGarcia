@@ -30,14 +30,20 @@ const router = createRouter({
 let redirectedOnLoad = false;
 
 router.beforeEach((to, from, next) => {
-  // Solo intercepta en la primera carga (refresh real)
-  if (!redirectedOnLoad && to.path !== "/") {
-    sessionStorage.setItem("originalPath", to.fullPath);
+  if (!redirectedOnLoad) {
     redirectedOnLoad = true;
-    next({ path: "/" });
-  } else {
-    next();
+
+    // Siempre guardamos la ruta a la que se está intentando ir
+    sessionStorage.setItem("originalPath", to.fullPath);
+
+    // Si ya estás en / no redirigimos, solo seguimos
+    if (to.path !== "/") {
+      next({ path: "/" });
+      return;
+    }
   }
+
+  next();
 });
 
 export default router;

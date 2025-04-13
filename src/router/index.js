@@ -27,19 +27,16 @@ const router = createRouter({
     },
   ],
 });
-let redirectedOnLoad = false;
+const redirectedOnLoad = sessionStorage.getItem("redirectedOnce");
 
 router.beforeEach((to, from, next) => {
   if (!redirectedOnLoad) {
-    redirectedOnLoad = true;
+    sessionStorage.setItem("redirectedOnce", "true");
 
-    // Siempre guardamos la ruta a la que se está intentando ir
-    sessionStorage.setItem("originalPath", to.fullPath);
-
-    // Si ya estás en / no redirigimos, solo seguimos
+    // Guardar la ruta actual solo si no es el splash
     if (to.path !== "/") {
-      next({ path: "/" });
-      return;
+      sessionStorage.setItem("originalPath", to.fullPath);
+      return next({ path: "/" }); // Manda al splash
     }
   }
 

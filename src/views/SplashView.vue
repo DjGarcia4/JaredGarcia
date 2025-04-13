@@ -40,8 +40,9 @@ onMounted(() => {
   const target = sessionStorage.getItem("originalPath");
 
   setTimeout(() => {
-    router.push(target || "/home"); // Si no hay ruta guardada, manda a /home
+    router.push(target || "/home");
     sessionStorage.removeItem("originalPath");
+    sessionStorage.removeItem("redirectedOnce");
   }, 3000);
 });
 const icons = [

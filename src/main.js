@@ -16,7 +16,15 @@ import "vue-toast-notification/dist/theme-sugar.css";
 import { VueFire, VueFireAuth } from "vuefire";
 import { firebaseApp } from "./config/firebase";
 
+// Font Awesome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons"; // ← esto es lo nuevo
+library.add(fas, fab); // ← actualizá esta línea
 const app = createApp(App);
+library.add(fas);
+app.component("font-awesome-icon", FontAwesomeIcon);
 
 app.use(VueFire, {
   firebaseApp,

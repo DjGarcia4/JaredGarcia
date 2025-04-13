@@ -3,10 +3,10 @@
     <div class="flex flex-col items-center md:w-1/2">
       <h1
         data-aos="fade-right"
-        class="text-2xl md:text-5xl font-bold text-gray-600 text-center"
+        class="text-2xl md:text-5xl font-semibold text-white text-center w-[30vw]"
       >
-        I look forward to working
-        <span class="text-green-500">together</span>!
+        ¡Espero que trabajemos
+        <span class="text-gradient-animated font-bold">Juntos</span>!
       </h1>
       <div data-aos="zoom-in">
         <img
@@ -52,8 +52,8 @@
         <div class="flex flex-col">
           <label
             for="fullname"
-            class="text-lg md:text-xl text-gray-500 font-medium"
-            >Your Full Name</label
+            class="text-lg md:text-xl text-white font-medium"
+            >Tu Nombre Completo</label
           >
           <input
             type="text"
@@ -64,11 +64,10 @@
             min="3"
           />
         </div>
+
         <div class="flex flex-col">
-          <label
-            for="email"
-            class="text-lg md:text-xl text-gray-500 font-medium"
-            >Your Email</label
+          <label for="email" class="text-lg md:text-xl text-white font-medium"
+            >Tu Correo Electrónico</label
           >
           <input
             type="email"
@@ -78,11 +77,10 @@
             required
           />
         </div>
+
         <div class="flex flex-col">
-          <label
-            for="message"
-            class="text-lg md:text-xl text-gray-500 font-medium"
-            >Your Message</label
+          <label for="message" class="text-lg md:text-xl text-white font-medium"
+            >Tu Mensaje</label
           >
           <textarea
             name="message"
@@ -94,6 +92,7 @@
             min="10"
           ></textarea>
         </div>
+
         <div class="w-full flex justify-center mt-2">
           <button
             class="flex items-center border-2 py-2 px-4 rounded-lg text-sm md:text-2xl text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all w-full justify-center gap-5"
@@ -138,8 +137,8 @@ emailjs.init("IlTVG1X5-tzzsmG1i");
 const modal = useModalStore();
 const $toast = useToast();
 const isCopyingEmail = ref(false);
-const buttonText = ref("Copy Email");
-const buttonTextSend = ref("Send ");
+const buttonText = ref("Copiar Email");
+const buttonTextSend = ref("Enviar");
 
 function copyEmail() {
   const email = "denisjared286@gmail.com";
@@ -160,7 +159,7 @@ function copyEmail() {
 }
 
 function sendEmail() {
-  buttonTextSend.value = "Sending...";
+  buttonTextSend.value = "Enviando...";
   const serviceID = "default_service";
   const templateID = "template_s4cxryd";
   const form = document.getElementById("emailForm");
@@ -169,18 +168,18 @@ function sendEmail() {
   emailjs
     .sendForm(serviceID, templateID, form)
     .then(() => {
-      $toast.success("Email sent! Thanks for your Message!", {
+      $toast.success("¡Correo enviado! ¡Gracias por tu mensaje!", {
         duration: 3000,
         position: "top",
       });
       modal.handleModal(false);
-      buttonTextSend.value = "Send ";
+      buttonTextSend.value = "Enviar";
       form.reset();
     })
     .catch((err) => {
-      button.textContent = "Send Email";
+      button.textContent = "Enviar correo";
       console.log(err);
-      $toast.error("Oops... something went  wrong. Try  again later.", {
+      $toast.error("Ups... algo salió mal. Intenta más tarde.", {
         duration: 3000,
         position: "top",
       });

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center w-screen bg-white">
+  <div class="flex justify-center items-center w-screen">
     <Nav class="animate__animated animate__slideInDown" />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white rounded-xl shadow-xl w-80 relative min-h-[490px] md:min-h-[560px]"
+    class="rounded-xl shadow-xl w-80 relative min-h-[470px] bg-white/10 backdrop-blur-md border border-white/20"
   >
     <img :src="project.image" alt="" class="rounded-t-xl" />
     <div class="px-5 pb-5 md:px-9 md:pb-9">
@@ -14,10 +14,10 @@
         />
       </div>
       <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-600">
+        <h2 class="text-2xl md:text-3xl font-bold text-white">
           {{ project.title }}
         </h2>
-        <p class="text-gray-400">
+        <p class="text-white line-clamp-3">
           {{ project.description }}
         </p>
       </div>
@@ -27,17 +27,17 @@
           :href="project.page"
           target="_blank"
           rel="noopener noreferrer"
-          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all flex justify-center items-center"
+          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-white hover:border-none hover:bg-green-500 hover:scale-110 hover:text-white transition-all flex justify-center items-center"
         >
-          Visit
+          Visitar
         </a>
         <a
           v-if="project.code"
           :href="project.code"
           target="_blank"
           rel="noopener noreferrer"
-          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-gray-400 hover:border-none hover:bg-green-500 hover:font-bold hover:text-white transition-all flex items-center"
-          >Code
+          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-white hover:border-none hover:bg-green-500 hover:scale-110 hover:text-white transition-all flex items-center"
+          >Codigo
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

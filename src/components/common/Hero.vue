@@ -79,6 +79,12 @@
 
 <script setup>
 import ButtonMain from "@/components/ButtonMain.vue";
+const scrollToContact = () => {
+  const contactSection = document.getElementById("contact");
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
 </script>
 
 <style scoped></style>

@@ -57,13 +57,6 @@ import Hero from "@/components/common/Hero.vue";
 const projects = useProjects();
 const router = useRouter();
 
-const scrollToContact = () => {
-  const contactSection = document.getElementById("contact");
-  if (contactSection) {
-    contactSection.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
 onMounted(() => {
   setTimeout(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

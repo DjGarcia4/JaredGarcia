@@ -36,15 +36,6 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-onMounted(() => {
-  const target = sessionStorage.getItem("originalPath");
-
-  setTimeout(() => {
-    router.push(target || "/home");
-    sessionStorage.removeItem("originalPath");
-    sessionStorage.removeItem("redirectedOnce");
-  }, 3000);
-});
 const icons = [
   "fa-solid fa-code",
   "fa-solid fa-user",

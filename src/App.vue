@@ -1,9 +1,5 @@
 <template>
-  <div v-if="route.path === '/'">
-    <!-- Solo splash -->
-    <RouterView />
-  </div>
-
+  <Splash v-if="showSplash" />
   <div v-else>
     <!-- Fondo global (detrás de todo excepto el splash) -->
     <!-- Fondo global -->
@@ -87,6 +83,7 @@ import AOS from "aos";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "./components/Modal.vue";
+import Splash from "./views/Splash.vue";
 
 import { useModalStore } from "./stores/modal";
 import { useRoute } from "vue-router";
@@ -94,6 +91,7 @@ import { useRoute } from "vue-router";
 const modal = useModalStore();
 const route = useRoute();
 const atTop = ref(true);
+const showSplash = ref(true);
 
 const showScrollButton = ref(false);
 const hideHeader = ref(false);
@@ -121,7 +119,9 @@ const scrollToTop = () => {
 onMounted(() => {
   AOS.init();
   window.addEventListener("scroll", handleScroll);
-  modal.handleModal(false);
+  setTimeout(() => {
+    showSplash.value = false;
+  }, 5000);
 });
 </script>
 
@@ -320,7 +320,7 @@ onMounted(() => {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  animation: move-gradient 2s ease infinite;
+  animation: move-gradient 5s ease infinite;
   font-weight: bold;
 }
 

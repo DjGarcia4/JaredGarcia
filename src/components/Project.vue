@@ -2,11 +2,11 @@
   <div
     class="rounded-xl shadow-xl w-80 relative min-h-[470px] bg-white/10 backdrop-blur-md border border-white/20"
   >
-    <img :src="project.image" alt="" class="rounded-t-xl" />
+    <img :src="project.images.cover" alt="" class="rounded-t-xl" />
     <div class="px-5 pb-5 md:px-9 md:pb-9">
       <div class="my-3 flex gap-2">
         <img
-          v-for="(skill, index) in project.technologies"
+          v-for="(skill, index) in project.techStack"
           :key="index"
           :src="'/img/skills/' + skill + '.svg'"
           :alt="skill"
@@ -18,7 +18,7 @@
           {{ project.title }}
         </h2>
         <p class="text-white line-clamp-3">
-          {{ project.description }}
+          {{ project.summary }}
         </p>
       </div>
       <div class="flex justify-end mt-4 gap-4 absolute bottom-5 right-5">

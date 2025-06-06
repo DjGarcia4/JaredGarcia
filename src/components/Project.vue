@@ -22,40 +22,13 @@
         </p>
       </div>
       <div class="flex justify-end mt-4 gap-4 absolute bottom-5 right-5">
-        <a
-          v-if="project.page"
-          :href="project.page"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-white hover:border-none hover:bg-green-500 hover:scale-110 hover:text-white transition-all flex justify-center items-center"
+        <router-link
+          :to="`/project/${project.slug}`"
+          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all shadow-md"
         >
-          Visitar
-        </a>
-        <a
-          v-if="project.code"
-          :href="project.code"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="border-2 py-2 px-4 rounded-lg text-sm md:text-lg text-white hover:border-none hover:bg-green-500 hover:scale-110 hover:text-white transition-all flex items-center"
-          >Codigo
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-code"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M7 8l-4 4l4 4" />
-            <path d="M17 8l4 4l-4 4" />
-            <path d="M14 4l-4 16" />
-          </svg>
-        </a>
+          Ver Proyecto
+          <font-awesome-icon :icon="['fas', 'arrow-right']" class="text-sm" />
+        </router-link>
       </div>
     </div>
   </div>

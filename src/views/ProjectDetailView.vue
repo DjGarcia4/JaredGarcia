@@ -1,15 +1,16 @@
 <template>
-  <div v-if="project" class="space-y-14">
+  <div
+    v-if="project"
+    class="px-4 md:px-0 max-w-6xl mx-auto space-y-8 mt-20 md:space-y-14"
+  >
     <!-- Encabezado -->
-    <div
-      class="text-center space-y-2"
-      data-aos="fade-down"
-      data-aos-duration="800"
-    >
-      <h1 class="text-5xl font-bold text-white tracking-tight drop-shadow">
+    <div class="text-center space-y-2" data-aos="fade-down">
+      <h1
+        class="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow"
+      >
         {{ project.title }}
       </h1>
-      <p class="text-lg text-white/60 italic">
+      <p class="text-sm md:text-lg text-white/60 italic">
         {{ project.summary }}
       </p>
     </div>
@@ -18,8 +19,6 @@
     <div
       class="flex flex-wrap justify-center gap-3 text-white/70 text-sm"
       data-aos="fade-up"
-      data-aos-delay="100"
-      data-aos-duration="600"
     >
       <span
         class="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full border border-white/20"
@@ -52,7 +51,6 @@
     <div
       class="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10 hover:ring-white/20 transition"
       data-aos="zoom-in"
-      data-aos-delay="200"
     >
       <img
         :src="project.images.cover"
@@ -62,11 +60,7 @@
     </div>
 
     <!-- Tecnologías -->
-    <div
-      class="flex flex-wrap gap-3 justify-center"
-      data-aos="fade-up"
-      data-aos-delay="300"
-    >
+    <div class="flex flex-wrap gap-3 justify-center" data-aos="fade-up">
       <div
         v-for="tech in project.techStack"
         :key="tech"
@@ -81,7 +75,6 @@
     <div
       class="max-w-3xl mx-auto bg-white/5 border border-white/10 p-6 rounded-xl text-white/90 text-base leading-relaxed backdrop-blur-lg shadow-md"
       data-aos="fade-right"
-      data-aos-delay="400"
     >
       {{ project.description }}
     </div>
@@ -91,7 +84,6 @@
       <h2
         class="text-2xl text-white font-semibold text-center"
         data-aos="fade-up"
-        data-aos-delay="500"
       >
         Funcionalidades destacadas
       </h2>
@@ -102,7 +94,6 @@
           :key="i"
           class="group flex items-start gap-3 p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-primary/10 hover:border-primary/50 transition"
           :data-aos="'fade-up'"
-          :data-aos-delay="550 + i * 100"
         >
           <font-awesome-icon
             :icon="['fas', 'check-circle']"
@@ -120,7 +111,6 @@
       v-if="project.tags?.length"
       class="flex flex-wrap justify-center gap-2 mt-8"
       data-aos="fade-up"
-      data-aos-delay="700"
     >
       <span
         v-for="tag in project.tags"
@@ -132,11 +122,7 @@
     </div>
 
     <!-- Enlaces -->
-    <div
-      class="flex justify-center gap-4 mt-10"
-      data-aos="zoom-in"
-      data-aos-delay="800"
-    >
+    <div class="flex justify-center gap-4 mt-10" data-aos="zoom-in">
       <a
         v-if="project.liveUrl"
         :href="project.liveUrl"

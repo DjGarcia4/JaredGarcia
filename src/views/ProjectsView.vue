@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="mx-8 md:mx-16">
-    <TitleSection>Projects</TitleSection>
+    <TitleSection>Proyectos</TitleSection>
   </div>
   <div
     class="mx-8 md:mx-16 flex flex-col justify-center items-center text-left"

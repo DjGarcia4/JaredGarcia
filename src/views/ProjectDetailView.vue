@@ -123,15 +123,12 @@
 
     <!-- Enlaces -->
     <div class="flex justify-center gap-4 mt-10" data-aos="zoom-in">
-      <a
-        v-if="project.liveUrl"
-        :href="project.liveUrl"
-        target="_blank"
-        class="flex items-center gap-2 bg-green-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-600 transition"
+      <button
+        @click="router.back()"
+        class="flex items-center gap-2 bg-white/10 text-white px-6 py-2 rounded-lg font-medium border border-white/20 hover:bg-white/20 transition"
       >
-        Ver Sitio
-        <font-awesome-icon :icon="['fas', 'arrow-right']" />
-      </a>
+        <font-awesome-icon :icon="['fas', 'arrow-left']" />
+      </button>
 
       <a
         v-if="project.repoUrl"
@@ -142,6 +139,15 @@
         <font-awesome-icon :icon="['fab', 'github']" />
         Ver Código
       </a>
+      <a
+        v-if="project.liveUrl"
+        :href="project.liveUrl"
+        target="_blank"
+        class="flex items-center gap-2 bg-green-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-600 transition"
+      >
+        Ver Sitio
+        <font-awesome-icon :icon="['fas', 'arrow-right']" />
+      </a>
     </div>
   </div>
 
@@ -151,12 +157,13 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { computed, onMounted } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const route = useRoute();
+const router = useRouter();
 const projects = useProjects();
 
 const project = computed(() =>

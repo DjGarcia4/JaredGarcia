@@ -1,23 +1,40 @@
 <template>
-  <div>
-    <TitleSection> Skills</TitleSection>
+  <section class="py-20">
+    <TitleSection>Tecnologías que domino</TitleSection>
+
     <div
-      class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-24"
+      class="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-24"
     >
-      <div data-aos="fade-right">
+      <!-- Memoji -->
+      <div data-aos="fade-right" class="flex-shrink-0">
         <img
           src="/img/memojis/computer.png"
-          alt="Image Memoji Home"
-          class="w-40 h-44 md:w-64 md:h-72"
+          alt="Memoji Developer"
+          class="w-40 h-44 md:w-60 md:h-72 drop-shadow-2xl transition-transform hover:scale-105"
         />
       </div>
-      <div class="grid grid-cols-5 gap-4">
-        <Skill v-for="(skill, index) in skills" :skill="skill" :key="index">{{
-          skill.name
-        }}</Skill>
+
+      <!-- Skills Grid -->
+      <div
+        data-aos="fade-up"
+        class="grid grid-cols-4 sm:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl"
+      >
+        <Skill
+          v-for="(skill, index) in skills"
+          :key="index"
+          :skill="skill"
+          class="group relative hover:scale-105 transition duration-300 ease-in-out"
+        >
+          <!-- Nombre flotante en mobile -->
+          <p
+            class="text-xs text-white bg-black/50 px-2 py-0.5 rounded-md mt-1 text-center sm:hidden"
+          >
+            {{ skill.name }}
+          </p>
+        </Skill>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

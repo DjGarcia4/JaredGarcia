@@ -3,14 +3,26 @@
     class="bg-red flex flex-col lg:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-14"
   >
     <div class="tracking-in-expand text-center lg:text-left">
-      <p class="text-2xl md:text-3xl text-white">Hola, mi nombre es</p>
-      <p class="text-3xl md:text-5xl text-white font-bold">Jared Garcia</p>
-      <p class="text-2xl md:text-3xl text-white">
-        Soy
-        <span class="text-3xl md:text-5xl font-bold text-gradient-animated">
-          Frontend Developer</span
-        >
-      </p>
+      <div class="space-y-1">
+        <p class="text-2xl md:text-3xl text-white">Hola, mi nombre es</p>
+        <p class="text-3xl md:text-5xl text-white font-bold">Jared Garcia</p>
+        <p class="text-2xl md:text-3xl text-white">
+          Soy
+          <span
+            class="block md:inline text-3xl md:text-5xl font-bold text-gradient-animated"
+          >
+            Frontend Developer
+          </span>
+        </p>
+        <p class="text-2xl md:text-3xl text-white">
+          &
+          <span
+            class="block md:inline text-3xl md:text-5xl font-bold text-gradient-animated"
+          >
+            UX/UI Designer
+          </span>
+        </p>
+      </div>
       <div class="flex flex-row justify-center my-5 space-x-5 items-center">
         <ButtonMain @click="scrollToContact" class="heartbeat">
           Contactame

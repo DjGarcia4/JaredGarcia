@@ -24,6 +24,12 @@ const router = createRouter({
       name: "project",
       component: () => import("../views/ProjectDetailView.vue"),
     },
+    {
+      path: "/certificate/:slug",
+      name: "certificate",
+      component: () =>
+        import("../views/certificates/CertificateDetailView.vue"),
+    },
   ],
 });
 

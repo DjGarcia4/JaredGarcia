@@ -2,7 +2,7 @@
   <div class="overflow-hidden">
     <Hero />
     <div class="mx-8 md:mx-16">
-      <TitleSection>My Projects</TitleSection>
+      <TitleSection>De la idea al código</TitleSection>
       <div data-aos="fade-up">
         <Carousel
           :itemsToShow="3.95"
@@ -21,6 +21,7 @@
           </template>
         </Carousel>
       </div>
+
       <div class="flex justify-center my-5">
         <ButtonMain
           data-aos="fade-up"
@@ -28,6 +29,7 @@
           >Ver mas proyectos...</ButtonMain
         >
       </div>
+      <Services />
 
       <!-- Skills -->
       <Skills />
@@ -53,6 +55,7 @@ import { useProjects } from "@/stores/projects";
 import Reviews from "@/components/Reviews.vue";
 import FormContact from "@/components/FormContact.vue";
 import Hero from "@/components/common/Hero.vue";
+import Services from "@/components/Services/Services.vue";
 
 const projects = useProjects();
 const router = useRouter();

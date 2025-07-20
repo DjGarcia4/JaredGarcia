@@ -39,9 +39,9 @@
         <div data-aos="fade-right" class="text-left md:w-10/12 space-y-6">
           <p class="text-[18px] md:text-2xl text-white leading-relaxed">
             Soy
-            <span class="font-bold text-green-400"
-              >Ingeniero en Ciencias de la Computación</span
-            >
+            <span class="font-bold text-green-400">
+              Ingeniero en Ciencias de la Computación
+            </span>
             y me apasiona crear experiencias digitales que impacten. Tengo
             experiencia sólida en
             <span class="font-bold text-green-400"
@@ -51,10 +51,13 @@
             nivel constantemente.
           </p>
 
+          <!-- Grid con data-aos -->
           <div
             class="grid sm:grid-cols-2 gap-4 text-white/90 text-[16px] md:text-lg"
           >
             <div
+              data-aos="fade-up"
+              data-aos-delay="100"
               class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
             >
               <h4 class="font-bold text-white mb-1 flex items-center gap-2">
@@ -67,6 +70,8 @@
             </div>
 
             <div
+              data-aos="fade-up"
+              data-aos-delay="200"
               class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
             >
               <h4 class="font-bold text-white mb-1 flex items-center gap-2">
@@ -79,6 +84,8 @@
             </div>
 
             <div
+              data-aos="fade-up"
+              data-aos-delay="300"
               class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
             >
               <h4 class="font-bold text-white mb-1 flex items-center gap-2">
@@ -91,6 +98,8 @@
             </div>
 
             <div
+              data-aos="fade-up"
+              data-aos-delay="400"
               class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
             >
               <h4 class="font-bold text-white mb-1 flex items-center gap-2">
@@ -134,68 +143,103 @@
         </div>
 
         <!-- Contenido -->
-        <div data-aos="fade-left" class="text-left md:w-10/12 space-y-6">
-          <TitleSection>Más allá del código...</TitleSection>
-
-          <p class="text-[18px] md:text-2xl text-white leading-relaxed">
-            Porque no todo es escribir líneas de código, también disfruto un
-            montón de cosas que me recargan las pilas:
-          </p>
-
+        <div
+          data-aos="fade-up"
+          class="flex gap-6 flex-col md:flex-row md:mx-auto justify-center items-center mt-10"
+        >
+          <!-- Texto -->
           <div
-            class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white/90 text-[16px] md:text-lg"
+            data-aos="fade-right"
+            data-aos-delay="100"
+            class="text-left md:w-10/12 space-y-6"
           >
-            <!-- Videojuegos -->
-            <div
-              class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
+            <p
+              data-aos="fade-up"
+              data-aos-delay="200"
+              class="text-[18px] md:text-2xl text-white leading-relaxed"
             >
-              <h4 class="font-bold text-white mb-1 flex items-center gap-2">
-                🎮 FIFA Competitivo
-              </h4>
-              <p>
-                Me encanta meterle nivel, mejorar jugadas y ganar con clase (o
-                gritos, depende).
-              </p>
-            </div>
+              Soy
+              <span class="font-bold text-green-400">
+                Ingeniero en Ciencias de la Computación
+              </span>
+              y me apasiona crear experiencias digitales que impacten. Tengo
+              experiencia sólida en
+              <span class="font-bold text-green-400"
+                >desarrollo web frontend</span
+              >
+              y me encanta enfrentar desafíos creativos que me reten a subir de
+              nivel constantemente.
+            </p>
 
-            <!-- Lectura -->
+            <!-- Grid con data-aos por item -->
             <div
-              class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
+              class="grid sm:grid-cols-2 gap-4 text-white/90 text-[16px] md:text-lg"
             >
-              <h4 class="font-bold text-white mb-1 flex items-center gap-2">
-                📚 Libros que inspiran
-              </h4>
-              <p>
-                Desde novelas hasta libros de crecimiento personal, siempre ando
-                buscando qué aprender.
-              </p>
-            </div>
+              <div
+                data-aos="zoom-in"
+                data-aos-delay="300"
+                class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
+              >
+                <h4 class="font-bold text-white mb-1 flex items-center gap-2">
+                  🤝 Trabajo en equipo
+                </h4>
+                <p>
+                  Me gusta colaborar, aprender de otros y sumar al proyecto como
+                  un jugador comprometido.
+                </p>
+              </div>
 
-            <!-- Deportes -->
-            <div
-              class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
-            >
-              <h4 class="font-bold text-white mb-1 flex items-center gap-2">
-                🏐 Fútbol, volley y basket
-              </h4>
-              <p>
-                Jugar y competir me mantiene activo, centrado y con mente clara
-                para volver al código.
-              </p>
-            </div>
+              <div
+                data-aos="zoom-in"
+                data-aos-delay="400"
+                class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
+              >
+                <h4 class="font-bold text-white mb-1 flex items-center gap-2">
+                  🧠 Resolución de problemas
+                </h4>
+                <p>
+                  Disfruto encontrar soluciones creativas, eficientes y que
+                  realmente funcionen.
+                </p>
+              </div>
 
-            <!-- Juegos de mesa -->
-            <div
-              class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
-            >
-              <h4 class="font-bold text-white mb-1 flex items-center gap-2">
-                🎲 Juegos de mesa
-              </h4>
-              <p>
-                Una buena partida de Monopoly y se arma la estrategia con risas
-                de por medio.
-              </p>
+              <div
+                data-aos="zoom-in"
+                data-aos-delay="500"
+                class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
+              >
+                <h4 class="font-bold text-white mb-1 flex items-center gap-2">
+                  🎯 Compromiso con la calidad
+                </h4>
+                <p>
+                  Cada detalle cuenta. Me enfoco en que todo funcione bien, se
+                  vea bien y sea confiable.
+                </p>
+              </div>
+
+              <div
+                data-aos="zoom-in"
+                data-aos-delay="600"
+                class="bg-white/10 p-4 rounded-xl border border-white/10 hover:border-white/25 transition-all"
+              >
+                <h4 class="font-bold text-white mb-1 flex items-center gap-2">
+                  🚀 Ganas de crecer
+                </h4>
+                <p>
+                  Siempre estoy buscando aprender algo nuevo, mejorar mis skills
+                  y asumir nuevos retos.
+                </p>
+              </div>
             </div>
+          </div>
+
+          <!-- Imagen -->
+          <div data-aos="fade-left" class="flex justify-center">
+            <img
+              src="/img/memojis/like.png"
+              alt="Imagen Memoji Sobre Mí"
+              class="w-44 h-44 md:w-72 md:h-72 drop-shadow-xl"
+            />
           </div>
         </div>
       </div>

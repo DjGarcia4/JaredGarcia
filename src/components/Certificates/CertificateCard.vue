@@ -3,7 +3,7 @@
 
   <div
     data-aos="fade-up"
-    class="flex flex-col md:flex-row gap-6 items-center md:items-start text-left shadow-xl p-6 rounded-2xl min-w-64 md:min-w-80 bg-black/90 md:bg-white/10 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all duration-300 max-w-3xl w-full"
+    class="flex flex-col md:flex-row gap-6 items-center md:items-start text-left shadow-xl p-6 rounded-2xl min-w-64 md:min-w-80 bg-white/20 md:bg-white/10 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all duration-300 max-w-3xl w-full"
   >
     <!-- Imagen -->
     <div v-if="certificate.imageUrl" class="flex-shrink-0">

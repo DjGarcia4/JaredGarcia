@@ -2,7 +2,7 @@
   <!-- Wrapper: fondo más opaco en móviles -->
   <!-- <div class="sm:bg-transparent bg-black/80 rounded-xl"> -->
   <div
-    class="rounded-xl shadow-xl w-80 relative min-h-[470px] bg-black/90 md:bg-white/10 backdrop-blur-md border border-white/20"
+    class="rounded-xl shadow-xl w-80 relative min-h-[470px] bg-white/20 md:bg-white/10 backdrop-blur-md border border-white/20"
   >
     <img :src="project.images.cover" alt="" class="rounded-t-xl" />
 

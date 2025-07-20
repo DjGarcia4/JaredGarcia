@@ -9,6 +9,7 @@
           :wrapAround="true"
           :autoplay="3000"
           :transition="500"
+          v-bind="carouselConfig"
         >
           <Slide
             v-for="project in projects.projectsCollection"
@@ -60,9 +61,36 @@ import Services from "@/components/Services/Services.vue";
 const projects = useProjects();
 const router = useRouter();
 
+const carouselConfig = {
+  itemsToShow: 2.5,
+  wrapAround: true,
+  breakpoints: {
+    500: {
+      itemsToShow: 1.4,
+      snapAlign: "center",
+    },
+
+    700: {
+      itemsToShow: 4.3,
+      snapAlign: "center",
+    },
+  },
+};
+
 onMounted(() => {
   setTimeout(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, 10);
 });
 </script>
+
+<style scoped>
+.carousel {
+  --vc-nav-background: rgba(0, 0, 0, 0.3);
+  --vc-nav-color: white;
+  --vc-nav-color-hover: #e5e5e5;
+  --vc-nav-border-radius: 50%;
+  --vc-nav-width: 40px;
+  --vc-nav-height: 40px;
+}
+</style>

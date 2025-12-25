@@ -3,7 +3,7 @@
     type="button"
     class="border-2 py-2 px-4 rounded-lg text-sm md:text-2xl text-white transition-all duration-300 ease-in-out hover:border-none hover:text-white hover:scale-110 animated-gradient"
   >
-    <slot></slot>
+        <slot></slot>
   </button>
 </template>
 

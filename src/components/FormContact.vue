@@ -1,156 +1,219 @@
 <template>
-  <div class="flex flex-col md:flex-row items-center gap-10 md:gap-20">
-    <!-- Columna izquierda -->
-    <div
-      class="flex flex-col items-center md:w-1/2 text-center md:text-left space-y-5"
-    >
-      <h1
-        data-aos="fade-right"
-        class="text-3xl md:text-5xl font-semibold text-white"
-      >
-        ¡Espero que trabajemos
-        <span class="text-gradient-animated font-bold">Juntos</span>!
-      </h1>
+  <div class="grid gap-10 md:grid-cols-2 md:gap-14">
+    <!-- Info de contacto -->
+    <div class="reveal flex flex-col">
+      <h3 class="font-display text-2xl font-bold text-white md:text-3xl">
+        ¿Tenés un proyecto en mente?
+      </h3>
+      <p class="mt-3 text-white/55">
+        Escribime y conversemos. Respondo todos los mensajes.
+      </p>
 
-      <div data-aos="zoom-in">
-        <img
-          src="/img/memojis/callme.png"
-          alt="Image Memoji Home"
-          class="w-32 h-32 md:w-[290px] md:h-72"
+      <button
+        type="button"
+        @click="copyEmail"
+        class="surface surface-hover mt-8 flex items-center gap-3 p-4 text-left"
+      >
+        <span
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent-light"
+        >
+          <font-awesome-icon :icon="['fas', 'envelope']" />
+        </span>
+        <span class="min-w-0">
+          <span class="block text-xs uppercase tracking-wider text-white/40">
+            Email
+          </span>
+          <span class="block truncate text-sm font-medium text-white">
+            {{ profile.email }}
+          </span>
+        </span>
+        <font-awesome-icon
+          :icon="['fas', copied ? 'check' : 'copy']"
+          class="ml-auto shrink-0 text-white/40"
+        />
+      </button>
+
+      <div class="mt-4 flex gap-3">
+        <a
+          :href="profile.socials.github"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          class="link-icon"
+        >
+          <font-awesome-icon :icon="['fab', 'github']" />
+        </a>
+        <a
+          :href="profile.socials.linkedin"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          class="link-icon"
+        >
+          <font-awesome-icon :icon="['fab', 'linkedin']" />
+        </a>
+        <a
+          :href="profile.socials.whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          class="link-icon"
+        >
+          <font-awesome-icon :icon="['fab', 'whatsapp']" />
+        </a>
+        <a
+          :href="profile.socials.instagram"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="link-icon"
+        >
+          <font-awesome-icon :icon="['fab', 'instagram']" />
+        </a>
+      </div>
+
+      <!-- QR de WhatsApp -->
+      <div class="surface mt-6 flex items-center gap-4 p-4">
+        <a
+          :href="profile.socials.whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir chat de WhatsApp"
+          class="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] transition-colors hover:border-accent/40"
+        >
+          <img
+            v-if="profile.whatsappQr"
+            :src="profile.whatsappQr"
+            alt="Código QR de WhatsApp"
+            class="h-full w-full object-contain"
+          />
+          <span
+            v-else
+            class="flex flex-col items-center gap-1.5 text-white/30"
+          >
+            <font-awesome-icon :icon="['fas', 'qrcode']" class="text-3xl" />
+            <span class="text-[10px] uppercase tracking-wider">QR</span>
+          </span>
+        </a>
+        <div class="min-w-0">
+          <span class="block text-xs uppercase tracking-wider text-white/40">
+            WhatsApp
+          </span>
+          <p class="mt-1 text-sm leading-relaxed text-white/60">
+            Escaneá el código y escribime directo por WhatsApp.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <form
+      id="emailForm"
+      @submit.prevent="sendEmail"
+      class="reveal space-y-4"
+    >
+      <div>
+        <label for="fullname" class="mb-1.5 block text-sm font-medium text-white/70">
+          Nombre completo
+        </label>
+        <input
+          type="text"
+          name="fullname"
+          id="fullname"
+          required
+          minlength="3"
+          placeholder="Tu nombre"
+          class="field"
         />
       </div>
 
-      <p data-aos="fade-up" class="text-xl lg:text-2xl text-gray-400">
-        denisjared286@gmail.com
-      </p>
-
-      <div data-aos="fade-right">
-        <ButtonMain class="flex items-center gap-3" @click="copyEmail">
-          <font-awesome-icon icon="copy" /> {{ buttonText }}
-        </ButtonMain>
+      <div>
+        <label for="email" class="mb-1.5 block text-sm font-medium text-white/70">
+          Correo electrónico
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          placeholder="ejemplo@correo.com"
+          class="field"
+        />
       </div>
-    </div>
 
-    <!-- Columna derecha -->
-    <div data-aos="fade-left" class="w-full md:w-1/2">
-      <form id="emailForm" @submit.prevent="sendEmail" class="space-y-6 w-full">
-        <div class="flex flex-col">
-          <label for="fullname" class="text-white mb-1 text-sm font-medium"
-            >Tu Nombre Completo</label
-          >
-          <input
-            type="text"
-            name="fullname"
-            id="fullname"
-            class="w-full px-4 py-3 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-md placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Ingresa tu nombre"
-            required
-            minlength="3"
-          />
-        </div>
+      <div>
+        <label for="message" class="mb-1.5 block text-sm font-medium text-white/70">
+          Mensaje
+        </label>
+        <textarea
+          name="message"
+          id="message"
+          rows="5"
+          required
+          minlength="10"
+          placeholder="Contame sobre tu proyecto..."
+          class="field resize-none"
+        ></textarea>
+      </div>
 
-        <div class="flex flex-col">
-          <label for="email" class="text-white mb-1 text-sm font-medium"
-            >Tu Correo Electrónico</label
-          >
-          <input
-            type="email"
-            name="email"
-            id="email"
-            class="w-full px-4 py-3 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-md placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="ejemplo@correo.com"
-            required
-          />
-        </div>
-
-        <div class="flex flex-col">
-          <label for="message" class="text-white mb-1 text-sm font-medium"
-            >Tu Mensaje</label
-          >
-          <textarea
-            name="message"
-            id="message"
-            rows="5"
-            class="w-full px-4 py-3 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-md placeholder:text-white/60 resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Escribe tu mensaje aquí..."
-            required
-            minlength="10"
-          ></textarea>
-        </div>
-
-        <div class="w-full flex justify-center">
-          <button
-            type="submit"
-            class="w-full md:w-auto flex items-center justify-center gap-3 px-6 py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-bold transition-all shadow-md"
-          >
-            {{ buttonTextSend }}
-            <font-awesome-icon icon="paper-plane" />
-          </button>
-        </div>
-      </form>
-    </div>
+      <button type="submit" class="btn-primary w-full" :disabled="sending">
+        {{ sending ? "Enviando..." : "Enviar mensaje" }}
+        <font-awesome-icon :icon="['fas', 'paper-plane']" />
+      </button>
+    </form>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-
-import ButtonMain from "./ButtonMain.vue";
-
-import { useModalStore } from "@/stores/modal";
-import { useToast } from "vue-toast-notification";
 import emailjs from "@emailjs/browser";
 
+import { toast } from "vue-sonner";
+
+import { profile } from "@/data/profile";
+import { useModalStore } from "@/stores/modal";
+
 emailjs.init("IlTVG1X5-tzzsmG1i");
+
 const modal = useModalStore();
-const $toast = useToast();
-const isCopyingEmail = ref(false);
-const buttonText = ref("Copiar Email");
-const buttonTextSend = ref("Enviar");
+
+const copied = ref(false);
+const sending = ref(false);
 
 function copyEmail() {
-  const email = "denisjared286@gmail.com";
   navigator.clipboard
-    .writeText(email)
+    .writeText(profile.email)
     .then(() => {
-      isCopyingEmail.value = true;
-      buttonText.value = "Email Copied!";
-      $toast.success("Copied to clipboard!", { position: "top" });
-      setTimeout(() => {
-        isCopyingEmail.value = false;
-        buttonText.value = "Copy Email";
-      }, 2000); // Cambiar de vuelta al texto original después de 2 segundos
+      copied.value = true;
+      toast.success("Email copiado", {
+        description: "Pegalo donde quieras y escribime.",
+      });
+      setTimeout(() => (copied.value = false), 2000);
     })
-    .catch((err) => {
-      console.error("Error al copiar el email: ", err);
-    });
+    .catch((err) => console.error("Error al copiar el email:", err));
 }
 
 function sendEmail() {
-  buttonTextSend.value = "Enviando...";
-  const serviceID = "default_service";
-  const templateID = "template_s4cxryd";
+  sending.value = true;
   const form = document.getElementById("emailForm");
-  const button = document.getElementById("submitButton");
 
   emailjs
-    .sendForm(serviceID, templateID, form)
+    .sendForm("default_service", "template_s4cxryd", form)
     .then(() => {
-      $toast.success("¡Correo enviado! ¡Gracias por tu mensaje!", {
-        duration: 3000,
-        position: "top",
+      toast.success("¡Mensaje enviado!", {
+        description: "Gracias por escribir, te respondo muy pronto.",
       });
       modal.handleModal(false);
-      buttonTextSend.value = "Enviar";
       form.reset();
     })
     .catch((err) => {
-      button.textContent = "Enviar correo";
-      console.log(err);
-      $toast.error("Ups... algo salió mal. Intenta más tarde.", {
-        duration: 3000,
-        position: "top",
+      console.error(err);
+      toast.error("Algo salió mal", {
+        description: "No se pudo enviar el mensaje. Intentá de nuevo.",
       });
+    })
+    .finally(() => {
+      sending.value = false;
     });
 }
 </script>

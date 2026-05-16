@@ -1,3 +1,281 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-white/80 font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(16, 185, 129, 0.3);
+    color: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-white;
+    text-wrap: balance;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08080a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #26262d;
+    border-radius: 999px;
+    border: 2px solid #08080a;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #33333d;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-6 md:px-10;
+  }
+
+  .surface {
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.03] backdrop-blur-md;
+  }
+
+  .surface-hover {
+    @apply transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.05];
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-accent-light;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/70;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-ink-950
+      transition-all duration-300 hover:bg-accent-light hover:shadow-glow active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-5 py-2.5 text-sm font-semibold text-white/85
+      transition-all duration-300 hover:border-accent/50 hover:bg-white/[0.04] hover:text-white active:scale-[0.98];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-light via-accent to-accent-dark bg-clip-text text-transparent;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white
+      transition-colors placeholder:text-white/35
+      focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/40;
+  }
+
+  .link-icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-white/70
+      transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent-light;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .bg-mesh {
+    background-color: #08080a;
+    background-image: radial-gradient(
+        ellipse 50% 40% at 15% 0%,
+        rgba(16, 185, 129, 0.12),
+        transparent 70%
+      ),
+      radial-gradient(
+        ellipse 45% 45% at 90% 20%,
+        rgba(16, 185, 129, 0.08),
+        transparent 70%
+      );
+  }
+
+  .grid-overlay {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.022) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000, transparent);
+  }
+}
+
+/* ── Reveal on scroll (CSS scroll-driven, fuera del hilo principal) ──
+   En navegadores sin animation-timeline el elemento queda visible (fallback). */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.reveal,
+.reveal-scale {
+  animation-fill-mode: both;
+  animation-timeline: view();
+}
+
+/* El rango termina dentro de la fase "entry" para que la animación se
+   complete cuando el elemento ya entró por completo al viewport. Así las
+   secciones al final de la página (sin scroll de sobra) no quedan opacas. */
+.reveal {
+  animation-name: reveal-rise;
+  animation-range: entry 2% entry 100%;
+}
+
+.reveal-scale {
+  animation-name: reveal-scale;
+  animation-range: entry 4% entry 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-scale {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Glass + border-glow que sigue el cursor (directiva v-glow) ── */
+.glow-card {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Relleno suave tipo spotlight. */
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--glow-x, 50%) var(--glow-y, -20%),
+    rgba(16, 185, 129, 0.1),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* Borde luminoso: la franja de 1px revela el gradiente posicionado en el cursor. */
+.glow-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    200px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(52, 211, 153, 0.9),
+    rgba(16, 185, 129, 0.2) 42%,
+    transparent 72%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.glow-card.is-glowing::before,
+.glow-card.is-glowing::after {
+  opacity: 1;
+}
+
+/* Barra de progreso de scroll */
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+
+/* ── Toasts (vue-sonner) afinados al tema dark del sitio ── */
+[data-sonner-toaster] {
+  --border-radius: 14px;
+  --normal-bg: rgba(23, 23, 29, 0.92);
+  --normal-border: rgba(255, 255, 255, 0.08);
+  --normal-text: #f4f4f5;
+  --success-bg: rgba(23, 23, 29, 0.92);
+  --success-border: rgba(52, 211, 153, 0.35);
+  --success-text: #f4f4f5;
+  --error-bg: rgba(23, 23, 29, 0.92);
+  --error-border: rgba(248, 113, 113, 0.35);
+  --error-text: #f4f4f5;
+}
+
+[data-sonner-toast] {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 14px 44px -14px rgba(0, 0, 0, 0.75);
+}
+
+[data-sonner-toast] [data-description] {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+[data-sonner-toast][data-type="success"] {
+  box-shadow: 0 14px 44px -14px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(52, 211, 153, 0.12);
+}
+
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: #34d399;
+}
+
+[data-sonner-toast][data-type="error"] [data-icon] {
+  color: #f87171;
+}
+
+[data-sonner-toast] [data-close-button] {
+  background: rgba(23, 23, 29, 0.95);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-sonner-toast] [data-close-button]:hover {
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.4);
+}

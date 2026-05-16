@@ -1,66 +1,66 @@
 <template>
-  <!-- Wrapper con fondo más sólido solo en mobile -->
-
-  <div
-    data-aos="fade-up"
-    class="flex flex-col md:flex-row gap-6 items-center md:items-start text-left shadow-xl p-6 rounded-2xl min-w-64 md:min-w-80 bg-white/20 md:bg-white/10 backdrop-blur-md border border-white/15 hover:border-white/30 transition-all duration-300 max-w-3xl w-full"
+  <RouterLink
+    v-glow
+    :to="`/certificate/${certificate.slug}`"
+    class="surface surface-hover group flex h-full flex-col p-6 text-left"
   >
-    <!-- Imagen -->
-    <div v-if="certificate.imageUrl" class="flex-shrink-0">
-      <img
-        :src="certificate.imageUrl"
-        :alt="certificate.title"
-        class="w-32 h-32 md:w-36 md:h-36 object-cover rounded-xl ring-1 ring-white/20 shadow"
+    <div class="flex items-center justify-between gap-2 text-xs text-white/40">
+      <span class="flex items-center gap-2">
+        <font-awesome-icon
+          :icon="['fas', 'certificate']"
+          class="text-accent-light"
+        />
+        Emitido por
+        <span class="font-medium text-white/70">{{ certificate.issuer }}</span>
+      </span>
+
+      <span
+        v-if="certificate.status"
+        class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold"
+        :class="statusStyle(certificate.status)"
+      >
+        <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+        {{ certificate.status }}
+      </span>
+    </div>
+
+    <h3
+      class="mt-3 font-display text-lg font-bold text-white transition-colors group-hover:text-accent-light"
+    >
+      {{ certificate.title }}
+    </h3>
+
+    <p class="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-white/55">
+      {{ certificate.description }}
+    </p>
+
+    <div class="mt-4 flex flex-wrap gap-1.5">
+      <span
+        v-for="topic in certificate.topics?.slice(0, 4)"
+        :key="topic"
+        class="chip capitalize"
+      >
+        {{ topic }}
+      </span>
+    </div>
+
+    <span
+      class="mt-5 flex items-center gap-2 text-sm font-semibold text-white/80 transition-colors group-hover:text-accent-light"
+    >
+      Ver detalles
+      <font-awesome-icon
+        :icon="['fas', 'arrow-right']"
+        class="text-xs transition-transform duration-300 group-hover:translate-x-1"
       />
-    </div>
-
-    <!-- Contenido -->
-    <div class="flex-1 space-y-3">
-      <!-- Título -->
-      <h3 class="text-xl md:text-2xl font-bold text-white drop-shadow-sm">
-        {{ certificate.title }}
-      </h3>
-
-      <!-- Fecha -->
-      <p class="text-white/60 text-sm">
-        Emitido por <span class="text-purple-600 font-semibold">Udemy</span>
-      </p>
-
-      <!-- Descripción -->
-      <p class="text-white/80 text-sm leading-relaxed line-clamp-3">
-        {{ certificate.description }}
-      </p>
-
-      <!-- Topics -->
-      <div class="flex flex-wrap gap-2 pt-2">
-        <span
-          v-for="(topic, index) in certificate.topics.slice(0, 4)"
-          :key="index"
-          class="bg-white/10 text-white text-xs px-3 py-1 rounded-full border border-white/20"
-        >
-          {{ topic }}
-        </span>
-      </div>
-
-      <!-- Acción -->
-      <div class="pt-4 flex justify-end">
-        <router-link
-          :to="`/certificate/${certificate.id}`"
-          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all shadow"
-        >
-          Ver Detalles
-          <font-awesome-icon :icon="['fas', 'arrow-right']" class="text-xs" />
-        </router-link>
-      </div>
-    </div>
-  </div>
+    </span>
+  </RouterLink>
 </template>
 
 <script setup>
+import { RouterLink } from "vue-router";
+import { statusStyle } from "@/lib/status";
+
 defineProps({
-  certificate: {
-    type: Object,
-    required: true,
-  },
+  certificate: { type: Object, required: true },
 });
 </script>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#0a0c0e"/>
+  <circle cx="300" cy="160" r="420" fill="url(#a)"/>
+  <circle cx="980" cy="560" r="400" fill="url(#b)"/>
+  <g stroke="#34d399" stroke-opacity="0.28" fill="#34d399" fill-opacity="0.06">
+    <rect x="620" y="150" width="150" height="90" rx="12"/>
+    <rect x="620" y="260" width="150" height="90" rx="12"/>
+    <rect x="800" y="150" width="150" height="90" rx="12"/>
+    <rect x="800" y="260" width="150" height="90" rx="12"/>
+    <rect x="800" y="370" width="150" height="90" rx="12"/>
+    <rect x="980" y="150" width="150" height="90" rx="12"/>
+  </g>
+  <defs>
+    <radialGradient id="a"><stop stop-color="#22c55e" stop-opacity="0.48"/><stop offset="1" stop-color="#22c55e" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b"><stop stop-color="#10b981" stop-opacity="0.42"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></radialGradient>
+  </defs>
+</svg>

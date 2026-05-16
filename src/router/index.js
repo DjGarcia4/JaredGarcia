@@ -10,11 +10,6 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
       path: "/projects",
       name: "projects",
       component: () => import("../views/ProjectsView.vue"),
@@ -31,6 +26,15 @@ const router = createRouter({
         import("../views/certificates/CertificateDetailView.vue"),
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return { el: to.hash, behavior: "smooth", top: 80 };
+    }
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { top: 0 };
+  },
 });
 
 export default router;

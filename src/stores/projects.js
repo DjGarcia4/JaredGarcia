@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
-import { useFirestore, useCollection } from "vuefire";
-import { collection, query, orderBy } from "firebase/firestore";
+import { ref } from "vue";
+import { projects } from "@/data/projects";
 
 export const useProjects = defineStore("projects", () => {
-  const db = useFirestore();
-  const q = query(collection(db, "projects"), orderBy("order", "asc"));
-
-  const projectsCollection = useCollection(q);
+  const projectsCollection = ref(
+    [...projects].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  );
 
   return { projectsCollection };
 });

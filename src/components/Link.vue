@@ -1,18 +1,24 @@
 <template>
-  <RouterLink
-    :to="{ name: to }"
-    class="text-white px-5 hover:text-green-500 mx-2 transition-all"
-    active-class="text-gray-600 font-bold border-b-4 border-green-500 bg-gradient-to-r from-green-800 via-green-400 to-green-600 bg-clip-text text-transparen"
-  >
-    <slot></slot>
+  <RouterLink :to="{ name: to }" custom v-slot="{ navigate, isActive }">
+    <button
+      type="button"
+      @click="navigate"
+      class="relative rounded-lg px-2.5 py-2 text-sm font-medium transition-colors md:px-3.5 md:text-[15px]"
+      :class="isActive ? 'text-white' : 'text-white/55 hover:text-white'"
+    >
+      <slot></slot>
+      <span
+        v-if="isActive"
+        class="absolute -bottom-px left-2.5 right-2.5 h-0.5 rounded-full bg-accent md:left-3.5 md:right-3.5"
+      ></span>
+    </button>
   </RouterLink>
 </template>
 
 <script setup>
 import { RouterLink } from "vue-router";
+
 defineProps({
-  to: {
-    type: String,
-  },
+  to: { type: String, required: true },
 });
 </script>

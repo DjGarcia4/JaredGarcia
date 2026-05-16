@@ -1,92 +1,78 @@
 <template>
-  <section class="py-16 px-6 lg:px-1 overflow-hidden">
-    <div class="mx-auto flex flex-col lg:flex-row gap-8">
-      <div class="flex flex-col gap-5">
-        <!-- Título -->
-        <div>
-          <TitleSection
-            >Lo que dicen quienes han trabajado conmigo</TitleSection
-          >
-        </div>
-
-        <!-- Botones de navegación -->
-        <div class="flex gap-3">
-          <button
-            @click="scrollLeft"
-            class="w-9 h-9 rounded-full border border-green-400 text-green-600 transition"
-          >
-            <svg
-              class="w-4 h-4 mx-auto"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <button
-            @click="scrollRight"
-            class="w-9 h-9 rounded-full border border-green-400 text-green-600 transition"
-          >
-            <svg
-              class="w-4 h-4 mx-auto"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
+  <section class="container-content overflow-hidden py-20 md:py-28">
+    <div
+      class="reveal flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+    >
+      <div>
+        <p class="eyebrow mb-3">
+          <span class="h-px w-6 bg-accent-light"></span>
+          Testimonios
+        </p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-5xl">
+          Lo que dicen de mi trabajo
+        </h2>
       </div>
 
-      <!-- Scroll horizontal con testimonios -->
-      <div
-        ref="scrollContainer"
-        class="overflow-x-auto no-scrollbar scroll-smooth"
+      <div class="flex gap-3">
+        <button
+          type="button"
+          aria-label="Anterior"
+          @click="scroll(-1)"
+          class="link-icon"
+        >
+          <font-awesome-icon :icon="['fas', 'arrow-left']" />
+        </button>
+        <button
+          type="button"
+          aria-label="Siguiente"
+          @click="scroll(1)"
+          class="link-icon"
+        >
+          <font-awesome-icon :icon="['fas', 'arrow-right']" />
+        </button>
+      </div>
+    </div>
+
+    <div
+      ref="scroller"
+      class="no-scrollbar reveal mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2"
+    >
+      <article
+        v-for="review in reviews.reviewsCollection"
+        :key="review.id"
+        v-glow
+        class="surface flex w-[300px] shrink-0 snap-start flex-col p-6 md:w-[360px]"
       >
-        <div class="flex gap-6 min-w-max py-10">
-          <div
-            v-for="review in reviews.reviewsCollection"
-            :key="review.id"
-            class="flex-shrink-0 relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg px-6 pt-14 pb-6 text-center w-72"
-          >
-            <img
-              :src="review.image"
-              :alt="review.name"
-              class="w-20 h-20 object-cover rounded-full border-4 border-white absolute left-1/2 -top-10 transform -translate-x-1/2 shadow-md"
-            />
-            <h3 class="text-sm font-bold text-white uppercase mt-10">
+        <font-awesome-icon
+          :icon="['fas', 'quote-left']"
+          class="text-2xl text-accent/40"
+        />
+        <p class="mt-4 flex-1 text-sm leading-relaxed text-white/70">
+          {{ review.review }}
+        </p>
+
+        <div class="mt-6 flex items-center gap-3 border-t border-white/[0.06] pt-5">
+          <img
+            :src="review.image"
+            :alt="review.name"
+            class="h-11 w-11 rounded-full border border-white/10 object-cover"
+          />
+          <div class="min-w-0">
+            <p class="truncate text-sm font-semibold text-white">
               {{ review.name }}
-            </h3>
-            <div class="flex justify-center gap-1 my-2">
-              <template v-for="i in review.rating" :key="i">
-                <svg
-                  class="w-4 h-4 text-green-500 fill-current"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M10 15l-5.878 3.09L5.5 11.545 1 7.91l6.06-.91L10 2l2.94 5 6.06.91-4.5 3.635 1.378 6.545z"
-                  />
-                </svg>
-              </template>
-            </div>
-            <p class="text-white text-sm leading-relaxed line-clamp-5">
-              {{ review.review }}
             </p>
+            <p class="truncate text-xs text-white/45">{{ review.role }}</p>
+          </div>
+          <div class="ml-auto flex gap-0.5">
+            <font-awesome-icon
+              v-for="i in review.rating"
+              :key="i"
+              :icon="['fas', 'star']"
+              class="text-xs text-accent-light"
+            />
           </div>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 </template>
@@ -94,25 +80,11 @@
 <script setup>
 import { ref } from "vue";
 import { useReviewsStore } from "@/stores/reviews";
-import TitleSection from "@/components/TitleSection.vue";
 
 const reviews = useReviewsStore();
-const scrollContainer = ref(null);
+const scroller = ref(null);
 
-const scrollLeft = () => {
-  scrollContainer.value.scrollLeft -= 300;
-};
-const scrollRight = () => {
-  scrollContainer.value.scrollLeft += 300;
+const scroll = (dir) => {
+  scroller.value?.scrollBy({ left: dir * 360, behavior: "smooth" });
 };
 </script>
-
-<style scoped>
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-</style>

@@ -1,63 +1,76 @@
 <template>
   <div
-    class="relative w-screen h-screen overflow-hidden flex flex-col items-center justify-center text-white"
+    class="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-ink-950"
   >
-    <!-- Fondo animado verde -->
+    <div class="bg-mesh absolute inset-0"></div>
     <div
-      class="absolute inset-0 animate-gradient bg-[length:400%_400%] z-0"
+      class="absolute h-[420px] w-[420px] rounded-full bg-accent/20 blur-[130px] animate-glow-pulse"
     ></div>
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm z-0"></div>
 
-    <!-- Iconos stack -->
-    <div class="flex flex-wrap justify-center gap-5 mb-10 z-10">
-      <div
-        v-for="(icon, index) in icons"
-        :key="index"
-        class="text-xl md:text-3xl px-4 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-all animate__animated animate__fadeInUp"
-        :style="{ animationDelay: `${index * 100}ms` }"
+    <div class="relative px-6 text-center">
+      <p class="eyebrow mb-5 animate-fade-up">Portafolio</p>
+      <h1
+        class="animate-fade-up font-display text-5xl font-bold tracking-tight md:text-7xl"
       >
-        <font-awesome-icon :icon="icon" class="text-white" />
+        Jared <span class="text-gradient">Garcia</span>
+      </h1>
+      <p
+        class="mt-4 animate-fade-up text-sm uppercase tracking-[0.25em] text-white/45 md:text-base"
+        style="animation-delay: 0.12s"
+      >
+        Frontend Developer · UX/UI Designer
+      </p>
+
+      <div class="mx-auto mt-10 h-px w-52 overflow-hidden bg-white/10">
+        <div
+          class="h-full bg-accent transition-[width] duration-100 ease-linear"
+          :style="{ width: progress + '%' }"
+        ></div>
       </div>
     </div>
 
-    <!-- Nombre y roles -->
-    <div class="text-center space-y-3 z-10 animate__animated animate__fadeInUp">
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-wide">
-        Jared Garcia
-      </h1>
-      <div class="flex flex-col text-lg md:text-2xl font-medium">
-        <span class="text-green-400">Frontend Developer</span>
-        <span class="text-green-300">UX/UI Designer</span>
-      </div>
-    </div>
+    <button
+      type="button"
+      @click="finish"
+      class="absolute bottom-10 text-xs uppercase tracking-[0.2em] text-white/40 transition-colors hover:text-accent-light"
+    >
+      Saltar intro →
+    </button>
   </div>
 </template>
 
 <script setup>
-const icons = [
-  "fa-solid fa-code",
-  "fa-solid fa-palette",
-  "fa-solid fa-lightbulb",
-  "fa-solid fa-bolt",
-  "fa-solid fa-rocket",
-];
-</script>
+import { onMounted, onUnmounted, ref } from "vue";
 
-<style scoped>
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-.animate-gradient {
-  background: linear-gradient(-45deg, #0f0f0f, #013b1b, #0f0f0f, #025e2e);
-  background-size: 300% 400%;
-  animation: gradientMove 12s ease infinite;
-}
-</style>
+const emit = defineEmits(["finish"]);
+
+const DURATION = 2200;
+const progress = ref(0);
+let rafId = null;
+let done = false;
+
+const finish = () => {
+  if (done) return;
+  done = true;
+  if (rafId) cancelAnimationFrame(rafId);
+  emit("finish");
+};
+
+onMounted(() => {
+  const start = performance.now();
+  const tick = (now) => {
+    const elapsed = now - start;
+    progress.value = Math.min(100, (elapsed / DURATION) * 100);
+    if (elapsed >= DURATION) {
+      finish();
+    } else {
+      rafId = requestAnimationFrame(tick);
+    }
+  };
+  rafId = requestAnimationFrame(tick);
+});
+
+onUnmounted(() => {
+  if (rafId) cancelAnimationFrame(rafId);
+});
+</script>

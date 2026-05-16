@@ -1,60 +1,85 @@
 <template>
-  <div class="space-y-6">
+  <div class="space-y-8">
     <!-- Filtros -->
-    <div class="space-y-4">
-      <!-- Filtro por categoría -->
+    <div class="space-y-5">
+      <!-- Buscador -->
+      <div class="relative max-w-md">
+        <font-awesome-icon
+          :icon="['fas', 'magnifying-glass']"
+          class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-white/35"
+        />
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Buscar proyecto..."
+          class="field pl-10"
+        />
+      </div>
+
+      <!-- Categorías -->
       <div class="flex flex-wrap gap-2">
         <button
           v-for="cat in categories"
           :key="cat"
+          type="button"
           @click="activeCategory = cat"
           :class="[
-            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 backdrop-blur-md',
+            'rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-200',
             activeCategory === cat
-              ? 'bg-primary/90 text-white shadow-[0_0_0_2px] shadow-primary'
-              : 'bg-white/10 text-white border border-white/20 hover:bg-white/20',
+              ? 'bg-accent text-ink-950'
+              : 'border border-white/10 bg-white/[0.03] text-white/60 hover:border-white/25 hover:text-white',
           ]"
         >
           {{ cat }}
         </button>
       </div>
 
-      <!-- Buscador -->
-      <input
-        v-model="searchQuery"
-        type="text"
-        placeholder="🔍 Buscar proyecto..."
-        class="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 backdrop-blur-md placeholder:text-white/60"
-      />
-
-      <div class="flex flex-wrap gap-2">
+      <!-- Tecnologías -->
+      <div v-if="allTechs.length" class="flex flex-wrap gap-2">
         <button
           v-for="tech in allTechs"
           :key="tech"
+          type="button"
           @click="toggleTech(tech)"
           :class="[
-            'flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium transition-all backdrop-blur',
+            'flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all',
             selectedTechs.includes(tech)
-              ? 'bg-green-500 text-white shadow'
-              : 'bg-white/10 text-white border border-white/20 hover:bg-white/20',
+              ? 'border border-accent/40 bg-accent/15 text-accent-light'
+              : 'border border-white/10 bg-white/[0.03] text-white/55 hover:border-white/25 hover:text-white',
           ]"
         >
-          <img :src="`/img/skills/${tech}.svg`" :alt="tech" class="w-4 h-4" />
+          <img :src="`/img/skills/${tech}.svg`" :alt="tech" class="h-4 w-4" />
           <span class="capitalize">{{ tech }}</span>
         </button>
       </div>
     </div>
 
-    <!-- Grilla de proyectos -->
+    <!-- Grilla -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4"
+      v-if="filteredProjects.length"
+      :key="filterKey"
+      v-stagger
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
     >
       <Project
-        data-aos="fade-up"
         v-for="project in filteredProjects"
         :key="project.id"
         :project="project"
       />
+    </div>
+
+    <div
+      v-else
+      class="surface flex flex-col items-center gap-3 py-20 text-center"
+    >
+      <font-awesome-icon
+        :icon="['fas', 'folder-open']"
+        class="text-3xl text-white/20"
+      />
+      <p class="text-white/55">No hay proyectos que coincidan con el filtro.</p>
+      <button type="button" class="btn-ghost" @click="resetFilters">
+        Limpiar filtros
+      </button>
     </div>
   </div>
 </template>
@@ -70,6 +95,11 @@ const activeCategory = ref("Todos");
 const searchQuery = ref("");
 const selectedTechs = ref([]);
 
+// Remonta la grilla (y reejecuta v-stagger) al cambiar categoría o tecnologías.
+const filterKey = computed(
+  () => `${activeCategory.value}|${selectedTechs.value.join(",")}`
+);
+
 const categories = computed(() => {
   const base = projects.projectsCollection.map(
     (p) => p.category || "Sin categoría"
@@ -83,11 +113,15 @@ const allTechs = computed(() => {
 });
 
 const toggleTech = (tech) => {
-  if (selectedTechs.value.includes(tech)) {
-    selectedTechs.value = selectedTechs.value.filter((t) => t !== tech);
-  } else {
-    selectedTechs.value.push(tech);
-  }
+  selectedTechs.value = selectedTechs.value.includes(tech)
+    ? selectedTechs.value.filter((t) => t !== tech)
+    : [...selectedTechs.value, tech];
+};
+
+const resetFilters = () => {
+  activeCategory.value = "Todos";
+  searchQuery.value = "";
+  selectedTechs.value = [];
 };
 
 const filteredProjects = computed(() => {
@@ -95,10 +129,11 @@ const filteredProjects = computed(() => {
     const matchCategory =
       activeCategory.value === "Todos" || p.category === activeCategory.value;
 
+    const query = searchQuery.value.trim().toLowerCase();
     const matchSearch =
-      searchQuery.value.trim() === "" ||
-      p.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      p.slug.toLowerCase().includes(searchQuery.value.toLowerCase());
+      query === "" ||
+      p.title.toLowerCase().includes(query) ||
+      p.slug.toLowerCase().includes(query);
 
     const matchTech =
       selectedTechs.value.length === 0 ||

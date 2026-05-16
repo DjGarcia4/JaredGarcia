@@ -1,12 +1,15 @@
 <template>
-  <section class="p-10 px-4 md:px-0 max-w-7xl mx-auto space-y-16">
-    <TitleSection>Lo que ofrezco como desarrollador y diseñador</TitleSection>
+  <section class="container-content py-20 md:py-28">
+    <TitleSection eyebrow="Servicios">
+      Lo que ofrezco
+    </TitleSection>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div v-stagger class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       <ServiceCard
         v-for="(service, index) in services"
         :key="index"
         :service="service"
+        :index="index"
       />
     </div>
   </section>
@@ -18,40 +21,40 @@ import ServiceCard from "@/components/Services/ServiceCard.vue";
 
 const services = [
   {
-    title: "Desarrollo Web",
+    title: "Desarrollo Web Fullstack",
     description:
-      "Diseño y desarrollo de sitios web modernos, responsivos y optimizados para cualquier dispositivo.",
+      "Aplicaciones web completas con Vue 3 y React: frontend, backend con Node y Firebase, listas para producción.",
     icon: "code",
   },
   {
     title: "Aplicaciones Móviles",
     description:
-      "Construcción de apps para iOS y Android usando React Native, Firebase y más.",
-    icon: "mobile-alt",
+      "Apps para iOS y Android con React Native, integradas con APIs, GraphQL y servicios cloud.",
+    icon: "mobile-screen",
+  },
+  {
+    title: "Plataformas SaaS Multi-tenant",
+    description:
+      "Arquitecturas escalables con datos aislados por cliente, control de acceso por roles y autenticación multifactor.",
+    icon: "layer-group",
   },
   {
     title: "Paneles Administrativos",
     description:
-      "Creación de dashboards personalizados con autenticación, CRUD, filtros y más.",
+      "Dashboards a medida con CRUD, filtros, reportes y sincronización de datos en tiempo real.",
     icon: "chart-line",
-  },
-  {
-    title: "Integraciones con Firebase",
-    description:
-      "Autenticación, Firestore, almacenamiento de archivos, notificaciones push y más.",
-    icon: "fire",
   },
   {
     title: "Diseño UI/UX",
     description:
-      "Prototipado en Figma, experiencia de usuario fluida y visual atractivo.",
+      "Prototipado en Figma, sistemas de diseño y experiencias de usuario fluidas con carácter.",
     icon: "paint-brush",
   },
   {
-    title: "Despliegue y Hosting",
+    title: "Despliegue & DevOps",
     description:
-      "Deploy de proyectos en Vercel, Netlify, Balena, y conexión a dominios personalizados.",
-    icon: "cloud-upload-alt",
+      "Contenedores con Docker, integración continua, configuración de dominios y hosting.",
+    icon: "cloud-arrow-up",
   },
 ];
 </script>

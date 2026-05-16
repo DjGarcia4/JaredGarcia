@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
-import { useFirestore, useCollection } from "vuefire";
-import { collection, query, orderBy } from "firebase/firestore";
+import { ref } from "vue";
+import { certificates } from "@/data/certificates";
 
 export const useCertifications = defineStore("certificates", () => {
-  const db = useFirestore();
-  const q = query(collection(db, "certificates"), orderBy("order", "asc"));
-
-  const certificationsCollection = useCollection(q);
+  const certificationsCollection = ref(
+    [...certificates].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  );
 
   return { certificationsCollection };
 });

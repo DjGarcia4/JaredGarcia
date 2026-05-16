@@ -1,177 +1,182 @@
 <template>
-  <div
-    v-if="project"
-    class="px-4 md:px-0 max-w-6xl mx-auto space-y-8 mt-20 md:space-y-14"
-  >
+  <div v-if="project" class="container-content max-w-5xl py-16 md:py-20">
+    <RouterLink
+      :to="{ name: 'projects' }"
+      class="inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-accent-light"
+    >
+      <font-awesome-icon :icon="['fas', 'arrow-left']" />
+      Volver a proyectos
+    </RouterLink>
+
     <!-- Encabezado -->
-    <div class="text-center space-y-2" data-aos="fade-down">
+    <div class="reveal mt-8">
+      <p class="text-sm font-medium uppercase tracking-wider text-accent-light">
+        {{ project.category }}
+      </p>
       <h1
-        class="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow"
+        class="mt-2 font-display text-3xl font-bold tracking-tight md:text-5xl"
       >
         {{ project.title }}
       </h1>
-      <p class="text-sm md:text-lg text-white/60 italic">
+      <p class="mt-3 max-w-2xl text-lg text-white/55">
         {{ project.summary }}
       </p>
     </div>
 
     <!-- Metadata -->
-    <div
-      class="flex flex-wrap justify-center gap-3 text-white/70 text-sm"
-      data-aos="fade-up"
-    >
+    <div class="reveal mt-6 flex flex-wrap gap-2">
       <span
-        class="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full border border-white/20"
+        v-if="project.status"
+        class="chip"
+        :class="statusStyle(project.status)"
       >
-        <font-awesome-icon :icon="['fas', 'layer-group']" />
-        {{ project.category }}
+        <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+        {{ project.status }}
       </span>
-      <span
-        class="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full border border-white/20"
-      >
-        <font-awesome-icon :icon="['fas', 'user-cog']" />
+      <span class="chip">
+        <font-awesome-icon :icon="['fas', 'user-gear']" />
         {{ project.role }}
       </span>
-      <span
-        class="flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full border border-white/20"
-      >
-        <font-awesome-icon :icon="['fas', 'calendar-alt']" />
+      <span class="chip">
+        <font-awesome-icon :icon="['fas', 'calendar']" />
         {{ project.year }}
+      </span>
+      <span v-if="project.duration" class="chip">
+        <font-awesome-icon :icon="['fas', 'clock']" />
+        {{ project.duration }}
+      </span>
+      <span v-if="project.team" class="chip">
+        <font-awesome-icon :icon="['fas', 'users']" />
+        {{ project.team }}
       </span>
       <span
         v-if="project.featured"
-        class="flex items-center gap-2 bg-yellow-400/10 text-yellow-300 px-3 py-1 rounded-full border border-yellow-300/20"
+        class="chip border-accent/30 bg-accent/10 text-accent-light"
       >
         <font-awesome-icon :icon="['fas', 'star']" />
-        Proyecto Destacado
+        Destacado
       </span>
     </div>
 
     <!-- Imagen principal -->
-    <div
-      class="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10 hover:ring-white/20 transition"
-      data-aos="zoom-in"
-    >
+    <div class="reveal-scale surface mt-10 overflow-hidden p-0">
       <img
+        v-if="project.images?.cover"
         :src="project.images.cover"
         :alt="project.title"
-        class="w-full h-auto object-cover"
+        class="aspect-video w-full object-cover"
       />
-    </div>
-
-    <!-- Tecnologías -->
-    <div class="flex flex-wrap gap-3 justify-center" data-aos="fade-up">
       <div
-        v-for="tech in project.techStack"
-        :key="tech"
-        class="flex items-center gap-2 bg-white/10 hover:bg-white/20 transition text-white text-sm px-3 py-1 rounded-full backdrop-blur border border-white/20"
+        v-else
+        class="flex aspect-video w-full items-center justify-center bg-gradient-to-br from-ink-800 via-ink-850 to-accent-soft/30"
       >
-        <img :src="`/img/skills/${tech}.svg`" :alt="tech" class="w-4 h-4" />
-        <span class="capitalize">{{ tech }}</span>
+        <span class="font-display text-3xl font-bold text-white/25 md:text-5xl">
+          {{ project.title }}
+        </span>
       </div>
     </div>
 
+    <!-- Tecnologías -->
+    <div class="reveal mt-8 flex flex-wrap gap-2">
+      <span v-for="tech in project.techStack" :key="tech" class="chip">
+        <img :src="`/img/skills/${tech}.svg`" :alt="tech" class="h-4 w-4" />
+        <span class="capitalize">{{ tech }}</span>
+      </span>
+    </div>
+
     <!-- Descripción -->
-    <div
-      class="max-w-3xl mx-auto bg-white/5 border border-white/10 p-6 rounded-xl text-white/90 text-base leading-relaxed backdrop-blur-lg shadow-md"
-      data-aos="fade-right"
-    >
-      {{ project.description }}
+    <div class="reveal mt-10 grid gap-10 md:grid-cols-3">
+      <h2 class="font-display text-xl font-bold text-white">
+        Sobre el proyecto
+      </h2>
+      <p class="text-white/70 md:col-span-2 md:text-lg md:leading-relaxed">
+        {{ project.description }}
+      </p>
     </div>
 
     <!-- Características -->
-    <div class="md:w-5/6 mx-5 md:mx-auto space-y-6">
-      <h2
-        class="text-2xl text-white font-semibold text-center"
-        data-aos="fade-up"
-      >
+    <div
+      v-if="project.features?.length"
+      class="reveal mt-12 border-t border-white/[0.06] pt-12"
+    >
+      <h2 class="font-display text-xl font-bold text-white">
         Funcionalidades destacadas
       </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div v-stagger class="mt-6 grid gap-4 sm:grid-cols-2">
         <div
           v-for="(feature, i) in project.features"
           :key="i"
-          class="group flex items-start gap-3 p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-primary/10 hover:border-primary/50 transition"
-          :data-aos="'fade-up'"
+          v-glow
+          class="surface flex items-start gap-3 p-5"
         >
           <font-awesome-icon
-            :icon="['fas', 'check-circle']"
-            class="text-green-400 group-hover:text-primary mt-1 w-5 h-5"
+            :icon="['fas', 'circle-check']"
+            class="mt-0.5 shrink-0 text-accent-light"
           />
-          <p class="text-white/90 text-sm leading-snug">
-            {{ feature }}
-          </p>
+          <p class="text-sm leading-relaxed text-white/75">{{ feature }}</p>
         </div>
       </div>
     </div>
 
     <!-- Tags -->
-    <div
-      v-if="project.tags?.length"
-      class="flex flex-wrap justify-center gap-2 mt-8"
-      data-aos="fade-up"
-    >
-      <span
-        v-for="tag in project.tags"
-        :key="tag"
-        class="bg-white/10 text-white/80 text-xs px-3 py-1 rounded-full border border-white/20"
-      >
+    <div v-if="project.tags?.length" class="reveal mt-10 flex flex-wrap gap-2">
+      <span v-for="tag in project.tags" :key="tag" class="text-sm text-white/40">
         #{{ tag }}
       </span>
     </div>
 
     <!-- Enlaces -->
-    <div class="flex justify-center gap-4 mt-10" data-aos="zoom-in">
-      <button
-        @click="router.back()"
-        class="flex items-center gap-2 bg-white/10 text-white px-6 py-2 rounded-lg font-medium border border-white/20 hover:bg-white/20 transition"
-      >
-        <font-awesome-icon :icon="['fas', 'arrow-left']" />
-      </button>
-
-      <a
-        v-if="project.repoUrl"
-        :href="project.repoUrl"
-        target="_blank"
-        class="flex items-center gap-2 bg-white/10 text-white px-6 py-2 rounded-lg font-medium border border-white/20 hover:bg-white/20 transition"
-      >
-        <font-awesome-icon :icon="['fab', 'github']" />
-        Ver Código
-      </a>
+    <div
+      class="reveal mt-12 flex flex-wrap gap-3 border-t border-white/[0.06] pt-10"
+    >
       <a
         v-if="project.liveUrl"
         :href="project.liveUrl"
         target="_blank"
-        class="flex items-center gap-2 bg-green-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-600 transition"
+        rel="noopener noreferrer"
+        class="btn-primary"
       >
-        Ver Sitio
-        <font-awesome-icon :icon="['fas', 'arrow-right']" />
+        Ver sitio en vivo
+        <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" />
+      </a>
+      <a
+        v-if="project.repoUrl"
+        :href="project.repoUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-ghost"
+      >
+        <font-awesome-icon :icon="['fab', 'github']" />
+        Ver código
       </a>
     </div>
   </div>
 
-  <div v-else class="text-center text-white py-20">
-    <p class="text-lg animate-pulse">Cargando proyecto...</p>
+  <div
+    v-else
+    class="container-content flex flex-col items-center gap-4 py-32 text-center"
+  >
+    <font-awesome-icon
+      :icon="['fas', 'folder-open']"
+      class="text-4xl text-white/20"
+    />
+    <p class="text-white/55">No se encontró el proyecto.</p>
+    <RouterLink :to="{ name: 'projects' }" class="btn-ghost">
+      Volver a proyectos
+    </RouterLink>
   </div>
 </template>
 
 <script setup>
-import { useRoute, useRouter } from "vue-router";
+import { computed } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import { useProjects } from "@/stores/projects";
-import { computed, onMounted } from "vue";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { statusStyle } from "@/lib/status";
 
 const route = useRoute();
-const router = useRouter();
 const projects = useProjects();
 
 const project = computed(() =>
   projects.projectsCollection.find((p) => p.slug === route.params.slug)
 );
-onMounted(() => {
-  setTimeout(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, 10);
-});
 </script>

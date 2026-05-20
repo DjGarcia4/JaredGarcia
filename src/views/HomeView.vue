@@ -21,35 +21,7 @@
       </div>
     </section>
 
-    <!-- Sobre mí -->
-    <section id="about" class="container-content py-20 md:py-28 scroll-mt-24">
-      <TitleSection eyebrow="Sobre mí">Lo que me define</TitleSection>
-      <div v-stagger class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div
-          v-for="(value, i) in values"
-          :key="value.title"
-          v-glow
-          class="surface surface-hover group relative flex flex-col p-6"
-        >
-          <div
-            class="flex h-12 w-12 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-lg text-accent-light transition-all duration-300 group-hover:scale-110 group-hover:border-accent/40 group-hover:bg-accent/20"
-          >
-            <font-awesome-icon :icon="['fas', value.icon]" />
-          </div>
-
-          <h4 class="mt-5 font-display text-base font-bold text-white">
-            {{ value.title }}
-          </h4>
-          <p class="mt-2 flex-1 text-sm leading-relaxed text-white/55">
-            {{ value.description }}
-          </p>
-
-          <div
-            class="mt-6 h-px w-10 rounded-full bg-accent/50 transition-all duration-500 ease-out group-hover:w-full"
-          ></div>
-        </div>
-      </div>
-    </section>
+    <AboutValues />
 
     <Currently />
     <div id="services" class="scroll-mt-24"></div>
@@ -81,6 +53,7 @@ import { useRouter } from "vue-router";
 
 import Hero from "@/components/common/Hero.vue";
 import StackedProjects from "@/components/StackedProjects.vue";
+import AboutValues from "@/components/AboutValues.vue";
 import Currently from "@/components/Currently.vue";
 import CurrentlyLearning from "@/components/CurrentlyLearning.vue";
 import Services from "@/components/Services/Services.vue";
@@ -101,30 +74,4 @@ const featured = computed(() => {
   return (starred.length >= 3 ? starred : all).slice(0, 3);
 });
 
-const values = [
-  {
-    title: "Trabajo en equipo",
-    description:
-      "Colaboro, aprendo de otros y sumo al proyecto como un jugador comprometido.",
-    icon: "users",
-  },
-  {
-    title: "Resolución de problemas",
-    description:
-      "Disfruto encontrar soluciones creativas, eficientes y que realmente funcionen.",
-    icon: "lightbulb",
-  },
-  {
-    title: "Compromiso con la calidad",
-    description:
-      "Cada detalle cuenta: que todo funcione bien, se vea bien y sea confiable.",
-    icon: "shield-halved",
-  },
-  {
-    title: "Ganas de crecer",
-    description:
-      "Siempre busco aprender algo nuevo, mejorar mis skills y asumir nuevos retos.",
-    icon: "rocket",
-  },
-];
 </script>

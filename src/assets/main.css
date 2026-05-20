@@ -13,7 +13,7 @@
   }
 
   ::selection {
-    background: rgba(16, 185, 129, 0.3);
+    background: rgba(34, 197, 94, 0.3);
     color: #fff;
   }
 
@@ -23,21 +23,22 @@
   h4 {
     @apply font-display text-white;
     text-wrap: balance;
+    letter-spacing: -0.01em;
   }
 
   ::-webkit-scrollbar {
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #08080a;
+    background: #0F172A;
   }
   ::-webkit-scrollbar-thumb {
-    background: #26262d;
+    background: #334155;
     border-radius: 999px;
-    border: 2px solid #08080a;
+    border: 2px solid #0F172A;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #33333d;
+    background: #475569;
   }
 }
 
@@ -54,12 +55,22 @@
     @apply transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.05];
   }
 
+  /* Surface variant with brutalist edges (sharp corners, harder border). */
+  .surface-brut {
+    @apply rounded-none border border-white/10 bg-ink-900/60 backdrop-blur-md;
+  }
+
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-accent-light;
+    @apply inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.2em] text-accent-light;
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/70;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-xs font-medium text-white/70;
+  }
+
+  /* Mono label: small uppercase technical caption used for badges, counters, metadata. */
+  .mono-label {
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-white/55;
   }
 
   .btn-primary {
@@ -98,15 +109,15 @@
   }
 
   .bg-mesh {
-    background-color: #08080a;
+    background-color: #0F172A;
     background-image: radial-gradient(
         ellipse 50% 40% at 15% 0%,
-        rgba(16, 185, 129, 0.12),
+        rgba(34, 197, 94, 0.12),
         transparent 70%
       ),
       radial-gradient(
         ellipse 45% 45% at 90% 20%,
-        rgba(16, 185, 129, 0.08),
+        rgba(34, 197, 94, 0.08),
         transparent 70%
       );
   }
@@ -189,7 +200,7 @@
   border-radius: inherit;
   background: radial-gradient(
     260px circle at var(--glow-x, 50%) var(--glow-y, -20%),
-    rgba(16, 185, 129, 0.1),
+    rgba(34, 197, 94, 0.1),
     transparent 62%
   );
   opacity: 0;
@@ -207,8 +218,8 @@
   padding: 1px;
   background: radial-gradient(
     200px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-    rgba(52, 211, 153, 0.9),
-    rgba(16, 185, 129, 0.2) 42%,
+    rgba(74, 222, 128, 0.9),
+    rgba(34, 197, 94, 0.2) 42%,
     transparent 72%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box,
@@ -235,15 +246,15 @@
 /* ── Toasts (vue-sonner) afinados al tema dark del sitio ── */
 [data-sonner-toaster] {
   --border-radius: 14px;
-  --normal-bg: rgba(23, 23, 29, 0.92);
+  --normal-bg: rgba(30, 41, 59, 0.92);
   --normal-border: rgba(255, 255, 255, 0.08);
-  --normal-text: #f4f4f5;
-  --success-bg: rgba(23, 23, 29, 0.92);
-  --success-border: rgba(52, 211, 153, 0.35);
-  --success-text: #f4f4f5;
-  --error-bg: rgba(23, 23, 29, 0.92);
+  --normal-text: #f8fafc;
+  --success-bg: rgba(30, 41, 59, 0.92);
+  --success-border: rgba(74, 222, 128, 0.35);
+  --success-text: #f8fafc;
+  --error-bg: rgba(30, 41, 59, 0.92);
   --error-border: rgba(248, 113, 113, 0.35);
-  --error-text: #f4f4f5;
+  --error-text: #f8fafc;
 }
 
 [data-sonner-toast] {
@@ -258,11 +269,11 @@
 
 [data-sonner-toast][data-type="success"] {
   box-shadow: 0 14px 44px -14px rgba(0, 0, 0, 0.75),
-    0 0 0 1px rgba(52, 211, 153, 0.12);
+    0 0 0 1px rgba(74, 222, 128, 0.12);
 }
 
 [data-sonner-toast][data-type="success"] [data-icon] {
-  color: #34d399;
+  color: #4ADE80;
 }
 
 [data-sonner-toast][data-type="error"] [data-icon] {
@@ -270,12 +281,12 @@
 }
 
 [data-sonner-toast] [data-close-button] {
-  background: rgba(23, 23, 29, 0.95);
+  background: rgba(30, 41, 59, 0.95);
   border-color: rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.7);
 }
 
 [data-sonner-toast] [data-close-button]:hover {
-  color: #34d399;
-  border-color: rgba(52, 211, 153, 0.4);
+  color: #4ADE80;
+  border-color: rgba(74, 222, 128, 0.4);
 }

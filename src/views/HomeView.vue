@@ -2,7 +2,7 @@
   <div class="overflow-hidden">
     <Hero />
 
-    <section class="container-content py-20 md:py-28">
+    <section id="trabajo" class="container-content py-20 md:py-28 scroll-mt-24">
       <TitleSection eyebrow="Trabajo seleccionado">
         Proyectos destacados
       </TitleSection>
@@ -22,7 +22,7 @@
     </section>
 
     <!-- Sobre mí -->
-    <section class="container-content py-20 md:py-28">
+    <section id="about" class="container-content py-20 md:py-28 scroll-mt-24">
       <TitleSection eyebrow="Sobre mí">Lo que me define</TitleSection>
       <div v-stagger class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <div
@@ -52,7 +52,9 @@
     </section>
 
     <Currently />
+    <div id="services" class="scroll-mt-24"></div>
     <Services />
+    <div id="skills" class="scroll-mt-24"></div>
     <Skills />
 
     <!-- Aprendizaje -->

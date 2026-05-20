@@ -9,86 +9,118 @@
       <article
         :ref="(el) => setCardRef(el, i)"
         v-glow
-        class="stack-card group grid overflow-hidden rounded-3xl border border-white/[0.08] bg-ink-900 shadow-card md:grid-cols-2"
+        class="stack-card group grid overflow-hidden rounded-3xl border border-white/[0.08] bg-ink-900 shadow-card md:grid-cols-[1fr_1.05fr]"
       >
-        <!-- Imagen -->
-        <div class="relative min-h-[220px] overflow-hidden md:min-h-full">
+        <!-- Cover (visual side) -->
+        <div
+          :ref="(el) => setCoverRef(el, i)"
+          class="card-cover relative overflow-hidden md:min-h-full"
+        >
           <img
             v-if="project.images?.cover"
             :src="project.images.cover"
             :alt="project.title"
-            class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
           />
           <div
             v-else
-            class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-ink-800 via-ink-850 to-accent-soft/30"
+            class="absolute inset-0 grid-overlay flex min-h-[260px] items-center justify-center bg-gradient-to-br from-ink-900 via-ink-850 to-accent-soft/20 md:min-h-[420px]"
           >
-            <span class="font-display text-3xl font-bold text-white/25">
+            <span
+              class="font-display text-3xl font-bold uppercase tracking-tight text-white/15 md:text-5xl"
+            >
               {{ project.title }}
             </span>
           </div>
+
+          <!-- Gradiente de transición hacia el panel info -->
           <div
-            class="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/30 to-transparent md:bg-gradient-to-r"
+            class="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/20 to-transparent md:bg-gradient-to-r"
           ></div>
+
+          <!-- Status: solo en cover, sutil -->
+          <span
+            v-if="project.status"
+            class="card-cover-pin absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur"
+            :class="statusStyle(project.status)"
+          >
+            <span
+              class="h-1.5 w-1.5 rounded-full bg-current animate-glow-pulse"
+            ></span>
+            {{ project.status }}
+          </span>
         </div>
 
-        <!-- Info -->
-        <div class="relative flex flex-col justify-center gap-5 p-8 md:p-12">
-          <span
-            class="font-display text-6xl font-bold text-white/[0.06] md:text-8xl"
-          >
-            {{ String(i + 1).padStart(2, "0") }}
-          </span>
+        <!-- Info side -->
+        <div
+          :ref="(el) => setInfoRef(el, i)"
+          class="card-info relative flex flex-col justify-center gap-5 p-8 md:p-12 lg:gap-6 lg:p-14"
+        >
+          <!-- Número editorial protagonista -->
+          <div class="card-number-wrap overflow-hidden">
+            <span
+              class="card-number block font-display text-5xl font-bold leading-none text-gradient md:text-6xl lg:text-7xl"
+            >
+              {{ String(i + 1).padStart(2, "0") }}.
+            </span>
+          </div>
 
-          <div>
-            <div class="flex flex-wrap items-center gap-3">
-              <p
-                class="text-xs font-medium uppercase tracking-[0.2em] text-accent-light"
-              >
-                {{ project.category }}
-              </p>
-              <span
-                v-if="project.status"
-                class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold"
-                :class="statusStyle(project.status)"
-              >
-                <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
-                {{ project.status }}
-              </span>
-            </div>
+          <!-- Eyebrow + categoría -->
+          <p class="card-eyebrow eyebrow">
+            <span class="h-px w-6 bg-accent-light"></span>
+            {{ project.category }}
+          </p>
+
+          <!-- Title -->
+          <div class="card-title-wrap overflow-hidden">
             <h3
-              class="mt-3 font-display text-2xl font-bold tracking-tight text-white md:text-4xl"
+              class="card-title font-display text-3xl font-bold leading-[1.05] tracking-tight text-white md:text-4xl lg:text-5xl"
             >
               {{ project.title }}
             </h3>
           </div>
 
-          <p class="max-w-md text-sm leading-relaxed text-white/55 md:text-base">
+          <!-- Summary -->
+          <p
+            class="card-summary max-w-md font-sans text-base leading-relaxed text-white/60 md:text-lg"
+          >
             {{ project.summary }}
           </p>
 
+          <!-- Metadata clean (icon + label) -->
           <div
-            class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-white/45"
+            class="card-meta flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/50"
           >
-            <span class="flex items-center gap-1.5">
-              <font-awesome-icon :icon="['fas', 'calendar']" />
+            <span class="flex items-center gap-2">
+              <font-awesome-icon
+                :icon="['fas', 'calendar']"
+                class="text-[11px] text-white/35"
+              />
               {{ project.year }}
             </span>
-            <span class="flex items-center gap-1.5">
-              <font-awesome-icon :icon="['fas', 'clock']" />
+            <span v-if="project.duration" class="flex items-center gap-2">
+              <font-awesome-icon
+                :icon="['fas', 'clock']"
+                class="text-[11px] text-white/35"
+              />
               {{ project.duration }}
             </span>
-            <span class="flex items-center gap-1.5">
-              <font-awesome-icon :icon="['fas', 'users']" />
+            <span class="flex items-center gap-2">
+              <font-awesome-icon
+                :icon="['fas', 'users']"
+                class="text-[11px] text-white/35"
+              />
               {{ project.team }}
             </span>
           </div>
 
-          <div class="flex flex-wrap gap-1.5">
+          <!-- Tech stack: iconos limpios -->
+          <div class="card-tech flex flex-wrap items-center gap-2">
             <span
               v-for="tech in project.techStack"
               :key="tech"
-              class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]"
+              class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] transition-colors duration-300 hover:border-accent/40 hover:bg-accent/[0.06]"
+              :title="tech"
             >
               <img
                 :src="`/img/skills/${tech}.svg`"
@@ -98,9 +130,10 @@
             </span>
           </div>
 
+          <!-- CTA (mismo lenguaje que el Hero) -->
           <RouterLink
             :to="`/project/${project.slug}`"
-            class="btn-primary mt-1 w-fit"
+            class="card-cta btn-primary mt-2 w-fit"
           >
             Ver proyecto
             <font-awesome-icon :icon="['fas', 'arrow-right']" />
@@ -114,7 +147,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { statusStyle } from "@/lib/status";
 
 defineProps({
@@ -123,9 +156,17 @@ defineProps({
 
 const root = ref(null);
 const cardRefs = ref([]);
+const coverRefs = ref([]);
+const infoRefs = ref([]);
 
 const setCardRef = (el, i) => {
   if (el) cardRefs.value[i] = el;
+};
+const setCoverRef = (el, i) => {
+  if (el) coverRefs.value[i] = el;
+};
+const setInfoRef = (el, i) => {
+  if (el) infoRefs.value[i] = el;
 };
 
 let ctx;
@@ -136,19 +177,116 @@ onMounted(() => {
   ctx = gsap.context(() => {
     const cards = cardRefs.value;
 
-    // Cada card se encoge mientras la siguiente sube a taparla.
     cards.forEach((card, i) => {
-      if (i === cards.length - 1) return;
-      gsap.to(card, {
-        scale: 0.9,
-        ease: "none",
-        scrollTrigger: {
-          trigger: cards[i + 1],
-          start: "top bottom",
-          end: "top top",
-          scrub: true,
-        },
+      const cover = coverRefs.value[i];
+      const info = infoRefs.value[i];
+      if (!card || !info) return;
+
+      // Selectors scoped a esta card (evita choques entre cards).
+      const q = (sel) => info.querySelector(sel);
+      const number = q(".card-number");
+      const eyebrow = q(".card-eyebrow");
+      const title = q(".card-title");
+      const summary = q(".card-summary");
+      const meta = q(".card-meta");
+      const tech = q(".card-tech");
+      const cta = q(".card-cta");
+      const coverPin = cover?.querySelector(".card-cover-pin");
+      const coverImg = cover?.querySelector("img, .grid-overlay");
+
+      // Timeline reusable por card (re-disparable al volver al viewport).
+      const tl = gsap.timeline({
+        paused: true,
+        defaults: { ease: "power4.out" },
       });
+
+      // Cover entra con un clipPath reveal de izquierda a derecha.
+      if (coverImg) {
+        tl.from(
+          coverImg,
+          {
+            clipPath: "inset(0 100% 0 0)",
+            duration: 1.2,
+            ease: "expo.out",
+          },
+          0
+        );
+      }
+      if (coverPin) {
+        tl.from(
+          coverPin,
+          { opacity: 0, y: -12, duration: 0.6 },
+          "<0.6"
+        );
+      }
+
+      // Número editorial: se "construye desde abajo" como el wordmark del Hero.
+      if (number) {
+        tl.from(
+          number,
+          {
+            yPercent: 110,
+            duration: 1.1,
+            ease: "expo.out",
+          },
+          "<0.05"
+        );
+      }
+
+      // Eyebrow + title + summary + meta + tech + CTA: stagger refinado.
+      const stack = [eyebrow, title, summary, meta, tech, cta].filter(Boolean);
+      if (stack.length) {
+        tl.from(
+          stack,
+          {
+            opacity: 0,
+            y: 36,
+            scale: 0.98,
+            filter: "blur(5px)",
+            duration: 0.95,
+            stagger: 0.11,
+          },
+          "<0.2"
+        );
+      }
+
+      // Title con un overflow-hidden parent + clipPath para sumar carácter.
+      if (title) {
+        tl.from(
+          title,
+          {
+            clipPath: "inset(100% 0 0 0)",
+            yPercent: 6,
+            duration: 1,
+            ease: "expo.out",
+          },
+          "<0.05"
+        );
+      }
+
+      // ScrollTrigger que dispara la entrada cada vez que la card entra al viewport.
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%",
+        onEnter: () => tl.restart(),
+        onEnterBack: () => tl.restart(),
+      });
+
+      // Sticky stack: cada card se encoge y se desenfoca mientras la siguiente sube a taparla.
+      if (i < cards.length - 1) {
+        gsap.to(card, {
+          scale: 0.9,
+          filter: "blur(3px)",
+          opacity: 0.7,
+          ease: "none",
+          scrollTrigger: {
+            trigger: cards[i + 1],
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          },
+        });
+      }
     });
   }, root.value);
 });
@@ -159,7 +297,7 @@ onUnmounted(() => ctx?.revert());
 <style scoped>
 .stack-card {
   transform-origin: center top;
-  will-change: transform;
+  will-change: transform, filter, opacity;
   min-height: 78vh;
 }
 

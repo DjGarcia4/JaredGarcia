@@ -8,6 +8,7 @@
     "
   >
     <div class="container-content flex h-20 items-center justify-between gap-4">
+
       <!-- Logo -->
       <RouterLink
         :to="{ name: 'home' }"

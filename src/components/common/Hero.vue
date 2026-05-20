@@ -443,7 +443,7 @@ onMounted(() => {
       },
     });
 
-    // Snap entre los 3 actos: solo en desktop con puntero fino.
+    // Snap suave entre los 3 actos: solo desktop con pointer fino.
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1024px) and (pointer: fine)", () => {
       snapTrigger = ScrollTrigger.create({

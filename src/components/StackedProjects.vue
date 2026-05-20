@@ -3,6 +3,7 @@
     <div
       v-for="(project, i) in projects"
       :key="project.id"
+      :ref="(el) => setStickyRef(el, i)"
       class="sticky"
       :style="{ top: `calc(6rem + ${i * 1.75}rem)` }"
     >
@@ -158,6 +159,7 @@ const root = ref(null);
 const cardRefs = ref([]);
 const coverRefs = ref([]);
 const infoRefs = ref([]);
+const stickyRefs = ref([]);
 
 const setCardRef = (el, i) => {
   if (el) cardRefs.value[i] = el;
@@ -168,8 +170,12 @@ const setCoverRef = (el, i) => {
 const setInfoRef = (el, i) => {
   if (el) infoRefs.value[i] = el;
 };
+const setStickyRef = (el, i) => {
+  if (el) stickyRefs.value[i] = el;
+};
 
 let ctx;
+let snapTrigger;
 
 onMounted(() => {
   if (prefersReducedMotion()) return;
@@ -288,6 +294,46 @@ onMounted(() => {
         });
       }
     });
+
+    // Snap suave entre cards: mismo patrón que el Hero. Solo desktop con pointer fino.
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1024px) and (pointer: fine)", () => {
+      const stickies = stickyRefs.value.filter(Boolean);
+      if (stickies.length < 2) return;
+
+      const first = stickies[0];
+      const last = stickies[stickies.length - 1];
+
+      snapTrigger = ScrollTrigger.create({
+        id: "stacked-snap",
+        trigger: first,
+        start: "top top",
+        endTrigger: last,
+        end: "top top",
+        snap: {
+          snapTo: (value) => {
+            const range = last.offsetTop - first.offsetTop;
+            if (!range) return value;
+            const points = stickies.map(
+              (el) => (el.offsetTop - first.offsetTop) / range
+            );
+            return points.reduce(
+              (prev, curr) =>
+                Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev,
+              points[0]
+            );
+          },
+          duration: { min: 0.3, max: 0.7 },
+          delay: 0.18,
+          ease: "power2.inOut",
+        },
+      });
+
+      return () => {
+        snapTrigger?.kill();
+        snapTrigger = null;
+      };
+    });
   }, root.value);
 });
 
@@ -298,12 +344,14 @@ onUnmounted(() => ctx?.revert());
 .stack-card {
   transform-origin: center top;
   will-change: transform, filter, opacity;
-  min-height: 78vh;
+  /* Llenar casi todo el viewport bajo el header: evita que aparezcan gaps
+     del background entre la card sticky-trabada y la siguiente. */
+  min-height: calc(100svh - 7rem);
 }
 
 @media (min-width: 768px) {
   .stack-card {
-    min-height: 66vh;
+    min-height: calc(100svh - 8rem);
   }
 }
 </style>

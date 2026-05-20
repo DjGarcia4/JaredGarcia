@@ -212,7 +212,7 @@ onMounted(() => {
           coverImg,
           {
             clipPath: "inset(0 100% 0 0)",
-            duration: 1.2,
+            duration: 0.85,
             ease: "expo.out",
           },
           0
@@ -221,8 +221,8 @@ onMounted(() => {
       if (coverPin) {
         tl.from(
           coverPin,
-          { opacity: 0, y: -12, duration: 0.6 },
-          "<0.6"
+          { opacity: 0, y: -12, duration: 0.45 },
+          "<0.4"
         );
       }
 
@@ -232,7 +232,7 @@ onMounted(() => {
           number,
           {
             yPercent: 110,
-            duration: 1.1,
+            duration: 0.8,
             ease: "expo.out",
           },
           "<0.05"
@@ -249,10 +249,10 @@ onMounted(() => {
             y: 36,
             scale: 0.98,
             filter: "blur(5px)",
-            duration: 0.95,
-            stagger: 0.11,
+            duration: 0.7,
+            stagger: 0.085,
           },
-          "<0.2"
+          "<0.15"
         );
       }
 
@@ -263,7 +263,7 @@ onMounted(() => {
           {
             clipPath: "inset(100% 0 0 0)",
             yPercent: 6,
-            duration: 1,
+            duration: 0.75,
             ease: "expo.out",
           },
           "<0.05"

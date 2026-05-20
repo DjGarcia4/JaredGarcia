@@ -23,7 +23,7 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["'Space Mono'", "ui-monospace", "monospace"],
+        display: ["'Space Grotesk'", "Inter", "system-ui", "sans-serif"],
         mono: ["'Space Mono'", "ui-monospace", "monospace"],
       },
       maxWidth: {

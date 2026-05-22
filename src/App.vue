@@ -39,6 +39,7 @@
           leave-active-class="transition duration-200 ease-in"
           enter-from-class="opacity-0 translate-y-3"
           leave-to-class="opacity-0"
+          @after-enter="onAfterEnter"
         >
           <component :is="Component" />
         </Transition>
@@ -140,6 +141,10 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
   ctx?.revert();
 });
+
+const onAfterEnter = () => {
+  ScrollTrigger.refresh();
+};
 
 // La altura de la página cambia entre rutas: recalcular ScrollTrigger.
 watch(

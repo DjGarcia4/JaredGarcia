@@ -84,7 +84,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import TitleSection from "@/components/TitleSection.vue";
 import { current } from "@/data/experience";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
 
 const root = ref(null);
 const card = ref(null);
@@ -108,11 +108,9 @@ onMounted(() => {
       stagger: { amount: 0.25, from: "start" },
     });
 
-    ScrollTrigger.create({
+    replayOnEnter(tl, {
       trigger: card.value,
       start: "top 92%",
-      onEnter: () => tl.restart(),
-      onEnterBack: () => tl.restart(),
     });
   }, root.value);
 });

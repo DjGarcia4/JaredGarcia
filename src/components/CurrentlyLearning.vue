@@ -94,7 +94,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useCertifications } from "@/stores/certifications";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
 
 const certifications = useCertifications();
 
@@ -123,11 +123,9 @@ onMounted(() => {
       stagger: { amount: 0.25, from: "start" },
     });
 
-    ScrollTrigger.create({
+    replayOnEnter(tl, {
       trigger: root.value,
       start: "top 92%",
-      onEnter: () => tl.restart(),
-      onEnterBack: () => tl.restart(),
     });
   }, root.value);
 });

@@ -206,7 +206,7 @@ import { useRouter } from "vue-router";
 import { profile } from "@/data/profile";
 import { skills } from "@/data/skills";
 import { projects } from "@/data/projects";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
 
 const router = useRouter();
 
@@ -303,11 +303,9 @@ onMounted(() => {
       "<0.15"
     );
 
-    ScrollTrigger.create({
+    replayOnEnter(act1In, {
       trigger: act1Ref.value,
       start: "top 78%",
-      onEnter: () => act1In.restart(),
-      onEnterBack: () => act1In.restart(),
     });
 
     // ─────── ACTO 2 · ENTRADA (reusable timeline) ───────
@@ -333,11 +331,9 @@ onMounted(() => {
       "<0.2"
     );
 
-    ScrollTrigger.create({
+    replayOnEnter(act2In, {
       trigger: act2Ref.value,
       start: "top 78%",
-      onEnter: () => act2In.restart(),
-      onEnterBack: () => act2In.restart(),
     });
 
     // ─────── ACTO 3 · ENTRADA (reusable timeline) ───────
@@ -381,11 +377,9 @@ onMounted(() => {
       "<0.2"
     );
 
-    ScrollTrigger.create({
+    replayOnEnter(act3In, {
       trigger: act3Ref.value,
       start: "top 78%",
-      onEnter: () => act3In.restart(),
-      onEnterBack: () => act3In.restart(),
     });
 
     // ─────── PARALLAX AMBIENTE ───────

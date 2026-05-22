@@ -28,7 +28,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import CertificateCard from "@/components/Certificates/CertificateCard.vue";
 import { useCertifications } from "@/stores/certifications";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 
@@ -73,11 +73,9 @@ onMounted(() => {
       duration: 0.7,
     });
 
-    ScrollTrigger.create({
+    replayOnEnter(tl, {
       trigger: carouselWrap.value,
       start: "top 92%",
-      onEnter: () => tl.restart(),
-      onEnterBack: () => tl.restart(),
     });
   }, root.value);
 });

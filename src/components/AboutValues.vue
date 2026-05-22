@@ -50,7 +50,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import TitleSection from "@/components/TitleSection.vue";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
 
 const values = [
   {
@@ -108,11 +108,9 @@ onMounted(() => {
       stagger: { amount: 0.3, from: "start" },
     });
 
-    ScrollTrigger.create({
+    replayOnEnter(tl, {
       trigger: grid.value,
       start: "top 92%",
-      onEnter: () => tl.restart(),
-      onEnterBack: () => tl.restart(),
     });
   }, root.value);
 });

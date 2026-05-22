@@ -30,7 +30,7 @@
     <Skills />
 
     <!-- Aprendizaje -->
-    <section class="container-content py-20 md:py-28">
+    <section id="aprendizaje" class="container-content py-20 md:py-28 scroll-mt-24">
       <TitleSection eyebrow="Aprendizaje">
         Mi camino de aprendizaje
       </TitleSection>

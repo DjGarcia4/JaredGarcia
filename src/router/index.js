@@ -28,7 +28,21 @@ const router = createRouter({
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
-      return { el: to.hash, behavior: "smooth", top: 80 };
+      // When navigating between routes with a hash (e.g. certificate → home#aprendizaje),
+      // the out-in transition (200ms leave + 400ms enter) means the target element
+      // doesn't exist yet. Wait for the transition to finish before scrolling,
+      // and verify the element exists before returning the scroll config —
+      // otherwise fall back to top to avoid leaving the page in a weird state.
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const target = document.querySelector(to.hash);
+          if (target) {
+            resolve({ el: to.hash, behavior: "smooth", top: 80 });
+          } else {
+            resolve({ top: 0 });
+          }
+        }, 700);
+      });
     }
     if (savedPosition) {
       return savedPosition;

@@ -101,16 +101,16 @@ onMounted(() => {
 
     tl.from(cardRefs.value, {
       opacity: 0,
-      y: 48,
-      scale: 0.96,
-      filter: "blur(6px)",
-      duration: 0.85,
-      stagger: 0.12,
+      y: 36,
+      scale: 0.97,
+      filter: "blur(5px)",
+      duration: 0.7,
+      stagger: { amount: 0.3, from: "start" },
     });
 
     ScrollTrigger.create({
       trigger: grid.value,
-      start: "top 80%",
+      start: "top 92%",
       onEnter: () => tl.restart(),
       onEnterBack: () => tl.restart(),
     });

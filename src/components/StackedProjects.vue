@@ -212,7 +212,7 @@ onMounted(() => {
           coverImg,
           {
             clipPath: "inset(0 100% 0 0)",
-            duration: 0.85,
+            duration: 0.7,
             ease: "expo.out",
           },
           0
@@ -221,38 +221,42 @@ onMounted(() => {
       if (coverPin) {
         tl.from(
           coverPin,
-          { opacity: 0, y: -12, duration: 0.45 },
-          "<0.4"
+          { opacity: 0, y: -12, duration: 0.4 },
+          "<0.2"
         );
       }
 
       // Número editorial: se "construye desde abajo" como el wordmark del Hero.
+      // Entra casi en paralelo con el cover (no detrás), para que el texto
+      // no quede "esperando" mientras la card ya es visible.
       if (number) {
         tl.from(
           number,
           {
             yPercent: 110,
-            duration: 0.8,
+            duration: 0.7,
             ease: "expo.out",
           },
-          "<0.05"
+          0.05
         );
       }
 
-      // Eyebrow + title + summary + meta + tech + CTA: stagger refinado.
+      // Eyebrow + title + summary + meta + tech + CTA: stagger refinado,
+      // arranca casi en paralelo al número para que el bloque de texto
+      // entre apenas el card asoma.
       const stack = [eyebrow, title, summary, meta, tech, cta].filter(Boolean);
       if (stack.length) {
         tl.from(
           stack,
           {
             opacity: 0,
-            y: 36,
+            y: 28,
             scale: 0.98,
-            filter: "blur(5px)",
-            duration: 0.7,
-            stagger: 0.085,
+            filter: "blur(4px)",
+            duration: 0.55,
+            stagger: 0.065,
           },
-          "<0.15"
+          0.15
         );
       }
 
@@ -263,17 +267,19 @@ onMounted(() => {
           {
             clipPath: "inset(100% 0 0 0)",
             yPercent: 6,
-            duration: 0.75,
+            duration: 0.65,
             ease: "expo.out",
           },
-          "<0.05"
+          0.2
         );
       }
 
-      // ScrollTrigger que dispara la entrada cada vez que la card entra al viewport.
+      // ScrollTrigger: dispara la entrada apenas el top del card asoma por
+      // el bottom del viewport (95%). Así para cuando el card está totalmente
+      // visible, su contenido ya terminó de materializarse.
       ScrollTrigger.create({
         trigger: card,
-        start: "top 80%",
+        start: "top 95%",
         onEnter: () => tl.restart(),
         onEnterBack: () => tl.restart(),
       });

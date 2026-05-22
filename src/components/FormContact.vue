@@ -1,10 +1,14 @@
 <template>
-  <div class="grid gap-10 md:grid-cols-2 md:gap-14">
+  <div ref="root" class="grid gap-10 md:grid-cols-2 md:gap-14">
     <!-- Info de contacto -->
-    <div class="reveal flex flex-col">
-      <h3 class="font-display text-2xl font-bold text-white md:text-3xl">
-        ¿Tenés un proyecto en mente?
-      </h3>
+    <div ref="leftCol" class="contact-left flex flex-col">
+      <div class="contact-title-wrap overflow-hidden">
+        <h3
+          class="contact-title font-display text-2xl font-bold leading-tight text-white md:text-3xl"
+        >
+          ¿Tenés un proyecto en mente?
+        </h3>
+      </div>
       <p class="mt-3 text-white/55">
         Escribime y conversemos. Respondo todos los mensajes.
       </p>
@@ -109,8 +113,9 @@
     <!-- Formulario -->
     <form
       id="emailForm"
+      ref="formEl"
       @submit.prevent="sendEmail"
-      class="reveal space-y-4"
+      class="space-y-4"
     >
       <div>
         <label for="fullname" class="mb-1.5 block text-sm font-medium text-white/70">
@@ -165,13 +170,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import emailjs from "@emailjs/browser";
 
 import { toast } from "vue-sonner";
 
 import { profile } from "@/data/profile";
 import { useModalStore } from "@/stores/modal";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 emailjs.init("IlTVG1X5-tzzsmG1i");
 
@@ -179,6 +185,100 @@ const modal = useModalStore();
 
 const copied = ref(false);
 const sending = ref(false);
+
+const root = ref(null);
+const leftCol = ref(null);
+const formEl = ref(null);
+
+let ctx;
+
+onMounted(() => {
+  if (prefersReducedMotion()) return;
+  if (!root.value || !leftCol.value || !formEl.value) return;
+
+  ctx = gsap.context(() => {
+    const leftChildren = Array.from(leftCol.value.children);
+    const formChildren = Array.from(formEl.value.children);
+    // Primer hijo del lado izq: wrapper del título (overflow-hidden).
+    // Segundo: párrafo. Resto: cards (email, socials, QR).
+    const [titleWrap, subtitle, ...leftCards] = leftChildren;
+    const title = titleWrap.querySelector(".contact-title");
+
+    // Estado inicial:
+    //  - title: clipPath cortado 100% desde arriba (oculto) + yPercent leve
+    //    para que al revelarse "suba" como en StackedProjects.
+    //  - subtitle: fade + y desde abajo
+    //  - cards izq: slide-in desde la izquierda
+    //  - fields form: slide-in desde la derecha
+    gsap.set(title, {
+      clipPath: "inset(100% 0 0 0)",
+      yPercent: 8,
+    });
+    gsap.set(subtitle, { opacity: 0, y: 24 });
+    gsap.set(leftCards, { opacity: 0, x: -28, scale: 0.98 });
+    gsap.set(formChildren, { opacity: 0, x: 28, scale: 0.98 });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return;
+
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        // Header: el título se revela con clipPath (persiana subiendo) y el
+        // párrafo entra por debajo con fade.
+        tl.to(
+          title,
+          {
+            clipPath: "inset(0% 0 0 0)",
+            yPercent: 0,
+            duration: 0.85,
+            ease: "expo.out",
+          },
+          0
+        ).to(
+          subtitle,
+          { opacity: 1, y: 0, duration: 0.5 },
+          "<0.18"
+        );
+
+        // Cards izquierda: stagger desde la izquierda
+        tl.to(
+          leftCards,
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.55,
+            stagger: 0.08,
+            clearProps: "transform,opacity",
+          },
+          "<0.15"
+        );
+
+        // Form fields: stagger desde la derecha, EN PARALELO con left cards
+        tl.to(
+          formChildren,
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.55,
+            stagger: 0.08,
+            clearProps: "transform,opacity",
+          },
+          "<"
+        );
+
+        observer.disconnect();
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    observer.observe(root.value);
+  }, root.value);
+});
+
+onUnmounted(() => ctx?.revert());
 
 function copyEmail() {
   navigator.clipboard

@@ -34,7 +34,7 @@
       <TitleSection eyebrow="Aprendizaje">
         Mi camino de aprendizaje
       </TitleSection>
-      <CurrentlyLearning class="reveal-scale mb-12" />
+      <CurrentlyLearning class="mb-12" />
       <Certifications />
     </section>
 

@@ -36,7 +36,7 @@ import Skill from "@/components/Skill.vue";
 import FeaturedSkill from "@/components/FeaturedSkill.vue";
 import { skills } from "@/data/skills";
 import { projects } from "@/data/projects";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 // Calcular uso real desde projects.techStack y partir en featured (top 3) + resto.
 const skillsWithUsage = computed(() => {
@@ -65,49 +65,53 @@ onMounted(() => {
   if (prefersReducedMotion()) return;
 
   ctx = gsap.context(() => {
-    // Featured: stagger más amplio (entrada protagonista).
-    if (featuredGrid.value?.children.length) {
-      const tl = gsap.timeline({
-        paused: true,
-        defaults: { ease: "power4.out" },
-      });
-      tl.from(featuredGrid.value.children, {
-        opacity: 0,
-        y: 50,
-        scale: 0.95,
-        filter: "blur(8px)",
-        duration: 0.95,
-        stagger: 0.15,
-      });
-      ScrollTrigger.create({
-        trigger: featuredGrid.value,
-        start: "top 82%",
-        onEnter: () => tl.restart(),
-        onEnterBack: () => tl.restart(),
-      });
-    }
+    // IntersectionObserver nativo en vez de ScrollTrigger. Bypass total al
+    // sistema de refresh que causaba interferencias con el pin de Services
+    // arriba y el sticky stack de StackedProjects. Una vez que el grid entra,
+    // observer.disconnect() — la animación corre independiente del scroll.
+    // Sin filter blur (expensive + glitches en algunos browsers); solo
+    // opacity + y + scale.
+    const animate = (grid, opts) => {
+      if (!grid?.children.length) return;
+      const items = Array.from(grid.children);
 
-    // Resto: stagger fino (entrada de soporte).
-    if (restGrid.value?.children.length) {
-      const tl = gsap.timeline({
-        paused: true,
-        defaults: { ease: "power4.out" },
-      });
-      tl.from(restGrid.value.children, {
-        opacity: 0,
-        y: 24,
-        scale: 0.92,
-        filter: "blur(4px)",
-        duration: 0.6,
-        stagger: 0.035,
-      });
-      ScrollTrigger.create({
-        trigger: restGrid.value,
-        start: "top 88%",
-        onEnter: () => tl.restart(),
-        onEnterBack: () => tl.restart(),
-      });
-    }
+      gsap.set(items, { opacity: 0, y: opts.y, scale: opts.scale });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            gsap.to(items, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: opts.duration,
+              stagger: opts.stagger,
+              ease: "power3.out",
+              overwrite: true,
+              clearProps: "transform,opacity",
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.05, rootMargin: "0px 0px -5% 0px" }
+      );
+
+      observer.observe(grid);
+    };
+
+    animate(featuredGrid.value, {
+      y: 28,
+      scale: 0.97,
+      duration: 0.55,
+      stagger: 0.08,
+    });
+
+    animate(restGrid.value, {
+      y: 16,
+      scale: 0.95,
+      duration: 0.4,
+      stagger: 0.035,
+    });
   }, root.value);
 });
 

@@ -99,7 +99,7 @@
       leave-active-class="transition duration-200 ease-in"
       enter-from-class="opacity-0 -translate-y-2"
       leave-to-class="opacity-0 -translate-y-2"
-      @after-enter="animateDrawerItems"
+      @enter="animateDrawerItems"
     >
       <div
         v-if="mobileOpen"
@@ -284,6 +284,7 @@ const animateDrawerItems = () => {
     duration: 0.55,
     ease: "power4.out",
     stagger: 0.06,
+    clearProps: "transform,opacity,filter",
   });
 };
 

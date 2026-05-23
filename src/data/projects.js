@@ -1,11 +1,16 @@
 // Proyectos del portafolio.
 // Campos: id, slug (URL), title, summary (corto, para cards),
 // description (largo), category, role, year, status, team,
-// featured, order, images.cover, techStack[] (nombres de SVG en
-// /public/img/skills/), features[], tags[], repoUrl, liveUrl.
+// featured, order, images { cover, mobile, gallery[] },
+// techStack[] (nombres de SVG en /public/img/skills/),
+// features[], tags[], repoUrl, liveUrl.
 //
 // status: "Producción" | "En desarrollo" | "Concepto" | "Archivado"
-// Las covers están vacías a propósito (se agregan los mockups después).
+// images:
+//   cover    → desktop 16:10 (cards + hero del detail)
+//   mobile   → captura vertical 9:19.5 (sección móvil del detail)
+//   gallery  → array de capturas desktop (sección "Pantallas" del detail)
+// Convención de paths: /img/projects/<slug>/{cover,mobile,01,02,03}.webp
 
 export const projects = [
   {
@@ -23,7 +28,15 @@ export const projects = [
     team: "Wink Digital S.A.",
     featured: true,
     order: 0,
-    images: { cover: "" },
+    images: {
+      cover: "/img/projects/wink-app/cover.webp",
+      mobile: "/img/projects/wink-app/mobile.webp",
+      gallery: [
+        "/img/projects/wink-app/01.webp",
+        "/img/projects/wink-app/02.webp",
+        "/img/projects/wink-app/03.webp",
+      ],
+    },
     techStack: ["vue", "vite", "firebase", "pinia", "tailwind", "primevue"],
     features: [
       "Gestión de pantallas, zonas y grupos de displays.",
@@ -35,6 +48,43 @@ export const projects = [
     tags: ["digital-signage", "saas", "vue", "firebase"],
     repoUrl: "",
     liveUrl: "",
+  },
+  {
+    id: "wink-site",
+    slug: "wink-site",
+    title: "Wink Site",
+    summary:
+      "Landing page oficial de Wink: captura de leads, planes de precios y showcase de la plataforma de digital signage.",
+    description:
+      "Wink Site es el sitio de marketing y la puerta de entrada comercial del ecosistema Wink. Diseñé y desarrollé la landing completa con foco en conversión: hero, propuesta de valor, métricas, modalidades de servicio, capacidades de la plataforma, showcase de Wink AI, casos de implementación reales, testimonios, tabla comparativa de los cuatro planes (Basic, Professional, Business, Enterprise) y un formulario de contacto con validación y envío vía EmailJS para captura de leads. La arquitectura está construida con Vue 3 + Vite, PrimeVue y Tailwind para la UI, Pinia para estado, VueFire para integración con Firebase y se despliega en Firebase Hosting con headers de seguridad endurecidos (HSTS, CSP, X-Frame-Options, Permissions-Policy) y cache inmutable para assets. La medición se hace con Google Tag Manager + GA4, con un plan de tracking propio que registra eventos clave como envío de formulario, clic en demo, expansión de planes y propiedades de usuario para diferenciar prospectos B2B de individuales.",
+    category: "Landing Page",
+    role: "Head of Development",
+    year: 2025,
+    status: "Producción",
+    team: "Wink Digital S.A.",
+    featured: true,
+    order: 1,
+    images: {
+      cover: "/img/projects/wink-site/cover.webp",
+      mobile: "/img/projects/wink-site/mobile.webp",
+      gallery: [
+        "/img/projects/wink-site/01.webp",
+        "/img/projects/wink-site/02.webp",
+        "/img/projects/wink-site/03.webp",
+      ],
+    },
+    techStack: ["vue", "vite", "firebase", "pinia", "tailwind", "primevue"],
+    features: [
+      "Landing con 11 secciones orientadas a conversión y captura de leads.",
+      "Formulario de contacto con vee-validate + EmailJS y schema propio de validación.",
+      "Tabla comparativa y tarjetas de los cuatro planes de precios.",
+      "Tracking GA4 vía Google Tag Manager con eventos personalizados (lead, demo, navegación, expansión de planes).",
+      "Headers de seguridad endurecidos en Firebase Hosting (HSTS, CSP, X-Frame, Permissions-Policy).",
+      "Animaciones al hacer scroll con AOS y diseño responsivo mobile-first.",
+    ],
+    tags: ["vue", "landing", "marketing", "firebase", "saas"],
+    repoUrl: "",
+    liveUrl: "https://winkdigital.io/",
   },
   {
     id: "hmc",
@@ -50,8 +100,17 @@ export const projects = [
     status: "Producción",
     team: "Proyecto cliente",
     featured: true,
-    order: 1,
-    images: { cover: "" },
+    order: 2,
+    images: {
+      cover: "/img/projects/honduras-medical-center/cover.webp",
+      mobile: "/img/projects/honduras-medical-center/mobile.webp",
+      gallery: [
+        "/img/projects/honduras-medical-center/01.webp",
+        "/img/projects/honduras-medical-center/02.webp",
+        "/img/projects/honduras-medical-center/03.webp",
+        "/img/projects/honduras-medical-center/04.webp",
+      ],
+    },
     techStack: ["vue", "tailwind", "pinia", "firebase", "js"],
     features: [
       "Panel admin para doctores, especialidades y artículos.",
@@ -77,7 +136,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: true,
-    order: 2,
+    order: 3,
     images: { cover: "" },
     techStack: ["vue", "tailwind", "pinia", "vite", "js"],
     features: [
@@ -106,7 +165,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 3,
+    order: 4,
     images: { cover: "" },
     techStack: ["js", "react", "mongo", "node", "vite"],
     features: [
@@ -133,7 +192,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 4,
+    order: 5,
     images: { cover: "" },
     techStack: ["vite", "js", "tailwind", "vue"],
     features: [
@@ -160,7 +219,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 5,
+    order: 6,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "firebase", "vite"],
     features: [
@@ -187,7 +246,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 6,
+    order: 7,
     images: { cover: "" },
     techStack: ["vite", "js", "vue", "firebase"],
     features: [
@@ -214,7 +273,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 7,
+    order: 8,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -241,7 +300,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 8,
+    order: 9,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -268,7 +327,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 9,
+    order: 10,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -295,7 +354,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 10,
+    order: 11,
     images: { cover: "" },
     techStack: ["react", "ts", "css", "vite", "html"],
     features: [
@@ -322,7 +381,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 11,
+    order: 12,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -349,7 +408,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 12,
+    order: 13,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -376,7 +435,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 13,
+    order: 14,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -403,7 +462,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 14,
+    order: 15,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -430,7 +489,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 15,
+    order: 16,
     images: { cover: "" },
     techStack: ["html", "css", "js", "vite"],
     features: [

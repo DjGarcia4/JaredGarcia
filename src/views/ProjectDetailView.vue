@@ -383,6 +383,115 @@
             </ul>
           </section>
 
+          <!-- Gallery: capturas adicionales del producto -->
+          <section
+            v-if="project.images?.gallery?.length"
+            ref="gallerySection"
+            class="mt-16 md:mt-24"
+          >
+            <header class="mb-8 flex items-center justify-between gap-4 md:mb-10">
+              <p
+                class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
+              >
+                <span class="h-px w-8 bg-accent"></span>
+                Pantallas
+              </p>
+              <span
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/35"
+              >
+                {{ String(project.images.gallery.length).padStart(2, "0") }}
+                {{ project.images.gallery.length === 1 ? "vista" : "vistas" }}
+                · Click para ampliar
+              </span>
+            </header>
+
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+              <figure
+                v-for="(img, i) in project.images.gallery"
+                :key="img"
+                :class="[
+                  'gallery-item group relative cursor-zoom-in overflow-hidden rounded-3xl border border-white/[0.08] transition-all duration-500 hover:border-accent/30',
+                  galleryItemSpan(i, project.images.gallery.length),
+                ]"
+                @click="openLightbox(i)"
+              >
+                <img
+                  :src="img"
+                  :alt="`${project.title} — vista ${i + 1}`"
+                  loading="lazy"
+                  class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <!-- Hover overlay con icono -->
+                <div
+                  class="pointer-events-none absolute inset-0 flex items-end justify-between bg-gradient-to-t from-black/55 via-black/10 to-transparent p-5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:p-6"
+                >
+                  <span
+                    class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/85"
+                  >
+                    Vista {{ String(i + 1).padStart(2, "0") }}
+                  </span>
+                  <span
+                    class="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md"
+                  >
+                    <font-awesome-icon
+                      :icon="['fas', 'up-right-and-down-left-from-center']"
+                      class="text-[11px]"
+                    />
+                  </span>
+                </div>
+              </figure>
+            </div>
+          </section>
+
+          <!-- Vista móvil: mockup centrado con ambient glow -->
+          <section
+            v-if="project.images?.mobile"
+            ref="mobileSection"
+            class="mt-16 md:mt-24"
+          >
+            <header class="mb-10 flex items-center justify-between gap-4">
+              <p
+                class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
+              >
+                <span class="h-px w-8 bg-accent"></span>
+                Vista móvil
+              </p>
+            </header>
+
+            <div
+              class="relative flex justify-center overflow-hidden rounded-3xl border border-white/[0.06] bg-gradient-to-br from-ink-900 via-ink-850 to-ink-900 py-14 md:py-20"
+            >
+              <!-- Ambient glow + grid -->
+              <div
+                class="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/[0.10] blur-3xl"
+              ></div>
+              <div
+                class="pointer-events-none absolute -bottom-24 left-1/2 h-60 w-60 -translate-x-1/2 rounded-full bg-accent/[0.05] blur-3xl"
+              ></div>
+              <div
+                class="pointer-events-none absolute inset-0 opacity-[0.04]"
+                style="
+                  background-image:
+                    linear-gradient(to right, white 1px, transparent 1px),
+                    linear-gradient(to bottom, white 1px, transparent 1px);
+                  background-size: 48px 48px;
+                "
+              ></div>
+
+              <div
+                ref="mobileFrame"
+                class="mobile-frame relative w-[260px] overflow-hidden rounded-[2.25rem] border border-white/[0.12] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.55)] md:w-[300px]"
+              >
+                <img
+                  :src="project.images.mobile"
+                  :alt="`${project.title} — vista móvil`"
+                  loading="lazy"
+                  class="block w-full"
+                />
+              </div>
+            </div>
+          </section>
+
           <!-- Tags -->
           <section
             v-if="project.tags?.length"
@@ -559,11 +668,135 @@
         Volver a proyectos
       </RouterLink>
     </div>
+
+    <!-- ─── LIGHTBOX (gallery viewer + carousel) ─────────────────────── -->
+    <Teleport to="body">
+      <Transition name="lightbox">
+        <div
+          v-if="lightboxOpen && project?.images?.gallery?.length"
+          class="lightbox fixed inset-0 z-[100] flex flex-col bg-black/85 backdrop-blur-xl"
+          role="dialog"
+          aria-modal="true"
+          @click.self="closeLightbox"
+        >
+          <!-- Top bar: counter + close -->
+          <div
+            class="flex items-center justify-between px-5 py-5 md:px-10 md:py-7"
+          >
+            <p
+              class="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/65"
+            >
+              <span class="text-accent-light">
+                {{ String(lightboxIndex + 1).padStart(2, "0") }}
+              </span>
+              <span class="mx-2 text-white/25">/</span>
+              <span>
+                {{
+                  String(project.images.gallery.length).padStart(2, "0")
+                }}
+              </span>
+              <span class="ml-3 hidden text-white/35 sm:inline">
+                · {{ project.title }}
+              </span>
+            </p>
+            <button
+              type="button"
+              @click="closeLightbox"
+              aria-label="Cerrar"
+              class="group flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/80 transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
+            >
+              <font-awesome-icon
+                :icon="['fas', 'xmark']"
+                class="text-base transition-transform duration-300 group-hover:rotate-90"
+              />
+            </button>
+          </div>
+
+          <!-- Main viewer -->
+          <div
+            class="relative flex flex-1 items-center justify-center px-5 pb-2 md:px-10"
+            @click.self="closeLightbox"
+          >
+            <!-- Prev button -->
+            <button
+              v-if="project.images.gallery.length > 1"
+              type="button"
+              @click.stop="prevImage"
+              aria-label="Anterior"
+              class="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light md:left-8 md:h-12 md:w-12"
+            >
+              <font-awesome-icon
+                :icon="['fas', 'chevron-left']"
+                class="text-sm md:text-base"
+              />
+            </button>
+
+            <!-- Image -->
+            <Transition name="lightbox-image" mode="out-in">
+              <img
+                :key="project.images.gallery[lightboxIndex]"
+                :src="project.images.gallery[lightboxIndex]"
+                :alt="`${project.title} — vista ${lightboxIndex + 1}`"
+                class="max-h-full max-w-full rounded-2xl border border-white/[0.08] object-contain shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+                style="max-height: calc(100vh - 240px)"
+                @click.stop
+              />
+            </Transition>
+
+            <!-- Next button -->
+            <button
+              v-if="project.images.gallery.length > 1"
+              type="button"
+              @click.stop="nextImage"
+              aria-label="Siguiente"
+              class="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light md:right-8 md:h-12 md:w-12"
+            >
+              <font-awesome-icon
+                :icon="['fas', 'chevron-right']"
+                class="text-sm md:text-base"
+              />
+            </button>
+          </div>
+
+          <!-- Thumbnails carousel -->
+          <div
+            v-if="project.images.gallery.length > 1"
+            class="overflow-x-auto px-5 py-5 md:px-10 md:py-6"
+          >
+            <div class="mx-auto flex w-fit max-w-full gap-3">
+              <button
+                v-for="(img, i) in project.images.gallery"
+                :key="img"
+                type="button"
+                @click.stop="lightboxIndex = i"
+                :aria-label="`Ver vista ${i + 1}`"
+                :class="[
+                  'group relative h-16 w-28 shrink-0 overflow-hidden rounded-lg border transition-all duration-300 md:h-20 md:w-36',
+                  i === lightboxIndex
+                    ? 'border-accent shadow-[0_0_0_3px_rgba(74,222,128,0.18)]'
+                    : 'border-white/10 opacity-55 hover:border-white/30 hover:opacity-100',
+                ]"
+              >
+                <img
+                  :src="img"
+                  :alt="`Thumbnail vista ${i + 1}`"
+                  class="h-full w-full object-cover"
+                />
+                <span
+                  v-if="i === lightboxIndex"
+                  class="absolute inset-x-0 bottom-0 h-0.5 bg-accent"
+                ></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
@@ -604,6 +837,9 @@ const coverWrap = ref(null);
 const aboutSection = ref(null);
 const stackSection = ref(null);
 const featuresSection = ref(null);
+const gallerySection = ref(null);
+const mobileSection = ref(null);
+const mobileFrame = ref(null);
 const tagsSection = ref(null);
 const linksSection = ref(null);
 const ctaSection = ref(null);
@@ -611,7 +847,56 @@ const navSection = ref(null);
 
 let ctx;
 
+// ─── LIGHTBOX STATE ────────────────────────────────────────────────────
+const lightboxOpen = ref(false);
+const lightboxIndex = ref(0);
+
+function galleryItemSpan(i, total) {
+  // Asimetría editorial: con 3 items, la primera ocupa full-width.
+  // Con 1 item, también full-width. Con 2 ó 4, grilla pareja.
+  if (total === 1) return "md:col-span-2";
+  if (total === 3 && i === 0) return "md:col-span-2";
+  return "";
+}
+
+function openLightbox(i) {
+  lightboxIndex.value = i;
+  lightboxOpen.value = true;
+}
+
+function closeLightbox() {
+  lightboxOpen.value = false;
+}
+
+function nextImage() {
+  const total = project.value?.images?.gallery?.length || 0;
+  if (!total) return;
+  lightboxIndex.value = (lightboxIndex.value + 1) % total;
+}
+
+function prevImage() {
+  const total = project.value?.images?.gallery?.length || 0;
+  if (!total) return;
+  lightboxIndex.value = (lightboxIndex.value - 1 + total) % total;
+}
+
+function onKeydown(e) {
+  if (!lightboxOpen.value) return;
+  if (e.key === "Escape") closeLightbox();
+  else if (e.key === "ArrowRight") nextImage();
+  else if (e.key === "ArrowLeft") prevImage();
+}
+
+// Body scroll lock cuando el lightbox está abierto
+watch(lightboxOpen, (open) => {
+  if (typeof document === "undefined") return;
+  document.body.style.overflow = open ? "hidden" : "";
+});
+
 onMounted(() => {
+  // Listener global de teclado para el lightbox (siempre activo)
+  window.addEventListener("keydown", onKeydown);
+
   if (!project.value) return;
   // Scroll to top en cada nuevo proyecto (por si el router no lo hace)
   window.scrollTo({ top: 0, behavior: "instant" });
@@ -786,6 +1071,70 @@ onMounted(() => {
       }
     }
 
+    // ── GALLERY (al scroll, clipPath + blur cinematográfico) ──────────
+    if (gallerySection.value) {
+      const items = gallerySection.value.querySelectorAll(".gallery-item");
+      if (items.length) {
+        gsap.set(items, {
+          opacity: 0,
+          y: 32,
+          scale: 0.97,
+          clipPath: "inset(8% 4% 8% 4%)",
+          filter: "blur(8px)",
+        });
+
+        const obs = new IntersectionObserver(
+          (entries) => {
+            if (!entries[0].isIntersecting) return;
+            gsap.to(items, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              clipPath: "inset(0% 0% 0% 0%)",
+              filter: "blur(0px)",
+              duration: 0.95,
+              stagger: 0.12,
+              ease: "expo.out",
+              clearProps: "transform,opacity,filter,clipPath",
+            });
+            obs.disconnect();
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -5% 0px" }
+        );
+
+        obs.observe(gallerySection.value);
+      }
+    }
+
+    // ── MOBILE FRAME (al scroll, fade + scale + blur) ─────────────────
+    if (mobileSection.value && mobileFrame.value) {
+      gsap.set(mobileFrame.value, {
+        opacity: 0,
+        y: 28,
+        scale: 0.92,
+        filter: "blur(6px)",
+      });
+
+      const obs = new IntersectionObserver(
+        (entries) => {
+          if (!entries[0].isIntersecting) return;
+          gsap.to(mobileFrame.value, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.95,
+            ease: "expo.out",
+            clearProps: "transform,opacity,filter",
+          });
+          obs.disconnect();
+        },
+        { threshold: 0.15 }
+      );
+
+      obs.observe(mobileSection.value);
+    }
+
     // ── TAGS + LINKS (al scroll, simple fade) ─────────────────────────
     [tagsSection.value, linksSection.value].forEach((section) => {
       if (!section) return;
@@ -857,7 +1206,13 @@ onMounted(() => {
   }, root.value);
 });
 
-onUnmounted(() => ctx?.revert());
+onUnmounted(() => {
+  ctx?.revert();
+  window.removeEventListener("keydown", onKeydown);
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = "";
+  }
+});
 </script>
 
 <style scoped>
@@ -874,5 +1229,43 @@ onUnmounted(() => ctx?.revert());
     color: rgb(74 222 128);
     padding: 0.35rem 0.65rem 0 0;
   }
+}
+
+/* Lightbox entrance/exit: fade del overlay + scale del contenido */
+.lightbox-enter-active,
+.lightbox-leave-active {
+  transition:
+    opacity 0.28s ease,
+    backdrop-filter 0.28s ease;
+}
+.lightbox-enter-from,
+.lightbox-leave-to {
+  opacity: 0;
+}
+.lightbox-enter-active :deep(img),
+.lightbox-leave-active :deep(img) {
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.32s ease;
+}
+.lightbox-enter-from :deep(img) {
+  transform: scale(0.94);
+  opacity: 0;
+}
+
+/* Crossfade entre imágenes del carrusel */
+.lightbox-image-enter-active,
+.lightbox-image-leave-active {
+  transition:
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lightbox-image-enter-from {
+  opacity: 0;
+  transform: scale(0.97);
+}
+.lightbox-image-leave-to {
+  opacity: 0;
+  transform: scale(1.02);
 }
 </style>

@@ -76,35 +76,32 @@
         </a>
       </div>
 
-      <!-- QR de WhatsApp -->
+      <!-- QR de WhatsApp (SVG dinámico, mismo URL que el link) -->
       <div class="surface mt-6 flex items-center gap-4 p-4">
         <a
           :href="profile.socials.whatsapp"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Abrir chat de WhatsApp"
-          class="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] transition-colors hover:border-accent/40"
+          aria-label="Abrir chat de WhatsApp con mensaje precargado"
+          class="group relative flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white p-2 transition-all duration-300 hover:border-accent/50 hover:shadow-[0_0_0_3px_rgba(74,222,128,0.12)]"
         >
-          <img
-            v-if="profile.whatsappQr"
-            :src="profile.whatsappQr"
-            alt="Código QR de WhatsApp"
-            class="h-full w-full object-contain"
+          <QrcodeVue
+            :value="profile.socials.whatsapp"
+            :size="200"
+            level="M"
+            render-as="svg"
+            background="#ffffff"
+            foreground="#0b1410"
+            class="h-full w-full"
           />
-          <span
-            v-else
-            class="flex flex-col items-center gap-1.5 text-white/30"
-          >
-            <font-awesome-icon :icon="['fas', 'qrcode']" class="text-3xl" />
-            <span class="text-[10px] uppercase tracking-wider">QR</span>
-          </span>
         </a>
         <div class="min-w-0">
           <span class="block text-xs uppercase tracking-wider text-white/40">
             WhatsApp
           </span>
           <p class="mt-1 text-sm leading-relaxed text-white/60">
-            Escaneá el código y escribime directo por WhatsApp.
+            Escaneá el código o tocá la imagen para abrir el chat con un
+            mensaje listo.
           </p>
         </div>
       </div>
@@ -171,6 +168,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
+import QrcodeVue from "qrcode.vue";
 import emailjs from "@emailjs/browser";
 
 import { toast } from "vue-sonner";

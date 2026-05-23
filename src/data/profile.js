@@ -1,3 +1,10 @@
+// WhatsApp: número internacional sin + ni espacios, y mensaje
+// que se precarga al abrir el chat. Se usa tanto para el link como
+// para generar el QR dinámico — single source of truth.
+const WHATSAPP_NUMBER = "50487854736";
+const WHATSAPP_MESSAGE =
+  "¡Hola Jared! Vi tu portafolio y me interesa hablar de un proyecto.";
+
 export const profile = {
   name: "Jared Garcia",
   roles: ["Frontend Developer", "UX/UI Designer"],
@@ -10,12 +17,10 @@ export const profile = {
   socials: {
     github: "https://github.com/DjGarcia4",
     linkedin: "https://www.linkedin.com/in/jared-garcia-739255243/",
-    // TODO: reemplazá con tu número real (formato internacional, sin + ni espacios).
-    whatsapp: "https://wa.me/504XXXXXXXX",
+    whatsapp: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      WHATSAPP_MESSAGE
+    )}`,
     // TODO: reemplazá con tu usuario real de Instagram.
     instagram: "https://instagram.com/tu_usuario",
   },
-  // TODO: poné la imagen del QR en /public/img/ y referenciála acá,
-  // ej. "/img/whatsapp-qr.png". Si queda vacío se muestra un placeholder.
-  whatsappQr: "",
 };

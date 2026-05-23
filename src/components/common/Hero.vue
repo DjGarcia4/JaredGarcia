@@ -50,7 +50,7 @@
         <p
           class="font-mono text-xs font-medium uppercase tracking-[0.28em] text-white/50"
         >
-          {{ profile.location }} · since 2023
+          {{ profile.location }} · since 2021
         </p>
       </div>
 

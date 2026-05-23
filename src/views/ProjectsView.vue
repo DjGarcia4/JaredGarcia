@@ -82,6 +82,11 @@ const projects = useProjects();
 const headerRef = ref(null);
 let ctx;
 
+// Año de inicio de carrera. El rango mostrado refleja la trayectoria real,
+// no solo los proyectos listados (algunos de los primeros años no están
+// publicados en el portafolio).
+const CAREER_START_YEAR = 2021;
+
 const stats = computed(() => {
   const all = projects.projectsCollection;
   const years = all.map((p) => p.year).filter(Boolean);
@@ -89,7 +94,7 @@ const stats = computed(() => {
   return {
     total: all.length,
     featured: all.filter((p) => p.featured).length,
-    yearMin: Math.min(...years),
+    yearMin: Math.min(CAREER_START_YEAR, ...years),
     yearMax: Math.max(...years),
     categories: cats.size,
   };

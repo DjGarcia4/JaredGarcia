@@ -3,7 +3,7 @@
     <!-- Pin target: incluye title + card. Ambos quedan fijos juntos durante
          el scrollytelling, para que el header "Lo que ofrezco" no se vaya
          arriba mientras el user explora los servicios. -->
-    <div ref="pinTarget">
+    <div ref="pinTarget" class="mt-20">
       <TitleSection eyebrow="Servicios">
         Lo que ofrezco
       </TitleSection>

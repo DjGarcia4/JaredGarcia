@@ -8,7 +8,7 @@
     <Splash v-if="showSplash" @finish="finishSplash" />
   </Transition>
 
-  <div v-show="!showSplash" class="relative min-h-screen">
+  <div v-if="!showSplash" class="relative min-h-screen">
     <!-- Fondo -->
     <MeshBackground />
     <div class="grid-overlay fixed inset-0 -z-10"></div>
@@ -123,11 +123,8 @@ const handleScroll = () => {
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll, { passive: true });
-
-  if (prefersReducedMotion()) return;
-
+const initScrollProgress = () => {
+  if (prefersReducedMotion() || !progressBar.value) return;
   ctx = gsap.context(() => {
     gsap.to(progressBar.value, {
       scaleX: 1,
@@ -135,6 +132,14 @@ onMounted(() => {
       scrollTrigger: { start: 0, end: "max", scrub: 0.3 },
     });
   });
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  if (!showSplash.value) {
+    initScrollProgress();
+  }
 });
 
 onUnmounted(() => {
@@ -145,6 +150,14 @@ onUnmounted(() => {
 const onAfterEnter = () => {
   ScrollTrigger.refresh();
 };
+
+watch(showSplash, (newVal) => {
+  if (!newVal) {
+    nextTick(() => {
+      initScrollProgress();
+    });
+  }
+});
 
 // La altura de la página cambia entre rutas: recalcular ScrollTrigger.
 watch(

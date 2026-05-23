@@ -16,19 +16,31 @@ export const stagger = {
       willChange: "transform, opacity",
     });
 
-    const triggers = ScrollTrigger.batch(items, {
-      start: "top 92%",
-      once: true,
-      onEnter: (batch) =>
-        gsap.to(batch, {
-          opacity: 1,
-          y: 0,
-          duration: 0.45,
-          ease: "power2.out",
-          stagger: 0.06,
-          overwrite: true,
-          onComplete: () => gsap.set(batch, { willChange: "auto" }),
-        }),
+    const triggers = [];
+    const isDesktop = window.innerWidth >= 1024;
+    const isTablet = window.innerWidth >= 640 && window.innerWidth < 1024;
+    const cols = isDesktop ? 3 : (isTablet ? 2 : 1);
+
+    items.forEach((item, index) => {
+      const delay = (index % cols) * 0.06;
+
+      const trigger = ScrollTrigger.create({
+        trigger: item,
+        start: "top 92%",
+        once: true,
+        onEnter: () => {
+          gsap.to(item, {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            ease: "power2.out",
+            delay,
+            clearProps: "transform,opacity",
+            onComplete: () => gsap.set(item, { willChange: "auto" }),
+          });
+        },
+      });
+      triggers.push(trigger);
     });
 
     state.set(el, triggers);

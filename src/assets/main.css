@@ -131,6 +131,118 @@
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000, transparent);
   }
+
+  /* ── Grid chase (Hero idle motion) ────────────────────────────────
+     Líneas verticales y horizontales con un "destello" que viaja por
+     ellas. Tech sobrio, GPU-only (solo transform), respeta reduced-
+     motion. Las líneas son contenedores delgados con overflow oculto;
+     el destello es un gradient que se traduce a lo largo. */
+  .grid-chase {
+    position: absolute;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .grid-chase-v {
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(255, 255, 255, 0.04) 20%,
+      rgba(255, 255, 255, 0.04) 80%,
+      transparent
+    );
+  }
+
+  .grid-chase-h {
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.04) 20%,
+      rgba(255, 255, 255, 0.04) 80%,
+      transparent
+    );
+  }
+
+  .grid-chase-glow {
+    position: absolute;
+    display: block;
+    will-change: transform;
+  }
+
+  .grid-chase-v .grid-chase-glow {
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 32%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(74, 222, 128, 0.4) 40%,
+      rgba(190, 255, 200, 1) 50%,
+      rgba(74, 222, 128, 0.4) 60%,
+      transparent 100%
+    );
+    filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.7));
+    transform: translateY(-100%);
+    animation: chase-v 9s ease-in-out infinite;
+  }
+
+  .grid-chase-h .grid-chase-glow {
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 28%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(74, 222, 128, 0.4) 40%,
+      rgba(190, 255, 200, 1) 50%,
+      rgba(74, 222, 128, 0.4) 60%,
+      transparent 100%
+    );
+    filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.7));
+    transform: translateX(-100%);
+    animation: chase-h 11s ease-in-out infinite;
+  }
+}
+
+@keyframes chase-v {
+  0% {
+    transform: translateY(-100%);
+  }
+  /* Pausa antes y después: el destello vive un ~45% del loop, luego
+     descansa fuera de la vista para que no se sienta repetitivo. */
+  40% {
+    transform: translateY(310%);
+  }
+  100% {
+    transform: translateY(310%);
+  }
+}
+
+@keyframes chase-h {
+  0% {
+    transform: translateX(-100%);
+  }
+  45% {
+    transform: translateX(360%);
+  }
+  100% {
+    transform: translateX(360%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-chase-glow {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* ── Reveal on scroll (CSS scroll-driven, fuera del hilo principal) ──

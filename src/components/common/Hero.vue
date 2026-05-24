@@ -1,5 +1,36 @@
 <template>
   <section ref="heroRef" class="relative overflow-hidden">
+    <!-- Grid chase · vida en idle. Líneas verticales y horizontales
+         con destellos accent que las recorren en bucle largo y
+         desfasado. Solo en el Acto 1 (h-screen). -->
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-screen overflow-hidden"
+      aria-hidden="true"
+    >
+      <!-- Verticales: 4 líneas a porcentajes que no compiten con el
+           wordmark central. Delays negativos para arrancar desfasadas. -->
+      <div class="grid-chase grid-chase-v" style="left: 12%">
+        <span class="grid-chase-glow"></span>
+      </div>
+      <div class="grid-chase grid-chase-v" style="left: 30%; animation-delay: -3s">
+        <span class="grid-chase-glow" style="animation-delay: -3s"></span>
+      </div>
+      <div class="grid-chase grid-chase-v" style="left: 68%">
+        <span class="grid-chase-glow" style="animation-delay: -5.5s"></span>
+      </div>
+      <div class="grid-chase grid-chase-v" style="left: 88%">
+        <span class="grid-chase-glow" style="animation-delay: -7.5s"></span>
+      </div>
+
+      <!-- Horizontales: 2 líneas en bandas superiores/inferiores. -->
+      <div class="grid-chase grid-chase-h" style="top: 24%">
+        <span class="grid-chase-glow" style="animation-delay: -2s"></span>
+      </div>
+      <div class="grid-chase grid-chase-h" style="top: 78%">
+        <span class="grid-chase-glow" style="animation-delay: -8s"></span>
+      </div>
+    </div>
+
     <!-- Glow ambient (parallax con scroll) -->
     <div
       ref="glowRef"

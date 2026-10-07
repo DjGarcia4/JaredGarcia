@@ -379,10 +379,9 @@ onMounted(() => {
       opacity: 0,
       y: 36,
       scale: 0.98,
-      filter: "blur(6px)",
       duration: 0.8,
       ease: "power4.out",
-      clearProps: "filter,transform,opacity",
+      clearProps: "transform,opacity",
     });
 
     replayOnEnter(pinEntry, {

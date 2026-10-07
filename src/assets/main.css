@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  /* Sin scroll-behavior: smooth global: choca con los scrollTo de GSAP
+     (cada frame se suaviza de nuevo) y traba el scroll. Los scrolls
+     programáticos ya piden behavior: "smooth" explícito. */
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
 
   body {
@@ -48,7 +51,7 @@
   }
 
   .surface {
-    @apply rounded-2xl border border-white/[0.07] bg-white/[0.03] backdrop-blur-md;
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.03];
   }
 
   .surface-hover {
@@ -57,7 +60,7 @@
 
   /* Surface variant with brutalist edges (sharp corners, harder border). */
   .surface-brut {
-    @apply rounded-none border border-white/10 bg-ink-900/60 backdrop-blur-md;
+    @apply rounded-none border border-white/10 bg-ink-900/60;
   }
 
   .eyebrow {

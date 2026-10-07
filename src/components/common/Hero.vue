@@ -34,7 +34,7 @@
     <!-- Glow ambient (parallax con scroll) -->
     <div
       ref="glowRef"
-      class="pointer-events-none absolute left-1/2 top-32 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-accent/15 blur-[160px] animate-glow-pulse"
+      class="pointer-events-none absolute left-1/2 top-32 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-accent/15 blur-[160px] animate-glow-pulse will-change-transform"
     ></div>
 
     <!-- ─────────── ACTO 1 · PRESENTACIÓN ─────────── -->
@@ -150,7 +150,7 @@
 
       <!-- Stats full-width con detalle secundario -->
       <dl
-        class="act3-item mt-10 grid w-full grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.07] backdrop-blur-md md:mt-12 md:grid-cols-3"
+        class="act3-item mt-10 grid w-full grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.07] md:mt-12 md:grid-cols-3"
       >
         <div
           v-for="stat in stats"
@@ -237,7 +237,7 @@ import { useRouter } from "vue-router";
 import { profile } from "@/data/profile";
 import { skills } from "@/data/skills";
 import { projects } from "@/data/projects";
-import { gsap, ScrollTrigger, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
 
 const router = useRouter();
 
@@ -295,7 +295,6 @@ const stats = computed(() => [
 const display = reactive({ projects: 0, years: 0, techs: 0 });
 
 let ctx;
-let snapTrigger;
 
 const scrollToContact = () => {
   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
@@ -319,7 +318,6 @@ onMounted(() => {
       opacity: 0,
       y: 60,
       scale: 0.97,
-      filter: "blur(8px)",
       duration: 1.2,
       stagger: 0.13,
     });
@@ -348,7 +346,6 @@ onMounted(() => {
       opacity: 0,
       y: 70,
       scale: 0.97,
-      filter: "blur(6px)",
       duration: 1.15,
       stagger: 0.14,
     });
@@ -382,7 +379,6 @@ onMounted(() => {
       opacity: 0,
       y: 50,
       scale: 0.97,
-      filter: "blur(6px)",
       duration: 1.1,
       stagger: 0.12,
     });
@@ -425,12 +421,13 @@ onMounted(() => {
       },
     });
 
-    // ─────── SALIDAS · cada acto se "desenfoca al fondo" cuando lo dejás atrás ───────
+    // ─────── SALIDAS · cada acto se aleja y apaga cuando lo dejás atrás ───────
+    // Solo transform + opacity (compositor): un filter: blur con scrub
+    // re-pinta el acto entero en cada frame y traba el scroll.
     gsap.to(act1Ref.value, {
       yPercent: -22,
       opacity: 0.1,
       scale: 0.92,
-      filter: "blur(6px)",
       ease: "none",
       scrollTrigger: {
         trigger: act1Ref.value,
@@ -444,7 +441,6 @@ onMounted(() => {
       yPercent: -16,
       opacity: 0.2,
       scale: 0.95,
-      filter: "blur(5px)",
       ease: "none",
       scrollTrigger: {
         trigger: act2Ref.value,
@@ -458,7 +454,6 @@ onMounted(() => {
       yPercent: -10,
       opacity: 0.35,
       scale: 0.97,
-      filter: "blur(3px)",
       ease: "none",
       scrollTrigger: {
         trigger: act3Ref.value,
@@ -466,41 +461,6 @@ onMounted(() => {
         end: "bottom top",
         scrub: true,
       },
-    });
-
-    // Snap suave entre los 3 actos: solo desktop con pointer fino.
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 1024px) and (pointer: fine)", () => {
-      snapTrigger = ScrollTrigger.create({
-        id: "hero-snap",
-        trigger: heroRef.value,
-        start: "top top",
-        endTrigger: act3Ref.value,
-        end: "top top",
-        snap: {
-          snapTo: (value) => {
-            const total = act3Ref.value.offsetTop;
-            if (!total) return value;
-            const points = [
-              0,
-              act2Ref.value.offsetTop / total,
-              1,
-            ];
-            return points.reduce(
-              (prev, curr) =>
-                Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev,
-              points[0]
-            );
-          },
-          duration: { min: 0.3, max: 0.7 },
-          delay: 0.18,
-          ease: "power2.inOut",
-        },
-      });
-      return () => {
-        snapTrigger?.kill();
-        snapTrigger = null;
-      };
     });
   }, heroRef.value);
 });

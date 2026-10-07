@@ -14,6 +14,43 @@
 
 export const projects = [
   {
+    id: "rapisites",
+    slug: "rapisites",
+    title: "RapiSites",
+    summary:
+      "SaaS para crear sitios web con IA: respondes 4 preguntas y tu sitio queda publicado, con SEO técnico, en minutos.",
+    description:
+      "RapiSites es mi proyecto personal principal: un constructor de sitios web multi-tenant donde cualquier persona responde cuatro preguntas y obtiene su sitio completo —estructura, contenido y metadatos SEO— generado con la API de Claude en menos de treinta segundos. Cada sitio se sirve en su propio subdominio o en el dominio del cliente con HTTPS automático, y se publica de forma atómica: auditoría SEO previa, snapshot congelado e historial de versiones con rollback en un click. Incluye un editor visual con autosave, undo/redo y secciones con drag & drop, un catálogo de 33 secciones que no cargan JavaScript en el sitio público (el rendimiento es SEO) y sitios bilingües. Lo diseño y desarrollo de punta a punta, desde el producto hasta la infraestructura: Nuxt 4 con SSR, PostgreSQL + Drizzle, colas con pg-boss, Cloudflare R2, Caddy con certificados wildcard y on-demand, despliegue con Docker en un VPS endurecido, backups cifrados y observabilidad con Sentry y BetterStack. Está en producción y en desarrollo activo.",
+    category: "SaaS",
+    role: "Fundador y desarrollador fullstack",
+    year: 2026,
+    status: "Producción",
+    team: "Proyecto personal",
+    featured: true,
+    order: 0,
+    images: {
+      cover: "/img/projects/rapisites/cover.webp",
+      mobile: "/img/projects/rapisites/mobile.webp",
+      gallery: [
+        "/img/projects/rapisites/01.webp",
+        "/img/projects/rapisites/02.webp",
+        "/img/projects/rapisites/03.webp",
+      ],
+    },
+    techStack: ["vue", "ts", "tailwind", "node", "docker"],
+    features: [
+      "Wizard de 4 preguntas que genera estructura, contenido y SEO con la API de Claude.",
+      "Sitios multi-tenant por subdominio y dominios propios con HTTPS automático.",
+      "Publicación atómica con auditoría SEO, historial de versiones y rollback.",
+      "Editor visual con autosave, undo/redo y secciones con drag & drop.",
+      "33 secciones sin JavaScript en el sitio público, en español e inglés.",
+      "Infra propia: Docker, Caddy, PostgreSQL, R2, backups cifrados y monitoreo.",
+    ],
+    tags: ["saas", "nuxt", "ia", "multi-tenant", "seo", "typescript"],
+    repoUrl: "",
+    liveUrl: "https://rapisites.com",
+  },
+  {
     id: "wink-app",
     slug: "wink-app",
     title: "Wink App",
@@ -27,7 +64,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 0,
+    order: 2,
     images: {
       cover: "/img/projects/wink-app/cover.webp",
       mobile: "/img/projects/wink-app/mobile.webp",
@@ -63,7 +100,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 1,
+    order: 3,
     images: {
       cover: "/img/projects/wink-site/cover.webp",
       mobile: "/img/projects/wink-site/mobile.webp",
@@ -100,7 +137,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto cliente",
     featured: true,
-    order: 2,
+    order: 4,
     images: {
       cover: "/img/projects/honduras-medical-center/cover.webp",
       mobile: "/img/projects/honduras-medical-center/mobile.webp",
@@ -127,29 +164,36 @@ export const projects = [
     slug: "swiftflow-typing-test",
     title: "SwiftFlow",
     summary:
-      "Aplicación de mecanografía con Vue.js. Estadísticas en tiempo real, múltiples textos y animaciones.",
+      "Test de mecanografía en español e inglés que no solo te mide: te dice en qué fallás y te arma la práctica para arreglarlo.",
     description:
-      "Desarrollé SwiftFlow, una aplicación web moderna de prueba de mecanografía construida con Vue.js 3 y Tailwind CSS. La aplicación ofrece una experiencia de escritura fluida con retroalimentación en tiempo real, estadísticas detalladas de velocidad (WPM), precisión y tiempo. Incluye múltiples pasajes de texto en español, animaciones suaves con confetti al completar textos, sistema de pausa automática por inactividad, navegación entre textos y un diseño completamente responsivo con tema oscuro. La aplicación utiliza Vue 3 Composition API para un rendimiento óptimo, Canvas Confetti para celebraciones visuales, y está optimizada para funcionar perfectamente en escritorio y dispositivos móviles.",
+      "SwiftFlow es mi proyecto hobby, que sigo mejorando constantemente: un test de mecanografía en español e inglés que va más allá de medir la velocidad. Analiza cada pulsación para decirte qué teclas, qué dedos y qué combinaciones te frenan, y arma práctica a medida alrededor de tus puntos débiles. Tiene 13 modos —tiempo, palabras, números, citas, clásicos de la literatura, dictado por voz, código en 8 lenguajes, zen, entrenamiento por teclas y por dedos—, un curso de 24 lecciones para aprender a escribir sin mirar adaptado a tu distribución de teclado, logros, retos diarios y semanales, y un historial con mapa de errores, tendencias, constancia y consejos personalizados. Todo funciona sin cuenta ni servidor: los datos viven en el navegador, se instala como PWA y anda sin conexión. Está construido con Vue 3, Pinia y Tailwind CSS 4, organizado por features, con tests unitarios en Vitest, end-to-end en Playwright y chequeos de accesibilidad con axe.",
     category: "Aplicación Web",
-    role: "Desarrollador frontend",
-    year: 2025,
+    role: "Creador y desarrollador",
+    year: 2026,
     status: "Producción",
-    team: "Proyecto individual",
+    team: "Proyecto personal",
     featured: true,
-    order: 3,
-    images: { cover: "" },
+    order: 1,
+    images: {
+      cover: "/img/projects/swiftflow/cover.webp",
+      mobile: "/img/projects/swiftflow/mobile.webp",
+      gallery: [
+        "/img/projects/swiftflow/01.webp",
+        "/img/projects/swiftflow/02.webp",
+      ],
+    },
     techStack: ["vue", "tailwind", "pinia", "vite", "js"],
     features: [
-      "Prueba de mecanografía en tiempo real con textos en español.",
-      "Estadísticas detalladas: WPM, precisión, tiempo y errores.",
-      "Sistema de pausa automática tras 3 segundos de inactividad.",
-      "Navegación entre múltiples pasajes de texto.",
-      "Animaciones suaves y celebración con confetti al completar.",
-      "Diseño responsivo con tema oscuro y efectos visuales.",
+      "13 modos de práctica, incluyendo dictado por voz y código en 8 lenguajes.",
+      "Análisis de errores por tecla, dedo y combinación, con consejos personalizados.",
+      "Curso de 24 lecciones para escribir sin mirar, adaptado a 5 distribuciones de teclado.",
+      "Logros, retos diarios y semanales, y resúmenes mensuales para compartir.",
+      "Interfaz y textos en español e inglés, manejable 100% con el teclado.",
+      "PWA sin cuenta ni servidor: funciona offline y guarda todo en el navegador.",
     ],
-    tags: ["vue", "tailwind", "typing", "javascript", "frontend"],
+    tags: ["vue", "pwa", "typing", "i18n", "accesibilidad", "frontend"],
     repoUrl: "",
-    liveUrl: "",
+    liveUrl: "https://swiftflowtyping.netlify.app",
   },
   {
     id: "tasksphere",
@@ -165,7 +209,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 4,
+    order: 5,
     images: { cover: "" },
     techStack: ["js", "react", "mongo", "node", "vite"],
     features: [
@@ -192,7 +236,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 5,
+    order: 6,
     images: { cover: "" },
     techStack: ["vite", "js", "tailwind", "vue"],
     features: [
@@ -219,7 +263,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 6,
+    order: 7,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "firebase", "vite"],
     features: [
@@ -246,7 +290,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 7,
+    order: 8,
     images: { cover: "" },
     techStack: ["vite", "js", "vue", "firebase"],
     features: [
@@ -273,7 +317,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 8,
+    order: 9,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -300,7 +344,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 9,
+    order: 10,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -327,7 +371,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 10,
+    order: 11,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -354,7 +398,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 11,
+    order: 12,
     images: { cover: "" },
     techStack: ["react", "ts", "css", "vite", "html"],
     features: [
@@ -381,7 +425,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 12,
+    order: 13,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -408,7 +452,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 13,
+    order: 14,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -435,7 +479,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 14,
+    order: 15,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -462,7 +506,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 15,
+    order: 16,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -489,7 +533,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto individual",
     featured: false,
-    order: 16,
+    order: 17,
     images: { cover: "" },
     techStack: ["html", "css", "js", "vite"],
     features: [

@@ -130,14 +130,18 @@
             </span>
           </div>
 
-          <!-- CTA (mismo lenguaje que el Hero) -->
-          <RouterLink
-            :to="`/project/${project.slug}`"
-            class="card-cta btn-primary mt-2 w-fit"
-          >
-            Ver proyecto
-            <font-awesome-icon :icon="['fas', 'arrow-right']" />
-          </RouterLink>
+          <!-- CTA (mismo lenguaje que el Hero). GSAP anima el wrapper: el
+               transition-all de .btn-primary pelea con el tween y el botón
+               podía quedar invisible. -->
+          <div class="card-cta mt-2 w-fit">
+            <RouterLink
+              :to="`/project/${project.slug}`"
+              class="btn-primary"
+            >
+              Ver proyecto
+              <font-awesome-icon :icon="['fas', 'arrow-right']" />
+            </RouterLink>
+          </div>
         </div>
       </article>
     </div>

@@ -70,22 +70,27 @@
         </span>
       </div>
 
-      <!-- CTA -->
-      <RouterLink
-        :to="`/certificate/${learning.slug}`"
-        class="learning-item mt-8 inline-flex w-fit items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent-light transition-all duration-300 hover:border-accent hover:bg-accent hover:text-ink-950 md:mt-10"
-      >
-        Ver detalles
-        <font-awesome-icon
-          :icon="['fas', 'arrow-right']"
-          class="text-xs transition-transform duration-300 group-hover:translate-x-1"
-        />
-      </RouterLink>
+      <!-- CTA. GSAP anima el wrapper: el transition-all del link pelea con
+           el tween y lo podía dejar invisible. -->
+      <div class="learning-item mt-8 w-fit md:mt-10">
+        <RouterLink
+          :to="`/certificate/${learning.slug}`"
+          class="inline-flex w-fit items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent-light transition-all duration-300 hover:border-accent hover:bg-accent hover:text-ink-950"
+        >
+          Ver detalles
+          <font-awesome-icon
+            :icon="['fas', 'arrow-right']"
+            class="text-xs transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </RouterLink>
+      </div>
 
       <!-- Hairline expandible -->
-      <div
-        class="learning-item mt-10 h-px w-full origin-left scale-x-[0.12] bg-accent transition-transform duration-700 ease-out group-hover:scale-x-100"
-      ></div>
+      <div class="learning-item mt-10">
+        <div
+          class="h-px w-full origin-left scale-x-[0.12] bg-accent transition-transform duration-700 ease-out group-hover:scale-x-100"
+        ></div>
+      </div>
     </div>
   </div>
 </template>

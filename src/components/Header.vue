@@ -240,6 +240,7 @@ const runEntryAnimation = () => {
         x: -18,
         filter: "blur(4px)",
         duration: 0.75,
+        clearProps: "transform,opacity,filter",
       },
       "<0.2"
     );
@@ -254,6 +255,7 @@ const runEntryAnimation = () => {
         filter: "blur(6px)",
         duration: 0.85,
         stagger: 0.07,
+        clearProps: "transform,opacity,filter",
       },
       "<0.1"
     );
@@ -268,6 +270,7 @@ const runEntryAnimation = () => {
         filter: "blur(6px)",
         duration: 0.85,
         stagger: 0.09,
+        clearProps: "transform,opacity,filter",
       },
       "<0.1"
     );

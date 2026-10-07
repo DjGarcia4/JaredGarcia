@@ -72,9 +72,11 @@
         </div>
 
         <!-- Hairline expandible -->
-        <div
-          class="currently-item mt-10 h-px w-full origin-left scale-x-[0.12] bg-accent transition-transform duration-700 ease-out group-hover:scale-x-100"
-        ></div>
+        <div class="currently-item mt-10">
+          <div
+            class="h-px w-full origin-left scale-x-[0.12] bg-accent transition-transform duration-700 ease-out group-hover:scale-x-100"
+          ></div>
+        </div>
       </div>
     </div>
   </section>

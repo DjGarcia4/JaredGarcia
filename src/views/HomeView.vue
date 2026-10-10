@@ -28,6 +28,21 @@
       <Stack />
     </section>
 
+    <section v-if="latestPosts.length" id="blog" class="container-content scroll-mt-24 py-20 md:py-28">
+      <TitleSection :eyebrow="t('home.blogEyebrow')">{{ t("home.blogTitle") }}</TitleSection>
+      <ul class="divide-y divide-white/[0.06] border-y border-white/[0.06]">
+        <li v-for="post in latestPosts" :key="post.slug">
+          <PostRow :post="post" />
+        </li>
+      </ul>
+      <div class="mt-12 flex justify-center">
+        <RouterLink :to="{ name: 'blog' }" class="btn-ghost">
+          {{ t("home.allPosts") }}
+          <font-awesome-icon :icon="['fas', 'arrow-right']" />
+        </RouterLink>
+      </div>
+    </section>
+
     <section id="contact" class="container-content scroll-mt-24 py-20 md:py-28">
       <TitleSection :eyebrow="t('home.contactEyebrow')">{{ t("home.contactTitle") }}</TitleSection>
       <FormContact />
@@ -46,8 +61,10 @@ import Process from "@/components/Process.vue";
 import About from "@/components/About.vue";
 import Stack from "@/components/Stack.vue";
 import FormContact from "@/components/FormContact.vue";
+import PostRow from "@/components/blog/PostRow.vue";
 
 import { useProjects } from "@/stores/projects";
+import { getPosts } from "@/lib/blog";
 import { t } from "@/i18n";
 
 const projects = useProjects();
@@ -56,4 +73,6 @@ const projects = useProjects();
 const featured = computed(() =>
   projects.projectsCollection.filter((p) => p.featured && p.headline).slice(0, 4)
 );
+
+const latestPosts = computed(() => getPosts().slice(0, 3));
 </script>

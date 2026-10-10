@@ -34,6 +34,7 @@
         <span class="hdr-nav-item"><Link to="home" hash="#proceso">{{ t("nav.process") }}</Link></span>
         <span class="hdr-nav-item"><Link to="home" hash="#about">{{ t("nav.about") }}</Link></span>
         <span class="hdr-nav-item"><Link to="projects">{{ t("nav.projects") }}</Link></span>
+        <span class="hdr-nav-item"><Link to="blog" :also="['post']">{{ t("nav.blog") }}</Link></span>
       </nav>
 
       <!-- Aside derecha desktop -->
@@ -181,12 +182,14 @@ const mobileItems = computed(() => [
   { label: t("nav.process"), to: { name: "home", hash: "#proceso" } },
   { label: t("nav.about"), to: { name: "home", hash: "#about" } },
   { label: t("nav.projects"), to: { name: "projects" } },
+  { label: t("nav.blog"), to: { name: "blog" } },
 ]);
 
 const isMobileItemActive = (item) => {
   if (item.to.hash) {
     return route.name === item.to.name && route.hash === item.to.hash;
   }
+  if (item.to.name === "blog") return ["blog", "post"].includes(route.name);
   return route.name === item.to.name && !route.hash;
 };
 

@@ -25,6 +25,7 @@
 import { computed } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import { projects } from "@/data/projects";
+import { getPosts } from "@/lib/blog";
 import { t } from "@/i18n";
 
 const route = useRoute();
@@ -34,6 +35,8 @@ const route = useRoute();
 const known = [
   { label: "/projects", to: { name: "projects" } },
   { label: "/design-system", to: { name: "design-system" } },
+  { label: "/blog", to: { name: "blog" } },
+  ...getPosts().map((p) => ({ label: `/blog/${p.slug}`, to: { name: "post", params: { slug: p.slug } } })),
   ...projects
     .filter((p) => p.status !== "Práctica")
     .map((p) => ({ label: `/project/${p.slug}`, to: { name: "project", params: { slug: p.slug } } })),

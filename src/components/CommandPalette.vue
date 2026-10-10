@@ -80,6 +80,7 @@ import { toast } from "vue-sonner";
 
 import { profile } from "@/data/profile";
 import { getProjects } from "@/data/localized";
+import { getPosts } from "@/lib/blog";
 import { t } from "@/i18n";
 
 const props = defineProps({ open: { type: Boolean, default: false } });
@@ -110,12 +111,21 @@ const items = computed(() => [
       icon: ["fas", "briefcase"],
       run: () => router.push({ name: "project", params: { slug: p.slug } }),
     })),
+  ...getPosts().map((p) => ({
+    group: t("palette.groups.posts"),
+    label: p.title,
+    hint: t("blog.minRead", { n: p.readingTime }),
+    keywords: `blog ${p.tags.join(" ")}`,
+    icon: ["fas", "newspaper"],
+    run: () => router.push({ name: "post", params: { slug: p.slug } }),
+  })),
   section(t("nav.work"), "#trabajo", "hashtag", "trabajo work casos cases"),
   section(t("palette.workHow"), "#proceso", "hashtag", "proceso process metodología"),
   section(t("nav.about"), "#about", "hashtag", "sobre mí about bio formación education experiencia"),
   section(t("nav.stack"), "#stack", "hashtag", "tecnologías technologies skills herramientas tools"),
   section(t("nav.contact"), "#contact", "paper-plane", "contacto contact email whatsapp hablemos"),
   { group: t("palette.groups.sections"), label: t("nav.designSystem"), keywords: "tokens design system sistema componentes components", icon: ["fas", "layer-group"], run: () => router.push({ name: "design-system" }) },
+  { group: t("palette.groups.sections"), label: t("nav.blog"), keywords: "blog artículos articles posts notas notes rss", icon: ["fas", "newspaper"], run: () => router.push({ name: "blog" }) },
   { group: t("palette.groups.sections"), label: t("nav.lab"), keywords: "lab experimentos experiments microinteracciones micro-interactions", icon: ["fas", "bolt"], run: () => router.push({ name: "lab" }) },
   { group: t("palette.groups.sections"), label: t("palette.allProjects"), keywords: "proyectos projects", icon: ["fas", "folder-open"], run: () => router.push({ name: "projects" }) },
   {

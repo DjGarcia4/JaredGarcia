@@ -10,6 +10,29 @@ diferida) para la demo 3D del caso Wink App.
 El contenido (proyectos, certificados, reviews, skills) vive de forma local en
 `src/data/`. No requiere base de datos ni backend.
 
+## Blog
+
+Los artículos son Markdown en `src/content/blog/<idioma>/<slug>.md`
+(`es/` y `en/`). El mismo nombre de archivo en las dos carpetas es el mismo
+artículo traducido; si falta una traducción, se muestra la versión que haya
+con un aviso. Frontmatter:
+
+```yaml
+---
+title: "Título"
+description: "Resumen para la lista, SEO y RSS."
+date: 2026-10-10          # AAAA-MM-DD
+updated: 2026-10-20       # opcional
+tags: [performance, vue]  # opcional
+projects: [rapisites]     # opcional: slugs de casos relacionados
+cover: /img/blog/x.png    # opcional: imagen para Open Graph
+draft: true               # opcional: solo se ve con `npm run dev`
+---
+```
+
+El build renderiza el Markdown (código resaltado con Shiki), y genera
+`rss.xml`, `en/rss.xml` y las entradas del sitemap (`plugins/blog.js`).
+
 ## Requisitos
 
 - Node.js 18+

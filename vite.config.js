@@ -5,10 +5,11 @@ import vue from "@vitejs/plugin-vue";
 
 import { projects } from "./src/data/projects.js";
 import { certificates } from "./src/data/certificates.js";
+import blog from "./plugins/blog.js";
 
 // Genera sitemap.xml y robots.txt en el build a partir de las rutas reales.
 // Necesita VITE_SITE_URL (ver .env); sin ella solo emite un robots.txt básico.
-const seoFiles = (siteUrl) => ({
+const seoFiles = (siteUrl, blogPlugin) => ({
   name: "seo-files",
   apply: "build",
   generateBundle() {
@@ -21,6 +22,8 @@ const seoFiles = (siteUrl) => ({
         "/projects",
         "/design-system",
         "/lab",
+        "/blog",
+        ...blogPlugin.api.slugs().map((slug) => `/blog/${slug}`),
         // Solo casos: los proyectos de práctica no se indexan.
         ...projects.filter((p) => p.status !== "Práctica").map((p) => `/project/${p.slug}`),
         ...certificates.map((c) => `/certificate/${c.slug}`),
@@ -49,8 +52,9 @@ const seoFiles = (siteUrl) => ({
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
+  const blogPlugin = blog({ siteUrl: env.VITE_SITE_URL, siteName: "Jared Garcia" });
   return {
-    plugins: [vue(), seoFiles(env.VITE_SITE_URL)],
+    plugins: [blogPlugin, vue(), seoFiles(env.VITE_SITE_URL, blogPlugin)],
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),

@@ -31,6 +31,16 @@ const router = createRouter({
       component: () => import("../views/LabView.vue"),
     },
     {
+      path: "/blog",
+      name: "blog",
+      component: () => import("../views/BlogView.vue"),
+    },
+    {
+      path: "/blog/:slug",
+      name: "post",
+      component: () => import("../views/BlogPostView.vue"),
+    },
+    {
       path: "/certificate/:slug",
       name: "certificate",
       component: () =>

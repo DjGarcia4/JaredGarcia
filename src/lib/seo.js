@@ -3,6 +3,7 @@
 // las pestañas del navegador, el historial y lo que indexa Google.
 import { profile } from "@/data/profile";
 import { getCertificates, getProjects } from "@/data/localized";
+import { getPost } from "@/lib/blog";
 import { locale, t } from "@/i18n";
 
 const SITE_NAME = profile.name;
@@ -39,6 +40,13 @@ const resolve = (route) => {
     const c = getCertificates().find((x) => x.slug === route.params.slug);
     if (c) return { title: `${c.title} · ${SITE_NAME}`, description: t("seo.certDescription", { issuer: c.issuer }) };
   }
+  if (route.name === "post") {
+    const p = getPost(route.params.slug);
+    if (p) return { title: `${p.title} · ${SITE_NAME}`, description: p.description, image: p.cover, type: "article" };
+  }
+  if (route.name === "blog") {
+    return { title: `${t("seo.blogTitle")} · ${SITE_NAME}`, description: t("seo.blogDescription") };
+  }
   if (route.name === "not-found") {
     return { title: `${t("seo.notFoundTitle")} · ${SITE_NAME}`, description: DEFAULT_DESCRIPTION };
   }
@@ -55,7 +63,7 @@ const resolve = (route) => {
 };
 
 export const applyRouteMeta = (route) => {
-  const { title, description } = resolve(route);
+  const { title, description, image, type = "website" } = resolve(route);
   document.title = title;
   setMeta('meta[name="description"]', "content", description);
   setMeta('meta[property="og:title"]', "content", title);
@@ -63,9 +71,13 @@ export const applyRouteMeta = (route) => {
   setMeta('meta[name="twitter:title"]', "content", title);
   setMeta('meta[name="twitter:description"]', "content", description);
   setMeta('meta[property="og:locale"]', "content", locale.value === "en" ? "en_US" : "es_HN");
+  setMeta('meta[property="og:type"]', "content", type);
 
   const base = import.meta.env.VITE_SITE_URL;
   if (base) {
+    const img = new URL(image || "/og.png", base).href;
+    setMeta('meta[property="og:image"]', "content", img);
+    setMeta('meta[name="twitter:image"]', "content", img);
     const url = new URL(route.path, base).href;
     setMeta('meta[property="og:url"]', "content", url);
     setCanonical(url);

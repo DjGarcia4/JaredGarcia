@@ -154,6 +154,7 @@ const navItems = computed(() => [
   { label: t("nav.about"), to: { name: "home", hash: "#about" } },
   { label: t("nav.stack"), to: { name: "home", hash: "#stack" } },
   { label: t("nav.projects"), to: { name: "projects" } },
+  { label: t("nav.blog"), to: { name: "blog" } },
   { label: t("nav.designSystem"), to: { name: "design-system" } },
   { label: t("nav.lab"), to: { name: "lab" } },
   { label: t("nav.contact"), to: { name: "home", hash: "#contact" } },

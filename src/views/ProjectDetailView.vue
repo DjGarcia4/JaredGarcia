@@ -535,6 +535,16 @@
             </div>
           </section>
 
+          <!-- Artículos del blog sobre este proyecto -->
+          <section v-if="relatedPosts.length" class="mt-16 md:mt-24">
+            <p class="mono-label">{{ t("blog.relatedPosts") }}</p>
+            <ul class="mt-2 divide-y divide-white/[0.06] border-b border-white/[0.06]">
+              <li v-for="post in relatedPosts" :key="post.slug">
+                <PostRow :post="post" />
+              </li>
+            </ul>
+          </section>
+
           <!-- CTA section -->
           <section ref="ctaSection" class="proj-cta mt-16 md:mt-24">
             <div
@@ -785,6 +795,8 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
+import PostRow from "@/components/blog/PostRow.vue";
+import { postsForProject } from "@/lib/blog";
 import { techName } from "@/data/skills";
 import { projectSrc, projectSrcset } from "@/lib/img";
 import { getCase } from "@/data/localized";
@@ -799,6 +811,8 @@ const projectsStore = useProjects();
 const project = computed(() =>
   projectsStore.projectsCollection.find((p) => p.slug === route.params.slug)
 );
+
+const relatedPosts = computed(() => (project.value ? postsForProject(project.value.slug) : []));
 
 const study = computed(() => (project.value ? getCase(project.value.id) : null));
 const tldrRows = computed(() =>

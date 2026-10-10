@@ -24,6 +24,9 @@ import { RouterLink, useRoute } from "vue-router";
 const props = defineProps({
   to: { type: String, required: true },
   hash: { type: String, default: null },
+  // Otras rutas en las que el link también cuenta como activo
+  // (p. ej. "Blog" mientras se lee un artículo).
+  also: { type: Array, default: () => [] },
 });
 
 const route = useRoute();
@@ -42,6 +45,6 @@ const active = (isActive, isExactActive) => {
   if (props.hash) {
     return isExactActive && route.hash === props.hash;
   }
-  return isActive && !route.hash;
+  return (isActive || props.also.includes(route.name)) && !route.hash;
 };
 </script>

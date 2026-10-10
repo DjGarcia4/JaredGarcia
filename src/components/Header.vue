@@ -214,8 +214,6 @@ watch(lockBody, (locked) => {
 });
 
 // ───────── Animación de entrada (GSAP) ─────────
-// Espera con RAF a que el header sea realmente visible (no detrás del splash)
-// antes de animar. Sin esto, el reveal sucede mientras está display:none.
 let ctx;
 
 const runEntryAnimation = () => {
@@ -296,17 +294,7 @@ onMounted(() => {
 
   if (prefersReducedMotion()) return;
 
-  // RAF polling hasta que el header sea realmente visible (offsetParent ≠ null
-  // significa que ningún ancestro está en display:none — i.e. el splash terminó).
-  const waitVisible = () => {
-    if (!headerRef.value) return;
-    if (headerRef.value.offsetParent !== null) {
-      runEntryAnimation();
-    } else {
-      requestAnimationFrame(waitVisible);
-    }
-  };
-  requestAnimationFrame(waitVisible);
+  runEntryAnimation();
 });
 
 onUnmounted(() => {

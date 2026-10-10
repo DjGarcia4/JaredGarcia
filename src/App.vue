@@ -1,14 +1,5 @@
 <template>
-  <Transition
-    enter-active-class="transition-opacity duration-500"
-    leave-active-class="transition-opacity duration-500"
-    enter-from-class="opacity-0"
-    leave-to-class="opacity-0"
-  >
-    <Splash v-if="showSplash" @finish="finishSplash" />
-  </Transition>
-
-  <div v-if="!showSplash" class="relative min-h-screen">
+  <div class="relative min-h-screen">
     <!-- Fondo -->
     <MeshBackground />
     <div class="grid-overlay fixed inset-0 -z-10"></div>
@@ -96,7 +87,6 @@ import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import Modal from "@/components/Modal.vue";
 import MeshBackground from "@/components/MeshBackground.vue";
-import Splash from "@/views/Splash.vue";
 
 import { useModalStore } from "@/stores/modal";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
@@ -104,17 +94,11 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 const modal = useModalStore();
 const route = useRoute();
 
-const showSplash = ref(!sessionStorage.getItem("splashSeen"));
 const scrolled = ref(false);
 const showScrollTop = ref(false);
 const progressBar = ref(null);
 
 let ctx;
-
-const finishSplash = () => {
-  sessionStorage.setItem("splashSeen", "1");
-  showSplash.value = false;
-};
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 24;
@@ -137,9 +121,7 @@ const initScrollProgress = () => {
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
 
-  if (!showSplash.value) {
-    initScrollProgress();
-  }
+  initScrollProgress();
 });
 
 onUnmounted(() => {
@@ -150,14 +132,6 @@ onUnmounted(() => {
 const onAfterEnter = () => {
   ScrollTrigger.refresh();
 };
-
-watch(showSplash, (newVal) => {
-  if (!newVal) {
-    nextTick(() => {
-      initScrollProgress();
-    });
-  }
-});
 
 // La altura de la página cambia entre rutas: recalcular ScrollTrigger.
 watch(

@@ -155,21 +155,23 @@
         <div
           v-for="stat in stats"
           :key="stat.key"
-          class="act3-stat bg-ink-950/40 p-6 md:p-8 lg:p-10"
+          class="act3-stat flex flex-col bg-ink-950/40 p-6 md:p-8 lg:p-10"
         >
-          <dd
-            class="font-display text-5xl font-bold text-gradient md:text-6xl lg:text-7xl"
-          >
-            {{ display[stat.key] }}{{ stat.suffix }}
-          </dd>
+          <!-- dt antes que dd (orden válido de <dl>); el número se muestra
+               primero con order. -->
           <dt
-            class="mt-4 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-white/55 md:text-xs"
+            class="order-2 mt-4 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-white/55 md:text-xs"
           >
             {{ stat.label }}
           </dt>
-          <p class="mt-2 font-sans text-sm leading-relaxed text-white/55">
+          <dd
+            class="order-1 font-display text-5xl font-bold text-gradient md:text-6xl lg:text-7xl"
+          >
+            {{ display[stat.key] }}{{ stat.suffix }}
+          </dd>
+          <dd class="order-3 mt-2 font-sans text-sm leading-relaxed text-white/55">
             {{ stat.detail }}
-          </p>
+          </dd>
         </div>
       </dl>
 

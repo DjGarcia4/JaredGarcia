@@ -99,13 +99,14 @@
        ───────────────────────────────────────────────────────────── -->
     <div class="container-content py-10 md:py-14">
       <div ref="wordmarkWrap" class="wordmark-wrap overflow-hidden">
-        <h2
+        <!-- Decorativo: el texto va en ::before/::after para que no sea un
+             heading ni cuente como texto con bajo contraste. -->
+        <div
           ref="wordmark"
           aria-hidden="true"
+          :data-text="profile.name"
           class="wordmark select-none whitespace-nowrap font-display font-bold tracking-[-0.04em] text-white/[0.08]"
-        >
-          Jared Garcia<span class="text-accent/80">.</span>
-        </h2>
+        ></div>
       </div>
     </div>
 
@@ -318,6 +319,13 @@ onUnmounted(() => {
 /* Wordmark fluido: escala con el viewport para sentirse "edge to edge".
    clamp() mantiene legibilidad en mobile y impacto en desktop sin overflow
    (el .wordmark-wrap tiene overflow-hidden para el clipPath reveal). */
+.wordmark::before {
+  content: attr(data-text);
+}
+.wordmark::after {
+  content: ".";
+  color: rgb(34 197 94 / 0.8);
+}
 .wordmark {
   font-size: clamp(3.5rem, 14vw, 11rem);
   line-height: 0.9;

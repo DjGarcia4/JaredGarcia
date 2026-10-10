@@ -32,6 +32,7 @@
               <li
                 v-for="(service, i) in services"
                 :key="service.title"
+                role="presentation"
                 class="flex-shrink-0 lg:flex-shrink"
               >
                 <button

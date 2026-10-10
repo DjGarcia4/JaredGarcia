@@ -25,11 +25,11 @@
     <!-- Body -->
     <div class="relative">
       <!-- Name -->
-      <h4
+      <h3
         class="font-display text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl"
       >
         {{ skill.name }}
-      </h4>
+      </h3>
 
       <!-- Usage con dot pulsante -->
       <p

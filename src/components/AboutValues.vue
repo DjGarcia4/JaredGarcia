@@ -25,11 +25,11 @@
         </div>
 
         <!-- Title -->
-        <h4
+        <h3
           class="value-title mt-6 font-display text-xl font-bold leading-tight tracking-tight text-white md:text-2xl"
         >
           {{ value.title }}
-        </h4>
+        </h3>
 
         <!-- Description -->
         <p

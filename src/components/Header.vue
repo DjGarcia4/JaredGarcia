@@ -72,7 +72,7 @@
         type="button"
         :aria-expanded="mobileOpen"
         aria-controls="mobile-nav"
-        aria-label="Abrir menú"
+        :aria-label="mobileOpen ? 'Cerrar menú' : 'Abrir menú'"
         class="hdr-aside-item flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-white/80 transition-colors hover:border-accent/40 hover:text-white lg:hidden"
         @click="toggleMobile"
       >

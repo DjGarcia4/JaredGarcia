@@ -401,19 +401,21 @@
               >
                 {{ String(project.images.gallery.length).padStart(2, "0") }}
                 {{ project.images.gallery.length === 1 ? "vista" : "vistas" }}
-                · Click para ampliar
+                · Tocá para ampliar
               </span>
             </header>
 
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
-              <figure
+              <button
                 v-for="(img, i) in project.images.gallery"
                 :key="img"
+                type="button"
+                :aria-label="`Ampliar vista ${i + 1} de ${project.images.gallery.length}`"
                 :class="[
-                  'gallery-item group relative cursor-zoom-in overflow-hidden rounded-3xl border border-white/[0.08] transition-all duration-500 hover:border-accent/30',
+                  'gallery-item group relative block w-full cursor-zoom-in overflow-hidden rounded-3xl border border-white/[0.08] transition-all duration-500 hover:border-accent/30',
                   galleryItemSpan(i, project.images.gallery.length),
                 ]"
-                @click="openLightbox(i)"
+                @click="openLightbox(i, $event)"
               >
                 <img
                   :src="img"
@@ -439,7 +441,7 @@
                     />
                   </span>
                 </div>
-              </figure>
+              </button>
             </div>
           </section>
 
@@ -675,8 +677,11 @@
         <div
           v-if="lightboxOpen && project?.images?.gallery?.length"
           class="lightbox fixed inset-0 z-[100] flex flex-col bg-black/85 backdrop-blur-xl"
+          ref="lightboxEl"
           role="dialog"
           aria-modal="true"
+          :aria-label="`Galería de ${project.title}`"
+          @keydown.tab="trapFocus"
           @click.self="closeLightbox"
         >
           <!-- Top bar: counter + close -->
@@ -701,8 +706,9 @@
             </p>
             <button
               type="button"
+              ref="lightboxClose"
               @click="closeLightbox"
-              aria-label="Cerrar"
+              aria-label="Cerrar galería"
               class="group flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/80 transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
             >
               <font-awesome-icon
@@ -779,7 +785,7 @@
               >
                 <img
                   :src="img"
-                  :alt="`Thumbnail vista ${i + 1}`"
+                  :alt="``"
                   class="h-full w-full object-cover"
                 />
                 <span
@@ -796,7 +802,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
@@ -859,13 +865,39 @@ function galleryItemSpan(i, total) {
   return "";
 }
 
-function openLightbox(i) {
+// Foco: al abrir va al botón de cerrar, queda atrapado dentro del diálogo
+// y al cerrar vuelve a la miniatura que lo abrió.
+const lightboxEl = ref(null);
+const lightboxClose = ref(null);
+let lightboxOpener = null;
+
+function openLightbox(i, e) {
+  lightboxOpener = e?.currentTarget ?? null;
   lightboxIndex.value = i;
   lightboxOpen.value = true;
+  nextTick(() => lightboxClose.value?.focus());
 }
 
 function closeLightbox() {
   lightboxOpen.value = false;
+  lightboxOpener?.focus();
+  lightboxOpener = null;
+}
+
+function trapFocus(e) {
+  const focusables = lightboxEl.value?.querySelectorAll(
+    'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])'
+  );
+  if (!focusables?.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
 }
 
 function nextImage() {

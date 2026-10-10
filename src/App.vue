@@ -1,5 +1,6 @@
 <template>
   <div class="relative min-h-screen">
+    <a href="#main" class="skip-link" @click.prevent="skipToMain">Saltar al contenido</a>
     <!-- Fondo -->
     <MeshBackground />
     <div class="grid-overlay fixed inset-0 -z-10"></div>
@@ -22,7 +23,7 @@
     />
     <Header :scrolled="scrolled" />
 
-    <main class="pt-20">
+    <main id="main" tabindex="-1" class="pt-20 focus:outline-none">
       <RouterView v-slot="{ Component }">
         <Transition
           mode="out-in"
@@ -39,46 +40,51 @@
 
     <Footer />
 
-    <!-- Botón contacto flotante -->
-    <Transition
-      enter-active-class="transition duration-300"
-      leave-active-class="transition duration-300"
-      enter-from-class="opacity-0 translate-x-6"
-      leave-to-class="opacity-0 translate-x-6"
+    <!-- Acciones flotantes (abajo a la derecha): volver arriba y, solo en
+         páginas de detalle, contacto. Apiladas para no tapar contenido. -->
+    <div
+      v-if="!modal.showModal"
+      class="pointer-events-none fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 md:bottom-8 md:right-8"
     >
-      <button
-        v-if="!modal.showModal && route.path !== '/'"
-        @click="modal.handleModal(true)"
-        type="button"
-        class="btn-primary fixed bottom-6 left-6 z-40 shadow-glow md:bottom-8 md:left-8"
+      <Transition
+        enter-active-class="transition duration-300"
+        leave-active-class="transition duration-300"
+        enter-from-class="opacity-0 translate-y-6"
+        leave-to-class="opacity-0 translate-y-6"
       >
-        <font-awesome-icon :icon="['fas', 'paper-plane']" />
-        Contactame
-      </button>
-    </Transition>
+        <button
+          v-if="showScrollTop"
+          @click="scrollToTop"
+          type="button"
+          aria-label="Volver arriba"
+          class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-ink-850/80 text-white/80 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent-light"
+        >
+          <font-awesome-icon :icon="['fas', 'arrow-up']" />
+        </button>
+      </Transition>
 
-    <!-- Botón scroll-to-top -->
-    <Transition
-      enter-active-class="transition duration-300"
-      leave-active-class="transition duration-300"
-      enter-from-class="opacity-0 translate-y-6"
-      leave-to-class="opacity-0 translate-y-6"
-    >
-      <button
-        v-if="!modal.showModal && showScrollTop"
-        @click="scrollToTop"
-        type="button"
-        aria-label="Volver arriba"
-        class="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-ink-850/80 text-white/80 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent-light md:bottom-8 md:right-8"
+      <Transition
+        enter-active-class="transition duration-300"
+        leave-active-class="transition duration-300"
+        enter-from-class="opacity-0 translate-y-6"
+        leave-to-class="opacity-0 translate-y-6"
       >
-        <font-awesome-icon :icon="['fas', 'arrow-up']" />
-      </button>
-    </Transition>
+        <button
+          v-if="showFloatingContact"
+          @click="modal.handleModal(true)"
+          type="button"
+          class="btn-primary pointer-events-auto shadow-glow"
+        >
+          <font-awesome-icon :icon="['fas', 'paper-plane']" />
+          Contactame
+        </button>
+      </Transition>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterView, useRoute } from "vue-router";
 
 import { Toaster } from "vue-sonner";
@@ -98,11 +104,24 @@ const scrolled = ref(false);
 const showScrollTop = ref(false);
 const progressBar = ref(null);
 
+// En la home ya está la sección de contacto, y en /projects el botón tapaba
+// el buscador y los filtros: solo se muestra en las páginas de detalle.
+const showFloatingContact = computed(() =>
+  ["project", "certificate"].includes(route.name)
+);
+
 let ctx;
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 24;
   showScrollTop.value = window.scrollY > 400;
+};
+
+// Sin dejar que el router interprete #main como navegación.
+const skipToMain = () => {
+  const main = document.getElementById("main");
+  main?.focus({ preventScroll: true });
+  main?.scrollIntoView();
 };
 
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });

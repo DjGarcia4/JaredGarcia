@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .skip-link {
+    @apply fixed left-4 top-3 z-[200] -translate-y-24 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-ink-950 transition-transform duration-200 focus:translate-y-0;
+  }
+}
+
 @layer base {
   /* Sin scroll-behavior: smooth global: choca con los scrollTo de GSAP
      (cada frame se suaviza de nuevo) y traba el scroll. Los scrolls
@@ -13,6 +19,13 @@
   body {
     @apply bg-ink-950 text-white/80 font-sans antialiased;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /* Foco visible consistente para teclado (no aparece con mouse). */
+  :focus-visible {
+    outline: 2px solid #4ade80;
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
   ::selection {

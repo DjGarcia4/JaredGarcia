@@ -205,9 +205,9 @@ export const projects = [
     headline:
       "Un test de mecanografía que no solo mide: te dice en qué fallás y te arma la práctica para arreglarlo.",
     highlights: [
-      "Análisis de errores por tecla, dedo y combinación",
+      "+50 personas lo usan, sin anuncios ni cuenta",
+      "Errores por tecla, dedo y combinación, con práctica para corregirlos",
       "100 % usable con teclado, chequeado con axe",
-      "PWA offline, sin cuenta ni servidor",
     ],
     color: "#F97316",
     slug: "swiftflow-typing-test",

@@ -157,34 +157,37 @@ export const cases = {
   },
 
   swiftflow: {
-    draft: true,
+    // Validado con el autor (2026-10-09).
+    draft: false,
     tldr: {
-      problem: "Los test de mecanografía te dan un número, pero no te dicen qué mejorar.",
+      problem: "El test de mecanografía que usaba se llenó de anuncios, y además solo medía: no decía qué mejorar.",
       role: "Proyecto personal: diseño, desarrollo y tests.",
-      outcome: "PWA en producción, usable 100 % con teclado y chequeada con axe.",
+      outcome: "Más de 50 personas lo usan: PWA sin anuncios, sin cuenta y 100 % usable con teclado.",
     },
     context:
-      "SwiftFlow es mi proyecto hobby: un test de mecanografía en español e inglés que sigo mejorando.",
+      "Usaba una plataforma de mecanografía que me gustaba: no tenía muchas cosas, pero medía bien. Cuando empezó a mostrar anuncios dejó de gustarme, así que hice la mía, libre de anuncios. Hoy es mi proyecto hobby y lo sigo mejorando.",
     problem:
-      "Saber que escribís a 58 palabras por minuto no te ayuda a escribir a 70. Lo útil es saber qué teclas, dedos y combinaciones te frenan, y practicar justo eso.",
+      "Saber que escribís a 58 palabras por minuto no te ayuda a escribir a 70. Lo útil es saber qué teclas, dedos y combinaciones te frenan y, sobre todo, cómo practicar justo eso.",
     decisions: [
       {
-        title: "Del número al diagnóstico",
-        body: "Cada pulsación se analiza para armar un mapa de errores por tecla, dedo y combinación, con consejos concretos y práctica generada alrededor de los puntos débiles.",
+        title: "Del error a cómo corregirlo",
+        body: "Lo que más tuve que rehacer fue cómo mostrar los errores. Señalar en qué fallaste no alcanza: cada pulsación se analiza para armar un mapa por tecla, dedo y combinación, y el resultado viene con consejos y práctica generada alrededor de esos puntos débiles.",
       },
       {
-        title: "Teclado primero",
-        body: "Una herramienta para escribir tiene que poder usarse sin mouse: toda la interfaz se maneja con teclado, y la accesibilidad se verifica con axe en los tests end-to-end.",
+        title: "Nada de mouse",
+        body: "Si para empezar otra prueba tenés que agarrar el mouse, tus dedos salen de su lugar y perdés el ritmo. Por eso toda la interfaz se maneja con teclado, y la accesibilidad se verifica con axe en los tests end-to-end.",
       },
       {
-        title: "Sin cuenta, sin servidor",
-        body: "Los datos viven en el navegador y la app se instala como PWA offline. Cero fricción para empezar y cero datos personales en un servidor.",
+        title: "Sin anuncios, sin cuenta, sin servidor",
+        body: "Lo que me hizo dejar la otra plataforma fueron los anuncios. SwiftFlow no tiene, no pide cuenta y los datos viven en el navegador; se instala como PWA y funciona offline. Cero fricción para empezar y cero datos personales en un servidor.",
       },
     ],
     outcome: [
-      { value: "13", label: "modos de práctica" },
-      { value: "24", label: "lecciones para escribir sin mirar" },
-      { value: "100 %", label: "usable con teclado" },
+      { value: "+50", label: "personas lo usan" },
+      { value: "13", label: "modos de práctica y 24 lecciones" },
+      { value: "100 %", label: "usable con teclado, sin anuncios" },
     ],
+    learnings:
+      "Diseñar para mí mismo fue la mejor investigación: cada decisión salió de algo que me molestaba como usuario, desde los anuncios hasta tener que soltar el teclado.",
   },
 };

@@ -28,3 +28,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Notas internas (no se publican)
+REVIEW.md
+PLAN.md

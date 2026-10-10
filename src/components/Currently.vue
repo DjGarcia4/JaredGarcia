@@ -86,7 +86,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import TitleSection from "@/components/TitleSection.vue";
 import { current } from "@/data/experience";
-import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
 const root = ref(null);
 const card = ref(null);
@@ -110,7 +110,7 @@ onMounted(() => {
       stagger: { amount: 0.25, from: "start" },
     });
 
-    replayOnEnter(tl, {
+    playOnEnter(tl, {
       trigger: card.value,
       start: "top 92%",
     });

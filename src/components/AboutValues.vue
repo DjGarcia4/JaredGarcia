@@ -50,7 +50,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import TitleSection from "@/components/TitleSection.vue";
-import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
 const values = [
   {
@@ -108,7 +108,7 @@ onMounted(() => {
       stagger: { amount: 0.3, from: "start" },
     });
 
-    replayOnEnter(tl, {
+    playOnEnter(tl, {
       trigger: grid.value,
       start: "top 92%",
     });

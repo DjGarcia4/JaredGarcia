@@ -237,7 +237,7 @@ import { useRouter } from "vue-router";
 import { profile } from "@/data/profile";
 import { skills } from "@/data/skills";
 import { projects } from "@/data/projects";
-import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
 const router = useRouter();
 
@@ -332,7 +332,7 @@ onMounted(() => {
       "<0.15"
     );
 
-    replayOnEnter(act1In, {
+    playOnEnter(act1In, {
       trigger: act1Ref.value,
       start: "top 78%",
     });
@@ -359,7 +359,7 @@ onMounted(() => {
       "<0.2"
     );
 
-    replayOnEnter(act2In, {
+    playOnEnter(act2In, {
       trigger: act2Ref.value,
       start: "top 78%",
     });
@@ -404,7 +404,7 @@ onMounted(() => {
       "<0.2"
     );
 
-    replayOnEnter(act3In, {
+    playOnEnter(act3In, {
       trigger: act3Ref.value,
       start: "top 78%",
     });

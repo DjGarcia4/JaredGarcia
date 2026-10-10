@@ -190,7 +190,7 @@ import {
   watch,
 } from "vue";
 import TitleSection from "@/components/TitleSection.vue";
-import { gsap, ScrollTrigger, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
 const services = [
   {
@@ -372,7 +372,7 @@ onMounted(() => {
 
   ctx = gsap.context(() => {
     // Entrada cinematográfica del pin target completo (title + card como
-    // 1 bloque, dispara antes del pin). Patrón paused + replayOnEnter para
+    // 1 bloque, dispara antes del pin). Patrón paused + playOnEnter para
     // que sobreviva a navegaciones con hash que aterrizan ya pasado el start.
     const pinEntry = gsap.timeline({ paused: true });
     pinEntry.from(pinTarget.value, {
@@ -384,7 +384,7 @@ onMounted(() => {
       clearProps: "transform,opacity",
     });
 
-    replayOnEnter(pinEntry, {
+    playOnEnter(pinEntry, {
       trigger: pinTarget.value,
       start: "top 88%",
     });

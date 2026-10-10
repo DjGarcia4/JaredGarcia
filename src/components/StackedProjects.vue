@@ -151,7 +151,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 import { statusStyle } from "@/lib/status";
 
 defineProps({
@@ -274,7 +274,7 @@ onMounted(() => {
       // ScrollTrigger: dispara la entrada apenas el top del card asoma por
       // el bottom del viewport (95%). Así para cuando el card está totalmente
       // visible, su contenido ya terminó de materializarse.
-      replayOnEnter(tl, {
+      playOnEnter(tl, {
         trigger: card,
         start: "top 95%",
       });

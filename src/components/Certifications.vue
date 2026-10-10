@@ -28,7 +28,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import CertificateCard from "@/components/Certificates/CertificateCard.vue";
 import { useCertifications } from "@/stores/certifications";
-import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Navigation } from "vue3-carousel";
 
@@ -73,7 +73,7 @@ onMounted(() => {
       duration: 0.7,
     });
 
-    replayOnEnter(tl, {
+    playOnEnter(tl, {
       trigger: carouselWrap.value,
       start: "top 92%",
     });

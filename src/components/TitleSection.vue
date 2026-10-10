@@ -15,7 +15,7 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, playOnEnter, prefersReducedMotion } from "@/lib/gsap";
 
 defineProps({
   eyebrow: { type: String, default: "" },
@@ -28,21 +28,14 @@ onMounted(() => {
   if (prefersReducedMotion()) return;
 
   ctx = gsap.context(() => {
-    // Scrubbing: el título entra apagado y se ilumina con el scroll.
-    gsap.fromTo(
-      titleRef.value,
-      { opacity: 0.2 },
-      {
-        opacity: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: titleRef.value,
-          start: "top 90%",
-          end: "top 45%",
-          scrub: true,
-        },
-      }
-    );
+    const tl = gsap.timeline({ paused: true });
+    tl.from(titleRef.value, {
+      opacity: 0,
+      y: 18,
+      duration: 0.6,
+      ease: "power3.out",
+    });
+    playOnEnter(tl, { trigger: titleRef.value, start: "top 90%" });
   }, titleRef.value);
 });
 

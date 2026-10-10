@@ -134,7 +134,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { profile } from "@/data/profile";
-import { gsap, prefersReducedMotion, replayOnEnter } from "@/lib/gsap";
+import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
 const year = new Date().getFullYear();
 
@@ -280,7 +280,7 @@ onMounted(() => {
         "<0.1"
       );
 
-    replayOnEnter(tlChrome, {
+    playOnEnter(tlChrome, {
       trigger: root.value,
       start: "top 92%",
     });
@@ -301,7 +301,7 @@ onMounted(() => {
       duration: 1.4,
     });
 
-    replayOnEnter(tlWordmark, {
+    playOnEnter(tlWordmark, {
       trigger: wordmarkWrap.value,
       start: "top 88%",
     });

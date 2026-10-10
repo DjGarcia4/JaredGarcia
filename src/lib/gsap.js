@@ -7,18 +7,17 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Crea un ScrollTrigger que (a) reproduce un timeline pausado cada vez que el
-// trigger entra al viewport (filosofía cinematográfica "se reinicia al volver")
-// y (b) si el scroll ya está pasado el start al refresh inicial — caso típico
-// al navegar de vuelta con hash, p.ej. /certificate/x → /#aprendizaje — saltea
-// el timeline a su estado final para que el contenido no quede invisible.
-export const replayOnEnter = (tl, options) =>
+// Reproduce un timeline pausado una sola vez, cuando el trigger entra al
+// viewport. Si al refrescar el scroll ya está pasado el start (p. ej. al
+// volver con hash, /certificate/x → /#aprendizaje), salta al estado final
+// para que el contenido no quede invisible.
+export const playOnEnter = (tl, options) =>
   ScrollTrigger.create({
     ...options,
-    onEnter: () => tl.restart(),
-    onEnterBack: () => tl.restart(),
+    once: true,
+    onEnter: () => tl.play(),
     onRefresh: (self) => {
-      if (self.progress > 0) tl.progress(1).pause();
+      if (self.progress > 0) tl.progress(1);
     },
   });
 

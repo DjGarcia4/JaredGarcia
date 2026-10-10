@@ -113,6 +113,7 @@ export default {
     p2a: "Hoy soy Head of Development en Wink Digital, donde lidero una plataforma de digital signage con más de 500 implementaciones en 3 países",
     p2b: ". En paralelo construyo RapiSites, un SaaS de punta a punta (del producto y la UI a la infraestructura) que ya generó más de 80 sitios y cuya API usa Wink para hospedar los sitios de sus clientes.",
     p3: "Me muevo cómodo entre Figma y el código. Eso me permite tomar decisiones de diseño sabiendo lo que cuestan, y escribir frontend que respeta el diseño hasta el último estado.",
+    photoAlt: "Ilustración de Jared Garcia en su escritorio, con audífonos, café y código en pantalla.",
     sourceLabel: "Fuente: winkdigital.io",
     open: "Abierto a roles de Frontend y UI/UX, y a proyectos freelance.",
     now: "Ahora",

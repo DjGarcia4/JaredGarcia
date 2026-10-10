@@ -21,8 +21,21 @@
       </p>
     </div>
 
-    <!-- Ahora + Formación -->
+    <!-- Foto + Ahora + Formación -->
     <div class="space-y-5 lg:col-span-5">
+      <figure class="about-in overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-900">
+        <img
+          src="/img/me/jared-880.webp"
+          srcset="/img/me/jared-480.webp 480w, /img/me/jared-880.webp 880w"
+          sizes="(min-width: 1024px) 440px, 100vw"
+          :alt="t('about.photoAlt')"
+          width="880"
+          height="880"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[4/3] w-full object-cover object-[50%_28%]"
+        />
+      </figure>
       <div class="about-in surface p-6 md:p-7">
         <p class="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-accent-light">
           <span class="relative flex h-2 w-2">

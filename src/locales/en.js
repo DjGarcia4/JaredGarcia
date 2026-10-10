@@ -112,6 +112,7 @@ export default {
     p2a: "Today I'm Head of Development at Wink Digital, where I lead a digital signage platform with more than 500 deployments across 3 countries",
     p2b: ". On the side I'm building RapiSites, an end-to-end SaaS (from product and UI to infrastructure) that has generated more than 80 sites and whose API Wink uses to host its clients' websites.",
     p3: "I'm at home between Figma and code. That lets me make design decisions knowing what they cost, and write front-end code that respects the design down to the last state.",
+    photoAlt: "Illustration of Jared Garcia at his desk, with headphones, coffee and code on screen.",
     sourceLabel: "Source: winkdigital.io",
     open: "Open to Frontend and UI/UX roles, and to freelance projects.",
     now: "Now",

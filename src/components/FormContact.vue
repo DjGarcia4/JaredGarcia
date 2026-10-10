@@ -167,9 +167,14 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, reactive, ref } from "vue";
-import QrcodeVue from "qrcode.vue";
-import emailjs from "@emailjs/browser";
+import { defineAsyncComponent, onMounted, onUnmounted, reactive, ref } from "vue";
+// El QR y EmailJS no hacen falta para el primer render: se cargan aparte.
+const QrcodeVue = defineAsyncComponent(() => import("qrcode.vue"));
+const loadEmailjs = () =>
+  import("@emailjs/browser").then((m) => {
+    m.default.init("IlTVG1X5-tzzsmG1i");
+    return m.default;
+  });
 
 import { toast } from "vue-sonner";
 
@@ -178,8 +183,6 @@ import ThinkingOrb from "@/components/ThinkingOrb.vue";
 import { profile } from "@/data/profile";
 import { useModalStore } from "@/stores/modal";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
-
-emailjs.init("IlTVG1X5-tzzsmG1i");
 
 const modal = useModalStore();
 
@@ -368,8 +371,10 @@ function sendEmail() {
   }
 
   sending.value = true;
-  emailjs
-    .sendForm("default_service", "template_s4cxryd", formEl.value)
+  loadEmailjs()
+    .then((emailjs) =>
+      emailjs.sendForm("default_service", "template_s4cxryd", formEl.value)
+    )
     .then(() => {
       toast.success("¡Mensaje enviado!", {
         description: "Gracias por escribir, te respondo muy pronto.",

@@ -16,7 +16,7 @@
           :ref="(el) => setCoverRef(el, i)"
           class="card-cover relative overflow-hidden md:min-h-full"
         >
-          <img
+          <img loading="lazy" decoding="async"
             v-if="project.images?.cover"
             :src="project.images.cover"
             :alt="project.title"
@@ -122,7 +122,7 @@
               class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] transition-colors duration-300 hover:border-accent/40 hover:bg-accent/[0.06]"
               :title="tech"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 :src="`/img/skills/${tech}.svg`"
                 :alt="tech"
                 class="h-4 w-4"

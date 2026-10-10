@@ -241,7 +241,7 @@
             ref="coverWrap"
             class="proj-cover relative mt-12 overflow-hidden rounded-3xl border border-white/[0.08] md:mt-16"
           >
-            <img
+            <img fetchpriority="high"
               v-if="project.images?.cover"
               :src="project.images.cover"
               :alt="project.title"
@@ -330,7 +330,7 @@
                 <span
                   class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.03] transition-all duration-300 group-hover:scale-110 group-hover:border-accent/30"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     :src="`/img/skills/${tech}.svg`"
                     alt=""
                     class="h-4 w-4"

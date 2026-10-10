@@ -53,5 +53,21 @@ export default defineConfig(({ mode }) => {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          // Vendors en chunks propios: cambian poco, así que quedan en caché
+          // entre deploys aunque cambie el código del sitio.
+          manualChunks: {
+            "vendor-vue": ["vue", "vue-router", "pinia"],
+            "vendor-gsap": ["gsap"],
+            "vendor-icons": [
+              "@fortawesome/fontawesome-svg-core",
+              "@fortawesome/vue-fontawesome",
+            ],
+          },
+        },
+      },
+    },
   };
 });

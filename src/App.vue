@@ -11,7 +11,7 @@
       class="scroll-progress fixed left-0 top-0 z-50 h-[3px] w-full bg-gradient-to-r from-accent-dark via-accent to-accent-light"
     ></div>
 
-    <Modal />
+    <Modal v-if="modalUsed" />
     <Toaster
       position="top-center"
       theme="dark"
@@ -84,20 +84,30 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, defineAsyncComponent, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterView, useRoute } from "vue-router";
 
 import { Toaster } from "vue-sonner";
 
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
-import Modal from "@/components/Modal.vue";
 import MeshBackground from "@/components/MeshBackground.vue";
 
 import { useModalStore } from "@/stores/modal";
+
+// El modal (Headless UI + formulario) solo se descarga la primera vez que se
+// abre; después queda montado para que funcione la transición de cierre.
+const Modal = defineAsyncComponent(() => import("@/components/Modal.vue"));
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
 const modal = useModalStore();
+const modalUsed = ref(false);
+watch(
+  () => modal.showModal,
+  (open) => {
+    if (open) modalUsed.value = true;
+  }
+);
 const route = useRoute();
 
 const scrolled = ref(false);

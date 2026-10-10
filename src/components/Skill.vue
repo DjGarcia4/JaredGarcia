@@ -3,7 +3,7 @@
     class="skill-card surface group relative flex flex-col items-center justify-center gap-3 overflow-hidden p-4 transition-colors duration-500 hover:border-accent/30 md:p-5"
   >
     <!-- Icon -->
-    <img
+    <img loading="lazy" decoding="async"
       :src="`/img/skills/${skill.image}.svg`"
       :alt="skill.name"
       class="h-10 w-10 opacity-55 grayscale transition-all duration-500 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0 md:h-11 md:w-11"

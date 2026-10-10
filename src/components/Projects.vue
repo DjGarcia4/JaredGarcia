@@ -93,7 +93,7 @@
               ]"
             >
               <span class="flex min-w-0 items-center gap-2.5">
-                <img
+                <img loading="lazy" decoding="async"
                   :src="`/img/skills/${tech.name}.svg`"
                   alt=""
                   class="h-3.5 w-3.5 flex-shrink-0 transition-opacity"
@@ -165,7 +165,7 @@
             </div>
 
             <div class="relative aspect-[21/9] overflow-hidden">
-              <img
+              <img loading="lazy" decoding="async"
                 v-if="featuredProjects[0].images?.cover"
                 :src="featuredProjects[0].images.cover"
                 :alt="featuredProjects[0].title"
@@ -209,7 +209,7 @@
                     :key="tech"
                     class="flex items-center gap-1.5 rounded-md border border-white/10 bg-ink-950/60 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/65"
                   >
-                    <img :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
+                    <img loading="lazy" decoding="async" :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
                     {{ techName(tech) }}
                   </span>
                   <span
@@ -260,7 +260,7 @@
             </div>
 
             <div class="relative aspect-[16/10] overflow-hidden">
-              <img
+              <img loading="lazy" decoding="async"
                 v-if="project.images?.cover"
                 :src="project.images.cover"
                 :alt="project.title"
@@ -302,7 +302,7 @@
                   :key="tech"
                   class="flex items-center gap-1.5 rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/65"
                 >
-                  <img :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
+                  <img loading="lazy" decoding="async" :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
                   {{ techName(tech) }}
                 </span>
                 <span
@@ -361,7 +361,7 @@
             </div>
 
             <div class="relative aspect-[16/10] overflow-hidden">
-              <img
+              <img loading="lazy" decoding="async"
                 v-if="project.images?.cover"
                 :src="project.images.cover"
                 :alt="project.title"
@@ -410,7 +410,7 @@
                   :key="tech"
                   class="flex items-center gap-1.5 rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/65"
                 >
-                  <img :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
+                  <img loading="lazy" decoding="async" :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
                   {{ techName(tech) }}
                 </span>
                 <span

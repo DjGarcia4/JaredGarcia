@@ -15,7 +15,7 @@
     <div
       class="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-accent/20 bg-accent/[0.08] transition-all duration-500 group-hover:scale-110 group-hover:border-accent/50 group-hover:bg-accent/15 md:h-18 md:w-18"
     >
-      <img
+      <img loading="lazy" decoding="async"
         :src="`/img/skills/${skill.image}.svg`"
         :alt="skill.name"
         class="h-9 w-9 transition-transform duration-500 group-hover:scale-110 md:h-10 md:w-10"

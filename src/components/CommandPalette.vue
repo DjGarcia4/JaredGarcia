@@ -116,6 +116,7 @@ const items = computed(() => [
   section(t("nav.stack"), "#stack", "hashtag", "tecnologías technologies skills herramientas tools"),
   section(t("nav.contact"), "#contact", "paper-plane", "contacto contact email whatsapp hablemos"),
   { group: t("palette.groups.sections"), label: t("nav.designSystem"), keywords: "tokens design system sistema componentes components", icon: ["fas", "layer-group"], run: () => router.push({ name: "design-system" }) },
+  { group: t("palette.groups.sections"), label: t("nav.lab"), keywords: "lab experimentos experiments microinteracciones micro-interactions", icon: ["fas", "bolt"], run: () => router.push({ name: "lab" }) },
   { group: t("palette.groups.sections"), label: t("palette.allProjects"), keywords: "proyectos projects", icon: ["fas", "folder-open"], run: () => router.push({ name: "projects" }) },
   {
     group: t("palette.groups.actions"), label: t("palette.copyEmail"), hint: profile.email, icon: ["fas", "copy"],

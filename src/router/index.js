@@ -26,6 +26,11 @@ const router = createRouter({
       component: () => import("../views/DesignSystemView.vue"),
     },
     {
+      path: "/lab",
+      name: "lab",
+      component: () => import("../views/LabView.vue"),
+    },
+    {
       path: "/certificate/:slug",
       name: "certificate",
       component: () =>

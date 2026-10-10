@@ -42,6 +42,9 @@ const resolve = (route) => {
   if (route.name === "not-found") {
     return { title: `${t("seo.notFoundTitle")} · ${SITE_NAME}`, description: DEFAULT_DESCRIPTION };
   }
+  if (route.name === "lab") {
+    return { title: `${t("seo.labTitle")} · ${SITE_NAME}`, description: t("seo.labDescription") };
+  }
   if (route.name === "design-system") {
     return { title: `${t("seo.dsTitle")} · ${SITE_NAME}`, description: t("seo.dsDescription") };
   }

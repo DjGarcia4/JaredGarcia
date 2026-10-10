@@ -20,6 +20,7 @@ const seoFiles = (siteUrl) => ({
         "/",
         "/projects",
         "/design-system",
+        "/lab",
         // Solo casos: los proyectos de práctica no se indexan.
         ...projects.filter((p) => p.status !== "Práctica").map((p) => `/project/${p.slug}`),
         ...certificates.map((c) => `/certificate/${c.slug}`),

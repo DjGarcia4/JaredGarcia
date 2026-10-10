@@ -14,8 +14,9 @@
           Hoy soy Head of Development en Wink Digital, donde lidero una
           plataforma de digital signage con más de 500 implementaciones en 3
           países<a href="https://winkdigital.io" target="_blank" rel="noopener noreferrer" class="align-super text-xs text-accent-light" aria-label="Fuente: winkdigital.io">¹</a>.
-          En paralelo construyo RapiSites, un SaaS de punta a punta: del
-          producto y la UI a la infraestructura.
+          En paralelo construyo RapiSites, un SaaS de punta a punta (del
+          producto y la UI a la infraestructura) que ya generó más de 80 sitios
+          y cuya API usa Wink para hospedar los sitios de sus clientes.
         </p>
         <p>
           Me muevo cómodo entre Figma y el código. Eso me permite tomar

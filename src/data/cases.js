@@ -17,21 +17,26 @@
 
 export const cases = {
   rapisites: {
-    draft: true,
+    // Validado con el autor (2026-10-09).
+    draft: false,
     tldr: {
-      problem: "Tener un sitio decente sigue siendo caro o técnico para un negocio chico.",
+      problem: "Tener un sitio decente y poder mantenerlo sigue siendo caro o técnico para un negocio chico.",
       role: "Producto, diseño, frontend, backend e infraestructura. Solo.",
-      outcome: "En producción en rapisites.com, con publicación en dominio propio y HTTPS automático.",
+      outcome: "Más de 80 sitios generados, y una API que Wink ya usa para hospedar los sitios de sus clientes.",
     },
     context:
-      "RapiSites es mi proyecto principal: un constructor de sitios multi-tenant pensado para negocios que no tienen tiempo ni presupuesto para una agencia, y que tampoco quieren pelearse con un editor lleno de opciones.",
+      "Hace años que construyo sitios para clientes, y siempre empezaba igual. RapiSites nació como un generador para mí; después lo convertí en producto para que cualquier negocio pudiera armar su sitio sin mucho rollo y mantenerlo cómodo, sin depender de alguien técnico.",
     problem:
-      "Los constructores conocidos ponen al usuario frente a una plantilla en blanco y cientos de decisiones. El reto era invertir eso: que la persona aporte lo único que solo ella sabe (qué hace su negocio y cómo contactarla) y que todo lo demás —estructura, textos, SEO— venga resuelto, sin quitarle el control después.",
+      "Los constructores conocidos ponen al usuario frente a una plantilla en blanco y cientos de decisiones. El reto era invertir eso: que la persona aporte lo único que solo ella sabe y que todo lo demás —estructura, textos, SEO— venga resuelto, sin quitarle el control después.",
     decisions: [
       {
-        title: "Cuatro preguntas, no un formulario",
-        body: "El onboarding se redujo a nombre, a qué se dedica, cómo contactar y un estilo visual. Todo lo que se puede inferir de esas respuestas lo genera la IA (API de Claude): páginas, textos, paleta y metadatos SEO, en menos de treinta segundos.",
+        title: "Las cuatro preguntas que siempre hacía",
+        body: "En cada proyecto con clientes arrancaba con lo mismo: cómo se llama el negocio, a qué se dedica, cómo contactarlo y qué estilo le gusta. Esas cuatro preguntas son todo el onboarding. Lo demás lo genera la IA (API de Claude): páginas, textos, paleta y metadatos SEO, en menos de treinta segundos.",
         media: { type: "orbs", caption: "Demo ilustrativa de los estados de generación (componente thinking-orbs)." },
+      },
+      {
+        title: "Menos efecto, más mensaje",
+        body: "Las primeras versiones tenían mucho diseño y mucha animación. Se veían bien, pero no era la base: un sitio tiene que transmitir la idea con solo verlo, sin explicar mucho. Recorté hasta que cada sección se entendiera de un vistazo, y eso también hizo los sitios más livianos.",
       },
       {
         title: "Generar no es publicar",
@@ -39,20 +44,20 @@ export const cases = {
       },
       {
         title: "Editar sin aprender una herramienta",
-        body: "El editor visual trabaja sobre secciones, no sobre píxeles: se reordenan con drag & drop, todo se guarda solo y hay undo/redo. Menos libertad que un lienzo en blanco, pero imposible de dejar ‘roto’.",
+        body: "El editor visual trabaja sobre secciones, no sobre píxeles: se reordenan con drag & drop, todo se guarda solo y hay undo/redo. Menos libertad que un lienzo en blanco, pero imposible de dejar ‘roto’: mantener el sitio tiene que ser cómodo.",
       },
       {
-        title: "El rendimiento también es SEO",
-        body: "Las 33 secciones del catálogo se renderizan sin JavaScript en el sitio público (Nuxt con SSR). Para un negocio chico, cargar rápido en un celular con mala señal es parte de la experiencia, no un detalle técnico.",
+        title: "Una API para que otras plataformas construyan encima",
+        body: "RapiSites expone una API para que otras plataformas generen y publiquen sitios desde su propio producto. Wink ya la usa: sus clientes suben su sitio para mostrarlo en pantalla, y antes de desplegarlo Wink lo envía a RapiSites para que lo hospede.",
       },
     ],
     outcome: [
-      { value: "33", label: "secciones sin JS en el sitio público" },
-      { value: "< 30 s", label: "para generar un sitio completo" },
-      { value: "ES · EN", label: "sitios bilingües" },
+      { value: "+80", label: "sitios generados en RapiSites" },
+      { value: "API", label: "en uso por Wink para hospedar los sitios de sus clientes" },
+      { value: "< 30 s", label: "para generar un sitio completo, con 33 secciones sin JS" },
     ],
     learnings:
-      "Diseñar el flujo antes que la interfaz me obligó a decidir qué no preguntar. Cada pregunta que saqué del onboarding se convirtió en una decisión que el sistema toma bien por defecto y que el usuario puede cambiar después.",
+      "Diseñar el flujo antes que la interfaz me obligó a decidir qué no preguntar, y qué no animar. Cada pregunta que saqué del onboarding se convirtió en una decisión que el sistema toma bien por defecto y que el usuario puede cambiar después.",
   },
 
   "wink-app": {
@@ -93,6 +98,7 @@ export const cases = {
   },
 
   "wink-site": {
+    // Decisión 1 validada con el autor; el resto sigue en borrador.
     draft: true,
     tldr: {
       problem: "Explicar un producto técnico (pantallas + software + hardware) a quien solo quiere vender más.",
@@ -105,8 +111,8 @@ export const cases = {
       "El digital signage es difícil de imaginar: involucra una pantalla, un dispositivo, una app y un servicio. Había que hacerlo tangible en segundos, responder ‘¿cuánto cuesta?’ sin esconderlo, y saber qué partes del sitio realmente llevaban a pedir una demo.",
     decisions: [
       {
-        title: "Mostrar el producto funcionando, no describirlo",
-        body: "La página ‘Cómo funciona’ cuenta la vida de una pantalla Wink de principio a fin con un scrollytelling en CSS 3D: se enciende, se diagnostica, se vincula con un código y queda lista para manejarse desde el panel.",
+        title: "De animar todo a contar una historia",
+        body: "La primera versión tenía animación en cada componente: muy bonita, pero poco informativa. La rehice alrededor de una sola idea: un scrollytelling en CSS 3D que acompaña al usuario mientras baja y le muestra, paso a paso, cómo funciona Wink. La pantalla se enciende, se diagnostica, se vincula con un código y queda lista para manejarse desde el panel. Es la decisión de diseño de la que más orgulloso estoy.",
         media: {
           type: "video",
           src: "/media/wink-como-funciona",

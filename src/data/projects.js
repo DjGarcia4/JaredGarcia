@@ -23,8 +23,8 @@ export const projects = [
     headline:
       "Respondés cuatro preguntas y tu sitio queda publicado, con SEO técnico, en minutos.",
     highlights: [
-      "IA (API de Claude) genera estructura, contenido y SEO",
-      "Multi-tenant: subdominios y dominios propios con HTTPS",
+      "+80 sitios generados con IA (API de Claude)",
+      "API en uso por Wink para hospedar los sitios de sus clientes",
       "Editor visual con autosave, undo/redo y drag & drop",
     ],
     color: "#7C3AED",

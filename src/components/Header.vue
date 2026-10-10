@@ -17,10 +17,8 @@
         @click="closeMobile"
       >
         <span class="hdr-logo-mark-wrap inline-block overflow-hidden rounded-lg">
-          <span
-            class="hdr-logo-mark flex h-9 w-9 items-center justify-center rounded-lg bg-accent font-sans text-sm font-bold text-ink-950 shadow-glow transition-colors duration-300 group-hover:bg-accent-light"
-          >
-            JG
+          <span class="hdr-logo-mark block h-9 w-9 rounded-lg shadow-glow">
+            <LogoMark blink class="block h-full w-full" />
           </span>
         </span>
         <span
@@ -174,6 +172,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import Link from "@/components/Link.vue";
+import LogoMark from "@/components/LogoMark.vue";
 import { isMac, openPalette } from "@/lib/palette";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 

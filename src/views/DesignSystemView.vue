@@ -24,6 +24,19 @@
       </ol>
     </section>
 
+    <!-- Logo -->
+    <section class="mt-20" aria-labelledby="ds-logo">
+      <h2 id="ds-logo" class="ds-h">Logo</h2>
+      <p class="ds-p">Una J y un cursor de terminal: diseño y código en una sola marca. Pensado para leerse incluso a 16 px; en el header el cursor parpadea.</p>
+      <div class="mt-6 flex flex-wrap items-end gap-8 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8">
+        <LogoMark blink class="h-28 w-28" />
+        <LogoMark class="h-12 w-12" />
+        <LogoMark class="h-8 w-8" />
+        <LogoMark class="h-4 w-4" />
+        <div class="rounded-xl bg-slate-100 p-3"><LogoMark class="h-10 w-10" /></div>
+      </div>
+    </section>
+
     <!-- Color -->
     <section class="mt-20" aria-labelledby="ds-color">
       <h2 id="ds-color" class="ds-h">Color</h2>
@@ -159,6 +172,7 @@
 </template>
 
 <script setup>
+import LogoMark from "@/components/LogoMark.vue";
 import ThinkingOrb from "@/components/ThinkingOrb.vue";
 
 const principles = [

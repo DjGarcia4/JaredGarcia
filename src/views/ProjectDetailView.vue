@@ -237,6 +237,17 @@
             {{ project.summary }}
           </p>
 
+          <!-- TL;DR para quien tiene 5 minutos -->
+          <dl
+            v-if="study"
+            class="proj-tldr mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.08] md:grid-cols-3"
+          >
+            <div v-for="row in tldrRows" :key="row.label" class="bg-ink-950/90 p-5 md:p-6">
+              <dt class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-accent-light">{{ row.label }}</dt>
+              <dd class="mt-2 text-[15px] leading-relaxed text-white/80">{{ row.value }}</dd>
+            </div>
+          </dl>
+
           <!-- Cover image / fallback editorial -->
           <div
             v-if="project.images?.cover"
@@ -250,105 +261,7 @@
             />
           </div>
 
-          <!-- Description con drop cap editorial -->
-          <section ref="aboutSection" class="proj-description mt-16 md:mt-20">
-            <p
-              class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
-            >
-              <span class="h-px w-8 bg-accent"></span>
-              Sobre el proyecto
-            </p>
-            <p
-              class="proj-description-text mt-6 max-w-3xl text-base leading-[1.8] text-white/75 md:text-lg"
-            >
-              {{ project.description }}
-            </p>
-          </section>
-
-          <!-- Stack técnico -->
-          <section
-            v-if="project.techStack?.length"
-            ref="stackSection"
-            class="mt-16 md:mt-20"
-          >
-            <header class="mb-6 flex items-center justify-between gap-4">
-              <p
-                class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
-              >
-                <span class="h-px w-8 bg-accent"></span>
-                Stack técnico
-              </p>
-              <span
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
-              >
-                {{ project.techStack.length }}
-                {{ project.techStack.length === 1 ? "tecnología" : "tecnologías" }}
-              </span>
-            </header>
-
-            <ul class="tech-grid grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-              <li
-                v-for="tech in project.techStack"
-                :key="tech"
-                class="tech-card group flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04]"
-              >
-                <span
-                  class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.03] transition-all duration-300 group-hover:scale-110 group-hover:border-accent/30"
-                >
-                  <img loading="lazy" decoding="async"
-                    :src="`/img/skills/${tech}.svg`"
-                    alt=""
-                    class="h-4 w-4"
-                  />
-                </span>
-                <span
-                  class="text-sm font-medium text-white/80 transition-colors duration-300 group-hover:text-white"
-                >
-                  {{ techName(tech) }}
-                </span>
-              </li>
-            </ul>
-          </section>
-
-          <!-- Funcionalidades destacadas -->
-          <section
-            v-if="project.features?.length"
-            ref="featuresSection"
-            class="mt-16 md:mt-20"
-          >
-            <header class="mb-6 flex items-center justify-between gap-4">
-              <p
-                class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
-              >
-                <span class="h-px w-8 bg-accent"></span>
-                Funcionalidades destacadas
-              </p>
-              <span
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
-              >
-                {{ String(project.features.length).padStart(2, "0") }} puntos
-              </span>
-            </header>
-
-            <ul class="features-grid grid gap-3 sm:grid-cols-2">
-              <li
-                v-for="(feature, i) in project.features"
-                :key="i"
-                class="feature-card group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.03] md:p-6"
-              >
-                <span
-                  class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/50 transition-colors duration-300 group-hover:text-accent-light"
-                >
-                  {{ String(i + 1).padStart(2, "0") }}
-                </span>
-                <p
-                  class="text-sm leading-relaxed text-white/75 transition-colors duration-300 group-hover:text-white md:text-base"
-                >
-                  {{ feature }}
-                </p>
-              </li>
-            </ul>
-          </section>
+          <CaseStudy v-if="study" :study="study" class="mt-16 md:mt-24" />
 
           <!-- Gallery: capturas adicionales del producto -->
           <section
@@ -460,6 +373,122 @@
               </div>
             </div>
           </section>
+
+          <!-- Ingeniería: en los casos con estudio va al final y plegada (al
+               dev que la busca le interesa; al resto no le estorba). -->
+          <component
+            :is="study ? 'details' : 'div'"
+            class="eng-block"
+            :class="study ? 'group mt-16 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 md:mt-20 md:p-8' : ''"
+          >
+            <summary
+              v-if="study"
+              class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-bold text-white"
+            >
+              Ingeniería: arquitectura, stack y alcance
+              <font-awesome-icon :icon="['fas', 'chevron-down']" class="text-sm text-white/55 transition-transform duration-300 group-open:rotate-180" />
+            </summary>
+          <!-- Description con drop cap editorial -->
+          <section ref="aboutSection" :class="study ? 'proj-description mt-8' : 'proj-description mt-16 md:mt-20'">
+            <p
+              class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
+            >
+              <span class="h-px w-8 bg-accent"></span>
+              Sobre el proyecto
+            </p>
+            <p
+              class="proj-description-text mt-6 max-w-3xl text-base leading-[1.8] text-white/75 md:text-lg"
+            >
+              {{ project.description }}
+            </p>
+          </section>
+
+          <!-- Stack técnico -->
+          <section
+            v-if="project.techStack?.length"
+            ref="stackSection"
+            class="mt-16 md:mt-20"
+          >
+            <header class="mb-6 flex items-center justify-between gap-4">
+              <p
+                class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
+              >
+                <span class="h-px w-8 bg-accent"></span>
+                Stack técnico
+              </p>
+              <span
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
+              >
+                {{ project.techStack.length }}
+                {{ project.techStack.length === 1 ? "tecnología" : "tecnologías" }}
+              </span>
+            </header>
+
+            <ul class="tech-grid grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+              <li
+                v-for="tech in project.techStack"
+                :key="tech"
+                class="tech-card group flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-4 py-3 transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.04]"
+              >
+                <span
+                  class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.06] bg-white/[0.03] transition-all duration-300 group-hover:scale-110 group-hover:border-accent/30"
+                >
+                  <img loading="lazy" decoding="async"
+                    :src="`/img/skills/${tech}.svg`"
+                    alt=""
+                    class="h-4 w-4"
+                  />
+                </span>
+                <span
+                  class="text-sm font-medium text-white/80 transition-colors duration-300 group-hover:text-white"
+                >
+                  {{ techName(tech) }}
+                </span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Funcionalidades destacadas -->
+          <section
+            v-if="project.features?.length"
+            ref="featuresSection"
+            class="mt-16 md:mt-20"
+          >
+            <header class="mb-6 flex items-center justify-between gap-4">
+              <p
+                class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
+              >
+                <span class="h-px w-8 bg-accent"></span>
+                Funcionalidades destacadas
+              </p>
+              <span
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
+              >
+                {{ String(project.features.length).padStart(2, "0") }} puntos
+              </span>
+            </header>
+
+            <ul class="features-grid grid gap-3 sm:grid-cols-2">
+              <li
+                v-for="(feature, i) in project.features"
+                :key="i"
+                class="feature-card group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.03] md:p-6"
+              >
+                <span
+                  class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/50 transition-colors duration-300 group-hover:text-accent-light"
+                >
+                  {{ String(i + 1).padStart(2, "0") }}
+                </span>
+                <p
+                  class="text-sm leading-relaxed text-white/75 transition-colors duration-300 group-hover:text-white md:text-base"
+                >
+                  {{ feature }}
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          </component>
 
           <!-- Enlaces externos -->
           <section
@@ -751,6 +780,8 @@ import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
 import { techName } from "@/data/skills";
+import { cases as caseStudies } from "@/data/cases";
+import CaseStudy from "@/components/case/CaseStudy.vue";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const route = useRoute();
@@ -759,6 +790,17 @@ const projectsStore = useProjects();
 
 const project = computed(() =>
   projectsStore.projectsCollection.find((p) => p.slug === route.params.slug)
+);
+
+const study = computed(() => (project.value ? caseStudies[project.value.id] : null));
+const tldrRows = computed(() =>
+  study.value
+    ? [
+        { label: "Problema", value: study.value.tldr.problem },
+        { label: "Mi rol", value: study.value.tldr.role },
+        { label: "Resultado", value: study.value.tldr.outcome },
+      ]
+    : []
 );
 
 // Navegación y contador recorren solo los casos; los proyectos de práctica
@@ -973,7 +1015,8 @@ onMounted(() => {
     }
 
     // ── ABOUT SECTION (al scroll) ─────────────────────────────────────
-    if (aboutSection.value) {
+    // Dentro del <details> de Ingeniería (casos con estudio) no se anima.
+    if (aboutSection.value && !study.value) {
       gsap.set(aboutSection.value, { opacity: 0, y: 24 });
 
       const obs = new IntersectionObserver(
@@ -995,7 +1038,7 @@ onMounted(() => {
     }
 
     // ── TECH STACK GRID (al scroll) ───────────────────────────────────
-    if (stackSection.value) {
+    if (stackSection.value && !study.value) {
       const cards = stackSection.value.querySelectorAll(".tech-card");
       if (cards.length) {
         gsap.set(cards, { opacity: 0, y: 18, scale: 0.96 });
@@ -1022,7 +1065,7 @@ onMounted(() => {
     }
 
     // ── FEATURES GRID (al scroll) ─────────────────────────────────────
-    if (featuresSection.value) {
+    if (featuresSection.value && !study.value) {
       const cards = featuresSection.value.querySelectorAll(".feature-card");
       if (cards.length) {
         gsap.set(cards, { opacity: 0, y: 24, scale: 0.97 });

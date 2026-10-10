@@ -20,7 +20,5 @@ export const profile = {
     whatsapp: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
       WHATSAPP_MESSAGE
     )}`,
-    // TODO: reemplazá con tu usuario real de Instagram.
-    instagram: "https://instagram.com/tu_usuario",
   },
 };

@@ -65,15 +65,6 @@
         >
           <font-awesome-icon :icon="['fab', 'whatsapp']" />
         </a>
-        <a
-          :href="profile.socials.instagram"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          class="link-icon"
-        >
-          <font-awesome-icon :icon="['fab', 'instagram']" />
-        </a>
       </div>
 
       <!-- QR de WhatsApp (SVG dinámico, mismo URL que el link) -->
@@ -107,71 +98,82 @@
       </div>
     </div>
 
-    <!-- Formulario -->
+    <!-- Formulario: validación propia (novalidate) para mostrar errores en
+         español, inline y anunciados a lectores de pantalla. -->
     <form
-      id="emailForm"
       ref="formEl"
+      novalidate
       @submit.prevent="sendEmail"
       class="space-y-4"
     >
-      <div>
-        <label for="fullname" class="mb-1.5 block text-sm font-medium text-white/70">
-          Nombre completo
+      <div v-for="field in fields" :key="field.name">
+        <label
+          :for="`${uid}-${field.name}`"
+          class="mb-1.5 block text-sm font-medium text-white/70"
+        >
+          {{ field.label }}
         </label>
-        <input
-          type="text"
-          name="fullname"
-          id="fullname"
-          required
-          minlength="3"
-          placeholder="Tu nombre"
+        <component
+          :is="field.textarea ? 'textarea' : 'input'"
+          :id="`${uid}-${field.name}`"
+          :value="values[field.name]"
+          :name="field.name"
+          :type="field.textarea ? undefined : field.type"
+          :rows="field.textarea ? 5 : undefined"
+          :autocomplete="field.autocomplete"
+          :placeholder="field.placeholder"
+          :aria-invalid="errors[field.name] ? 'true' : 'false'"
+          :aria-describedby="errors[field.name] ? `${uid}-${field.name}-error` : undefined"
           class="field"
+          :class="[
+            field.textarea && 'resize-none',
+            errors[field.name] && '!border-red-400/70 focus:!ring-red-400/30',
+          ]"
+          @blur="touch(field.name)"
+          @input="onInput(field.name, $event)"
         />
+        <p
+          v-if="errors[field.name]"
+          :id="`${uid}-${field.name}-error`"
+          class="mt-1.5 flex items-center gap-1.5 text-sm text-red-300"
+        >
+          <font-awesome-icon :icon="['fas', 'circle-exclamation']" class="text-xs" />
+          {{ errors[field.name] }}
+        </p>
       </div>
 
-      <div>
-        <label for="email" class="mb-1.5 block text-sm font-medium text-white/70">
-          Correo electrónico
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          placeholder="ejemplo@correo.com"
-          class="field"
-        />
-      </div>
-
-      <div>
-        <label for="message" class="mb-1.5 block text-sm font-medium text-white/70">
-          Mensaje
-        </label>
-        <textarea
-          name="message"
-          id="message"
-          rows="5"
-          required
-          minlength="10"
-          placeholder="Contame sobre tu proyecto..."
-          class="field resize-none"
-        ></textarea>
-      </div>
-
-      <button type="submit" class="btn-primary w-full" :disabled="sending">
-        {{ sending ? "Enviando..." : "Enviar mensaje" }}
-        <font-awesome-icon :icon="['fas', 'paper-plane']" />
+      <button
+        type="submit"
+        class="btn-primary w-full"
+        :disabled="sending"
+        :aria-busy="sending"
+      >
+        <template v-if="sending">
+          <ThinkingOrb
+            state="breathing"
+            :size="20"
+            color="#0F172A"
+            label="Enviando mensaje"
+          />
+          Enviando…
+        </template>
+        <template v-else>
+          Enviar mensaje
+          <font-awesome-icon :icon="['fas', 'paper-plane']" />
+        </template>
       </button>
     </form>
   </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, reactive, ref } from "vue";
 import QrcodeVue from "qrcode.vue";
 import emailjs from "@emailjs/browser";
 
 import { toast } from "vue-sonner";
+
+import ThinkingOrb from "@/components/ThinkingOrb.vue";
 
 import { profile } from "@/data/profile";
 import { useModalStore } from "@/stores/modal";
@@ -183,6 +185,72 @@ const modal = useModalStore();
 
 const copied = ref(false);
 const sending = ref(false);
+
+// Prefijo único por instancia: el form vive en la home y también en el modal.
+const uid = `contact-${Math.random().toString(36).slice(2, 8)}`;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+// `name` coincide con las variables del template de EmailJS.
+const fields = [
+  {
+    name: "fullname",
+    label: "Nombre completo",
+    type: "text",
+    autocomplete: "name",
+    placeholder: "Tu nombre",
+    check: (v) =>
+      !v ? "Contame cómo te llamás." : v.length < 3 ? "El nombre es muy corto." : "",
+  },
+  {
+    name: "email",
+    label: "Correo electrónico",
+    type: "email",
+    autocomplete: "email",
+    placeholder: "ejemplo@correo.com",
+    check: (v) =>
+      !v
+        ? "Necesito tu correo para responderte."
+        : !EMAIL_RE.test(v)
+          ? "Revisá el correo, parece incompleto."
+          : "",
+  },
+  {
+    name: "message",
+    label: "Mensaje",
+    textarea: true,
+    autocomplete: "off",
+    placeholder: "Contame sobre tu proyecto…",
+    check: (v) =>
+      !v
+        ? "Escribí un mensaje."
+        : v.length < 10
+          ? "Contame un poco más (mínimo 10 caracteres)."
+          : "",
+  },
+];
+
+const values = reactive({ fullname: "", email: "", message: "" });
+const errors = reactive({ fullname: "", email: "", message: "" });
+const touched = reactive({ fullname: false, email: false, message: false });
+
+const validate = (name) => {
+  const field = fields.find((f) => f.name === name);
+  errors[name] = field.check(values[name].trim());
+  return !errors[name];
+};
+
+// v-model no aplica a <component :is="input">: se compila como v-model de
+// componente. Por eso el binding es manual.
+const onInput = (name, e) => {
+  values[name] = e.target.value;
+  if (touched[name]) validate(name);
+};
+
+const touch = (name) => {
+  touched[name] = true;
+  validate(name);
+};
 
 const root = ref(null);
 const leftCol = ref(null);
@@ -292,22 +360,31 @@ function copyEmail() {
 }
 
 function sendEmail() {
-  sending.value = true;
-  const form = document.getElementById("emailForm");
+  fields.forEach((f) => (touched[f.name] = true));
+  const invalid = fields.filter((f) => !validate(f.name));
+  if (invalid.length) {
+    document.getElementById(`${uid}-${invalid[0].name}`)?.focus();
+    return;
+  }
 
+  sending.value = true;
   emailjs
-    .sendForm("default_service", "template_s4cxryd", form)
+    .sendForm("default_service", "template_s4cxryd", formEl.value)
     .then(() => {
       toast.success("¡Mensaje enviado!", {
         description: "Gracias por escribir, te respondo muy pronto.",
       });
       modal.handleModal(false);
-      form.reset();
+      fields.forEach((f) => {
+        values[f.name] = "";
+        errors[f.name] = "";
+        touched[f.name] = false;
+      });
     })
     .catch((err) => {
       console.error(err);
       toast.error("Algo salió mal", {
-        description: "No se pudo enviar el mensaje. Intentá de nuevo.",
+        description: "No se pudo enviar el mensaje. Intentá de nuevo o escribime por WhatsApp.",
       });
     })
     .finally(() => {

@@ -18,6 +18,7 @@
     "gsap": "^3.15.0",
     "pinia": "^2.1.7",
     "qrcode.vue": "^3.9.1",
+    "thinking-orbs": "^0.3.2",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",
     "vue-sonner": "^2.0.9",

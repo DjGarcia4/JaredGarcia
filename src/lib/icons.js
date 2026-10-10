@@ -15,6 +15,7 @@ import {
   faCertificate,
   faChartLine,
   faCheck,
+  faCircleExclamation,
   faChevronLeft,
   faChevronRight,
   faClock,
@@ -50,6 +51,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
+  faCircleExclamation,
   faArrowDown,
   faArrowLeft,
   faArrowRight,

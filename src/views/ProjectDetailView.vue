@@ -255,7 +255,11 @@
             class="proj-cover relative mt-12 overflow-hidden rounded-3xl border border-white/[0.08] md:mt-16"
           >
             <img fetchpriority="high"
-              :src="project.images.cover"
+              :src="projectSrc(project.images.cover)"
+              :srcset="projectSrcset(project.images.cover)"
+              sizes="(min-width: 1024px) 860px, 100vw"
+              width="1680"
+              height="1050"
               :alt="project.title"
               class="aspect-video w-full object-cover"
             />
@@ -298,7 +302,9 @@
                 @click="openLightbox(i, $event)"
               >
                 <img
-                  :src="img"
+                  :src="projectSrc(img)"
+                  :srcset="projectSrcset(img)"
+                  sizes="(min-width: 768px) 50vw, 100vw"
                   :alt="`${project.title} — vista ${i + 1}`"
                   loading="lazy"
                   class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
@@ -780,6 +786,7 @@ import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
 import { techName } from "@/data/skills";
+import { projectSrc, projectSrcset } from "@/lib/img";
 import { cases as caseStudies } from "@/data/cases";
 import CaseStudy from "@/components/case/CaseStudy.vue";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";

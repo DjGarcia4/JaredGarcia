@@ -48,7 +48,9 @@
 
               <img
                 v-else-if="d.media.type === 'image'"
-                :src="d.media.src"
+                :src="projectSrc(d.media.src)"
+                :srcset="projectSrcset(d.media.src)"
+                sizes="(min-width: 1024px) 760px, 100vw"
                 :alt="d.media.caption"
                 loading="lazy"
                 decoding="async"
@@ -104,6 +106,7 @@
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import WizardDemo from "@/components/case/WizardDemo.vue";
+import { projectSrc, projectSrcset } from "@/lib/img";
 // La demo 3D (y three.js) se cargan aparte, solo en el caso que la usa.
 const SignageDemo = defineAsyncComponent(() => import("@/components/case/SignageDemo.vue"));
 

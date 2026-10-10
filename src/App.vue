@@ -24,7 +24,9 @@
     />
     <Header :scrolled="scrolled" />
 
-    <main id="main" tabindex="-1" class="pt-20 focus:outline-none">
+    <!-- min-h: mientras carga el chunk de la ruta, <main> está vacío; sin
+         altura mínima el footer aparece arriba y después salta (CLS). -->
+    <main id="main" tabindex="-1" class="min-h-[100svh] pt-20 focus:outline-none">
       <RouterView v-slot="{ Component }">
         <Transition
           mode="out-in"

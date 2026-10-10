@@ -41,11 +41,14 @@
           >
             <div class="overflow-hidden border-b border-white/[0.06] bg-ink-900" :class="i === 0 ? 'md:w-3/5 md:border-b-0 md:border-r' : ''">
               <img
-                :src="project.images.cover"
+                :src="projectSrc(project.images.cover)"
+                :srcset="projectSrcset(project.images.cover)"
+                :sizes="i === 0 ? '(min-width: 768px) 60vw, 100vw' : '(min-width: 768px) 50vw, 100vw'"
                 alt=""
                 width="1680"
                 height="1050"
-                :loading="i < 2 ? 'eager' : 'lazy'"
+                :loading="i < 1 ? 'eager' : 'lazy'"
+                :fetchpriority="i === 0 ? 'high' : undefined"
                 decoding="async"
                 class="aspect-[16/10] h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
@@ -131,6 +134,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
+import { projectSrc, projectSrcset } from "@/lib/img";
 
 import { profile } from "@/data/profile";
 import { techName } from "@/data/skills";

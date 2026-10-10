@@ -33,7 +33,9 @@
             </span>
           </div>
           <img
-            :src="project.images.cover"
+            :src="projectSrc(project.images.cover)"
+            :srcset="projectSrcset(project.images.cover)"
+            sizes="(min-width: 1024px) 58vw, 100vw"
             alt=""
             width="1680"
             height="1050"
@@ -113,6 +115,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
+import { projectSrc, projectSrcset } from "@/lib/img";
 import { gsap, playOnEnter, prefersReducedMotion } from "@/lib/gsap";
 
 defineProps({

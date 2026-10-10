@@ -48,16 +48,13 @@
         </h1>
 
         <p
-          class="hero-in mt-5 font-display text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl lg:text-[1.8rem] xl:text-[2rem]"
-          style="--d: 1"
+          class="mt-5 font-display text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl lg:text-[1.8rem] xl:text-[2rem]"
         >
           <span class="whitespace-nowrap">Frontend Developer</span> <span class="text-accent-light">&amp;</span> <span class="whitespace-nowrap">UI/UX Designer</span>
         </p>
 
-        <p
-          class="hero-in mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg"
-          style="--d: 2"
-        >
+        <!-- Sin animación de entrada: en mobile es candidato a LCP. -->
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
           Diseño la experiencia y la construyo hasta producción. Hoy lidero el
           desarrollo de
           <RouterLink :to="{ name: 'project', params: { slug: 'wink-app' } }" class="hero-link">Wink</RouterLink>,

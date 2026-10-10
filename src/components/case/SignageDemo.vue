@@ -15,7 +15,7 @@
 
       <!-- Contenido de la pantalla. En 3D es la textura (oculto); sin WebGL
            o con reduced-motion se muestra plano dentro de un marco. -->
-      <div v-show="!use3d" class="grid aspect-[16/11] place-items-center p-6 sm:p-10">
+      <div v-show="!use3d" class="flex aspect-[16/11] items-center justify-center p-6 sm:p-10">
         <div class="w-full rounded-xl border-[10px] border-[#111827] bg-black shadow-card">
           <canvas
             ref="contentCanvas"

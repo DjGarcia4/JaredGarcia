@@ -42,9 +42,10 @@
       <!-- Hero layout: meta sidebar + main -->
       <div class="grid gap-12 lg:grid-cols-[280px_1fr] lg:gap-20">
         <!-- Sidebar (sticky en desktop) -->
-        <aside class="meta-sidebar lg:sticky lg:top-28 lg:self-start">
+        <!-- En mobile va al final: el título y el TL;DR primero. -->
+        <aside class="meta-sidebar order-2 lg:order-1 lg:sticky lg:top-28 lg:self-start">
           <!-- Número editorial gigante decorativo -->
-          <div v-if="projectIndex >= 0" class="proj-number-wrap overflow-hidden">
+          <div v-if="projectIndex >= 0" class="proj-number-wrap hidden overflow-hidden lg:block">
             <p
               class="proj-number block font-display text-[88px] font-bold leading-[0.85] tracking-tight text-white/[0.06] md:text-[120px]"
             >
@@ -167,7 +168,7 @@
         </aside>
 
         <!-- Main content -->
-        <div class="main-content">
+        <div class="main-content order-1 lg:order-2">
           <!-- Eyebrow -->
           <p
             class="proj-eyebrow flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"

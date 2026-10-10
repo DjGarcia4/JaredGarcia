@@ -103,8 +103,9 @@
     @apply bg-gradient-to-r from-accent-light via-accent to-accent-dark bg-clip-text text-transparent;
   }
 
+  /* 16px en mobile: con menos, Safari iOS hace zoom al enfocar el campo. */
   .field {
-    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white
+    @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-white sm:text-sm
       transition-colors placeholder:text-white/50
       focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/40;
   }

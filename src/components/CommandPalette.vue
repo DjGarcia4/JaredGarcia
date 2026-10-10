@@ -30,7 +30,7 @@
               aria-controls="cmdk-list"
               :aria-activedescendant="results.length ? `cmdk-${activeIndex}` : undefined"
               :placeholder="t('palette.placeholder')"
-              class="h-14 w-full bg-transparent text-[15px] text-white placeholder:text-white/50 focus:outline-none"
+              class="h-14 w-full bg-transparent text-base text-white sm:text-[15px] placeholder:text-white/50 focus:outline-none"
               autocomplete="off"
               spellcheck="false"
             />

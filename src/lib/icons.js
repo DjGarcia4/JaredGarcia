@@ -27,10 +27,12 @@ import {
   faFileArrowDown,
   faFolderOpen,
   faGraduationCap,
+  faHashtag,
   faLayerGroup,
   faLightbulb,
   faListCheck,
   faLocationDot,
+  faMagnifyingGlass,
   faMobileScreen,
   faPaintBrush,
   faPaperPlane,
@@ -54,6 +56,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
+  faHashtag,
+  faMagnifyingGlass,
   faPlay,
   faPause,
   faChevronDown,

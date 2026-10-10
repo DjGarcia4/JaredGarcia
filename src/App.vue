@@ -12,6 +12,7 @@
     ></div>
 
     <Modal v-if="modalUsed" />
+    <CommandPalette v-if="paletteUsed" :open="paletteOpen" @close="closePalette" />
     <Toaster
       position="top-center"
       theme="dark"
@@ -98,7 +99,10 @@ import { useModalStore } from "@/stores/modal";
 // El modal (Headless UI + formulario) solo se descarga la primera vez que se
 // abre; después queda montado para que funcione la transición de cierre.
 const Modal = defineAsyncComponent(() => import("@/components/Modal.vue"));
+// La paleta ⌘K también se descarga recién la primera vez que se abre.
+const CommandPalette = defineAsyncComponent(() => import("@/components/CommandPalette.vue"));
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { closePalette, openPalette, paletteOpen, paletteUsed } from "@/lib/palette";
 
 const modal = useModalStore();
 const modalUsed = ref(false);
@@ -147,14 +151,23 @@ const initScrollProgress = () => {
   });
 };
 
+const onGlobalKey = (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    e.preventDefault();
+    paletteOpen.value ? closePalette() : openPalette();
+  }
+};
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("keydown", onGlobalKey);
 
   initScrollProgress();
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("keydown", onGlobalKey);
   ctx?.revert();
 });
 

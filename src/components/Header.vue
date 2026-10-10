@@ -40,6 +40,18 @@
 
       <!-- Aside derecha desktop -->
       <div class="hidden items-center gap-4 lg:flex">
+        <!-- Paleta de comandos -->
+        <button
+          type="button"
+          class="hdr-aside-item inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/65 transition-colors hover:border-accent/40 hover:text-white"
+          aria-label="Buscar y navegar"
+          aria-keyshortcuts="Meta+K Control+K"
+          @click="openPalette"
+        >
+          <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="text-[10px]" />
+          <kbd class="font-mono text-[10px]">{{ isMac ? "⌘" : "Ctrl" }} K</kbd>
+        </button>
+
         <!-- Status indicator -->
         <span
           class="hdr-aside-item inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/65"
@@ -162,6 +174,7 @@
 import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import Link from "@/components/Link.vue";
+import { isMac, openPalette } from "@/lib/palette";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 defineProps({

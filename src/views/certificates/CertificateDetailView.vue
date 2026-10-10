@@ -218,7 +218,7 @@
               <span
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                {{ certificate.topics.length }} items
+                {{ certificate.topics.length }} temas
               </span>
             </header>
 

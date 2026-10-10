@@ -119,12 +119,11 @@
       >
         <p>
           © {{ year }} {{ profile.name }}
-          <span class="mx-2 text-white/20">·</span>
         </p>
         <p class="inline-flex items-center gap-3 uppercase tracking-[0.18em]">
-          <span class="text-white/50">v1.0</span>
+          <span class="text-white/50">v2</span>
           <span class="h-3 w-px bg-white/15"></span>
-          <span>Made in Honduras</span>
+          <span>Hecho en Honduras</span>
         </p>
       </div>
     </div>

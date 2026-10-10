@@ -282,7 +282,7 @@
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ project.techStack.length }}
-                {{ project.techStack.length === 1 ? "tech" : "techs" }}
+                {{ project.techStack.length === 1 ? "tecnología" : "tecnologías" }}
               </span>
             </header>
 
@@ -326,7 +326,7 @@
               <span
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                {{ String(project.features.length).padStart(2, "0") }} items
+                {{ String(project.features.length).padStart(2, "0") }} puntos
               </span>
             </header>
 
@@ -458,29 +458,6 @@
                   class="block w-full"
                 />
               </div>
-            </div>
-          </section>
-
-          <!-- Tags -->
-          <section
-            v-if="project.tags?.length"
-            ref="tagsSection"
-            class="mt-14 md:mt-16"
-          >
-            <p
-              class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
-            >
-              <span class="h-px w-8 bg-accent"></span>
-              Tags
-            </p>
-            <div class="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-              <span
-                v-for="tag in project.tags"
-                :key="tag"
-                class="tag-item font-mono text-sm text-white/55 transition-colors duration-300 hover:text-accent-light"
-              >
-                #{{ tag }}
-              </span>
             </div>
           </section>
 
@@ -815,7 +792,6 @@ const featuresSection = ref(null);
 const gallerySection = ref(null);
 const mobileSection = ref(null);
 const mobileFrame = ref(null);
-const tagsSection = ref(null);
 const linksSection = ref(null);
 const ctaSection = ref(null);
 const navSection = ref(null);
@@ -1137,7 +1113,7 @@ onMounted(() => {
     }
 
     // ── TAGS + LINKS (al scroll, simple fade) ─────────────────────────
-    [tagsSection.value, linksSection.value].forEach((section) => {
+    [linksSection.value].forEach((section) => {
       if (!section) return;
       gsap.set(section, { opacity: 0, y: 18 });
       const obs = new IntersectionObserver(

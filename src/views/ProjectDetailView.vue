@@ -1,7 +1,9 @@
 <template>
-  <!-- Forzamos remount al cambiar de project (slug) para que las
-       animaciones GSAP corran de nuevo. -->
   <div :key="project?.slug || 'not-found'">
+    <!-- El :key fuerza el remount al cambiar de project (slug) para que las
+         animaciones GSAP corran de nuevo. El comentario va adentro del div:
+         afuera, en dev la raíz queda como fragmento y la <Transition
+         mode="out-in"> de App.vue nunca termina la salida (página en blanco). -->
     <div
       v-if="project"
       ref="root"

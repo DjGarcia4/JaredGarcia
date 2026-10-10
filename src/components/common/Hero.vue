@@ -112,7 +112,7 @@
       </div>
 
       <!-- Visual -->
-      <div class="hero-in relative" style="--d: 2">
+      <div class="hero-in relative mt-14 lg:mt-0" style="--d: 2">
         <HeroLayers />
       </div>
     </div>

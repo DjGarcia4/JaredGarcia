@@ -68,20 +68,28 @@
 
         <!-- 04: Lighthouse real de este portafolio (antes → después) -->
         <div v-else-if="step.visual === 'scores'" class="flex flex-wrap items-center gap-5">
+          <!-- Anillo tipo Lighthouse: el puntaje actual adentro; el arco tenue
+               marca dónde estaba antes del rediseño. -->
           <div v-for="s in scores" :key="s.label" class="flex items-center gap-3">
-            <svg viewBox="0 0 36 36" class="h-12 w-12 -rotate-90">
-              <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3" />
-              <circle
-                cx="18" cy="18" r="15.5" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round"
-                :stroke-dasharray="`${(s.after / 100) * 97.4} 97.4`"
-              />
-            </svg>
-            <div>
-              <p class="font-display text-lg font-bold leading-none text-white">
-                <span class="text-sm font-medium text-white/45 line-through">{{ s.before }}</span>
+            <div class="relative h-14 w-14 shrink-0">
+              <svg viewBox="0 0 36 36" class="h-full w-full -rotate-90">
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" />
+                <circle
+                  cx="18" cy="18" r="15.5" fill="none" stroke="#4ade80" stroke-width="3" stroke-linecap="round"
+                  :stroke-dasharray="`${(s.after / 100) * 97.4} 97.4`"
+                />
+                <circle
+                  cx="18" cy="18" r="15.5" fill="none" stroke="rgba(15,23,42,0.55)" stroke-width="3"
+                  :stroke-dasharray="`${(s.before / 100) * 97.4} 97.4`"
+                />
+              </svg>
+              <span class="absolute inset-0 grid place-items-center font-display text-base font-bold text-white">
                 {{ s.after }}
-              </p>
-              <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">{{ s.label }}</p>
+              </span>
+            </div>
+            <div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-white/70">{{ s.label }}</p>
+              <p class="mt-1 text-xs text-white/55">antes: {{ s.before }}</p>
             </div>
           </div>
         </div>

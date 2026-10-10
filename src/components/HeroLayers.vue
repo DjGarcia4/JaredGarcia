@@ -6,7 +6,7 @@
          decorativa (aria-hidden); la leyenda sí es accesible. -->
   <div
     ref="root"
-    class="hero-layers relative aspect-[10/8.4] w-full select-none"
+    class="hero-layers relative aspect-square w-full select-none"
     aria-hidden="true"
     @pointermove="onPointer"
     @pointerleave="resetPointer"
@@ -119,7 +119,7 @@
 
     <!-- Leyenda -->
     <div
-      class="mt-2 rounded-2xl border border-white/[0.08] bg-ink-950/50 p-4 backdrop-blur-sm"
+      class="mt-6 rounded-2xl border border-white/[0.08] bg-ink-950/50 p-4 backdrop-blur-sm"
       @mouseenter="paused = true"
       @mouseleave="paused = false"
       @focusin="paused = true"

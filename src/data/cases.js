@@ -11,7 +11,7 @@
 //   context      párrafo: dónde y para quién
 //   problem      párrafo: qué había que resolver
 //   decisions[]  { title, body, media? } — media: { type: "video"|"image"|
-//                "orbs", src, poster?, caption }
+//                "orbs"|"signage", src?, poster?, caption, href? }
 //   outcome[]    { value, label, source? } — solo datos verificables
 //   learnings    párrafo opcional
 
@@ -75,6 +75,10 @@ export const cases = {
       {
         title: "Programar por pantalla, zona y grupo",
         body: "Las playlists se asignan a una pantalla, a una zona o a un grupo, con horarios. Así una cadena cambia el contenido de todas sus sucursales de una vez, sin perder la posibilidad de excepciones por local.",
+        media: {
+          type: "signage",
+          caption: "Demo interactiva: elegí un contenido o dejá correr la playlist. Contenidos y marcas ficticios; escena en three.js.",
+        },
       },
       {
         title: "Aislamiento y permisos como parte del diseño",

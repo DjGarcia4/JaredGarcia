@@ -24,6 +24,7 @@
 
             <figure v-if="d.media" class="mt-7">
               <WizardDemo v-if="d.media.type === 'orbs'" />
+              <SignageDemo v-else-if="d.media.type === 'signage'" />
 
               <div
                 v-else-if="d.media.type === 'video'"
@@ -101,8 +102,10 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import WizardDemo from "@/components/case/WizardDemo.vue";
+// La demo 3D (y three.js) se cargan aparte, solo en el caso que la usa.
+const SignageDemo = defineAsyncComponent(() => import("@/components/case/SignageDemo.vue"));
 
 defineProps({
   study: { type: Object, required: true },

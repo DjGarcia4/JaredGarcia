@@ -34,6 +34,8 @@ import {
   faMobileScreen,
   faPaintBrush,
   faPaperPlane,
+  faPlay,
+  faPause,
   faQuoteLeft,
   faRocket,
   faRotateLeft,
@@ -52,6 +54,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
+  faPlay,
+  faPause,
   faChevronDown,
   faCircleExclamation,
   faArrowDown,

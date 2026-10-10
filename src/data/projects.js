@@ -139,6 +139,7 @@ export const projects = [
         "/img/projects/wink-site/01.webp",
         "/img/projects/wink-site/02.webp",
         "/img/projects/wink-site/03.webp",
+        "/img/projects/wink-site/04.webp",
       ],
     },
     techStack: ["vue", "vite", "firebase", "pinia", "tailwind", "primevue"],

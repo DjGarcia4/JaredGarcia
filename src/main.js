@@ -6,6 +6,7 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
+import { initialLocale, setLocale } from "./i18n";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -21,4 +22,6 @@ app.directive("glow", glow);
 app.use(createPinia());
 app.use(router);
 
-app.mount("#app");
+// Monta cuando el idioma inicial está listo (si es inglés, su chunk se
+// descarga primero; en español no hay espera).
+setLocale(initialLocale, { persist: false }).finally(() => app.mount("#app"));

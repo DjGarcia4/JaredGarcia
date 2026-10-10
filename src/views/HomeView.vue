@@ -3,39 +3,33 @@
     <Hero />
 
     <section id="trabajo" class="container-content scroll-mt-24 py-20 md:py-28">
-      <TitleSection eyebrow="Trabajo seleccionado">
-        Casos destacados
-      </TitleSection>
+      <TitleSection :eyebrow="t('home.workEyebrow')">{{ t("home.workTitle") }}</TitleSection>
       <FeaturedCases :projects="featured" />
       <div class="mt-20 flex justify-center">
         <RouterLink :to="{ name: 'projects' }" class="btn-ghost">
-          Ver todos los proyectos
+          {{ t("home.allProjects") }}
           <font-awesome-icon :icon="['fas', 'arrow-right']" />
         </RouterLink>
       </div>
     </section>
 
     <section id="proceso" class="container-content scroll-mt-24 py-20 md:py-28">
-      <TitleSection eyebrow="Cómo trabajo">
-        Diseño y código, sin pasamanos
-      </TitleSection>
+      <TitleSection :eyebrow="t('home.processEyebrow')">{{ t("home.processTitle") }}</TitleSection>
       <Process />
     </section>
 
     <section id="about" class="container-content scroll-mt-24 py-20 md:py-28">
-      <TitleSection eyebrow="Sobre mí">
-        Entre Figma y producción
-      </TitleSection>
+      <TitleSection :eyebrow="t('home.aboutEyebrow')">{{ t("home.aboutTitle") }}</TitleSection>
       <About />
     </section>
 
     <section id="stack" class="container-content scroll-mt-24 py-20 md:py-28">
-      <TitleSection eyebrow="Stack">Con qué trabajo</TitleSection>
+      <TitleSection :eyebrow="t('home.stackEyebrow')">{{ t("home.stackTitle") }}</TitleSection>
       <Stack />
     </section>
 
     <section id="contact" class="container-content scroll-mt-24 py-20 md:py-28">
-      <TitleSection eyebrow="Contacto">Hablemos</TitleSection>
+      <TitleSection :eyebrow="t('home.contactEyebrow')">{{ t("home.contactTitle") }}</TitleSection>
       <FormContact />
     </section>
   </div>
@@ -54,6 +48,7 @@ import Stack from "@/components/Stack.vue";
 import FormContact from "@/components/FormContact.vue";
 
 import { useProjects } from "@/stores/projects";
+import { t } from "@/i18n";
 
 const projects = useProjects();
 

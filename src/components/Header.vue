@@ -29,11 +29,11 @@
       </RouterLink>
 
       <!-- Nav desktop -->
-      <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Principal">
-        <span class="hdr-nav-item"><Link to="home" hash="#trabajo">Trabajo</Link></span>
-        <span class="hdr-nav-item"><Link to="home" hash="#proceso">Proceso</Link></span>
-        <span class="hdr-nav-item"><Link to="home" hash="#about">Sobre mí</Link></span>
-        <span class="hdr-nav-item"><Link to="projects">Proyectos</Link></span>
+      <nav class="hidden items-center gap-0.5 lg:flex" :aria-label="t('nav.label')">
+        <span class="hdr-nav-item"><Link to="home" hash="#trabajo">{{ t("nav.work") }}</Link></span>
+        <span class="hdr-nav-item"><Link to="home" hash="#proceso">{{ t("nav.process") }}</Link></span>
+        <span class="hdr-nav-item"><Link to="home" hash="#about">{{ t("nav.about") }}</Link></span>
+        <span class="hdr-nav-item"><Link to="projects">{{ t("nav.projects") }}</Link></span>
       </nav>
 
       <!-- Aside derecha desktop -->
@@ -42,7 +42,7 @@
         <button
           type="button"
           class="hdr-aside-item inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/65 transition-colors hover:border-accent/40 hover:text-white"
-          aria-label="Buscar y navegar"
+          :aria-label="t('nav.search')"
           aria-keyshortcuts="Meta+K Control+K"
           @click="openPalette"
         >
@@ -50,25 +50,14 @@
           <kbd class="font-mono text-[10px]">{{ isMac ? "⌘" : "Ctrl" }} K</kbd>
         </button>
 
-        <!-- Status indicator -->
-        <span
-          class="hdr-aside-item inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/65"
-        >
-          <span class="relative flex h-2 w-2">
-            <span
-              class="absolute inline-flex h-full w-full animate-glow-pulse rounded-full bg-accent opacity-75"
-            ></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
-          </span>
-          Disponible
-        </span>
+        <LangToggle class="hdr-aside-item" />
 
         <!-- CTA -->
         <RouterLink
           :to="{ name: 'home', hash: '#contact' }"
           class="hdr-aside-item inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-ink-950 transition-all duration-300 hover:bg-accent-light hover:shadow-glow active:scale-[0.98]"
         >
-          Hablemos
+          {{ t("common.hablemos") }}
           <font-awesome-icon
             :icon="['fas', 'arrow-right']"
             class="text-[11px]"
@@ -81,7 +70,7 @@
         type="button"
         :aria-expanded="mobileOpen"
         aria-controls="mobile-nav"
-        :aria-label="mobileOpen ? 'Cerrar menú' : 'Abrir menú'"
+        :aria-label="mobileOpen ? t('nav.closeMenu') : t('nav.openMenu')"
         class="hdr-aside-item flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-white/80 transition-colors hover:border-accent/40 hover:text-white lg:hidden"
         @click="toggleMobile"
       >
@@ -147,8 +136,9 @@
                   class="relative inline-flex h-2 w-2 rounded-full bg-accent"
                 ></span>
               </span>
-              Disponible para proyectos
+              {{ t("nav.availableLong") }}
             </span>
+            <LangToggle />
           </div>
 
           <RouterLink
@@ -156,7 +146,7 @@
             class="mobile-nav-item mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-ink-950 transition-colors hover:bg-accent-light"
             @click="closeMobile"
           >
-            Hablemos
+            {{ t("common.hablemos") }}
             <font-awesome-icon
               :icon="['fas', 'arrow-right']"
               class="text-[11px]"
@@ -173,6 +163,8 @@ import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import Link from "@/components/Link.vue";
 import LogoMark from "@/components/LogoMark.vue";
+import LangToggle from "@/components/LangToggle.vue";
+import { t } from "@/i18n";
 import { isMac, openPalette } from "@/lib/palette";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
@@ -184,12 +176,12 @@ const route = useRoute();
 const headerRef = ref(null);
 const mobileOpen = ref(false);
 
-const mobileItems = [
-  { label: "Trabajo", to: { name: "home", hash: "#trabajo" } },
-  { label: "Proceso", to: { name: "home", hash: "#proceso" } },
-  { label: "Sobre mí", to: { name: "home", hash: "#about" } },
-  { label: "Proyectos", to: { name: "projects" } },
-];
+const mobileItems = computed(() => [
+  { label: t("nav.work"), to: { name: "home", hash: "#trabajo" } },
+  { label: t("nav.process"), to: { name: "home", hash: "#proceso" } },
+  { label: t("nav.about"), to: { name: "home", hash: "#about" } },
+  { label: t("nav.projects"), to: { name: "projects" } },
+]);
 
 const isMobileItemActive = (item) => {
   if (item.to.hash) {

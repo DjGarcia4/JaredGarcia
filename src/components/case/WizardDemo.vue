@@ -26,11 +26,11 @@
 
     <div class="w-full min-w-0">
       <p class="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-white/55">
-        Generando tunegocio.rapisites.com
+        {{ t("wizard.generating") }}
       </p>
       <!-- aria-live para que el cambio de etapa se anuncie -->
       <p class="mt-2 font-display text-xl font-semibold text-white" aria-live="polite">
-        {{ done ? "Tu sitio está listo." : current.label }}
+        {{ done ? t("wizard.done") : current.label }}
       </p>
       <ol class="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
         <li
@@ -52,7 +52,7 @@
         class="mt-5 text-sm font-medium text-accent-light underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
         @click="restart"
       >
-        Ver de nuevo
+        {{ t("wizard.again") }}
       </button>
     </div>
   </div>
@@ -61,25 +61,22 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import ThinkingOrb from "@/components/ThinkingOrb.vue";
+import { t, tm } from "@/i18n";
 
-const stages = [
-  { state: "searching", label: "Entendiendo tu negocio…", short: "Entender" },
-  { state: "composing", label: "Escribiendo el contenido…", short: "Escribir" },
-  { state: "shaping", label: "Armando las secciones…", short: "Armar" },
-  { state: "solving", label: "Revisando el SEO…", short: "SEO" },
-];
+const STATES = ["searching", "composing", "shaping", "solving"];
+const stages = computed(() => tm("wizard.stages").map((text, i) => ({ ...text, state: STATES[i] })));
 
 const STEP_MS = 2200;
 const step = ref(0);
 const done = ref(false);
-const current = computed(() => stages[Math.min(step.value, stages.length - 1)]);
+const current = computed(() => stages.value[Math.min(step.value, stages.value.length - 1)]);
 
 const root = ref(null);
 let timer = 0;
 let io;
 
 const tick = () => {
-  if (step.value < stages.length - 1) {
+  if (step.value < stages.value.length - 1) {
     step.value++;
     timer = window.setTimeout(tick, STEP_MS);
   } else {

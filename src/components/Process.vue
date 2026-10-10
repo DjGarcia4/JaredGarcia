@@ -14,14 +14,14 @@
         <h3 class="mt-3 text-2xl font-bold tracking-tight">{{ step.title }}</h3>
         <p class="mt-3 leading-relaxed text-white/70">{{ step.body }}</p>
         <p class="mt-4 text-sm leading-relaxed text-white/60">
-          <span class="font-semibold text-white/85">En la práctica:</span>
+          <span class="font-semibold text-white/85">{{ t("process.inPractice") }}</span>
           {{ step.proof }}
           <RouterLink
             v-if="step.link"
             :to="step.link.to"
             class="whitespace-nowrap font-medium text-accent-light underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
           >
-            {{ step.link.label }}
+            {{ t(step.link.label) }}
           </RouterLink>
         </p>
       </div>
@@ -44,12 +44,12 @@
         <div v-else-if="step.visual === 'tokens'" class="flex items-center justify-between gap-4">
           <div class="flex gap-2">
             <span
-              v-for="t in tokens"
-              :key="t.name"
+              v-for="tok in tokens"
+              :key="tok.name"
               class="flex h-12 w-12 items-end rounded-lg p-1 ring-1 ring-white/15"
-              :style="{ background: t.value }"
+              :style="{ background: tok.value }"
             >
-              <span class="font-mono text-[8px] leading-none" :class="t.dark ? 'text-ink-950' : 'text-white/70'">{{ t.name }}</span>
+              <span class="font-mono text-[8px] leading-none" :class="tok.dark ? 'text-ink-950' : 'text-white/70'">{{ tok.name }}</span>
             </span>
           </div>
           <div class="text-right">
@@ -60,10 +60,10 @@
 
         <!-- 03: pipeline de calidad de SwiftFlow -->
         <div v-else-if="step.visual === 'pipeline'" class="font-mono text-[12px] leading-6 text-white/70">
-          <p><span class="text-accent-light">✓</span> vitest <span class="text-white/45">— unit</span></p>
-          <p><span class="text-accent-light">✓</span> playwright <span class="text-white/45">— end-to-end</span></p>
-          <p><span class="text-accent-light">✓</span> axe-core <span class="text-white/45">— accesibilidad</span></p>
-          <p class="text-white/45">$ vite build → PWA offline</p>
+          <p><span class="text-accent-light">✓</span> vitest <span class="text-white/45">— {{ tm("process.pipeline")[0] }}</span></p>
+          <p><span class="text-accent-light">✓</span> playwright <span class="text-white/45">— {{ tm("process.pipeline")[1] }}</span></p>
+          <p><span class="text-accent-light">✓</span> axe-core <span class="text-white/45">— {{ tm("process.pipeline")[2] }}</span></p>
+          <p class="text-white/45">{{ tm("process.pipeline")[3] }}</p>
         </div>
 
         <!-- 04: Lighthouse real de este portafolio (antes → después) -->
@@ -89,7 +89,7 @@
             </div>
             <div>
               <p class="font-mono text-[10px] uppercase tracking-[0.16em] text-white/70">{{ s.label }}</p>
-              <p class="mt-1 text-xs text-white/55">antes: {{ s.before }}</p>
+              <p class="mt-1 text-xs text-white/55">{{ t("process.before", { n: s.before }) }}</p>
             </div>
           </div>
         </div>
@@ -99,44 +99,21 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { t, tm } from "@/i18n";
 import { RouterLink } from "vue-router";
 import { gsap, playOnEnter, prefersReducedMotion } from "@/lib/gsap";
 
-const steps = [
-  {
-    kicker: "Entender",
-    title: "Primero el problema, después la pantalla",
-    body: "Defino para quién es, qué tiene que lograr y qué se puede sacar. La mejor interfaz suele ser la que pide menos.",
-    proof: "en RapiSites, crear un sitio se reduce a cuatro preguntas; la IA hace el resto.",
-    link: { label: "Ver caso →", to: { name: "project", params: { slug: "rapisites" } } },
-    visual: "wizard",
-  },
-  {
-    kicker: "Diseñar",
-    title: "Sistemas, no pantallas sueltas",
-    body: "Tokens de color, tipografía y espaciado reutilizables, y componentes con todos sus estados: vacío, carga, error, éxito.",
-    proof: "este portafolio usa un solo set de tokens, con contraste AA en todo el texto.",
-    link: { label: "Ver el sistema →", to: { name: "design-system" } },
-    visual: "tokens",
-  },
-  {
-    kicker: "Construir",
-    title: "Lo diseño y lo programo yo",
-    body: "Vue 3, Nuxt y TypeScript en el front; Node, PostgreSQL o Firebase atrás. Sin pasamanos entre Figma y el código.",
-    proof: "SwiftFlow tiene tests unitarios, end-to-end y chequeos automáticos de accesibilidad.",
-    link: { label: "Ver caso →", to: { name: "project", params: { slug: "swiftflow-typing-test" } } },
-    visual: "pipeline",
-  },
-  {
-    kicker: "Medir",
-    title: "Lo que no se mide, no mejora",
-    body: "Eventos de analítica en los pasos que importan y auditorías de performance y accesibilidad antes de dar algo por terminado.",
-    proof: "en Wink Site medimos el embudo con GA4 y eventos propios; este sitio pasó de 80 a 100 en accesibilidad.",
-    link: { label: "Ver caso →", to: { name: "project", params: { slug: "wink-site" } } },
-    visual: "scores",
-  },
+// Metadata de cada paso; el texto (kicker, title, body, proof) sale de
+// los mensajes de i18n (process.steps), en el mismo orden.
+const stepMeta = [
+  { link: { label: "process.viewCase", to: { name: "project", params: { slug: "rapisites" } } }, visual: "wizard" },
+  { link: { label: "process.viewSystem", to: { name: "design-system" } }, visual: "tokens" },
+  { link: { label: "process.viewCase", to: { name: "project", params: { slug: "swiftflow-typing-test" } } }, visual: "pipeline" },
+  { link: { label: "process.viewCase", to: { name: "project", params: { slug: "wink-site" } } }, visual: "scores" },
 ];
+
+const steps = computed(() => tm("process.steps").map((text, i) => ({ ...text, ...stepMeta[i] })));
 
 const tokens = [
   { name: "950", value: "#0F172A" },
@@ -146,11 +123,12 @@ const tokens = [
 ];
 
 // Lighthouse de este sitio (docs/metrics.md): main @ fe6ece3 → redesign/v2.
-const scores = [
-  { label: "Accesibilidad", before: 80, after: 100 },
-  { label: "SEO", before: 92, after: 100 },
-  { label: "Perf. desktop", before: 93, after: 100 },
+const scoreValues = [
+  { before: 80, after: 100 },
+  { before: 92, after: 100 },
+  { before: 93, after: 100 },
 ];
+const scores = computed(() => tm("process.scores").map((label, i) => ({ label, ...scoreValues[i] })));
 
 const root = ref(null);
 let ctx;

@@ -31,9 +31,11 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import { stack } from "@/data/stack";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { getStack } from "@/data/localized";
 import { gsap, playOnEnter, prefersReducedMotion } from "@/lib/gsap";
+
+const stack = computed(() => getStack());
 
 const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[^\w]+/g, "-");
 

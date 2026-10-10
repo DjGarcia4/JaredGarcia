@@ -1,6 +1,6 @@
 <template>
   <div class="relative min-h-screen">
-    <a href="#main" class="skip-link" @click.prevent="skipToMain">Saltar al contenido</a>
+    <a href="#main" class="skip-link" @click.prevent="skipToMain">{{ t("app.skip") }}</a>
     <!-- Fondo -->
     <MeshBackground />
     <div class="grid-overlay fixed inset-0 -z-10"></div>
@@ -59,7 +59,7 @@
           v-if="showScrollTop"
           @click="scrollToTop"
           type="button"
-          aria-label="Volver arriba"
+          :aria-label="t('app.toTop')"
           class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-ink-850/80 text-white/80 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:text-accent-light"
         >
           <font-awesome-icon :icon="['fas', 'arrow-up']" />
@@ -79,7 +79,7 @@
           class="btn-primary pointer-events-auto shadow-glow"
         >
           <font-awesome-icon :icon="['fas', 'paper-plane']" />
-          Contactame
+          {{ t("app.contactMe") }}
         </button>
       </Transition>
     </div>
@@ -105,6 +105,8 @@ const Modal = defineAsyncComponent(() => import("@/components/Modal.vue"));
 const CommandPalette = defineAsyncComponent(() => import("@/components/CommandPalette.vue"));
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { closePalette, openPalette, paletteOpen, paletteUsed } from "@/lib/palette";
+import { locale, t } from "@/i18n";
+import { applyRouteMeta } from "@/lib/seo";
 
 const modal = useModalStore();
 const modalUsed = ref(false);
@@ -163,6 +165,13 @@ const onGlobalKey = (e) => {
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("keydown", onGlobalKey);
+  // Al recargar, el navegador restaura el scroll antes de que exista el
+  // listener: sin esto el header arranca transparente sobre el contenido.
+  handleScroll();
+  requestAnimationFrame(handleScroll);
+  // Las metas de la primera navegación pueden calcularse antes de que el
+  // idioma inicial termine de cargar: se recalculan al montar.
+  applyRouteMeta(route);
 
   initScrollProgress();
 });
@@ -176,6 +185,13 @@ onUnmounted(() => {
 const onAfterEnter = () => {
   ScrollTrigger.refresh();
 };
+
+// Al cambiar de idioma: título/metas del nuevo idioma y recalcular
+// ScrollTrigger (los textos cambian de alto).
+watch(locale, () => {
+  applyRouteMeta(route);
+  nextTick(() => ScrollTrigger.refresh());
+});
 
 // La altura de la página cambia entre rutas: recalcular ScrollTrigger.
 watch(

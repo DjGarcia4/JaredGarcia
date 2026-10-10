@@ -37,7 +37,7 @@
             <span class="absolute inline-flex h-full w-full animate-glow-pulse rounded-full bg-accent opacity-75"></span>
             <span class="relative inline-flex h-2 w-2 rounded-full bg-accent"></span>
           </span>
-          Disponible para roles y proyectos
+          {{ t("hero.status") }}
         </p>
 
         <!-- Sin animación de entrada: es el LCP. -->
@@ -55,17 +55,12 @@
 
         <!-- Sin animación de entrada: en mobile es candidato a LCP. -->
         <p class="mt-6 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
-          Diseño la experiencia y la construyo hasta producción. Hoy lidero el
-          desarrollo de
-          <RouterLink :to="{ name: 'project', params: { slug: 'wink-app' } }" class="hero-link">Wink</RouterLink>,
-          una plataforma de digital signage, y construyo
-          <RouterLink :to="{ name: 'project', params: { slug: 'rapisites' } }" class="hero-link">RapiSites</RouterLink>,
-          un SaaS que arma sitios web con IA.
+          {{ t("hero.leadA") }} <RouterLink :to="{ name: 'project', params: { slug: 'wink-app' } }" class="hero-link">Wink</RouterLink>{{ t("hero.leadB") }} <RouterLink :to="{ name: 'project', params: { slug: 'rapisites' } }" class="hero-link">RapiSites</RouterLink>{{ t("hero.leadC") }}
         </p>
 
         <div class="hero-in mt-9 flex flex-wrap items-center gap-3" style="--d: 3">
           <a href="#trabajo" class="btn-primary" @click.prevent="scrollToWork">
-            Ver casos
+            {{ t("hero.cta") }}
             <font-awesome-icon :icon="['fas', 'arrow-down']" />
           </a>
           <a
@@ -75,7 +70,7 @@
             class="btn-ghost"
           >
             <font-awesome-icon :icon="['fas', 'file-arrow-down']" />
-            Descargar CV
+            {{ t("common.downloadCv") }}
           </a>
           <span class="mx-1 hidden h-6 w-px bg-white/10 sm:block"></span>
           <a
@@ -106,8 +101,8 @@
             <font-awesome-icon :icon="['fas', 'location-dot']" class="text-accent-light" />
             {{ profile.location }}
           </li>
-          <li>Desde {{ profile.careerStart }}</li>
-          <li>Head of Development · Wink Digital</li>
+          <li>{{ t("hero.since", { year: profile.careerStart }) }}</li>
+          <li>{{ t("hero.current") }}</li>
         </ul>
       </div>
 
@@ -124,6 +119,7 @@ import { RouterLink } from "vue-router";
 
 import HeroLayers from "@/components/HeroLayers.vue";
 import { profile } from "@/data/profile";
+import { t } from "@/i18n";
 
 const scrollToWork = () => {
   document.getElementById("trabajo")?.scrollIntoView({ behavior: "smooth" });

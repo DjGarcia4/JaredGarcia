@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { certificates } from "@/data/certificates";
+import { computed } from "vue";
+import { getCertificates } from "@/data/localized";
 
 export const useCertifications = defineStore("certificates", () => {
-  const certificationsCollection = ref(
-    [...certificates].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const certificationsCollection = computed(() =>
+    [...getCertificates()].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   );
 
   return { certificationsCollection };

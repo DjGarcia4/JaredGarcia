@@ -1,22 +1,22 @@
 <template>
   <section class="container-content flex min-h-[70vh] flex-col items-start justify-center py-24">
-    <p class="eyebrow"><span class="h-px w-6 bg-accent-light"></span>Error 404</p>
+    <p class="eyebrow"><span class="h-px w-6 bg-accent-light"></span>{{ t("notFound.eyebrow") }}</p>
     <h1 class="mt-5 text-5xl font-bold tracking-tight md:text-7xl">
-      Esta página <span class="text-gradient">no existe.</span>
+      {{ t("notFound.titleA") }} <span class="text-gradient">{{ t("notFound.titleB") }}</span>
     </h1>
     <p class="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-      Puede que el enlace esté mal escrito o que la página se haya movido.
+      {{ t("notFound.lead") }}
       <span v-if="suggestion">
-        ¿Quisiste decir
+        {{ t("notFound.didYouMean") }}
         <RouterLink :to="suggestion.to" class="text-accent-light underline decoration-accent/40 underline-offset-4 hover:decoration-accent">{{ suggestion.label }}</RouterLink>?
       </span>
     </p>
     <div class="mt-9 flex flex-wrap gap-3">
       <RouterLink :to="{ name: 'home' }" class="btn-primary">
-        Ir al inicio
+        {{ t("notFound.home") }}
         <font-awesome-icon :icon="['fas', 'arrow-right']" />
       </RouterLink>
-      <RouterLink :to="{ name: 'projects' }" class="btn-ghost">Ver proyectos</RouterLink>
+      <RouterLink :to="{ name: 'projects' }" class="btn-ghost">{{ t("notFound.projects") }}</RouterLink>
     </div>
   </section>
 </template>
@@ -25,6 +25,7 @@
 import { computed } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import { projects } from "@/data/projects";
+import { t } from "@/i18n";
 
 const route = useRoute();
 

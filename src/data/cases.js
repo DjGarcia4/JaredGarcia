@@ -141,6 +141,7 @@ export const cases = {
       {
         title: "Precios a la vista",
         body: "Desde el primer día los precios están publicados: tres planes con precio (desde US$12 al mes) y Enterprise a medida, con tabla comparativa. Mostrar el precio filtra mejor que un ‘contáctanos’ y deja las demos para quien ya está interesado.",
+        media: { type: "image", src: "/img/projects/wink-site/02.webp", caption: "Planes y precios publicados en winkdigital.io/pricing." },
       },
       {
         title: "Medir cada paso del embudo",

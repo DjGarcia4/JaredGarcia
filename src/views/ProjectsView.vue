@@ -3,27 +3,25 @@
     <section class="container-content pb-12 pt-16 md:pb-16 md:pt-24">
       <p class="pv-in eyebrow">
         <span class="h-px w-6 bg-accent-light"></span>
-        Proyectos
+        {{ t("projects.eyebrow") }}
       </p>
       <h1 class="pv-in mt-5 text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl">
-        Trabajo <span class="text-gradient">real.</span>
+        {{ t("projects.titleA") }} <span class="text-gradient">{{ t("projects.titleB") }}</span>
       </h1>
       <p class="pv-in mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-        Productos que diseñé y construí, hoy en producción. Más abajo, los
-        ejercicios de cursos y de mis primeros años, como registro de cómo
-        aprendí.
+        {{ t("projects.lead") }}
       </p>
       <dl class="pv-in mt-8 flex flex-wrap gap-x-10 gap-y-4">
         <div>
-          <dt class="mono-label">Casos</dt>
+          <dt class="mono-label">{{ t("projects.cases") }}</dt>
           <dd class="mt-1 font-display text-3xl font-bold text-white">{{ cases.length }}</dd>
         </div>
         <div>
-          <dt class="mono-label">Práctica</dt>
+          <dt class="mono-label">{{ t("projects.practice") }}</dt>
           <dd class="mt-1 font-display text-3xl font-bold text-white">{{ practice.length }}</dd>
         </div>
         <div>
-          <dt class="mono-label">Desde</dt>
+          <dt class="mono-label">{{ t("projects.since") }}</dt>
           <dd class="mt-1 font-display text-3xl font-bold text-white">{{ profile.careerStart }}</dd>
         </div>
       </dl>
@@ -31,7 +29,7 @@
 
     <!-- Casos -->
     <section class="container-content pb-24" aria-labelledby="casos-title">
-      <h2 id="casos-title" class="sr-only">Casos</h2>
+      <h2 id="casos-title" class="sr-only">{{ t("projects.cases") }}</h2>
       <ul class="grid gap-6 md:grid-cols-2">
         <li v-for="(project, i) in cases" :key="project.id" class="pv-card" :class="i === 0 ? 'md:col-span-2' : ''">
           <RouterLink
@@ -64,10 +62,10 @@
               </h3>
               <p class="mt-3 leading-relaxed text-white/70">{{ project.headline }}</p>
               <ul class="mt-5 flex flex-wrap gap-1.5">
-                <li v-for="t in project.techStack" :key="t" class="chip">{{ techName(t) }}</li>
+                <li v-for="tech in project.techStack" :key="tech" class="chip">{{ techName(tech) }}</li>
               </ul>
               <span class="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-white">
-                Ver caso
+                {{ t("cases.view") }}
                 <font-awesome-icon :icon="['fas', 'arrow-right']" class="text-xs transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </div>
@@ -80,11 +78,10 @@
     <section class="container-content pb-28" aria-labelledby="practica-title">
       <div class="mb-8 max-w-2xl">
         <h2 id="practica-title" class="text-3xl font-bold tracking-tight md:text-4xl">
-          Práctica y cursos
+          {{ t("projects.practiceTitle") }}
         </h2>
         <p class="mt-3 leading-relaxed text-white/65">
-          Ejercicios que hice mientras aprendía (varios de cursos de Udemy).
-          No son casos de estudio: los dejo con su código y su demo.
+          {{ t("projects.practiceLead") }}
         </p>
       </div>
 
@@ -110,8 +107,8 @@
               class="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-sm text-white/80 transition-colors hover:border-accent/50 hover:text-white"
             >
               <font-awesome-icon :icon="['fab', 'github']" />
-              Código
-              <span class="sr-only">de {{ project.title }}</span>
+              {{ t("projects.code") }}
+              <span class="sr-only">{{ t("cases.viewOf", { title: project.title }) }}</span>
             </a>
             <a
               v-if="project.liveUrl"
@@ -120,8 +117,8 @@
               rel="noopener noreferrer"
               class="inline-flex items-center gap-1.5 rounded-lg border border-white/10 px-3 py-1.5 text-sm text-white/80 transition-colors hover:border-accent/50 hover:text-white"
             >
-              Demo
-              <span class="sr-only">de {{ project.title }}</span>
+              {{ t("projects.demo") }}
+              <span class="sr-only">{{ t("cases.viewOf", { title: project.title }) }}</span>
               <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" class="text-[10px]" />
             </a>
           </div>
@@ -137,6 +134,7 @@ import { RouterLink } from "vue-router";
 import { projectSrc, projectSrcset } from "@/lib/img";
 
 import { profile } from "@/data/profile";
+import { t } from "@/i18n";
 import { techName } from "@/data/skills";
 import { useProjects } from "@/stores/projects";
 import { gsap, playOnEnter, prefersReducedMotion } from "@/lib/gsap";

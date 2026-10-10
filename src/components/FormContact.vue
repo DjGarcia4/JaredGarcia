@@ -6,11 +6,11 @@
         <h3
           class="contact-title font-display text-2xl font-bold leading-tight text-white md:text-3xl"
         >
-          ¿Tenés un proyecto en mente?
+          {{ t("contact.title") }}
         </h3>
       </div>
       <p class="mt-3 text-white/55">
-        Escribime y conversemos. Respondo todos los mensajes.
+        {{ t("contact.lead") }}
       </p>
 
       <button
@@ -25,7 +25,7 @@
         </span>
         <span class="min-w-0">
           <span class="block text-xs uppercase tracking-wider text-white/55">
-            Email
+            {{ t("contact.email") }}
           </span>
           <span class="block truncate text-sm font-medium text-white">
             {{ profile.email }}
@@ -73,7 +73,7 @@
           :href="profile.socials.whatsapp"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Abrir chat de WhatsApp con mensaje precargado"
+          :aria-label="t('contact.whatsappAria')"
           class="group relative flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white p-2 transition-all duration-300 hover:border-accent/50 hover:shadow-[0_0_0_3px_rgba(74,222,128,0.12)]"
         >
           <QrcodeVue
@@ -91,8 +91,7 @@
             WhatsApp
           </span>
           <p class="mt-1 text-sm leading-relaxed text-white/60">
-            Escaneá el código o tocá la imagen para abrir el chat con un
-            mensaje listo.
+            {{ t("contact.whatsappLead") }}
           </p>
         </div>
       </div>
@@ -111,7 +110,7 @@
           :for="`${uid}-${field.name}`"
           class="mb-1.5 block text-sm font-medium text-white/70"
         >
-          {{ field.label }}
+          {{ t(`contact.fields.${field.name}.label`) }}
         </label>
         <component
           :is="field.textarea ? 'textarea' : 'input'"
@@ -121,7 +120,7 @@
           :type="field.textarea ? undefined : field.type"
           :rows="field.textarea ? 5 : undefined"
           :autocomplete="field.autocomplete"
-          :placeholder="field.placeholder"
+          :placeholder="t(`contact.fields.${field.name}.placeholder`)"
           :aria-invalid="errors[field.name] ? 'true' : 'false'"
           :aria-describedby="errors[field.name] ? `${uid}-${field.name}-error` : undefined"
           class="field"
@@ -138,7 +137,7 @@
           class="mt-1.5 flex items-center gap-1.5 text-sm text-red-300"
         >
           <font-awesome-icon :icon="['fas', 'circle-exclamation']" class="text-xs" />
-          {{ errors[field.name] }}
+          {{ t(`contact.fields.${field.name}.${errors[field.name]}`) }}
         </p>
       </div>
 
@@ -153,12 +152,12 @@
             state="breathing"
             :size="20"
             color="#0F172A"
-            label="Enviando mensaje"
+            :label="t('contact.sendingAria')"
           />
-          Enviando…
+          {{ t("contact.sending") }}
         </template>
         <template v-else>
-          Enviar mensaje
+          {{ t("contact.send") }}
           <font-awesome-icon :icon="['fas', 'paper-plane']" />
         </template>
       </button>
@@ -179,6 +178,7 @@ const loadEmailjs = () =>
 import { toast } from "vue-sonner";
 
 import ThinkingOrb from "@/components/ThinkingOrb.vue";
+import { t } from "@/i18n";
 
 import { profile } from "@/data/profile";
 import { useModalStore } from "@/stores/modal";
@@ -195,41 +195,26 @@ const uid = `contact-${Math.random().toString(36).slice(2, 8)}`;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 // `name` coincide con las variables del template de EmailJS.
+// Los mensajes de error se guardan como código (empty | short | invalid)
+// y se traducen al mostrarlos, así cambian si se cambia el idioma.
 const fields = [
   {
     name: "fullname",
-    label: "Nombre completo",
     type: "text",
     autocomplete: "name",
-    placeholder: "Tu nombre",
-    check: (v) =>
-      !v ? "Contame cómo te llamás." : v.length < 3 ? "El nombre es muy corto." : "",
+    check: (v) => (!v ? "empty" : v.length < 3 ? "short" : ""),
   },
   {
     name: "email",
-    label: "Correo electrónico",
     type: "email",
     autocomplete: "email",
-    placeholder: "ejemplo@correo.com",
-    check: (v) =>
-      !v
-        ? "Necesito tu correo para responderte."
-        : !EMAIL_RE.test(v)
-          ? "Revisá el correo, parece incompleto."
-          : "",
+    check: (v) => (!v ? "empty" : !EMAIL_RE.test(v) ? "invalid" : ""),
   },
   {
     name: "message",
-    label: "Mensaje",
     textarea: true,
     autocomplete: "off",
-    placeholder: "Contame sobre tu proyecto…",
-    check: (v) =>
-      !v
-        ? "Escribí un mensaje."
-        : v.length < 10
-          ? "Contame un poco más (mínimo 10 caracteres)."
-          : "",
+    check: (v) => (!v ? "empty" : v.length < 10 ? "short" : ""),
   },
 ];
 
@@ -354,8 +339,8 @@ function copyEmail() {
     .writeText(profile.email)
     .then(() => {
       copied.value = true;
-      toast.success("Email copiado", {
-        description: "Pegalo donde quieras y escribime.",
+      toast.success(t("contact.copied"), {
+        description: t("contact.copiedDesc"),
       });
       setTimeout(() => (copied.value = false), 2000);
     })
@@ -376,8 +361,8 @@ function sendEmail() {
       emailjs.sendForm("default_service", "template_s4cxryd", formEl.value)
     )
     .then(() => {
-      toast.success("¡Mensaje enviado!", {
-        description: "Gracias por escribir, te respondo muy pronto.",
+      toast.success(t("contact.sent"), {
+        description: t("contact.sentDesc"),
       });
       modal.handleModal(false);
       fields.forEach((f) => {
@@ -388,8 +373,8 @@ function sendEmail() {
     })
     .catch((err) => {
       console.error(err);
-      toast.error("Algo salió mal", {
-        description: "No se pudo enviar el mensaje. Intentá de nuevo o escribime por WhatsApp.",
+      toast.error(t("contact.error"), {
+        description: t("contact.errorDesc"),
       });
     })
     .finally(() => {

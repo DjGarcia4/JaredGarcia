@@ -11,15 +11,15 @@
       <div ref="leftCol" class="md:col-span-7">
         <span class="ft-eyebrow eyebrow">
           <span class="h-px w-8 bg-accent/60"></span>
-          Conectemos
+          {{ t("footer.eyebrow") }}
         </span>
 
         <p
           class="ft-lead mt-6 max-w-lg font-display text-2xl font-semibold leading-tight text-white md:text-[28px]"
         >
-          Gracias por llegar hasta acá.
+          {{ t("footer.leadA") }}
           <span class="text-white/60">
-            Quedó la puerta abierta para lo que sigue.
+            {{ t("footer.leadB") }}
           </span>
         </p>
 
@@ -60,8 +60,8 @@
       </div>
 
       <!-- Columna derecha: sitemap + CV -->
-      <nav ref="rightCol" class="md:col-span-5" aria-label="Mapa del sitio">
-        <span class="ft-eyebrow mono-label">Navegar</span>
+      <nav ref="rightCol" class="md:col-span-5" :aria-label="t('footer.sitemap')">
+        <span class="ft-eyebrow mono-label">{{ t("footer.navigate") }}</span>
 
         <ul class="ft-nav mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
           <li v-for="item in navItems" :key="item.label" class="ft-nav-item">
@@ -85,7 +85,7 @@
           rel="noopener noreferrer"
           class="ft-cv btn-ghost mt-10 w-full justify-between sm:w-auto sm:justify-center"
         >
-          Descargar CV
+          {{ t("common.downloadCv") }}
           <font-awesome-icon
             :icon="['fas', 'arrow-up-right-from-square']"
             class="text-[11px]"
@@ -123,7 +123,7 @@
         <p class="inline-flex items-center gap-3 uppercase tracking-[0.18em]">
           <span class="text-white/50">v2</span>
           <span class="h-3 w-px bg-white/15"></span>
-          <span>Hecho en Honduras</span>
+          <span>{{ t("footer.made") }}</span>
         </p>
       </div>
     </div>
@@ -134,6 +134,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { profile } from "@/data/profile";
+import { t } from "@/i18n";
 import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
 const year = new Date().getFullYear();
@@ -147,15 +148,15 @@ const wordmarkWrap = ref(null);
 const wordmark = ref(null);
 
 // ── Sitemap (mismas rutas que el Header) ─────────────────────────
-const navItems = [
-  { label: "Trabajo", to: { name: "home", hash: "#trabajo" } },
-  { label: "Proceso", to: { name: "home", hash: "#proceso" } },
-  { label: "Sobre mí", to: { name: "home", hash: "#about" } },
-  { label: "Stack", to: { name: "home", hash: "#stack" } },
-  { label: "Proyectos", to: { name: "projects" } },
-  { label: "Sistema de diseño", to: { name: "design-system" } },
-  { label: "Contacto", to: { name: "home", hash: "#contact" } },
-];
+const navItems = computed(() => [
+  { label: t("nav.work"), to: { name: "home", hash: "#trabajo" } },
+  { label: t("nav.process"), to: { name: "home", hash: "#proceso" } },
+  { label: t("nav.about"), to: { name: "home", hash: "#about" } },
+  { label: t("nav.stack"), to: { name: "home", hash: "#stack" } },
+  { label: t("nav.projects"), to: { name: "projects" } },
+  { label: t("nav.designSystem"), to: { name: "design-system" } },
+  { label: t("nav.contact"), to: { name: "home", hash: "#contact" } },
+]);
 
 // ── Socials (orden por jerarquía: trabajo → mensajería → email) ──
 const socialLinks = computed(() => [

@@ -126,9 +126,9 @@
       @focusout="paused = false"
     >
       <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">
-        Una pantalla, cuatro etapas
+        {{ t("layers.title") }}
       </p>
-      <div class="mt-3 grid grid-cols-4 gap-1.5" role="tablist" aria-label="Etapas del proceso">
+      <div class="mt-3 grid grid-cols-2 gap-1.5 sm:grid-cols-4" role="tablist" :aria-label="t('layers.tablist')">
         <button
           v-for="(st, i) in stages"
           :key="st.name"
@@ -151,18 +151,14 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { t, tm } from "@/i18n";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 // Paleta real de RapiSites (la UI de la capa 04).
 const palette = ["#7C3AED", "#C2410C", "#18181B", "#FAFAFA"];
 
-const stages = [
-  { name: "Wireframe", desc: "La estructura: qué va en la pantalla y en qué orden, antes de cualquier color." },
-  { name: "Sistema", desc: "Los tokens: paleta, tipografía y espaciado que hacen que todo sea consistente." },
-  { name: "Código", desc: "El componente en Vue y TypeScript que convierte el diseño en algo real." },
-  { name: "Producción", desc: "El resultado publicado: rapisites.com, en vivo y usado por negocios reales." },
-];
+const stages = computed(() => tm("layers.stages"));
 
 const active = ref(0);
 const paused = ref(false);
@@ -226,7 +222,7 @@ onMounted(() => {
   // Recorre las etapas sola; se pausa con hover o foco en la leyenda.
   cycle = window.setInterval(() => {
     if (!paused.value && document.visibilityState === "visible") {
-      active.value = (active.value + 1) % stages.length;
+      active.value = (active.value + 1) % stages.value.length;
     }
   }, 2800);
 

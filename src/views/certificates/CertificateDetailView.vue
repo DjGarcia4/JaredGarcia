@@ -22,13 +22,13 @@
             :icon="['fas', 'arrow-left']"
             class="transition-transform duration-300 group-hover:-translate-x-1"
           />
-          Volver
+          {{ t("common.back") }}
         </button>
 
         <p
           class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55 md:flex md:items-center md:gap-3"
         >
-          <span>Certificado</span>
+          <span>{{ t("cert.certificate") }}</span>
           <span class="h-px w-6 bg-white/15"></span>
           <span class="text-white/70">
             {{ String(currentNumber).padStart(2, "0") }}
@@ -60,7 +60,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Emitido por
+                {{ t("cert.issuedBy") }}
               </dt>
               <dd class="mt-2 flex items-center gap-2.5 text-white">
                 <font-awesome-icon
@@ -77,7 +77,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Estado
+                {{ t("cert.status") }}
               </dt>
               <dd class="mt-2">
                 <span
@@ -92,7 +92,7 @@
                       class="relative inline-flex h-1.5 w-1.5 rounded-full bg-current"
                     ></span>
                   </span>
-                  {{ certificate.status }}
+                  {{ certificate.status === "En curso" ? t("about.inProgress") : certificate.status }}
                 </span>
               </dd>
             </div>
@@ -101,14 +101,14 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Áreas cubiertas
+                {{ t("cert.areas") }}
               </dt>
               <dd class="mt-2 flex items-baseline gap-2">
                 <span class="font-display text-2xl font-bold text-white">
                   {{ certificate.topics.length }}
                 </span>
                 <span class="text-sm text-white/55">
-                  {{ certificate.topics.length === 1 ? "tema" : "temas" }}
+                  {{ certificate.topics.length === 1 ? t("cert.topic") : t("cert.topics") }}
                 </span>
               </dd>
             </div>
@@ -117,10 +117,10 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Formato
+                {{ t("cert.format") }}
               </dt>
               <dd class="mt-2 text-sm text-white/75">
-                Curso online · Práctico
+                {{ t("cert.formatValue") }}
               </dd>
             </div>
           </dl>
@@ -132,7 +132,7 @@
             :to="{ name: 'home', hash: '#contact' }"
             class="meta-item mt-6 inline-flex items-center gap-2 text-sm text-white/65 transition-colors duration-300 hover:text-accent-light"
           >
-            Hablemos sobre esto
+            {{ t("detail.talk") }}
             <font-awesome-icon
               :icon="['fas', 'arrow-right']"
               class="text-[11px] transition-transform duration-300 group-hover:translate-x-1"
@@ -147,7 +147,7 @@
             class="cert-eyebrow flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
           >
             <span class="h-px w-8 bg-accent"></span>
-            Formación · Recorrido completo
+            {{ t("cert.eyebrow") }}
           </p>
 
           <!-- Title con clipPath reveal -->
@@ -176,7 +176,7 @@
                 :icon="['fas', 'list-check']"
                 class="text-xs text-white/55"
               />
-              {{ certificate.topics.length }} temas cubiertos
+              {{ certificate.topics.length }} {{ t("cert.topics") }}
             </span>
             <span
               v-if="certificate.status"
@@ -189,7 +189,7 @@
               <span
                 class="h-1.5 w-1.5 animate-glow-pulse rounded-full bg-accent"
               ></span>
-              {{ certificate.status }}
+              {{ certificate.status === "En curso" ? t("about.inProgress") : certificate.status }}
             </span>
           </div>
 
@@ -213,12 +213,12 @@
                 class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
               >
                 <span class="h-px w-8 bg-accent"></span>
-                Stack del recorrido
+                {{ t("cert.stack") }}
               </p>
               <span
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                {{ certificate.topics.length }} temas
+                {{ certificate.topics.length }} {{ t("cert.topics") }}
               </span>
             </header>
 
@@ -268,11 +268,10 @@
                 <h2
                   class="mt-5 font-display text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-[36px]"
                 >
-                  ¿Querés que apliquemos este stack en tu próximo proyecto?
+                  {{ t("cert.ctaTitle") }}
                 </h2>
                 <p class="mt-4 max-w-xl text-base leading-relaxed text-white/65 md:text-lg">
-                  Hablemos sobre cómo puedo ayudarte a llevar tu idea a
-                  producción con las tecnologías y prácticas de este recorrido.
+                  {{ t("cert.ctaBody") }}
                 </p>
 
                 <div class="mt-9 flex flex-wrap items-center gap-3">
@@ -280,14 +279,14 @@
                     :to="{ name: 'home', hash: '#contact' }"
                     class="btn-primary"
                   >
-                    Hablemos
+                    {{ t("common.hablemos") }}
                     <font-awesome-icon :icon="['fas', 'arrow-right']" />
                   </RouterLink>
                   <RouterLink
                     :to="{ name: 'home', hash: '#about' }"
                     class="btn-ghost"
                   >
-                    Ver formación
+                    {{ t("cert.education") }}
                   </RouterLink>
                 </div>
               </div>
@@ -312,7 +311,7 @@
                   :icon="['fas', 'arrow-left']"
                   class="text-[9px] transition-transform duration-300 group-hover:-translate-x-1"
                 />
-                Anterior
+                {{ t("common.previous") }}
               </p>
               <p
                 class="font-display text-sm font-semibold leading-snug text-white/80 transition-colors duration-300 group-hover:text-accent-light md:text-base"
@@ -330,7 +329,7 @@
               <p
                 class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Siguiente
+                {{ t("common.next") }}
                 <font-awesome-icon
                   :icon="['fas', 'arrow-right']"
                   class="text-[9px] transition-transform duration-300 group-hover:translate-x-1"
@@ -356,9 +355,9 @@
         :icon="['fas', 'folder-open']"
         class="text-4xl text-white/20"
       />
-      <p class="text-white/55">No se encontró el certificado.</p>
+      <p class="text-white/55">{{ t("cert.notFound") }}</p>
       <RouterLink :to="{ name: 'home' }" class="btn-ghost">
-        Volver al inicio
+        {{ t("cert.home") }}
       </RouterLink>
     </div>
   </div>
@@ -369,6 +368,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useCertifications } from "@/stores/certifications";
 import { statusStyle } from "@/lib/status";
+import { t } from "@/i18n";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const route = useRoute();

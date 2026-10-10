@@ -91,8 +91,8 @@
             :to="{ name: 'project', params: { slug: project.slug } }"
             class="btn-primary"
           >
-            Ver caso
-            <span class="sr-only">de {{ project.title }}</span>
+            {{ t("cases.view") }}
+            <span class="sr-only">{{ t("cases.viewOf", { title: project.title }) }}</span>
             <font-awesome-icon :icon="['fas', 'arrow-right']" />
           </RouterLink>
           <a
@@ -102,8 +102,8 @@
             rel="noopener noreferrer"
             class="btn-ghost"
           >
-            Sitio en vivo
-            <span class="sr-only">de {{ project.title }} (abre en otra pestaña)</span>
+            {{ t("cases.live") }}
+            <span class="sr-only">{{ t("cases.viewOf", { title: project.title }) }} ({{ t("common.newTab") }})</span>
             <font-awesome-icon :icon="['fas', 'arrow-up-right-from-square']" class="text-xs" />
           </a>
         </div>
@@ -116,6 +116,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { projectSrc, projectSrcset } from "@/lib/img";
+import { t } from "@/i18n";
 import { gsap, playOnEnter, prefersReducedMotion } from "@/lib/gsap";
 
 defineProps({

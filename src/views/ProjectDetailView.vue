@@ -22,14 +22,14 @@
             :icon="['fas', 'arrow-left']"
             class="transition-transform duration-300 group-hover:-translate-x-1"
           />
-          Volver
+          {{ t("common.back") }}
         </button>
 
         <p
           v-if="projectIndex >= 0"
           class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55 md:flex md:items-center md:gap-3"
         >
-          <span>Caso</span>
+          <span>{{ t("detail.case") }}</span>
           <span class="h-px w-6 bg-white/15"></span>
           <span class="text-white/70">
             {{ String(currentNumber).padStart(2, "0") }}
@@ -62,7 +62,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Cliente
+                {{ t("detail.client") }}
               </dt>
               <dd class="mt-2 flex items-center gap-2.5 text-white">
                 <font-awesome-icon
@@ -70,7 +70,7 @@
                   class="text-sm text-accent-light"
                 />
                 <span class="text-base font-semibold">
-                  {{ project.team || "Proyecto propio" }}
+                  {{ project.team || t("detail.ownProject") }}
                 </span>
               </dd>
             </div>
@@ -79,7 +79,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Rol
+                {{ t("detail.role") }}
               </dt>
               <dd class="mt-2 flex items-center gap-2.5 text-white/85">
                 <font-awesome-icon
@@ -94,7 +94,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Año
+                {{ t("detail.year") }}
               </dt>
               <dd class="mt-2 font-display text-2xl font-bold text-white">
                 {{ project.year }}
@@ -105,7 +105,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Estado
+                {{ t("detail.status") }}
               </dt>
               <dd class="mt-2">
                 <span
@@ -120,7 +120,7 @@
                       class="relative inline-flex h-1.5 w-1.5 rounded-full bg-current"
                     ></span>
                   </span>
-                  {{ project.status }}
+                  {{ t(`detail.status_values.${project.status}`) }}
                 </span>
               </dd>
             </div>
@@ -129,7 +129,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Duración
+                {{ t("detail.duration") }}
               </dt>
               <dd class="mt-2 flex items-center gap-2.5 text-white/85">
                 <font-awesome-icon
@@ -144,7 +144,7 @@
               <dt
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Categoría
+                {{ t("detail.category") }}
               </dt>
               <dd class="mt-2 text-sm text-white/75">
                 {{ project.category }}
@@ -159,7 +159,7 @@
             :to="{ name: 'home', hash: '#contact' }"
             class="meta-item mt-6 inline-flex items-center gap-2 text-sm text-white/65 transition-colors duration-300 hover:text-accent-light"
           >
-            Hablemos sobre esto
+            {{ t("detail.talk") }}
             <font-awesome-icon
               :icon="['fas', 'arrow-right']"
               class="text-[11px] transition-transform duration-300 group-hover:translate-x-1"
@@ -195,7 +195,7 @@
                 :icon="['fas', 'briefcase']"
                 class="text-xs text-white/55"
               />
-              {{ project.team || "Proyecto propio" }}
+              {{ project.team || t("detail.ownProject") }}
             </span>
             <span class="hidden h-px w-6 bg-white/15 sm:block"></span>
             <span class="flex items-center gap-2">
@@ -216,7 +216,7 @@
               <span
                 class="h-1.5 w-1.5 animate-glow-pulse rounded-full bg-accent"
               ></span>
-              {{ project.status }}
+              {{ t(`detail.status_values.${project.status}`) }}
             </span>
             <span
               v-if="project.featured"
@@ -227,7 +227,7 @@
               class="flex items-center gap-2 text-accent-light"
             >
               <font-awesome-icon :icon="['fas', 'star']" class="text-xs" />
-              Destacado
+              {{ t("detail.featured") }}
             </span>
           </div>
 
@@ -279,14 +279,14 @@
                 class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
               >
                 <span class="h-px w-8 bg-accent"></span>
-                Pantallas
+                {{ t("detail.screens") }}
               </p>
               <span
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ String(project.images.gallery.length).padStart(2, "0") }}
-                {{ project.images.gallery.length === 1 ? "vista" : "vistas" }}
-                · Tocá para ampliar
+                {{ project.images.gallery.length === 1 ? t("detail.view") : t("detail.views") }}
+                · {{ t("detail.tapToZoom") }}
               </span>
             </header>
 
@@ -295,7 +295,7 @@
                 v-for="(img, i) in project.images.gallery"
                 :key="img"
                 type="button"
-                :aria-label="`Ampliar vista ${i + 1} de ${project.images.gallery.length}`"
+                :aria-label="t('detail.zoom', { i: i + 1, n: project.images.gallery.length })"
                 :class="[
                   'gallery-item group relative block w-full cursor-zoom-in overflow-hidden rounded-3xl border border-white/[0.08] transition-all duration-500 hover:border-accent/30',
                   galleryItemSpan(i, project.images.gallery.length),
@@ -306,7 +306,7 @@
                   :src="projectSrc(img)"
                   :srcset="projectSrcset(img)"
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  :alt="`${project.title} — vista ${i + 1}`"
+                  :alt="t('detail.viewAlt', { title: project.title, n: i + 1 })"
                   loading="lazy"
                   class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
@@ -317,7 +317,7 @@
                   <span
                     class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/85"
                   >
-                    Vista {{ String(i + 1).padStart(2, "0") }}
+                    {{ t("detail.viewN", { n: String(i + 1).padStart(2, "0") }) }}
                   </span>
                   <span
                     class="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur-md"
@@ -343,7 +343,7 @@
                 class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
               >
                 <span class="h-px w-8 bg-accent"></span>
-                Vista móvil
+                {{ t("detail.mobile") }}
               </p>
             </header>
 
@@ -373,7 +373,7 @@
               >
                 <img
                   :src="project.images.mobile"
-                  :alt="`${project.title} — vista móvil`"
+                  :alt="t('detail.mobileAlt', { title: project.title })"
                   loading="lazy"
                   class="block w-full"
                 />
@@ -392,7 +392,7 @@
               v-if="study"
               class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-xl font-bold text-white"
             >
-              Ingeniería: arquitectura, stack y alcance
+              {{ t("detail.engineering") }}
               <font-awesome-icon :icon="['fas', 'chevron-down']" class="text-sm text-white/55 transition-transform duration-300 group-open:rotate-180" />
             </summary>
           <!-- Description con drop cap editorial -->
@@ -401,7 +401,7 @@
               class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
             >
               <span class="h-px w-8 bg-accent"></span>
-              Sobre el proyecto
+              {{ t("detail.about") }}
             </p>
             <p
               class="proj-description-text mt-6 max-w-3xl text-base leading-[1.8] text-white/75 md:text-lg"
@@ -421,13 +421,13 @@
                 class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
               >
                 <span class="h-px w-8 bg-accent"></span>
-                Stack técnico
+                {{ t("detail.stack") }}
               </p>
               <span
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ project.techStack.length }}
-                {{ project.techStack.length === 1 ? "tecnología" : "tecnologías" }}
+                {{ project.techStack.length === 1 ? t("detail.tech") : t("detail.techs") }}
               </span>
             </header>
 
@@ -466,12 +466,12 @@
                 class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
               >
                 <span class="h-px w-8 bg-accent"></span>
-                Funcionalidades destacadas
+                {{ t("detail.features") }}
               </p>
               <span
                 class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                {{ String(project.features.length).padStart(2, "0") }} puntos
+                {{ String(project.features.length).padStart(2, "0") }} {{ t("detail.points") }}
               </span>
             </header>
 
@@ -507,7 +507,7 @@
               class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
             >
               <span class="h-px w-8 bg-accent"></span>
-              Enlaces
+              {{ t("detail.links") }}
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
               <a
@@ -517,7 +517,7 @@
                 rel="noopener noreferrer"
                 class="btn-primary"
               >
-                Ver sitio en vivo
+                {{ t("detail.liveSite") }}
                 <font-awesome-icon
                   :icon="['fas', 'arrow-up-right-from-square']"
                 />
@@ -530,7 +530,7 @@
                 class="btn-ghost"
               >
                 <font-awesome-icon :icon="['fab', 'github']" />
-                Ver código
+                {{ t("detail.code") }}
               </a>
             </div>
           </section>
@@ -553,18 +553,17 @@
                   class="flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
                 >
                   <span class="h-px w-8 bg-accent"></span>
-                  Próximo paso
+                  {{ t("detail.nextStep") }}
                 </p>
                 <h2
                   class="mt-5 font-display text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl lg:text-[36px]"
                 >
-                  ¿Querés algo así para tu producto?
+                  {{ t("detail.ctaTitle") }}
                 </h2>
                 <p
                   class="mt-4 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
                 >
-                  Hablemos sobre cómo puedo ayudarte a llevar tu idea a
-                  producción con la misma calidad y stack que ves acá.
+                  {{ t("detail.ctaBody") }}
                 </p>
 
                 <div class="mt-9 flex flex-wrap items-center gap-3">
@@ -572,11 +571,11 @@
                     :to="{ name: 'home', hash: '#contact' }"
                     class="btn-primary"
                   >
-                    Hablemos
+                    {{ t("common.hablemos") }}
                     <font-awesome-icon :icon="['fas', 'arrow-right']" />
                   </RouterLink>
                   <RouterLink :to="{ name: 'projects' }" class="btn-ghost">
-                    Ver más proyectos
+                    {{ t("detail.moreProjects") }}
                   </RouterLink>
                 </div>
               </div>
@@ -601,7 +600,7 @@
                   :icon="['fas', 'arrow-left']"
                   class="text-[9px] transition-transform duration-300 group-hover:-translate-x-1"
                 />
-                Anterior
+                {{ t("common.previous") }}
               </p>
               <p
                 class="font-display text-sm font-semibold leading-snug text-white/80 transition-colors duration-300 group-hover:text-accent-light md:text-base"
@@ -619,7 +618,7 @@
               <p
                 class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
-                Siguiente
+                {{ t("common.next") }}
                 <font-awesome-icon
                   :icon="['fas', 'arrow-right']"
                   class="text-[9px] transition-transform duration-300 group-hover:translate-x-1"
@@ -645,9 +644,9 @@
         :icon="['fas', 'folder-open']"
         class="text-4xl text-white/20"
       />
-      <p class="text-white/55">No se encontró el proyecto.</p>
+      <p class="text-white/55">{{ t("detail.notFound") }}</p>
       <RouterLink :to="{ name: 'projects' }" class="btn-ghost">
-        Volver a proyectos
+        {{ t("detail.backToProjects") }}
       </RouterLink>
     </div>
 
@@ -660,7 +659,7 @@
           ref="lightboxEl"
           role="dialog"
           aria-modal="true"
-          :aria-label="`Galería de ${project.title}`"
+          :aria-label="t('detail.gallery', { title: project.title })"
           @keydown.tab="trapFocus"
           @click.self="closeLightbox"
         >
@@ -688,7 +687,7 @@
               type="button"
               ref="lightboxClose"
               @click="closeLightbox"
-              aria-label="Cerrar galería"
+              :aria-label="t('detail.closeGallery')"
               class="group flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white/80 transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light"
             >
               <font-awesome-icon
@@ -708,7 +707,7 @@
               v-if="project.images.gallery.length > 1"
               type="button"
               @click.stop="prevImage"
-              aria-label="Anterior"
+              :aria-label="t('common.previous')"
               class="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light md:left-8 md:h-12 md:w-12"
             >
               <font-awesome-icon
@@ -722,7 +721,7 @@
               <img
                 :key="project.images.gallery[lightboxIndex]"
                 :src="project.images.gallery[lightboxIndex]"
-                :alt="`${project.title} — vista ${lightboxIndex + 1}`"
+                :alt="t('detail.viewAlt', { title: project.title, n: lightboxIndex + 1 })"
                 class="max-h-full max-w-full rounded-2xl border border-white/[0.08] object-contain shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
                 style="max-height: calc(100vh - 240px)"
                 @click.stop
@@ -734,7 +733,7 @@
               v-if="project.images.gallery.length > 1"
               type="button"
               @click.stop="nextImage"
-              aria-label="Siguiente"
+              :aria-label="t('common.next')"
               class="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-accent/50 hover:bg-accent/10 hover:text-accent-light md:right-8 md:h-12 md:w-12"
             >
               <font-awesome-icon
@@ -755,7 +754,7 @@
                 :key="img"
                 type="button"
                 @click.stop="lightboxIndex = i"
-                :aria-label="`Ver vista ${i + 1}`"
+                :aria-label="t('detail.showView', { n: i + 1 })"
                 :class="[
                   'group relative h-16 w-28 shrink-0 overflow-hidden rounded-lg border transition-all duration-300 md:h-20 md:w-36',
                   i === lightboxIndex
@@ -788,7 +787,8 @@ import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
 import { techName } from "@/data/skills";
 import { projectSrc, projectSrcset } from "@/lib/img";
-import { cases as caseStudies } from "@/data/cases";
+import { getCase } from "@/data/localized";
+import { t } from "@/i18n";
 import CaseStudy from "@/components/case/CaseStudy.vue";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
@@ -800,13 +800,13 @@ const project = computed(() =>
   projectsStore.projectsCollection.find((p) => p.slug === route.params.slug)
 );
 
-const study = computed(() => (project.value ? caseStudies[project.value.id] : null));
+const study = computed(() => (project.value ? getCase(project.value.id) : null));
 const tldrRows = computed(() =>
   study.value
     ? [
-        { label: "Problema", value: study.value.tldr.problem },
-        { label: "Mi rol", value: study.value.tldr.role },
-        { label: "Resultado", value: study.value.tldr.outcome },
+        { label: t("detail.tldr.problem"), value: study.value.tldr.problem },
+        { label: t("detail.tldr.role"), value: study.value.tldr.role },
+        { label: t("detail.tldr.outcome"), value: study.value.tldr.outcome },
       ]
     : []
 );

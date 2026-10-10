@@ -23,14 +23,14 @@
             height="720"
             class="block aspect-video w-full rounded-[2px]"
             role="img"
-            :aria-label="`Pantalla mostrando: ${slides[active].title}`"
+            :aria-label="t('signage.showing', { title: titleOf(slides[active]) })"
           ></canvas>
         </div>
       </div>
 
       <p class="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-ink-950/70 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/70 backdrop-blur">
         <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
-        Lobby principal · en línea
+        {{ t("signage.online") }}
       </p>
     </div>
 
@@ -45,15 +45,15 @@
 
       <div class="flex items-start justify-between gap-3 px-5 pt-5">
         <div>
-          <p class="font-display text-lg font-bold text-white">Playlist · Desayunos</p>
+          <p class="font-display text-lg font-bold text-white">{{ t("signage.playlist") }}</p>
           <p class="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">
-            Lun–Sáb · 07:00–11:00 · 1 pantalla
+            {{ t("signage.schedule") }}
           </p>
         </div>
         <button
           type="button"
           class="link-icon h-9 w-9 shrink-0"
-          :aria-label="playing ? 'Pausar playlist' : 'Reproducir playlist'"
+          :aria-label="playing ? t('signage.pause') : t('signage.play')"
           @click="toggle"
         >
           <font-awesome-icon :icon="['fas', playing ? 'pause' : 'play']" class="text-xs" />
@@ -71,8 +71,8 @@
           >
             <span class="h-9 w-14 shrink-0 rounded-md ring-1 ring-white/10" :style="{ background: s.thumb }"></span>
             <span class="min-w-0 flex-1">
-              <span class="block truncate text-sm font-medium" :class="i === active ? 'text-white' : 'text-white/75'">{{ s.title }}</span>
-              <span class="block font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">{{ s.kind }} · {{ s.seconds }} s</span>
+              <span class="block truncate text-sm font-medium" :class="i === active ? 'text-white' : 'text-white/75'">{{ titleOf(s) }}</span>
+              <span class="block font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">{{ t(`signage.kinds.${s.kind}`) }} · {{ s.seconds }} s</span>
             </span>
             <span
               v-if="i === active"
@@ -88,11 +88,13 @@
 
 <script setup>
 import { onMounted, onUnmounted, ref } from "vue";
+import { locale, t } from "@/i18n";
 
 // Contenidos ficticios (marcas inventadas), dibujados en canvas.
 const slides = [
   {
     title: "Café Aurora · Combo desayuno",
+    titleEn: "Café Aurora · Breakfast combo",
     kind: "Promo",
     seconds: 5,
     thumb: "linear-gradient(135deg,#f59e0b,#b45309)",
@@ -111,6 +113,7 @@ const slides = [
   },
   {
     title: "El Puente · Semana del hogar",
+    titleEn: "El Puente · Home week",
     kind: "Promo",
     seconds: 5,
     thumb: "linear-gradient(135deg,#2563eb,#1e3a8a)",
@@ -125,6 +128,7 @@ const slides = [
   },
   {
     title: "Clínica Vida · Vacunación",
+    titleEn: "Clínica Vida · Vaccination",
     kind: "Aviso",
     seconds: 6,
     thumb: "linear-gradient(135deg,#14b8a6,#0f766e)",
@@ -141,6 +145,7 @@ const slides = [
   },
   {
     title: "Turnos · Caja 3",
+    titleEn: "Queue · Desk 3",
     kind: "Turnos",
     seconds: 4,
     thumb: "linear-gradient(135deg,#0ea5e9,#0c4a6e)",
@@ -157,6 +162,10 @@ const slides = [
     },
   },
 ];
+
+// El contenido dibujado en la pantalla queda en español (locales
+// ficticios de Honduras); en inglés solo se traduce el nombre en la lista.
+const titleOf = (s) => (locale.value === "en" ? s.titleEn : s.title);
 
 // ── Helpers de dibujo ──
 const FONT = "Inter, system-ui, sans-serif";

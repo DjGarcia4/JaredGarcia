@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { projects } from "@/data/projects";
+import { computed } from "vue";
+import { getProjects } from "@/data/localized";
 
+// Reactivo al idioma: getProjects() lee el locale actual.
 export const useProjects = defineStore("projects", () => {
-  const projectsCollection = ref(
-    [...projects].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  const projectsCollection = computed(() =>
+    [...getProjects()].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   );
 
   return { projectsCollection };

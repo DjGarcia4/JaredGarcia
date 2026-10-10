@@ -32,7 +32,7 @@
               <button
                 type="button"
                 @click="modal.handleModal(false)"
-                aria-label="Cerrar"
+                :aria-label="t('common.close')"
                 class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-white/50 transition-all hover:border-red-500/40 hover:text-red-400"
               >
                 <font-awesome-icon :icon="['fas', 'xmark']" />
@@ -48,6 +48,7 @@
 </template>
 
 <script setup>
+import { t } from "@/i18n";
 import {
   Dialog,
   DialogPanel,

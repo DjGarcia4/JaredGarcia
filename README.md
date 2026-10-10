@@ -61,16 +61,32 @@ las metas Open Graph, el canonical y el `sitemap.xml` que genera el build.
 npm run build
 ```
 
-El resultado queda en `dist/`.
+El resultado queda en `dist/`. El build tiene tres pasos:
+
+1. `vite build`: el sitio para el navegador.
+2. `vite build --ssr src/entry-server.js`: la misma app para Node, en
+   `dist-ssr/` (no se publica).
+3. `node scripts/prerender.js`: renderiza cada ruta (las del sitemap) a
+   HTML con su contenido y sus metas (título, descripción, Open Graph,
+   canonical, JSON-LD) y la escribe como `dist/<ruta>.html`. En el
+   navegador, Vue hidrata ese HTML en vez de armar la página de cero.
+
+Para que una página se pueda prerenderizar, su código no puede tocar
+`window` ni `document` fuera de `onMounted` o de handlers de eventos.
+
+El HTML sale en español. Quien entra en inglés no ve ese español: un
+script en el `<head>` oculta el contenido hasta que la app monta en
+inglés.
 
 ## Deploy (Netlify)
 
 El proyecto se publica en Netlify. Build command `npm run build`, publish
 directory `dist/`.
 
-El archivo `public/_redirects` redirige todas las rutas a `index.html` con
-código 200, necesario para que funcione el ruteo de la SPA al recargar o
-entrar directo a una URL interna.
+Netlify sirve cada ruta prerenderizada desde su `.html` (`/blog` →
+`blog.html`). Lo que no existe cae en `app.html`, la SPA sin prerender, por
+la regla de `_redirects` (en el build, `scripts/prerender.js` cambia el
+`index.html` de `public/_redirects` por `app.html`).
 
 ## Editar contenido
 

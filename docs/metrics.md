@@ -22,7 +22,42 @@ en `<main>` quedó en **0.001**.
 
 JS inicial: 695 KB gzip en un archivo → ~159 KB gzip en 4 chunks cacheables.
 
-Pendiente: el LCP mobile (3.2–3.8 s con throttling) lo frenan sobre todo las
-fuentes de Google Fonts (CSS que bloquea el render) y que el contenido es
-client-side. Siguientes pasos posibles: self-host + preload de las fuentes,
-o prerender de las rutas.
+## Fase 5: prerender y fuentes propias
+
+Cada ruta se prerenderiza a HTML en el build (Vue SSR) y se hidrata en el
+navegador. Las fuentes se sirven desde el sitio (`@fontsource`) en vez de
+Google Fonts.
+
+Lighthouse 12.2.1, mobile, con throttling aplicado (`--throttling-method=devtools`,
+4G lento + CPU 4×) y no simulado: la simulación estima el FCP sumando todo lo
+que se descarga antes del primer paint, JS incluido, aunque no bloquee el
+render. Por eso estos números no se comparan con las fases anteriores: la
+columna "antes" es `main` medido igual. Mediana de 3 corridas.
+
+Navegador en español (el HTML prerenderizado se ve en el primer paint):
+
+| | Perf. antes | Perf. después | LCP antes | LCP después | CLS antes | CLS después |
+|---|---|---|---|---|---|---|
+| Home | 61 | 71 | 4.2 s | 2.1 s | 0 | 0 |
+| `/projects` | 59 | 73 | 5.0 s | 2.8 s | 0 | 0 |
+| Artículo del blog | 80 | 80 | 4.0 s | 2.0 s | 0.049 | 0 |
+
+Navegador en inglés (el contenido espera a que la app monte en inglés):
+
+| | Perf. antes | Perf. después | LCP antes | LCP después |
+|---|---|---|---|---|
+| Home | 52 | 71 | 4.7 s | 4.5 s |
+| Artículo del blog | 72 | 83 | 3.9 s | 3.4 s |
+
+El TBT en español sube (home: ~530 ms → ~1.4 s) porque ahora hay contenido
+pintado antes de que corra el JS, y el TBT solo cuenta lo que bloquea
+después del primer paint. El trabajo total del hilo principal bajó (home:
+4.3 s → 3.8 s; `/projects`: 2.8 s → 2.4 s).
+
+Pendiente:
+
+- La hidratación de la home es una sola tarea de ~1.4 s con CPU 4×. Con
+  Vue 3.5 se podría hidratar de forma diferida lo que está debajo del
+  primer pantallazo (`hydrateOnVisible`).
+- El inglés no se beneficia del prerender: necesita URLs propias
+  (`/en/...`) prerenderizadas en inglés.

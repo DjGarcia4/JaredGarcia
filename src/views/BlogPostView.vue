@@ -151,12 +151,11 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, onServerPrefetch, onUnmounted, ref, useSSRContext, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 
 import { formatDate, getPost, getPosts, loadBody } from "@/lib/blog";
 import { getProjects } from "@/data/localized";
-import { profile } from "@/data/profile";
 import { t } from "@/i18n";
 import { ScrollTrigger } from "@/lib/gsap";
 
@@ -165,8 +164,16 @@ const router = useRouter();
 
 const post = computed(() => getPost(route.params.slug));
 
-const html = ref("");
-const toc = ref([]);
+// El prerender deja el cuerpo ya renderizado en el HTML y lo serializa en
+// window.__SSR_STATE__: al hidratar se arranca con ese mismo contenido, sin
+// volver a descargarlo ni dejar el artículo vacío un instante.
+const bodyKey = (p) => p && `${p.lang}/${p.slug}`;
+const prerendered = (key) =>
+  (!import.meta.env.SSR && key && window.__SSR_STATE__?.blog?.[key]) || null;
+const initial = prerendered(bodyKey(post.value));
+
+const html = ref(initial?.html ?? "");
+const toc = ref(initial?.toc ?? []);
 const content = ref(null);
 const activeId = ref(null);
 
@@ -180,16 +187,31 @@ const relatedProjects = computed(() =>
 );
 
 // ── Cuerpo: se descarga al entrar y al cambiar de idioma ─────────
+if (import.meta.env.SSR) {
+  const ssrContext = useSSRContext();
+  onServerPrefetch(async () => {
+    if (!post.value) return;
+    const body = await loadBody(post.value);
+    html.value = body.html;
+    toc.value = body.toc;
+    ssrContext.state.blog = { ...ssrContext.state.blog, [bodyKey(post.value)]: body };
+  });
+}
+
 let loadToken = 0;
 watch(
-  () => post.value && `${post.value.lang}/${post.value.slug}`,
-  async () => {
+  () => bodyKey(post.value),
+  async (key) => {
+    if (import.meta.env.SSR) return;
     const current = post.value;
     const token = ++loadToken;
-    html.value = "";
-    toc.value = [];
+    const ready = prerendered(key);
+    if (!ready) {
+      html.value = "";
+      toc.value = [];
+    }
     if (!current) return;
-    const body = await loadBody(current);
+    const body = ready ?? (await loadBody(current));
     if (token !== loadToken) return;
     html.value = body.html;
     toc.value = body.toc;
@@ -261,39 +283,9 @@ const onContentClick = async (e) => {
   }
 };
 
-// ── Datos estructurados (BlogPosting) ────────────────────────────
-const LD_ID = "ld-blog-post";
-watch(
-  post,
-  (p) => {
-    document.getElementById(LD_ID)?.remove();
-    if (!p) return;
-    const base = import.meta.env.VITE_SITE_URL || window.location.origin;
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.id = LD_ID;
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: p.title,
-      description: p.description,
-      datePublished: p.date,
-      dateModified: p.updated || p.date,
-      inLanguage: p.lang,
-      keywords: p.tags.join(", "),
-      url: `${base}/blog/${p.slug}`,
-      ...(p.cover ? { image: new URL(p.cover, base).href } : {}),
-      author: { "@type": "Person", name: profile.name, url: base },
-    });
-    document.head.appendChild(script);
-  },
-  { immediate: true }
-);
-
 onUnmounted(() => {
   observer?.disconnect();
   copyTimers.forEach(clearTimeout);
-  document.getElementById(LD_ID)?.remove();
 });
 </script>
 

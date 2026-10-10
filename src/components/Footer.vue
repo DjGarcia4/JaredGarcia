@@ -198,7 +198,9 @@ const timeFormatter = new Intl.DateTimeFormat("es-HN", {
   hour12: false,
 });
 
-const localTime = ref(timeFormatter.format(new Date()));
+// Arranca vacío y se llena al montar: la hora del build (prerender) no
+// sirve y no coincidiría al hidratar.
+const localTime = ref("--:--");
 let clockId;
 
 const updateClock = () => {

@@ -1,27 +1,41 @@
 import "./assets/main.css";
 import "vue-sonner/style.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
-import { createApp } from "vue";
-import { createPinia } from "pinia";
+// Fuentes servidas desde el propio sitio (solo el subset latino y los pesos
+// que se usan): sin el CSS de Google Fonts que bloqueaba el render.
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+import "@fontsource/space-grotesk/latin-500.css";
+import "@fontsource/space-grotesk/latin-600.css";
+import "@fontsource/space-grotesk/latin-700.css";
+import "@fontsource/space-mono/latin-400.css";
+import "@fontsource/space-mono/latin-700.css";
 
-import App from "./App.vue";
-import router from "./router";
-import { initialLocale, setLocale } from "./i18n";
+import { createWebHistory } from "vue-router";
 
-// Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import "./lib/icons";
+import { createVueApp } from "./app";
+import { initialLocale, locale, setLocale } from "./i18n";
+import { applyRouteMeta } from "./lib/seo";
+import { settleVisibleIntros } from "./lib/gsap";
 
-import { glow } from "./directives/glow";
+const root = document.getElementById("app");
 
-const app = createApp(App);
+// Las páginas del build vienen prerenderizadas en español. Si el idioma
+// es otro, no se hidrata: se monta de cero (el contenido estaba oculto, ver
+// el script de idioma que agrega scripts/prerender.js).
+setLocale(initialLocale, { persist: false }).finally(async () => {
+  const hydrate = root.hasAttribute("data-prerendered") && locale.value === "es";
+  const { app, router } = createVueApp({
+    ssr: hydrate,
+    history: createWebHistory(import.meta.env.BASE_URL),
+  });
+  router.afterEach((to) => applyRouteMeta(to));
 
-app.component("FontAwesomeIcon", FontAwesomeIcon);
-app.directive("glow", glow);
-
-app.use(createPinia());
-app.use(router);
-
-// Monta cuando el idioma inicial está listo (si es inglés, su chunk se
-// descarga primero; en español no hay espera).
-setLocale(initialLocale, { persist: false }).finally(() => app.mount("#app"));
+  await router.isReady();
+  app.mount("#app");
+  if (hydrate) settleVisibleIntros();
+  document.documentElement.classList.remove("i18n-pending");
+});

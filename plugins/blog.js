@@ -55,7 +55,7 @@ const readingTime = (body) => {
   return Math.max(1, Math.round(words / 220));
 };
 
-export default function blog({ dir = "src/content/blog", siteUrl = "", siteName = "" } = {}) {
+export default function blog({ dir = "src/content/blog", siteUrl = "", siteName = "", emit = true } = {}) {
   let root = process.cwd();
   let isBuild = false;
   let highlighter;
@@ -256,7 +256,7 @@ ${items}
       server.ws.send({ type: "full-reload" });
     },
     generateBundle() {
-      if (!siteUrl) return;
+      if (!emit || !siteUrl) return;
       const posts = allPosts();
       for (const lang of LANGS) {
         this.emitFile({

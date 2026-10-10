@@ -1,7 +1,12 @@
 // Íconos de Font Awesome usados en el sitio. Importarlos uno por uno
 // (en vez de library.add(fas, fab)) deja fuera del bundle los ~2.000
 // que no se usan. Si agregás un ícono nuevo, sumalo acá.
-import { library } from "@fortawesome/fontawesome-svg-core";
+import { config, library } from "@fortawesome/fontawesome-svg-core";
+
+// El CSS de los íconos viene en el bundle (main.js), no inyectado desde JS:
+// en el HTML prerenderizado, sin él, los íconos se pintan gigantes hasta que
+// carga el JS y la página salta.
+config.autoAddCss = false;
 import {
   faArrowDown,
   faArrowLeft,

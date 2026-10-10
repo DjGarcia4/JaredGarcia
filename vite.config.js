@@ -50,29 +50,44 @@ const seoFiles = (siteUrl, blogPlugin) => ({
 });
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, isSsrBuild }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const blogPlugin = blog({ siteUrl: env.VITE_SITE_URL, siteName: "Jared Garcia" });
+  // En el build SSR (el del prerender) no se emiten RSS ni sitemap: esos
+  // archivos salen solo del build del cliente.
+  const blogPlugin = blog({ siteUrl: env.VITE_SITE_URL, siteName: "Jared Garcia", emit: !isSsrBuild });
   return {
-    plugins: [blogPlugin, vue(), seoFiles(env.VITE_SITE_URL, blogPlugin)],
+    plugins: [blogPlugin, vue(), !isSsrBuild && seoFiles(env.VITE_SITE_URL, blogPlugin)],
+    ssr: {
+      // gsap/ScrollTrigger se publica como ESM sin "type": "module" y Node no
+      // lo puede importar suelto. Font Awesome, si queda externo, se carga dos
+      // veces (ESM y CJS) y los íconos registrados no se encuentran. Ambos
+      // van dentro del bundle SSR.
+      noExternal: ["gsap", /^@fortawesome\//],
+    },
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
     build: {
+      // Qué JS y CSS usa cada módulo: el prerender lo lee para precargar en
+      // el HTML justo lo que necesita cada ruta.
+      ssrManifest: !isSsrBuild,
       rollupOptions: {
         output: {
           // Vendors en chunks propios: cambian poco, así que quedan en caché
-          // entre deploys aunque cambie el código del sitio.
-          manualChunks: {
-            "vendor-vue": ["vue", "vue-router", "pinia"],
-            "vendor-gsap": ["gsap"],
-            "vendor-icons": [
-              "@fortawesome/fontawesome-svg-core",
-              "@fortawesome/vue-fontawesome",
-            ],
-          },
+          // entre deploys aunque cambie el código del sitio. (En el build SSR
+          // estos paquetes son externos.)
+          manualChunks: isSsrBuild
+            ? undefined
+            : {
+                "vendor-vue": ["vue", "vue-router", "pinia"],
+                "vendor-gsap": ["gsap"],
+                "vendor-icons": [
+                  "@fortawesome/fontawesome-svg-core",
+                  "@fortawesome/vue-fontawesome",
+                ],
+              },
         },
       },
     },

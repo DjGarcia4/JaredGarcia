@@ -6,13 +6,26 @@
 
 ---
 
+## Estado (actualizado 2026-10-09, rama `redesign/v2`)
+
+| Fase | Estado |
+|---|---|
+| 0 · Arranque | ✅ Rama, limpieza, ESLint, línea base de Lighthouse (`docs/metrics.md`) |
+| 1 · Fundaciones | ✅ Bundle 695 → ~160 KB gzip, accesibilidad 100, formulario propio, SEO/OG/sitemap, bug de pantalla en blanco, splash eliminado |
+| 2 · Reposicionamiento | ✅ Hero de 1 pantalla con 3D en CSS, home nueva (casos · proceso · sobre mí · stack), `/projects` con casos y práctica separados, microcopy en español · ⏳ **i18n ES/EN pendiente** (conviene hacerlo con los casos ya validados) |
+| 3 · Casos | ✅ Plantilla (TL;DR, decisiones, resultado, ingeniería plegada) + borradores de RapiSites, Wink App, Wink Site y SwiftFlow · ⏳ **Validar los borradores** (`src/data/cases.js`, `draft: true`) · HMC sin caso todavía |
+| 4 · Lo llamativo | ✅ Hero "interfaz explotada" (CSS 3D), demo 3D de signage (three.js, carga diferida), video del scrollytelling de Wink, orbs de IA, paleta ⌘K, `/design-system` · ⏸️ View Transitions descartadas (chocan con la transición de rutas y GSAP) · ⏳ `/lab` y datos en vivo |
+| 5 · Lanzamiento | ⏳ Foto y bio final, testimonios, `VITE_SITE_URL` + dominio, QA en dispositivos reales con lector de pantalla, meta-caso "Este portafolio", merge a `main` |
+
+---
+
 ## Decisiones (las tomé yo; si alguna no te cierra, la cambiamos)
 
 | Tema | Decisión | Por qué |
 |---|---|---|
 | **Posicionamiento** | **"Frontend Developer & UI/UX Designer"**, con las dos mitades al mismo peso visual. Tagline: *"Diseño la experiencia y la construyo hasta producción."* | Es lo que sos y es raro de encontrar. Que el dev vaya primero está bien siempre que el diseño se demuestre con casos, no solo con la etiqueta. |
 | **3D: ¿sí o no?** | **Sí, pero con 2 piezas con sentido, no 3D decorativo en todos lados** (ver Fase 4). | El 3D que no cuenta nada es ruido y peso. El que muestra tu trabajo (tu producto real de digital signage, o una interfaz "explotada" en capas diseño → código) es memorable y relevante. |
-| **Librería 3D** | **TresJS** (Three.js declarativo para Vue 3) + `@tresjs/cientos`, **cargado de forma diferida** (después del primer render, solo si el dispositivo lo aguanta). | Encaja con tu stack Vue, y que lo hayas hecho en Vue suma puntos como dev. Usarlo con carga diferida evita cargar ~150 KB gzip de Three en el primer paint. |
+| **Librería 3D** | ~~TresJS~~ → **CSS 3D** para el hero y **three.js directo** (con carga diferida) para la demo de signage. | El hero en CSS 3D no pesa nada ni frena el LCP. TresJS obligaba a tocar el compilador de Vue para una sola escena; three.js directo carga 117 KB gzip solo en el caso que lo usa. |
 | **Presupuesto de performance** | JS inicial **< 200 KB gzip** (hoy: 695 KB), chunk 3D **< 250 KB gzip** con carga diferida, **LCP < 2.5 s** en 4G, Lighthouse **≥ 90** en Performance y **100** en Accesibilidad. | Si el sitio es lento, lo llamativo se paga caro. El número de Lighthouse va a ir en el caso de estudio del propio portafolio. |
 | **Motion** | GSAP se queda, pero cada animación se ejecuta **una sola vez**. El motion fuerte va en el hero y en la transición card → caso. Se acaba el scroll-jacking. | M6 del review. |
 | **Idioma** | **Español + inglés** (`vue-i18n`), con selector ES/EN en el header. | Te abre puertas a trabajo remoto en EE. UU. y Europa. Para un candidato de Honduras es probablemente lo de mayor retorno después de los casos. |

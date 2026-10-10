@@ -1,6 +1,11 @@
 # Portafolio — Jared Garcia
 
-Portafolio personal construido con Vue 3 + Vite + Tailwind CSS.
+Portafolio personal de Jared Garcia, Frontend Developer & UI/UX Designer.
+Vue 3 + Vite + Tailwind CSS, con GSAP para motion y three.js (con carga
+diferida) para la demo 3D del caso Wink App.
+
+- Sistema de diseño vivo en `/design-system`.
+- Métricas de Lighthouse antes/después en `docs/metrics.md`.
 
 El contenido (proyectos, certificados, reviews, skills) vive de forma local en
 `src/data/`. No requiere base de datos ni backend.
@@ -19,7 +24,13 @@ npm install
 
 ```sh
 npm run dev
+npm run lint
 ```
+
+### Variables de entorno
+
+`.env` → `VITE_SITE_URL`: URL pública del sitio, sin `/` final. Se usa en
+las metas Open Graph, el canonical y el `sitemap.xml` que genera el build.
 
 ## Build de producción
 
@@ -42,8 +53,14 @@ entrar directo a una URL interna.
 
 Toda la información editable está en `src/data/`:
 
-- `profile.js` — nombre, roles, bio, contacto
-- `projects.js` — proyectos del portafolio
+- `profile.js` — nombre, roles, contacto, año de inicio (`careerStart`)
+- `projects.js` — proyectos (los de `status: "Práctica"` se listan aparte)
+- `cases.js` — casos de estudio (TL;DR, decisiones, resultado)
+- `stack.js` — stack agrupado por disciplina
+- `experience.js` — rol actual
 - `certificates.js` — certificados
-- `reviews.js` — testimonios
-- `skills.js` — stack de tecnologías
+- `reviews.js` — testimonios (pendientes; el componente no está en la home)
+- `skills.js` — íconos y nombres de tecnologías
+
+Las capturas de proyectos tienen variantes `-800.webp` y `-1600.webp`
+(para `srcset`); el original se usa en el lightbox.

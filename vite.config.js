@@ -19,6 +19,7 @@ const seoFiles = (siteUrl) => ({
       const paths = [
         "/",
         "/projects",
+        "/design-system",
         ...projects.map((p) => `/project/${p.slug}`),
         ...certificates.map((c) => `/certificate/${c.slug}`),
       ];

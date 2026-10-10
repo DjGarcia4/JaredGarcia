@@ -112,6 +112,7 @@ const items = [
   section("Sobre mí", "#about", "hashtag", "bio formación experiencia"),
   section("Stack", "#stack", "hashtag", "tecnologías skills herramientas"),
   section("Contacto", "#contact", "paper-plane", "email whatsapp hablemos"),
+  { group: "Secciones", label: "Sistema de diseño", keywords: "tokens design system componentes", icon: ["fas", "layer-group"], run: () => router.push({ name: "design-system" }) },
   { group: "Secciones", label: "Todos los proyectos", icon: ["fas", "folder-open"], run: () => router.push({ name: "projects" }) },
   {
     group: "Acciones", label: "Copiar email", hint: profile.email, icon: ["fas", "copy"],

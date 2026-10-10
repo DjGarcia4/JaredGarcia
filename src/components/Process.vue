@@ -109,6 +109,7 @@ const steps = [
     title: "Sistemas, no pantallas sueltas",
     body: "Tokens de color, tipografía y espaciado reutilizables, y componentes con todos sus estados: vacío, carga, error, éxito.",
     proof: "este portafolio usa un solo set de tokens, con contraste AA en todo el texto.",
+    link: { label: "Ver el sistema →", to: { name: "design-system" } },
     visual: "tokens",
   },
   {

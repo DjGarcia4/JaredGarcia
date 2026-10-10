@@ -153,6 +153,7 @@ const navItems = [
   { label: "Sobre mí", to: { name: "home", hash: "#about" } },
   { label: "Stack", to: { name: "home", hash: "#stack" } },
   { label: "Proyectos", to: { name: "projects" } },
+  { label: "Sistema de diseño", to: { name: "design-system" } },
   { label: "Contacto", to: { name: "home", hash: "#contact" } },
 ];
 

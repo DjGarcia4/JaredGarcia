@@ -21,6 +21,11 @@ const router = createRouter({
       component: () => import("../views/ProjectDetailView.vue"),
     },
     {
+      path: "/design-system",
+      name: "design-system",
+      component: () => import("../views/DesignSystemView.vue"),
+    },
+    {
       path: "/certificate/:slug",
       name: "certificate",
       component: () =>

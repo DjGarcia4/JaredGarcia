@@ -19,16 +19,16 @@
             v-model="searchQuery"
             type="text"
             placeholder="type_here..."
-            class="w-full rounded-lg border border-white/10 bg-ink-900/60 py-2.5 pl-9 pr-3 font-mono text-[13px] text-white placeholder:text-white/30 transition-colors focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/30"
+            class="w-full rounded-lg border border-white/10 bg-ink-900/60 py-2.5 pl-9 pr-3 font-mono text-[13px] text-white placeholder:text-white/50 transition-colors focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/30"
           />
         </label>
       </div>
 
       <!-- Counter inline -->
-      <div class="filter-item mt-5 flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/45">
+      <div class="filter-item mt-5 flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/60">
         <span class="h-1.5 w-1.5 rounded-full bg-accent animate-glow-pulse"></span>
         <span class="text-accent-light">{{ String(filteredProjects.length).padStart(2, "0") }}</span>
-        <span class="text-white/30">/</span>
+        <span class="text-white/50">/</span>
         <span>{{ String(totalProjects).padStart(2, "0") }} results</span>
       </div>
 
@@ -38,7 +38,7 @@
       <div class="filter-item">
         <p class="mono-label mb-3 flex items-center justify-between">
           <span>/ category</span>
-          <span class="text-white/25">{{ String(categoriesWithCounts.length - 1).padStart(2, "0") }}</span>
+          <span class="text-white/50">{{ String(categoriesWithCounts.length - 1).padStart(2, "0") }}</span>
         </p>
         <ul class="space-y-0.5">
           <li v-for="cat in categoriesWithCounts" :key="cat.name">
@@ -63,7 +63,7 @@
               </span>
               <span
                 class="font-mono text-[10px] font-bold tabular-nums"
-                :class="activeCategory === cat.name ? 'text-accent-light' : 'text-white/30'"
+                :class="activeCategory === cat.name ? 'text-accent-light' : 'text-white/50'"
               >
                 {{ String(cat.count).padStart(2, "0") }}
               </span>
@@ -78,7 +78,7 @@
       <div v-if="techsWithCounts.length" class="filter-item">
         <p class="mono-label mb-3 flex items-center justify-between">
           <span>/ tech_stack</span>
-          <span class="text-white/25">{{ String(techsWithCounts.length).padStart(2, "0") }}</span>
+          <span class="text-white/50">{{ String(techsWithCounts.length).padStart(2, "0") }}</span>
         </p>
         <ul class="space-y-0.5">
           <li v-for="tech in techsWithCounts" :key="tech.name">
@@ -106,7 +106,7 @@
               </span>
               <span
                 class="font-mono text-[10px] font-bold tabular-nums"
-                :class="selectedTechs.includes(tech.name) ? 'text-accent-light' : 'text-white/30'"
+                :class="selectedTechs.includes(tech.name) ? 'text-accent-light' : 'text-white/50'"
               >
                 {{ String(tech.count).padStart(2, "0") }}
               </span>
@@ -137,7 +137,7 @@
             <span class="h-px w-6 bg-accent-light"></span>
             Destacados
           </p>
-          <span class="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/35">
+          <span class="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
             {{ String(featuredProjects.length).padStart(2, "0") }} pieces
           </span>
         </header>
@@ -156,7 +156,7 @@
             class="project-card project-card-hero group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-900/60 backdrop-blur-md transition-colors duration-300 hover:border-accent/40 sm:col-span-2"
           >
             <div class="flex items-center justify-between border-b border-white/[0.06] px-6 py-3.5">
-              <span class="flex items-center gap-3 font-mono text-[11px] font-bold tracking-[0.2em] text-white/40">
+              <span class="flex items-center gap-3 font-mono text-[11px] font-bold tracking-[0.2em] text-white/55">
                 <span class="text-accent">#01</span>
                 <span class="h-px w-6 bg-white/10"></span>
                 <span class="text-accent-light">★ flagship</span>
@@ -214,7 +214,7 @@
                   </span>
                   <span
                     v-if="(featuredProjects[0].techStack || []).length > 6"
-                    class="rounded-md border border-white/10 bg-ink-950/60 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/45"
+                    class="rounded-md border border-white/10 bg-ink-950/60 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/60"
                   >
                     +{{ featuredProjects[0].techStack.length - 6 }}
                   </span>
@@ -223,9 +223,9 @@
 
               <div class="flex flex-shrink-0 items-center gap-6 md:flex-col md:items-end md:gap-3">
                 <dl class="grid grid-cols-2 gap-x-6 gap-y-1 font-mono text-[11px] md:text-right">
-                  <dt class="text-white/35">YEAR</dt>
+                  <dt class="text-white/55">YEAR</dt>
                   <dd class="font-semibold text-white/80 tabular-nums">{{ featuredProjects[0].year }}</dd>
-                  <dt class="text-white/35">ROLE</dt>
+                  <dt class="text-white/55">ROLE</dt>
                   <dd class="truncate font-semibold text-white/80" :title="featuredProjects[0].role">
                     {{ shortRole(featuredProjects[0].role) }}
                   </dd>
@@ -252,7 +252,7 @@
             class="project-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-900/60 backdrop-blur-md transition-colors duration-300 hover:border-accent/40"
           >
             <div class="flex items-center justify-between border-b border-white/[0.06] px-5 py-3">
-              <span class="flex items-center gap-2.5 font-mono text-[11px] font-bold tracking-[0.2em] text-white/40">
+              <span class="flex items-center gap-2.5 font-mono text-[11px] font-bold tracking-[0.2em] text-white/55">
                 <span class="text-accent">#{{ String(i + 2).padStart(2, "0") }}</span>
                 <span class="text-accent-light">★</span>
               </span>
@@ -307,7 +307,7 @@
                 </span>
                 <span
                   v-if="(project.techStack || []).length > 4"
-                  class="rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/45"
+                  class="rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/60"
                 >
                   +{{ project.techStack.length - 4 }}
                 </span>
@@ -335,7 +335,7 @@
             <span class="h-px w-6 bg-accent-light"></span>
             {{ hasActiveFilters ? "Resultados" : "Todo el catálogo" }}
           </p>
-          <span class="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/35">
+          <span class="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55">
             {{ String(displayProjects.length).padStart(2, "0") }} {{ hasActiveFilters ? "matches" : "pieces" }}
           </span>
         </header>
@@ -354,7 +354,7 @@
             class="project-card group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-900/60 backdrop-blur-md transition-colors duration-300 hover:border-accent/40"
           >
             <div class="flex items-center justify-between border-b border-white/[0.06] px-5 py-3">
-              <span class="font-mono text-[11px] font-bold tracking-[0.2em] text-white/40">
+              <span class="font-mono text-[11px] font-bold tracking-[0.2em] text-white/55">
                 #{{ String(displayStartIndex + i).padStart(2, "0") }}
               </span>
               <span class="mono-label">{{ project.category }}</span>
@@ -415,7 +415,7 @@
                 </span>
                 <span
                   v-if="(project.techStack || []).length > 4"
-                  class="rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/45"
+                  class="rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/60"
                 >
                   +{{ project.techStack.length - 4 }}
                 </span>
@@ -423,7 +423,7 @@
 
               <div class="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 font-mono text-[11px]">
                 <span class="flex items-center gap-1.5">
-                  <span class="text-white/35">YEAR</span>
+                  <span class="text-white/55">YEAR</span>
                   <span class="font-semibold text-white/80 tabular-nums">{{ project.year }}</span>
                 </span>
                 <span

@@ -18,7 +18,7 @@
           class="ft-lead mt-6 max-w-lg font-display text-2xl font-semibold leading-tight text-white md:text-[28px]"
         >
           Gracias por llegar hasta acá.
-          <span class="text-white/45">
+          <span class="text-white/60">
             Quedó la puerta abierta para lo que sigue.
           </span>
         </p>
@@ -36,10 +36,10 @@
           <span class="inline-flex items-center gap-2 tabular-nums">
             <font-awesome-icon
               :icon="['fas', 'clock']"
-              class="text-[10px] text-white/40"
+              class="text-[10px] text-white/55"
             />
             {{ localTime }}
-            <span class="text-white/30">GMT-6</span>
+            <span class="text-white/50">GMT-6</span>
           </span>
         </div>
 
@@ -114,14 +114,14 @@
        ───────────────────────────────────────────────────────────── -->
     <div class="border-t border-white/[0.06]">
       <div
-        class="container-content flex flex-col gap-3 py-6 font-mono text-[11px] text-white/40 sm:flex-row sm:items-center sm:justify-between"
+        class="container-content flex flex-col gap-3 py-6 font-mono text-[11px] text-white/55 sm:flex-row sm:items-center sm:justify-between"
       >
         <p>
           © {{ year }} {{ profile.name }}
           <span class="mx-2 text-white/20">·</span>
         </p>
         <p class="inline-flex items-center gap-3 uppercase tracking-[0.18em]">
-          <span class="text-white/30">v1.0</span>
+          <span class="text-white/50">v1.0</span>
           <span class="h-3 w-px bg-white/15"></span>
           <span>Made in Honduras</span>
         </p>

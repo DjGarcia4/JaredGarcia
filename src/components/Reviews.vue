@@ -61,7 +61,7 @@
             <p class="truncate text-sm font-semibold text-white">
               {{ review.name }}
             </p>
-            <p class="truncate text-xs text-white/45">{{ review.role }}</p>
+            <p class="truncate text-xs text-white/60">{{ review.role }}</p>
           </div>
           <div class="ml-auto flex gap-0.5">
             <font-awesome-icon

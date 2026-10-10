@@ -94,21 +94,21 @@
             <span class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'calendar']"
-                class="text-[11px] text-white/35"
+                class="text-[11px] text-white/55"
               />
               {{ project.year }}
             </span>
             <span v-if="project.duration" class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'clock']"
-                class="text-[11px] text-white/35"
+                class="text-[11px] text-white/55"
               />
               {{ project.duration }}
             </span>
             <span class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'users']"
-                class="text-[11px] text-white/35"
+                class="text-[11px] text-white/55"
               />
               {{ project.team }}
             </span>

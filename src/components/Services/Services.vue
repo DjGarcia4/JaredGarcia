@@ -49,7 +49,7 @@
                 >
                   <span
                     class="font-mono text-[11px] font-bold tracking-[0.22em] transition-colors duration-300"
-                    :class="active === i ? 'text-accent' : 'text-white/35'"
+                    :class="active === i ? 'text-accent' : 'text-white/55'"
                   >
                     {{ String(i + 1).padStart(2, "0") }}
                   </span>
@@ -64,7 +64,7 @@
                     :class="
                       active === i
                         ? 'translate-x-0 text-accent-light opacity-100'
-                        : '-translate-x-1 text-white/30 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'
+                        : '-translate-x-1 text-white/50 opacity-0 group-hover:translate-x-0 group-hover:opacity-100'
                     "
                   />
                 </button>
@@ -84,7 +84,7 @@
 
             <!-- Progress hint (sutil) -->
             <div
-              class="pointer-events-none absolute right-5 top-5 flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/30 md:right-6 md:top-6"
+              class="pointer-events-none absolute right-5 top-5 flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/50 md:right-6 md:top-6"
             >
               <span class="hidden sm:inline">Scroll para avanzar</span>
               <font-awesome-icon
@@ -147,7 +147,7 @@
                 class="mt-8 flex flex-wrap items-center gap-3"
               >
                 <span
-                  class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                  class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
                 >
                   Stack
                 </span>

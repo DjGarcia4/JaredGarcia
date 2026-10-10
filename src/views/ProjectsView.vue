@@ -25,13 +25,13 @@
           class="header-item grid grid-cols-2 gap-x-8 gap-y-5 md:border-l md:border-white/[0.08] md:pl-10"
         >
           <div>
-            <dt class="mono-label text-white/40">/ total</dt>
+            <dt class="mono-label text-white/55">/ total</dt>
             <dd class="mt-1.5 font-display text-3xl font-bold text-white md:text-4xl">
               {{ String(stats.total).padStart(2, "0") }}
             </dd>
           </div>
           <div>
-            <dt class="mono-label text-white/40">/ destacados</dt>
+            <dt class="mono-label text-white/55">/ destacados</dt>
             <dd
               class="mt-1.5 font-display text-3xl font-bold text-accent-light md:text-4xl"
             >
@@ -39,7 +39,7 @@
             </dd>
           </div>
           <div>
-            <dt class="mono-label text-white/40">/ rango</dt>
+            <dt class="mono-label text-white/55">/ rango</dt>
             <dd
               class="mt-1.5 font-mono text-lg font-semibold tracking-tight text-white md:text-xl"
             >
@@ -47,7 +47,7 @@
             </dd>
           </div>
           <div>
-            <dt class="mono-label text-white/40">/ categorías</dt>
+            <dt class="mono-label text-white/55">/ categorías</dt>
             <dd
               class="mt-1.5 font-mono text-lg font-semibold tracking-tight text-white md:text-xl"
             >

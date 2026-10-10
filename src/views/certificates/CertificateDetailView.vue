@@ -24,14 +24,14 @@
         </button>
 
         <p
-          class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/35 md:flex md:items-center md:gap-3"
+          class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55 md:flex md:items-center md:gap-3"
         >
           <span>Certificado</span>
           <span class="h-px w-6 bg-white/15"></span>
           <span class="text-white/70">
             {{ String(currentNumber).padStart(2, "0") }}
           </span>
-          <span class="text-white/35">/</span>
+          <span class="text-white/55">/</span>
           <span>{{ String(totalCount).padStart(2, "0") }}</span>
         </p>
       </div>
@@ -56,7 +56,7 @@
           <dl class="mt-8 space-y-6">
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Emitido por
               </dt>
@@ -73,7 +73,7 @@
 
             <div v-if="certificate.status" class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Estado
               </dt>
@@ -97,7 +97,7 @@
 
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Áreas cubiertas
               </dt>
@@ -113,7 +113,7 @@
 
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Formato
               </dt>
@@ -164,7 +164,7 @@
             <span class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'graduation-cap']"
-                class="text-xs text-white/35"
+                class="text-xs text-white/55"
               />
               {{ certificate.issuer }}
             </span>
@@ -172,7 +172,7 @@
             <span class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'list-check']"
-                class="text-xs text-white/35"
+                class="text-xs text-white/55"
               />
               {{ certificate.topics.length }} temas cubiertos
             </span>
@@ -214,7 +214,7 @@
                 Stack del recorrido
               </p>
               <span
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/35"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ certificate.topics.length }} items
               </span>
@@ -304,7 +304,7 @@
               class="nav-link group flex flex-col gap-1.5 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.04]"
             >
               <p
-                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 <font-awesome-icon
                   :icon="['fas', 'arrow-left']"
@@ -326,7 +326,7 @@
               class="nav-link group flex flex-col gap-1.5 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.04] sm:items-end sm:text-right"
             >
               <p
-                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Siguiente
                 <font-awesome-icon

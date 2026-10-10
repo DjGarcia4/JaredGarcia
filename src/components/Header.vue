@@ -122,7 +122,7 @@
             <span>{{ item.label }}</span>
             <font-awesome-icon
               :icon="['fas', 'arrow-right']"
-              class="text-[10px] text-white/30"
+              class="text-[10px] text-white/50"
             />
           </RouterLink>
 

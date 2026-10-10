@@ -44,7 +44,7 @@
     >
       <!-- Edition strip -->
       <div
-        class="act1-item flex w-full items-center gap-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/40"
+        class="act1-item flex w-full items-center gap-4 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55"
       >
         <span class="text-accent">/</span>
         <span>edition_01 · 2026</span>
@@ -54,7 +54,7 @@
 
       <!-- Greeting -->
       <p
-        class="act1-item mt-10 font-mono text-sm uppercase tracking-[0.3em] text-white/45 md:mt-14"
+        class="act1-item mt-10 font-mono text-sm uppercase tracking-[0.3em] text-white/60 md:mt-14"
       >
         hola,&nbsp;soy
       </p>
@@ -72,7 +72,7 @@
       >
         Frontend Developer
         <br />
-        <span class="text-white/45">& UX/UI Designer</span>
+        <span class="text-white/60">& UX/UI Designer</span>
       </p>
 
       <!-- Location detail -->
@@ -87,7 +87,7 @@
 
       <!-- Scroll hint -->
       <div
-        class="act1-item pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/35 md:bottom-10"
+        class="act1-item pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/55 md:bottom-10"
       >
         <span>scroll</span>
         <span
@@ -128,7 +128,7 @@
 
       <!-- Attribution -->
       <p
-        class="act2-item mt-10 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.28em] text-white/45 md:mt-12"
+        class="act2-item mt-10 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.28em] text-white/60 md:mt-12"
       >
         <span class="h-px w-8 bg-white/20"></span>
         <span>{{ profile.name }}</span>
@@ -167,7 +167,7 @@
           >
             {{ stat.label }}
           </dt>
-          <p class="mt-2 font-sans text-sm leading-relaxed text-white/40">
+          <p class="mt-2 font-sans text-sm leading-relaxed text-white/55">
             {{ stat.detail }}
           </p>
         </div>

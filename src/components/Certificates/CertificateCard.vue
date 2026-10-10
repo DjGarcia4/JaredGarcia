@@ -57,7 +57,7 @@
       </span>
       <span
         v-if="certificate.topics && certificate.topics.length > 4"
-        class="chip text-white/45"
+        class="chip text-white/60"
       >
         +{{ certificate.topics.length - 4 }}
       </span>

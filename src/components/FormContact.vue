@@ -24,7 +24,7 @@
           <font-awesome-icon :icon="['fas', 'envelope']" />
         </span>
         <span class="min-w-0">
-          <span class="block text-xs uppercase tracking-wider text-white/40">
+          <span class="block text-xs uppercase tracking-wider text-white/55">
             Email
           </span>
           <span class="block truncate text-sm font-medium text-white">
@@ -33,7 +33,7 @@
         </span>
         <font-awesome-icon
           :icon="['fas', copied ? 'check' : 'copy']"
-          class="ml-auto shrink-0 text-white/40"
+          class="ml-auto shrink-0 text-white/55"
         />
       </button>
 
@@ -96,7 +96,7 @@
           />
         </a>
         <div class="min-w-0">
-          <span class="block text-xs uppercase tracking-wider text-white/40">
+          <span class="block text-xs uppercase tracking-wider text-white/55">
             WhatsApp
           </span>
           <p class="mt-1 text-sm leading-relaxed text-white/60">

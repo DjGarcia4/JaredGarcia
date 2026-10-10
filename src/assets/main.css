@@ -92,7 +92,7 @@
 
   .field {
     @apply w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white
-      transition-colors placeholder:text-white/35
+      transition-colors placeholder:text-white/50
       focus:border-accent/50 focus:outline-none focus:ring-1 focus:ring-accent/40;
   }
 

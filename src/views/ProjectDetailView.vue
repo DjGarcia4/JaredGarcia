@@ -24,14 +24,14 @@
         </button>
 
         <p
-          class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/35 md:flex md:items-center md:gap-3"
+          class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55 md:flex md:items-center md:gap-3"
         >
           <span>Proyecto</span>
           <span class="h-px w-6 bg-white/15"></span>
           <span class="text-white/70">
             {{ String(currentNumber).padStart(2, "0") }}
           </span>
-          <span class="text-white/35">/</span>
+          <span class="text-white/55">/</span>
           <span>{{ String(totalCount).padStart(2, "0") }}</span>
         </p>
       </div>
@@ -56,7 +56,7 @@
           <dl class="mt-8 space-y-6">
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Cliente
               </dt>
@@ -73,14 +73,14 @@
 
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Rol
               </dt>
               <dd class="mt-2 flex items-center gap-2.5 text-white/85">
                 <font-awesome-icon
                   :icon="['fas', 'user-gear']"
-                  class="text-sm text-white/40"
+                  class="text-sm text-white/55"
                 />
                 <span class="text-sm">{{ project.role }}</span>
               </dd>
@@ -88,7 +88,7 @@
 
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Año
               </dt>
@@ -99,7 +99,7 @@
 
             <div v-if="project.status" class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Estado
               </dt>
@@ -123,14 +123,14 @@
 
             <div v-if="project.duration" class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Duración
               </dt>
               <dd class="mt-2 flex items-center gap-2.5 text-white/85">
                 <font-awesome-icon
                   :icon="['fas', 'clock']"
-                  class="text-sm text-white/40"
+                  class="text-sm text-white/55"
                 />
                 <span class="text-sm">{{ project.duration }}</span>
               </dd>
@@ -138,7 +138,7 @@
 
             <div class="meta-item">
               <dt
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Categoría
               </dt>
@@ -189,7 +189,7 @@
             <span class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'briefcase']"
-                class="text-xs text-white/35"
+                class="text-xs text-white/55"
               />
               {{ project.team || "Proyecto propio" }}
             </span>
@@ -197,7 +197,7 @@
             <span class="flex items-center gap-2">
               <font-awesome-icon
                 :icon="['fas', 'calendar']"
-                class="text-xs text-white/35"
+                class="text-xs text-white/55"
               />
               {{ project.year }}
             </span>
@@ -275,7 +275,7 @@
                   <span class="h-px w-6 bg-accent"></span>
                 </p>
                 <p
-                  class="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white/30 md:text-5xl"
+                  class="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white/50 md:text-5xl"
                 >
                   {{ project.title }}
                 </p>
@@ -312,7 +312,7 @@
                 Stack técnico
               </p>
               <span
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/35"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ project.techStack.length }}
                 {{ project.techStack.length === 1 ? "tech" : "techs" }}
@@ -357,7 +357,7 @@
                 Funcionalidades destacadas
               </p>
               <span
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/35"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ String(project.features.length).padStart(2, "0") }} items
               </span>
@@ -370,7 +370,7 @@
                 class="feature-card group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-accent/[0.03] md:p-6"
               >
                 <span
-                  class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/30 transition-colors duration-300 group-hover:text-accent-light"
+                  class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/50 transition-colors duration-300 group-hover:text-accent-light"
                 >
                   {{ String(i + 1).padStart(2, "0") }}
                 </span>
@@ -397,7 +397,7 @@
                 Pantallas
               </p>
               <span
-                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/35"
+                class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 {{ String(project.images.gallery.length).padStart(2, "0") }}
                 {{ project.images.gallery.length === 1 ? "vista" : "vistas" }}
@@ -508,7 +508,7 @@
               <span
                 v-for="tag in project.tags"
                 :key="tag"
-                class="tag-item font-mono text-sm text-white/40 transition-colors duration-300 hover:text-accent-light"
+                class="tag-item font-mono text-sm text-white/55 transition-colors duration-300 hover:text-accent-light"
               >
                 #{{ tag }}
               </span>
@@ -613,7 +613,7 @@
               class="nav-link group flex flex-col gap-1.5 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.04]"
             >
               <p
-                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 <font-awesome-icon
                   :icon="['fas', 'arrow-left']"
@@ -635,7 +635,7 @@
               class="nav-link group flex flex-col gap-1.5 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-accent/30 hover:bg-white/[0.04] sm:items-end sm:text-right"
             >
               <p
-                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/40"
+                class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-white/55"
               >
                 Siguiente
                 <font-awesome-icon
@@ -695,7 +695,7 @@
                   String(project.images.gallery.length).padStart(2, "0")
                 }}
               </span>
-              <span class="ml-3 hidden text-white/35 sm:inline">
+              <span class="ml-3 hidden text-white/55 sm:inline">
                 · {{ project.title }}
               </span>
             </p>

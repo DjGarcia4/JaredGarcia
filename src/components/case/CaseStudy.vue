@@ -26,6 +26,31 @@
               <WizardDemo v-if="d.media.type === 'orbs'" />
               <SignageDemo v-else-if="d.media.type === 'signage'" />
 
+              <!-- Línea de tiempo de iteraciones -->
+              <ol
+                v-else-if="d.media.type === 'steps'"
+                class="relative grid gap-4 md:grid-cols-4 md:gap-3"
+              >
+                <li
+                  v-for="(st, k) in d.media.steps"
+                  :key="st.title"
+                  class="relative rounded-2xl border p-5"
+                  :class="k === d.media.steps.length - 1 ? 'border-accent/40 bg-accent/[0.06]' : 'border-white/[0.08] bg-white/[0.02]'"
+                >
+                  <p class="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em]" :class="k === d.media.steps.length - 1 ? 'text-accent-light' : 'text-white/50'">
+                    <span class="grid h-5 w-5 place-items-center rounded-full border text-[10px]" :class="k === d.media.steps.length - 1 ? 'border-accent/60' : 'border-white/20'">{{ k + 1 }}</span>
+                    {{ k === d.media.steps.length - 1 ? "Hoy" : `Versión ${k + 1}` }}
+                  </p>
+                  <h4 class="mt-3 font-display text-lg font-bold leading-snug text-white">{{ st.title }}</h4>
+                  <p class="mt-2 text-sm leading-relaxed text-white/65">{{ st.body }}</p>
+                  <span
+                    v-if="k < d.media.steps.length - 1"
+                    class="absolute -right-2.5 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-ink-950 text-[9px] text-white/60 md:grid"
+                    aria-hidden="true"
+                  >→</span>
+                </li>
+              </ol>
+
               <div
                 v-else-if="d.media.type === 'video'"
                 class="overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-900"

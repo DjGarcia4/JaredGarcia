@@ -61,21 +61,36 @@ export const cases = {
   },
 
   "wink-app": {
-    draft: true,
+    // Validado con el autor (2026-10-09).
+    draft: false,
     tldr: {
-      problem: "Agencias que manejan pantallas de muchos clientes necesitan control total sin mezclar datos.",
-      role: "Head of Development: arquitectura, frontend y seguridad.",
-      outcome: "Panel en producción de una plataforma con más de 500 implementaciones en 3 países.",
+      problem: "Subir contenido, saber qué se está mostrando y si cada pantalla funciona, en cientos de pantallas a la vez.",
+      role: "Head of Development: UX del panel, arquitectura, frontend y seguridad.",
+      outcome: "+500 implementaciones, más de 20 clientes y el 99 % de las pantallas en línea.",
     },
     context:
-      "Wink es una plataforma de digital signage: pantallas en bancos, farmacias, restaurantes y centros comerciales que muestran contenido programado. Wink App es el panel desde donde se administra todo, y lo usan tanto el equipo de Wink como las agencias que revenden el servicio.",
+      "Wink es una plataforma de digital signage: pantallas en bancos, farmacias, restaurantes y centros comerciales que muestran contenido programado. Wink App es el panel desde donde se administra todo, y lo usamos todos: el equipo de Wink, las agencias y los propios clientes.",
     problem:
-      "El mismo panel tiene que servir a perfiles muy distintos —quien sube una imagen, quien arma la programación de una cadena entera, quien administra clientes— y cada agencia tiene que ver solo lo suyo. Además, una pantalla mal programada se nota en público: el margen de error es chico.",
+      "Los dolores eran siempre los mismos: subir y actualizar contenido, saber qué se estaba desplegando en cada pantalla y saber si las pantallas estaban funcionando. Con perfiles tan distintos usando el mismo panel —y cada agencia viendo solo lo suyo— no alcanzaba con que funcionara: tenía que ser fácil.",
     decisions: [
       {
-        title: "Tres verbos en la portada",
-        body: "La pantalla de inicio reduce el producto a lo que se hace todos los días: registrar una pantalla, cargar archivos, crear playlists y calendarizarlas. Lo avanzado está a un paso, no en la cara.",
+        title: "Un panel que crece desde los puntos de dolor",
+        body: "No partí de una lista de funciones: el panel se fue armando a medida que reconocía los dolores de quienes lo usan. Para cada pantalla pensé dos veces: como usuario, que tiene que ser fácil, y como técnico, qué información necesito administrar. El inicio resume el día a día en tres acciones: cargar archivos, crear playlists y calendarizarlas.",
         media: { type: "image", src: "/img/projects/wink-app/cover.webp", caption: "Inicio de Wink App." },
+      },
+      {
+        title: "Monitorear una pantalla: el flujo que más cambió",
+        body: "Es la parte que rediseñé más veces, y cada versión respondió a una pregunta nueva que traían los usuarios. Ya no alcanza con saber si una pantalla está prendida: hoy el panel permite diagnosticar un problema sin ir al local.",
+        media: {
+          type: "steps",
+          caption: "Cómo evolucionó el monitoreo de pantallas en Wink App.",
+          steps: [
+            { title: "¿Está en línea?", body: "Al principio solo veíamos si la pantalla estaba conectada." },
+            { title: "¿Qué está mostrando?", body: "Después, ver en tiempo real lo que la pantalla estaba reproduciendo." },
+            { title: "¿El equipo está sano?", body: "Luego, ver por dentro si el dispositivo funcionaba como debía." },
+            { title: "¿La red la deja hablar?", body: "Y ahora, detectar si la red bloquea algún puerto que el dispositivo necesita para comunicarse con los servidores de Wink." },
+          ],
+        },
       },
       {
         title: "Programar por pantalla, zona y grupo",
@@ -91,19 +106,21 @@ export const cases = {
       },
     ],
     outcome: [
-      { value: "+500", label: "implementaciones de Wink en 3 países", source: { label: "winkdigital.io", href: "https://winkdigital.io" } },
-      { value: "MFA + RBAC", label: "en un panel multi-agencia" },
-      { value: "Tiempo real", label: "sincronización con Firebase" },
+      { value: "+500", label: "implementaciones en 3 países", source: { label: "winkdigital.io", href: "https://winkdigital.io" } },
+      { value: "99 %", label: "de las pantallas en línea" },
+      { value: "+20", label: "clientes usando la plataforma" },
     ],
+    learnings:
+      "Un panel interno también es un producto. Escuchar los dolores de quienes lo usan todos los días —incluido yo— me enseñó más que cualquier lista de requisitos, y el monitoreo es la prueba: cada versión existió porque alguien necesitaba responder una pregunta nueva.",
   },
 
   "wink-site": {
-    // Decisión 1 validada con el autor; el resto sigue en borrador.
-    draft: true,
+    // Validado con el autor (2026-10-09).
+    draft: false,
     tldr: {
       problem: "Explicar un producto técnico (pantallas + software + hardware) a quien solo quiere vender más.",
       role: "Diseño y desarrollo completo del sitio, analítica y despliegue.",
-      outcome: "Sitio comercial en producción en winkdigital.io, con el embudo medido en GA4.",
+      outcome: "El scrollytelling se volvió herramienta de ventas: en las demos reemplaza a las diapositivas.",
     },
     context:
       "winkdigital.io es la puerta comercial de Wink. Lo visitan dueños de negocios, gerentes de marketing y equipos de TI de empresas como bancos y cadenas de farmacias, cada uno con una pregunta distinta.",
@@ -123,7 +140,7 @@ export const cases = {
       },
       {
         title: "Precios a la vista",
-        body: "Tres planes con precio publicado (desde US$12 al mes) y Enterprise a medida, con tabla comparativa. Mostrar el precio filtra mejor que un ‘contáctanos’ y deja las demos para quien ya está interesado.",
+        body: "Desde el primer día los precios están publicados: tres planes con precio (desde US$12 al mes) y Enterprise a medida, con tabla comparativa. Mostrar el precio filtra mejor que un ‘contáctanos’ y deja las demos para quien ya está interesado.",
       },
       {
         title: "Medir cada paso del embudo",
@@ -135,6 +152,8 @@ export const cases = {
       { value: "4 planes", label: "con tabla comparativa y precios públicos", source: { label: "winkdigital.io/pricing", href: "https://winkdigital.io/pricing" } },
       { value: "GA4", label: "con eventos propios en todo el embudo" },
     ],
+    learnings:
+      "Después del lanzamiento cambió cómo nos perciben: el recorrido deja claro que no es ‘cualquier producto’. Y en las demos es más fácil mostrar el scrollytelling que una diapositiva; los clientes quedan impresionados. Animar menos cosas, pero con un propósito, comunicó mucho más.",
   },
 
   swiftflow: {

@@ -69,9 +69,9 @@ export const projects = [
     headline:
       "Una red de pantallas — contenido, playlists y horarios — controlada desde un solo panel, con datos y permisos aislados por agencia.",
     highlights: [
-      "Programación de playlists por pantalla, zona y grupo",
+      "+500 implementaciones y 99 % de pantallas en línea",
+      "Monitoreo en tiempo real: contenido, dispositivo y red",
       "Multi-agencia con MFA (TOTP) y control por roles",
-      "Sincronización en tiempo real con Firebase",
     ],
     color: "#0EA5E9",
     slug: "wink-app",

@@ -12,13 +12,11 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import "./lib/icons";
 
 import { glow } from "./directives/glow";
-import { stagger } from "./directives/stagger";
 
 const app = createApp(App);
 
 app.component("FontAwesomeIcon", FontAwesomeIcon);
 app.directive("glow", glow);
-app.directive("stagger", stagger);
 
 app.use(createPinia());
 app.use(router);

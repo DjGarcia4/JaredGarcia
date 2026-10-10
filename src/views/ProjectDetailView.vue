@@ -26,9 +26,10 @@
         </button>
 
         <p
+          v-if="projectIndex >= 0"
           class="hidden font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-white/55 md:flex md:items-center md:gap-3"
         >
-          <span>Proyecto</span>
+          <span>Caso</span>
           <span class="h-px w-6 bg-white/15"></span>
           <span class="text-white/70">
             {{ String(currentNumber).padStart(2, "0") }}
@@ -43,7 +44,7 @@
         <!-- Sidebar (sticky en desktop) -->
         <aside class="meta-sidebar lg:sticky lg:top-28 lg:self-start">
           <!-- Número editorial gigante decorativo -->
-          <div class="proj-number-wrap overflow-hidden">
+          <div v-if="projectIndex >= 0" class="proj-number-wrap overflow-hidden">
             <p
               class="proj-number block font-display text-[88px] font-bold leading-[0.85] tracking-tight text-white/[0.06] md:text-[120px]"
             >
@@ -172,7 +173,7 @@
             class="proj-eyebrow flex items-center gap-3 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-accent-light"
           >
             <span class="h-px w-8 bg-accent"></span>
-            {{ project.category }} · Caso completo
+            {{ project.category }}
           </p>
 
           <!-- Title con clipPath reveal -->
@@ -238,51 +239,15 @@
 
           <!-- Cover image / fallback editorial -->
           <div
+            v-if="project.images?.cover"
             ref="coverWrap"
             class="proj-cover relative mt-12 overflow-hidden rounded-3xl border border-white/[0.08] md:mt-16"
           >
             <img fetchpriority="high"
-              v-if="project.images?.cover"
               :src="project.images.cover"
               :alt="project.title"
               class="aspect-video w-full object-cover"
             />
-            <div
-              v-else
-              class="relative flex aspect-video w-full items-center justify-center overflow-hidden bg-gradient-to-br from-ink-900 via-ink-850 to-ink-900"
-            >
-              <!-- Glow ambient para el fallback -->
-              <div
-                class="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-accent/[0.15] blur-3xl"
-              ></div>
-              <div
-                class="pointer-events-none absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-accent/[0.08] blur-3xl"
-              ></div>
-              <!-- Grid pattern decorativo -->
-              <div
-                class="pointer-events-none absolute inset-0 opacity-[0.04]"
-                style="
-                  background-image:
-                    linear-gradient(to right, white 1px, transparent 1px),
-                    linear-gradient(to bottom, white 1px, transparent 1px);
-                  background-size: 48px 48px;
-                "
-              ></div>
-              <div class="relative px-6 text-center">
-                <p
-                  class="flex items-center justify-center gap-3 font-mono text-[10px] font-bold uppercase tracking-[0.28em] text-accent-light"
-                >
-                  <span class="h-px w-6 bg-accent"></span>
-                  Visual preview
-                  <span class="h-px w-6 bg-accent"></span>
-                </p>
-                <p
-                  class="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white/50 md:text-5xl"
-                >
-                  {{ project.title }}
-                </p>
-              </div>
-            </div>
           </div>
 
           <!-- Description con drop cap editorial -->
@@ -819,26 +784,27 @@ const project = computed(() =>
   projectsStore.projectsCollection.find((p) => p.slug === route.params.slug)
 );
 
-const projectIndex = computed(() => {
-  if (!project.value) return -1;
-  return projectsStore.projectsCollection.findIndex(
-    (p) => p.slug === project.value.slug
-  );
-});
+// Navegación y contador recorren solo los casos; los proyectos de práctica
+// no tienen página propia en el flujo (se listan aparte en /projects).
+const cases = computed(() =>
+  projectsStore.projectsCollection.filter((p) => p.status !== "Práctica")
+);
+
+const projectIndex = computed(() =>
+  project.value ? cases.value.findIndex((p) => p.slug === project.value.slug) : -1
+);
 
 const currentNumber = computed(() => projectIndex.value + 1);
-const totalCount = computed(() => projectsStore.projectsCollection.length);
+const totalCount = computed(() => cases.value.length);
 
 const prevProject = computed(() => {
   const i = projectIndex.value;
-  return i > 0 ? projectsStore.projectsCollection[i - 1] : null;
+  return i > 0 ? cases.value[i - 1] : null;
 });
 
 const nextProject = computed(() => {
   const i = projectIndex.value;
-  return i >= 0 && i < projectsStore.projectsCollection.length - 1
-    ? projectsStore.projectsCollection[i + 1]
-    : null;
+  return i >= 0 && i < cases.value.length - 1 ? cases.value[i + 1] : null;
 });
 
 const root = ref(null);

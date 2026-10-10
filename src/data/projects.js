@@ -7,7 +7,9 @@
 // techStack[] (nombres de SVG en /public/img/skills/),
 // features[], tags[], repoUrl, liveUrl.
 //
-// status: "Producción" | "En desarrollo" | "Concepto" | "Archivado"
+// status: "Producción" | "En desarrollo" | "Concepto" | "Archivado" | "Práctica"
+//   "Práctica" = ejercicios de cursos o de mis primeros años: se listan aparte
+//   en /projects, sin card ni página de caso.
 // images:
 //   cover    → desktop 16:10 (cards + hero del detail)
 //   mobile   → captura vertical 9:19.5 (sección móvil del detail)
@@ -123,7 +125,7 @@ export const projects = [
       "Landing page oficial de Wink: captura de leads, planes de precios y showcase de la plataforma de digital signage.",
     description:
       "Wink Site es el sitio de marketing y la puerta de entrada comercial del ecosistema Wink. Diseñé y desarrollé la landing completa con foco en conversión: hero, propuesta de valor, métricas, modalidades de servicio, capacidades de la plataforma, showcase de Wink AI, casos de implementación reales, testimonios, tabla comparativa de los cuatro planes (Basic, Professional, Business, Enterprise) y un formulario de contacto con validación y envío vía EmailJS para captura de leads. La arquitectura está construida con Vue 3 + Vite, PrimeVue y Tailwind para la UI, Pinia para estado, VueFire para integración con Firebase y se despliega en Firebase Hosting con headers de seguridad endurecidos (HSTS, CSP, X-Frame-Options, Permissions-Policy) y cache inmutable para assets. La medición se hace con Google Tag Manager + GA4, con un plan de tracking propio que registra eventos clave como envío de formulario, clic en demo, expansión de planes y propiedades de usuario para diferenciar prospectos B2B de individuales.",
-    category: "Landing Page",
+    category: "Sitio web",
     role: "Head of Development",
     year: 2025,
     status: "Producción",
@@ -169,7 +171,7 @@ export const projects = [
       "Web médica con módulo de cotizaciones y panel administrativo. Vue + Firebase.",
     description:
       "Diseñé y desarrollé una plataforma web integral para Honduras Medical Center, orientada a la gestión eficiente de su contenido médico y atención al paciente. La aplicación incluye un panel administrativo para gestionar doctores, especialidades, artículos informativos y un robusto módulo de cotización de exámenes médicos, el cual permite al usuario solicitar presupuestos personalizados en línea, detallando cada prueba seleccionada con su precio y observaciones médicas. La plataforma está construida con Vue 3, Firebase, Pinia y Tailwind CSS, y fue diseñada para ser completamente responsiva, rápida y segura. Integra Firebase Auth para autenticación de usuarios y un sistema de roles para acceso administrativo.",
-    category: "Salud",
+    category: "Plataforma",
     role: "Desarrollador fullstack",
     year: 2025,
     status: "Producción",
@@ -214,7 +216,7 @@ export const projects = [
       "Test de mecanografía en español e inglés que no solo te mide: te dice en qué fallás y te arma la práctica para arreglarlo.",
     description:
       "SwiftFlow es mi proyecto hobby, que sigo mejorando constantemente: un test de mecanografía en español e inglés que va más allá de medir la velocidad. Analiza cada pulsación para decirte qué teclas, qué dedos y qué combinaciones te frenan, y arma práctica a medida alrededor de tus puntos débiles. Tiene 13 modos —tiempo, palabras, números, citas, clásicos de la literatura, dictado por voz, código en 8 lenguajes, zen, entrenamiento por teclas y por dedos—, un curso de 24 lecciones para aprender a escribir sin mirar adaptado a tu distribución de teclado, logros, retos diarios y semanales, y un historial con mapa de errores, tendencias, constancia y consejos personalizados. Todo funciona sin cuenta ni servidor: los datos viven en el navegador, se instala como PWA y anda sin conexión. Está construido con Vue 3, Pinia y Tailwind CSS 4, organizado por features, con tests unitarios en Vitest, end-to-end en Playwright y chequeos de accesibilidad con axe.",
-    category: "Aplicación Web",
+    category: "Herramienta",
     role: "Creador y desarrollador",
     year: 2026,
     status: "Producción",
@@ -250,10 +252,10 @@ export const projects = [
       "App para gestionar tareas, asignar responsables y monitorear el progreso del proyecto.",
     description:
       "TaskSphere es una aplicación web para la gestión de tareas y proyectos, diseñada para mejorar la organización de equipos. Permite asignar responsabilidades, establecer prioridades y dar seguimiento al progreso del proyecto de forma visual y eficiente. Desarrollada con React, Node y MongoDB, implementa una arquitectura robusta para manejar tanto el frontend como la comunicación con el backend. Ideal para equipos colaborativos que necesitan una solución ligera, intuitiva y responsiva.",
-    category: "Productividad",
+    category: "Práctica",
     role: "Desarrollador fullstack",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 5,
@@ -277,10 +279,10 @@ export const projects = [
       "Sistema de gestión veterinaria con historial, citas, tratamientos y facturación.",
     description:
       "Aplicación web diseñada para clínicas veterinarias, permite llevar un control detallado de los pacientes, incluyendo historiales médicos, tratamientos, citas y facturación. El sistema ofrece una interfaz moderna y responsiva desarrollada con Vue y Tailwind, optimizada con Vite para una experiencia de navegación fluida. Pensada para brindar una solución digital práctica a profesionales del área veterinaria.",
-    category: "Salud Animal",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 6,
@@ -304,10 +306,10 @@ export const projects = [
       "Buscador de propiedades inmobiliarias con filtros avanzados. Vue + Firebase.",
     description:
       "Desarrollé una aplicación web enfocada en la búsqueda de propiedades inmobiliarias en venta o alquiler. Incluye filtros avanzados por ubicación, tipo de propiedad y precio, además de una vista detallada de cada propiedad. El sistema permite a los usuarios explorar opciones de forma intuitiva y rápida. El proyecto fue desarrollado con Vue, Vuetify y Firebase, utilizando Vite como bundler para optimizar el rendimiento y una arquitectura frontend moderna.",
-    category: "Bienes raíces",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 7,
@@ -331,10 +333,10 @@ export const projects = [
       "POS simple y moderno con control de productos, precios y pagos. Vue + Firebase.",
     description:
       "Sistema de punto de venta que permite a negocios gestionar eficientemente transacciones de venta, registrar productos, calcular totales y administrar cobros. Fue desarrollado con Vue y Firebase, y utiliza Vite para una experiencia rápida y moderna. Ideal para pequeños comercios o negocios que necesitan una solución ágil y sin complicaciones.",
-    category: "Comercio",
+    category: "Práctica",
     role: "Desarrollador fullstack",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 8,
@@ -358,10 +360,10 @@ export const projects = [
       "App de control de gastos y presupuestos mensuales con visualización de estadísticas.",
     description:
       "Aplicación web para el control de gastos personales. Permite a los usuarios registrar sus gastos diarios, establecer presupuestos mensuales y visualizar patrones de consumo a través de gráficas claras y estadísticas en tiempo real. Desarrollada con React, TypeScript y Tailwind, hace uso de Context API para la gestión de estado global, lo que permite una experiencia de uso fluida y optimizada. Ideal para quienes buscan tener un mayor control de sus finanzas personales.",
-    category: "Finanzas personales",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 9,
@@ -385,10 +387,10 @@ export const projects = [
       "App para registrar calorías consumidas y quemadas, con seguimiento diario y diseño minimalista.",
     description:
       "Aplicación web para registrar comidas diarias y actividades físicas, calculando las calorías consumidas y quemadas. Diseñada para ayudar a mantener un estilo de vida saludable, permite a los usuarios llevar un seguimiento claro y visual de su consumo calórico. Desarrollada con React, TypeScript y Tailwind, utilizando useReducer para el manejo del estado de forma eficiente.",
-    category: "Salud y Bienestar",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 10,
@@ -412,10 +414,10 @@ export const projects = [
       "Consulta de precios de criptomonedas en tiempo real con interfaz moderna.",
     description:
       "Plataforma para consultar cotizaciones en tiempo real de distintas criptomonedas. Permite a los usuarios mantenerse informados sobre los precios actuales y tendencias del mercado a través de una interfaz clara y visual. La aplicación fue desarrollada con Vue, Vuetify y Vite, enfocándose en la experiencia de usuario, diseño limpio y consumo eficiente de APIs externas.",
-    category: "Finanzas",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 11,
@@ -439,10 +441,10 @@ export const projects = [
       "Ecommerce de guitarras con catálogo responsivo y arquitectura moderna en React.",
     description:
       "GuitarLA es una tienda online especializada en la venta de guitarras, ofreciendo una amplia variedad de modelos para músicos principiantes, intermedios y profesionales. La plataforma permite explorar productos, consultar descripciones y realizar compras en una interfaz clara y bien estructurada. Desarrollada con React, TypeScript, HTML, CSS y Vite, se enfoca en ofrecer una experiencia rápida, responsiva y accesible desde cualquier dispositivo.",
-    category: "E-commerce",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 12,
@@ -466,10 +468,10 @@ export const projects = [
       "Buscador de recetas de cócteles y bebidas. Vue + Tailwind + API de tragos.",
     description:
       "Aplicación web para buscar recetas de bebidas y cócteles, ideal para quienes quieren preparar tragos en casa. Permite buscar por nombre, ver ingredientes, pasos de preparación y una imagen referencial. Está desarrollada con Vue, Tailwind CSS y Vite, ofreciendo una experiencia moderna y responsiva con una interfaz clara y atractiva.",
-    category: "Entretenimiento",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 13,
@@ -493,10 +495,10 @@ export const projects = [
       "Consulta del clima actual por ciudad, con diseño responsivo y datos en tiempo real.",
     description:
       "Aplicación web para consultar información meteorológica detallada de diferentes ubicaciones. Permite a los usuarios buscar ciudades y obtener datos actualizados del clima, incluyendo temperatura, sensación térmica, humedad y condiciones generales. Desarrollada con Vue y Tailwind CSS, cuenta con una interfaz limpia y responsiva que se conecta a una API externa para mostrar la información en tiempo real.",
-    category: "Utilidades",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 14,
@@ -520,10 +522,10 @@ export const projects = [
       "App de control de gastos con presupuestos y estadísticas interactivas.",
     description:
       "Aplicación web para planificación y control financiero personal. Permite a los usuarios establecer presupuestos, registrar gastos por categorías y visualizar patrones de consumo mediante gráficas claras. Fue desarrollada con Vue, Vuetify y Vite, ofreciendo una experiencia de usuario fluida, moderna y 100% responsiva. Ideal para quienes desean mejorar su gestión financiera diaria.",
-    category: "Finanzas personales",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 15,
@@ -547,10 +549,10 @@ export const projects = [
       "Calculadora de propinas y división de cuentas en tiempo real. React + Tailwind + TypeScript.",
     description:
       "Aplicación web desarrollada para facilitar el cálculo de propinas y la división de cuentas en restaurantes o bares. Permite al usuario ingresar el total de la factura, ajustar el porcentaje de propina y dividir el monto equitativamente entre varios comensales. Fue construida con React y TypeScript, utilizando Tailwind CSS para un diseño limpio y responsivo, y Vite para una experiencia ultrarrápida de desarrollo.",
-    category: "Utilidades",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2024,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 16,
@@ -574,10 +576,10 @@ export const projects = [
       "Sitio de bienes raíces con catálogo de propiedades y navegación simple.",
     description:
       "Sitio web enfocado en la compra, venta y alquiler de propiedades. Ofrece una amplia variedad de opciones para quienes desean adquirir o arrendar una vivienda. Desarrollado con tecnologías básicas como HTML, CSS y JavaScript, y optimizado con Vite para una carga más rápida. Ideal como ejemplo de proyecto estático funcional con diseño responsive y navegación clara.",
-    category: "Bienes raíces",
+    category: "Práctica",
     role: "Desarrollador frontend",
     year: 2023,
-    status: "Producción",
+    status: "Práctica",
     team: "Proyecto individual",
     featured: false,
     order: 17,

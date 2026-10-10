@@ -7,7 +7,7 @@ const WHATSAPP_MESSAGE =
 
 export const profile = {
   name: "Jared Garcia",
-  roles: ["Frontend Developer", "UX/UI Designer"],
+  roles: ["Frontend Developer", "UI/UX Designer"],
   title: "Ingeniero en Ciencias de la Computación",
   email: "denisjared286@gmail.com",
   location: "Honduras",

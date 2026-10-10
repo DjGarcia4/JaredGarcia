@@ -72,7 +72,7 @@
       >
         Frontend Developer
         <br />
-        <span class="text-white/60">& UX/UI Designer</span>
+        <span class="text-white/60">& UI/UX Designer</span>
       </p>
 
       <!-- Location detail -->

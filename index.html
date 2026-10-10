@@ -43,6 +43,16 @@
   </head>
   <body>
     <div id="app"></div>
+    <!-- Netlify Forms detecta formularios en el HTML del build; como el real
+         lo renderiza Vue, este espejo oculto declara sus campos. -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input name="fullname" />
+      <input name="email" />
+      <textarea name="message"></textarea>
+      <input name="lang" />
+    </form>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

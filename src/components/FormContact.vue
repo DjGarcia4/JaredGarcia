@@ -101,10 +101,20 @@
          español, inline y anunciados a lectores de pantalla. -->
     <form
       ref="formEl"
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
       novalidate
       @submit.prevent="sendEmail"
       class="space-y-4"
     >
+      <!-- Netlify Forms: nombre del formulario + campo trampa para bots
+           (invisible para personas y lectores de pantalla). -->
+      <input type="hidden" name="form-name" value="contact" />
+      <p class="hidden" aria-hidden="true">
+        <label>No completar: <input v-model="botField" name="bot-field" tabindex="-1" autocomplete="off" /></label>
+      </p>
       <div v-for="field in fields" :key="field.name">
         <label
           :for="`${uid}-${field.name}`"
@@ -167,18 +177,13 @@
 
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted, reactive, ref } from "vue";
-// El QR y EmailJS no hacen falta para el primer render: se cargan aparte.
+// El QR no hace falta para el primer render: se carga aparte.
 const QrcodeVue = defineAsyncComponent(() => import("qrcode.vue"));
-const loadEmailjs = () =>
-  import("@emailjs/browser").then((m) => {
-    m.default.init("IlTVG1X5-tzzsmG1i");
-    return m.default;
-  });
 
 import { toast } from "vue-sonner";
 
 import ThinkingOrb from "@/components/ThinkingOrb.vue";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
 
 import { profile } from "@/data/profile";
 import { useModalStore } from "@/stores/modal";
@@ -218,6 +223,7 @@ const fields = [
   },
 ];
 
+const botField = ref("");
 const values = reactive({ fullname: "", email: "", message: "" });
 const errors = reactive({ fullname: "", email: "", message: "" });
 const touched = reactive({ fullname: false, email: false, message: false });
@@ -355,11 +361,27 @@ function sendEmail() {
     return;
   }
 
+  // Bots que completan el campo trampa: se finge éxito y no se envía.
+  if (botField.value) return;
+
+  // Netlify Forms: POST url-encoded a la raíz, con form-name. Netlify lo
+  // guarda y lo reenvía por email (Site → Forms → notifications).
   sending.value = true;
-  loadEmailjs()
-    .then((emailjs) =>
-      emailjs.sendForm("default_service", "template_s4cxryd", formEl.value)
-    )
+  const body = new URLSearchParams({
+    "form-name": "contact",
+    fullname: values.fullname.trim(),
+    email: values.email.trim(),
+    message: values.message.trim(),
+    lang: locale.value,
+  });
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: body.toString(),
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error(`Netlify Forms: ${res.status}`);
+    })
     .then(() => {
       toast.success(t("contact.sent"), {
         description: t("contact.sentDesc"),

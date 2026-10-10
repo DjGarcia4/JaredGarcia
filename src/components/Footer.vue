@@ -149,11 +149,11 @@ const wordmark = ref(null);
 
 // ── Sitemap (mismas rutas que el Header) ─────────────────────────
 const navItems = [
-  { label: "Inicio", to: { name: "home" } },
+  { label: "Trabajo", to: { name: "home", hash: "#trabajo" } },
+  { label: "Proceso", to: { name: "home", hash: "#proceso" } },
   { label: "Sobre mí", to: { name: "home", hash: "#about" } },
+  { label: "Stack", to: { name: "home", hash: "#stack" } },
   { label: "Proyectos", to: { name: "projects" } },
-  { label: "Servicios", to: { name: "home", hash: "#services" } },
-  { label: "Skills", to: { name: "home", hash: "#skills" } },
   { label: "Contacto", to: { name: "home", hash: "#contact" } },
 ];
 

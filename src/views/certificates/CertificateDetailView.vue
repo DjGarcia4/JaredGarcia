@@ -284,10 +284,10 @@
                     <font-awesome-icon :icon="['fas', 'arrow-right']" />
                   </RouterLink>
                   <RouterLink
-                    :to="{ name: 'home', hash: '#aprendizaje' }"
+                    :to="{ name: 'home', hash: '#about' }"
                     class="btn-ghost"
                   >
-                    Ver más certificados
+                    Ver formación
                   </RouterLink>
                 </div>
               </div>

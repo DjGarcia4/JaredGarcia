@@ -2,6 +2,8 @@
 // Campos: id, slug (URL), title, summary (corto, para cards),
 // description (largo), category, role, year, status, team,
 // featured, order, images { cover, mobile, gallery[] },
+// headline (línea de valor), highlights[] (3 puntos), color (marca del
+// proyecto, para acentos de la card),
 // techStack[] (nombres de SVG en /public/img/skills/),
 // features[], tags[], repoUrl, liveUrl.
 //
@@ -15,6 +17,15 @@
 export const projects = [
   {
     id: "rapisites",
+    // Una línea de valor para la card de la home.
+    headline:
+      "Respondés cuatro preguntas y tu sitio queda publicado, con SEO técnico, en minutos.",
+    highlights: [
+      "IA (API de Claude) genera estructura, contenido y SEO",
+      "Multi-tenant: subdominios y dominios propios con HTTPS",
+      "Editor visual con autosave, undo/redo y drag & drop",
+    ],
+    color: "#7C3AED",
     slug: "rapisites",
     title: "RapiSites",
     summary:
@@ -52,6 +63,15 @@ export const projects = [
   },
   {
     id: "wink-app",
+    // Una línea de valor para la card de la home.
+    headline:
+      "Una red de pantallas — contenido, playlists y horarios — controlada desde un solo panel, con datos y permisos aislados por agencia.",
+    highlights: [
+      "Programación de playlists por pantalla, zona y grupo",
+      "Multi-agencia con MFA (TOTP) y control por roles",
+      "Sincronización en tiempo real con Firebase",
+    ],
+    color: "#0EA5E9",
     slug: "wink-app",
     title: "Wink App",
     summary:
@@ -64,7 +84,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 2,
+    order: 1,
     images: {
       cover: "/img/projects/wink-app/cover.webp",
       mobile: "/img/projects/wink-app/mobile.webp",
@@ -88,6 +108,15 @@ export const projects = [
   },
   {
     id: "wink-site",
+    // Una línea de valor para la card de la home.
+    headline:
+      "La puerta comercial de Wink: una landing pensada para convertir, con cada paso del embudo medido.",
+    highlights: [
+      "11 secciones orientadas a captar leads",
+      "Tracking GA4 + GTM con eventos propios",
+      "Scrollytelling 3D en CSS en “Cómo funciona”",
+    ],
+    color: "#F5B700",
     slug: "wink-site",
     title: "Wink Site",
     summary:
@@ -100,7 +129,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 3,
+    order: 2,
     images: {
       cover: "/img/projects/wink-site/cover.webp",
       mobile: "/img/projects/wink-site/mobile.webp",
@@ -125,6 +154,15 @@ export const projects = [
   },
   {
     id: "hmc",
+    // Una línea de valor para la card de la home.
+    headline:
+      "Cotizar exámenes médicos en línea con precios claros, y un panel para que el equipo gestione su contenido.",
+    highlights: [
+      "Cotizador con detalle por examen y totales",
+      "Panel admin de doctores, especialidades y artículos",
+      "Roles de acceso con Firebase Auth",
+    ],
+    color: "#2563EB",
     slug: "honduras-medical-center",
     title: "Honduras Medical Center",
     summary:
@@ -161,6 +199,15 @@ export const projects = [
   },
   {
     id: "swiftflow",
+    // Una línea de valor para la card de la home.
+    headline:
+      "Un test de mecanografía que no solo mide: te dice en qué fallás y te arma la práctica para arreglarlo.",
+    highlights: [
+      "Análisis de errores por tecla, dedo y combinación",
+      "100 % usable con teclado, chequeado con axe",
+      "PWA offline, sin cuenta ni servidor",
+    ],
+    color: "#F97316",
     slug: "swiftflow-typing-test",
     title: "SwiftFlow",
     summary:
@@ -173,7 +220,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto personal",
     featured: true,
-    order: 1,
+    order: 3,
     images: {
       cover: "/img/projects/swiftflow/cover.webp",
       mobile: "/img/projects/swiftflow/mobile.webp",

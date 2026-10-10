@@ -31,12 +31,11 @@
       </RouterLink>
 
       <!-- Nav desktop -->
-      <nav class="hidden items-center gap-0.5 lg:flex">
-        <span class="hdr-nav-item"><Link to="home">Inicio</Link></span>
+      <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Principal">
+        <span class="hdr-nav-item"><Link to="home" hash="#trabajo">Trabajo</Link></span>
+        <span class="hdr-nav-item"><Link to="home" hash="#proceso">Proceso</Link></span>
         <span class="hdr-nav-item"><Link to="home" hash="#about">Sobre mí</Link></span>
         <span class="hdr-nav-item"><Link to="projects">Proyectos</Link></span>
-        <span class="hdr-nav-item"><Link to="home" hash="#services">Servicios</Link></span>
-        <span class="hdr-nav-item"><Link to="home" hash="#skills">Skills</Link></span>
       </nav>
 
       <!-- Aside derecha desktop -->
@@ -174,11 +173,10 @@ const headerRef = ref(null);
 const mobileOpen = ref(false);
 
 const mobileItems = [
-  { label: "Inicio", to: { name: "home" } },
+  { label: "Trabajo", to: { name: "home", hash: "#trabajo" } },
+  { label: "Proceso", to: { name: "home", hash: "#proceso" } },
   { label: "Sobre mí", to: { name: "home", hash: "#about" } },
   { label: "Proyectos", to: { name: "projects" } },
-  { label: "Servicios", to: { name: "home", hash: "#services" } },
-  { label: "Skills", to: { name: "home", hash: "#skills" } },
 ];
 
 const isMobileItemActive = (item) => {

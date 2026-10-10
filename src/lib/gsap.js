@@ -9,7 +9,7 @@ export const prefersReducedMotion = () =>
 
 // Reproduce un timeline pausado una sola vez, cuando el trigger entra al
 // viewport. Si al refrescar el scroll ya está pasado el start (p. ej. al
-// volver con hash, /certificate/x → /#aprendizaje), salta al estado final
+// volver con hash, /certificate/x → /#about), salta al estado final
 // para que el contenido no quede invisible.
 export const playOnEnter = (tl, options) =>
   ScrollTrigger.create({

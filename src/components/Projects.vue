@@ -101,7 +101,7 @@
                   aria-hidden="true"
                 />
                 <span class="truncate font-mono text-[12px] font-semibold uppercase tracking-[0.14em]">
-                  {{ tech.name }}
+                  {{ techName(tech.name) }}
                 </span>
               </span>
               <span
@@ -210,7 +210,7 @@
                     class="flex items-center gap-1.5 rounded-md border border-white/10 bg-ink-950/60 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/65"
                   >
                     <img :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
-                    {{ tech }}
+                    {{ techName(tech) }}
                   </span>
                   <span
                     v-if="(featuredProjects[0].techStack || []).length > 6"
@@ -303,7 +303,7 @@
                   class="flex items-center gap-1.5 rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/65"
                 >
                   <img :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
-                  {{ tech }}
+                  {{ techName(tech) }}
                 </span>
                 <span
                   v-if="(project.techStack || []).length > 4"
@@ -411,7 +411,7 @@
                   class="flex items-center gap-1.5 rounded-md border border-white/10 bg-ink-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wide text-white/65"
                 >
                   <img :src="`/img/skills/${tech}.svg`" alt="" class="h-3 w-3" aria-hidden="true" />
-                  {{ tech }}
+                  {{ techName(tech) }}
                 </span>
                 <span
                   v-if="(project.techStack || []).length > 4"
@@ -472,6 +472,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
+import { techName } from "@/data/skills";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const projects = useProjects();

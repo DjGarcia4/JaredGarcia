@@ -22,3 +22,8 @@ export const skills = [
   { name: "Docker", image: "docker" },
   { name: "Balena", image: "balena" },
 ];
+
+// Nombre legible de una tecnología a partir de su clave (el nombre del SVG
+// que usan los proyectos en techStack): "ts" → "TypeScript".
+const NAMES = Object.fromEntries(skills.map((s) => [s.image, s.name]));
+export const techName = (key) => NAMES[key] ?? key;

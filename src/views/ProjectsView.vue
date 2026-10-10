@@ -73,6 +73,7 @@
 </template>
 
 <script setup>
+import { profile } from "@/data/profile";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import Projects from "@/components/Projects.vue";
 import { useProjects } from "@/stores/projects";
@@ -82,10 +83,8 @@ const projects = useProjects();
 const headerRef = ref(null);
 let ctx;
 
-// Año de inicio de carrera. El rango mostrado refleja la trayectoria real,
-// no solo los proyectos listados (algunos de los primeros años no están
-// publicados en el portafolio).
-const CAREER_START_YEAR = 2021;
+// El rango arranca en el inicio de carrera (profile.careerStart), no en el
+// proyecto más viejo listado: algunos de los primeros no están publicados.
 
 const stats = computed(() => {
   const all = projects.projectsCollection;
@@ -94,7 +93,7 @@ const stats = computed(() => {
   return {
     total: all.length,
     featured: all.filter((p) => p.featured).length,
-    yearMin: Math.min(CAREER_START_YEAR, ...years),
+    yearMin: Math.min(profile.careerStart, ...years),
     yearMax: Math.max(...years),
     categories: cats.size,
   };

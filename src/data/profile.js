@@ -11,6 +11,9 @@ export const profile = {
   title: "Ingeniero en Ciencias de la Computación",
   email: "denisjared286@gmail.com",
   location: "Honduras",
+  // Año en que empecé a trabajar en desarrollo. Fuente única para el hero
+  // y la página de proyectos.
+  careerStart: 2021,
   bio: "Me apasiona crear experiencias digitales que impacten. Tengo experiencia sólida en desarrollo web frontend y me encanta enfrentar desafíos creativos que me reten a subir de nivel constantemente.",
   cvUrl:
     "https://drive.google.com/file/d/1GNi77TQDAXmsa0jGcdN3a_QELK-lA0ty/view?usp=drive_link",

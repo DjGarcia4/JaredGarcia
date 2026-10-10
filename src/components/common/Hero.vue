@@ -81,7 +81,7 @@
         <p
           class="font-mono text-xs font-medium uppercase tracking-[0.28em] text-white/50"
         >
-          {{ profile.location }} · since 2021
+          {{ profile.location }} · desde {{ profile.careerStart }}
         </p>
       </div>
 
@@ -235,7 +235,7 @@ import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import { profile } from "@/data/profile";
-import { skills } from "@/data/skills";
+import { skills, techName } from "@/data/skills";
 import { projects } from "@/data/projects";
 import { gsap, prefersReducedMotion, playOnEnter } from "@/lib/gsap";
 
@@ -249,7 +249,6 @@ const act3Ref = ref(null);
 
 // Datos derivados de los proyectos reales.
 const productionCount = projects.filter((p) => p.status === "Producción").length;
-const earliestYear = Math.min(...projects.map((p) => p.year));
 
 // Top 2 techs más usadas en los proyectos.
 const topTechs = (() => {
@@ -267,7 +266,7 @@ const topTechs = (() => {
 
 const targets = {
   projects: projects.length,
-  years: new Date().getFullYear() - earliestYear,
+  years: new Date().getFullYear() - profile.careerStart,
   techs: skills.length,
 };
 
@@ -282,13 +281,13 @@ const stats = computed(() => [
     key: "years",
     suffix: "+",
     label: "Años creando",
-    detail: `desde ${earliestYear}`,
+    detail: `desde ${profile.careerStart}`,
   },
   {
     key: "techs",
     suffix: "",
     label: "Tecnologías",
-    detail: `${topTechs.join(" · ")} principales`,
+    detail: `${topTechs.map(techName).join(" · ")} principales`,
   },
 ]);
 

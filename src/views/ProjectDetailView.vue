@@ -330,14 +330,14 @@
                 >
                   <img
                     :src="`/img/skills/${tech}.svg`"
-                    :alt="tech"
+                    alt=""
                     class="h-4 w-4"
                   />
                 </span>
                 <span
-                  class="text-sm font-medium capitalize text-white/80 transition-colors duration-300 group-hover:text-white"
+                  class="text-sm font-medium text-white/80 transition-colors duration-300 group-hover:text-white"
                 >
-                  {{ tech }}
+                  {{ techName(tech) }}
                 </span>
               </li>
             </ul>
@@ -806,6 +806,7 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
 import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
+import { techName } from "@/data/skills";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const route = useRoute();

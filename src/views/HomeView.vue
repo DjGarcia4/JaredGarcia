@@ -38,8 +38,6 @@
       <Certifications />
     </section>
 
-   <!-- <Reviews /> -->
-
     <section id="contact" class="container-content py-20 md:py-28">
       <TitleSection eyebrow="Contacto">Hablemos</TitleSection>
       <FormContact />
@@ -59,7 +57,6 @@ import CurrentlyLearning from "@/components/CurrentlyLearning.vue";
 import Services from "@/components/Services/Services.vue";
 import Skills from "@/components/Skills.vue";
 import Certifications from "@/components/Certifications.vue";
-import Reviews from "@/components/Reviews.vue";
 import FormContact from "@/components/FormContact.vue";
 import TitleSection from "@/components/TitleSection.vue";
 

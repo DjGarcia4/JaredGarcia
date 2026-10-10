@@ -1,12 +1,12 @@
 <template>
-  <!-- "Interfaz explotada": la misma pantalla (el hero de RapiSites) en las
-       cuatro capas de mi proceso, apiladas en 3D con CSS. Con el mouse se
-       inclina; con el scroll las capas se juntan en la pantalla final.
-       Decorativo para lectores de pantalla: el contenido real está en el
-       texto del hero. -->
+  <div class="mx-auto w-full max-w-[560px]">
+    <!-- "Interfaz explotada": la misma pantalla (el hero de RapiSites) en
+         las cuatro etapas de mi proceso, apiladas en 3D con CSS. La leyenda
+         de abajo recorre las capas y explica cada una. La escena es
+         decorativa (aria-hidden); la leyenda sí es accesible. -->
   <div
     ref="root"
-    class="hero-layers relative mx-auto aspect-[10/9] w-full max-w-[560px] select-none"
+    class="hero-layers relative aspect-[10/8.4] w-full select-none"
     aria-hidden="true"
     @pointermove="onPointer"
     @pointerleave="resetPointer"
@@ -17,7 +17,7 @@
         <div class="floor"></div>
 
         <!-- 01 · Wireframe -->
-        <div class="layer" style="--i: 0">
+        <div class="layer" :class="layerClass(0)" style="--i: 0">
           <div class="card bg-ink-950/90 ring-1 ring-white/15">
             <div class="wf">
               <div class="flex items-center justify-between">
@@ -45,11 +45,10 @@
               </div>
             </div>
           </div>
-          <span class="tag">01 · Wireframe</span>
         </div>
 
         <!-- 02 · Tokens de diseño -->
-        <div class="layer" style="--i: 1">
+        <div class="layer" :class="layerClass(1)" style="--i: 1">
           <div class="card bg-ink-900/85 ring-1 ring-white/15 backdrop-blur-sm">
             <div class="flex h-full flex-col justify-between p-5">
               <div class="flex gap-2.5">
@@ -77,11 +76,10 @@
               </div>
             </div>
           </div>
-          <span class="tag">02 · Sistema</span>
         </div>
 
         <!-- 03 · Código -->
-        <div class="layer" style="--i: 2">
+        <div class="layer" :class="layerClass(2)" style="--i: 2">
           <div class="card bg-[#0b1222]/90 ring-1 ring-accent/30 backdrop-blur-sm">
             <pre class="code"><span class="c-tag">&lt;script setup</span> <span class="c-attr">lang</span>=<span class="c-str">"ts"</span><span class="c-tag">&gt;</span>
 <span class="c-key">const</span> site = <span class="c-key">await</span> <span class="c-fn">generateSite</span>(answers)
@@ -94,11 +92,10 @@
   <span class="c-tag">/&gt;</span>
 <span class="c-tag">&lt;/template&gt;</span></pre>
           </div>
-          <span class="tag">03 · Código</span>
         </div>
 
         <!-- 04 · Producción -->
-        <div class="layer" style="--i: 3">
+        <div class="layer" :class="layerClass(3)" style="--i: 3">
           <div class="card overflow-hidden bg-white ring-1 ring-white/30">
             <div class="flex h-6 items-center gap-1.5 border-b border-black/5 bg-[#f4f4f5] px-2.5">
               <span class="h-2 w-2 rounded-full bg-[#ff5f57]"></span>
@@ -115,12 +112,40 @@
               class="block h-[calc(100%-1.5rem)] w-full object-cover object-top"
             />
           </div>
-          <span class="tag tag-live">
-            <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
-            04 · En producción
-          </span>
         </div>
       </div>
+    </div>
+  </div>
+
+    <!-- Leyenda -->
+    <div
+      class="mt-2 rounded-2xl border border-white/[0.08] bg-ink-950/50 p-4 backdrop-blur-sm"
+      @mouseenter="paused = true"
+      @mouseleave="paused = false"
+      @focusin="paused = true"
+      @focusout="paused = false"
+    >
+      <p class="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">
+        Una pantalla, cuatro etapas
+      </p>
+      <div class="mt-3 grid grid-cols-4 gap-1.5" role="tablist" aria-label="Etapas del proceso">
+        <button
+          v-for="(st, i) in stages"
+          :key="st.name"
+          type="button"
+          role="tab"
+          :aria-selected="i === active"
+          class="rounded-lg px-2 py-2 text-left transition-colors"
+          :class="i === active ? 'bg-accent/15 text-white' : 'text-white/60 hover:bg-white/[0.04] hover:text-white'"
+          @click="active = i"
+        >
+          <span class="block font-mono text-[10px]" :class="i === active ? 'text-accent-light' : 'text-white/50'">0{{ i + 1 }}</span>
+          <span class="block text-[13px] font-semibold">{{ st.name }}</span>
+        </button>
+      </div>
+      <p class="mt-3 min-h-[2.75rem] text-sm leading-relaxed text-white/70" aria-live="polite">
+        {{ stages[active].desc }}
+      </p>
     </div>
   </div>
 </template>
@@ -131,6 +156,25 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 // Paleta real de RapiSites (la UI de la capa 04).
 const palette = ["#7C3AED", "#C2410C", "#18181B", "#FAFAFA"];
+
+const stages = [
+  { name: "Wireframe", desc: "La estructura: qué va en la pantalla y en qué orden, antes de cualquier color." },
+  { name: "Sistema", desc: "Los tokens: paleta, tipografía y espaciado que hacen que todo sea consistente." },
+  { name: "Código", desc: "El componente en Vue y TypeScript que convierte el diseño en algo real." },
+  { name: "Producción", desc: "El resultado publicado: rapisites.com, en vivo y usado por negocios reales." },
+];
+
+const active = ref(0);
+const paused = ref(false);
+let cycle = 0;
+
+// Las capas por encima de la activa casi desaparecen (para que se lea la
+// activa); las de abajo quedan atenuadas como contexto.
+const layerClass = (i) => ({
+  "is-active": i === active.value,
+  "is-above": i > active.value,
+  "is-below": i < active.value,
+});
 
 const root = ref(null);
 const tilt = ref(null);
@@ -161,10 +205,7 @@ const kick = () => {
 const onPointer = (e) => {
   if (reduced || e.pointerType !== "mouse") return;
   const r = root.value.getBoundingClientRect();
-  target = {
-    x: (e.clientX - r.left) / r.width - 0.5,
-    y: (e.clientY - r.top) / r.height - 0.5,
-  };
+  target = { x: (e.clientX - r.left) / r.width - 0.5, y: (e.clientY - r.top) / r.height - 0.5 };
   kick();
 };
 
@@ -177,42 +218,26 @@ let ctx;
 
 onMounted(() => {
   reduced = prefersReducedMotion();
-  if (reduced) return;
+  if (reduced) {
+    active.value = 3;
+    return;
+  }
+
+  // Recorre las etapas sola; se pausa con hover o foco en la leyenda.
+  cycle = window.setInterval(() => {
+    if (!paused.value && document.visibilityState === "visible") {
+      active.value = (active.value + 1) % stages.length;
+    }
+  }, 2800);
 
   ctx = gsap.context(() => {
     // Entrada: las capas "se separan" desde la pila.
-    gsap.from(stage.value, {
-      "--gap": "0px",
-      "--fan": "0%",
-      duration: 1.4,
-      ease: "expo.out",
-      delay: 0.15,
-    });
-
-    // Scroll (desktop): al salir del hero, las capas se juntan y la vista
-    // queda de frente sobre la pantalla final.
-    gsap.matchMedia().add("(min-width: 1024px)", () => {
-      gsap.to(stage.value, {
-        "--gap": "0px",
-        "--fan": "0%",
-        "--rx": "0deg",
-        "--rz": "0deg",
-        "--s": 1.08,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.value,
-          // Arranca apenas empieza el scroll y termina antes de que la pieza
-          // salga de pantalla, para que se vea la pantalla final de frente.
-          start: "top 40%",
-          end: "center 25%",
-          scrub: 0.6,
-        },
-      });
-    });
+    gsap.from(stage.value, { "--gap": "0px", "--fan": "0%", duration: 1.4, ease: "expo.out", delay: 0.15 });
   }, root.value);
 });
 
 onUnmounted(() => {
+  window.clearInterval(cycle);
   cancelAnimationFrame(raf);
   ctx?.revert();
 });
@@ -233,7 +258,7 @@ onUnmounted(() => {
 .stage {
   --gap: 70px;
   --fan: 9%;
-  --rx: 54deg;
+  --rx: 50deg;
   --rz: -34deg;
   --s: 1;
   width: 72%;
@@ -246,13 +271,33 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   /* Escalonadas en diagonal además de en Z, para que asome cada capa.
      --fan se anima a 0 junto con --gap al colapsar. */
   transform: translate3d(
     calc((3 - var(--i)) * var(--fan) * -1),
     calc((3 - var(--i)) * var(--fan)),
-    calc(var(--i) * var(--gap))
+    calc(var(--i) * var(--gap) + var(--lift, 0px))
   );
+}
+/* La capa activa se levanta y se ilumina; las demás se apagan. */
+.layer.is-active {
+  --lift: 34px;
+}
+.layer .card {
+  transition: opacity 0.5s, box-shadow 0.5s;
+}
+.layer.is-below .card {
+  opacity: 0.45;
+}
+.layer.is-above {
+  --lift: 60px;
+}
+.layer.is-above .card {
+  opacity: 0.08;
+}
+.layer.is-active .card {
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.85), 0 30px 60px -20px rgba(0, 0, 0, 0.9);
 }
 
 .card {
@@ -271,29 +316,6 @@ onUnmounted(() => {
   transform: translateZ(-30px);
 }
 
-.tag {
-  position: absolute;
-  left: -2px;
-  top: -26px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(15, 23, 42, 0.85);
-  padding: 3px 9px;
-  font-family: "Space Mono", ui-monospace, monospace;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-}
-.tag-live {
-  border-color: rgba(74, 222, 128, 0.4);
-  color: #4ade80;
-}
 
 /* Wireframe */
 .wf {

@@ -40,6 +40,9 @@ const resolve = (route) => {
     const c = certificates.find((x) => x.slug === route.params.slug);
     if (c) return { title: `${c.title} · ${SITE_NAME}`, description: `Certificación de ${c.issuer}.` };
   }
+  if (route.name === "not-found") {
+    return { title: `Página no encontrada · ${SITE_NAME}`, description: DEFAULT_DESCRIPTION };
+  }
   if (route.name === "design-system") {
     return {
       title: `Sistema de diseño · ${SITE_NAME}`,

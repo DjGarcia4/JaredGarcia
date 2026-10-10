@@ -31,6 +31,11 @@ const router = createRouter({
       component: () =>
         import("../views/certificates/CertificateDetailView.vue"),
     },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: () => import("../views/NotFoundView.vue"),
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.hash) {

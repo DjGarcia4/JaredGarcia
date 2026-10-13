@@ -112,7 +112,7 @@ export const casesEn = {
     decisions: [
       {
         title: "One app, eleven screens",
-        body: "Every app is designed for all the sizes a layout can give it, not just one: the strip keeps the essentials, portrait reflows, and the small box shows only the data that matters. Text that doesn't fit is shortened deliberately, never cut off with a stray “…”.",
+        body: "Every app is designed for all the sizes a layout can give it, not just one: the strip keeps the essentials, portrait reflows, and the small box shows only the data that matters. And if some text doesn't fit, it ends in “…” — never sliced off mid-letter.",
         media: { type: "image", src: "/img/projects/wink-studio/sizes.webp", caption: "Daily Menu in 8 of the 11 sizes certification checks (true scale between them)." },
       },
       {

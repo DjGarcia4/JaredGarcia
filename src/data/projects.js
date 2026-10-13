@@ -177,7 +177,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 3,
+    order: 4,
     images: {
       cover: "/img/projects/wink-site/cover.webp",
       mobile: "/img/projects/wink-site/mobile.webp",
@@ -269,7 +269,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto personal",
     featured: true,
-    order: 4,
+    order: 3,
     images: {
       cover: "/img/projects/swiftflow/cover.webp",
       mobile: "/img/projects/swiftflow/mobile.webp",

@@ -131,7 +131,7 @@ export const cases = {
     decisions: [
       {
         title: "Una app, once pantallas",
-        body: "Cada app se diseña para todos los tamaños donde la puede poner un layout, no para uno solo: en la tira queda lo esencial, en la vertical se reordena y en el recuadro chico solo el dato que importa. El texto que no entra se acorta con criterio, nunca con «…» a medias.",
+        body: "Cada app se diseña para todos los tamaños donde la puede poner un layout, no para uno solo: en la tira queda lo esencial, en la vertical se reordena y en el recuadro chico solo el dato que importa. Y si un texto no entra, se corta con «…»: nunca queda mocho a la mitad de una letra.",
         media: { type: "image", src: "/img/projects/wink-studio/sizes.webp", caption: "Menú del día en 8 de los 11 tamaños que revisa la certificación (escala real entre ellos)." },
       },
       {

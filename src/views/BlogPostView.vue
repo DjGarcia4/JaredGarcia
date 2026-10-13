@@ -155,6 +155,7 @@ import { computed, nextTick, onServerPrefetch, onUnmounted, ref, useSSRContext, 
 import { RouterLink, useRoute, useRouter } from "vue-router";
 
 import { formatDate, getPost, getPosts, loadBody } from "@/lib/blog";
+import "@/lib/blog-descriptions";
 import { getProjects } from "@/data/localized";
 import { t } from "@/i18n";
 import { ScrollTrigger } from "@/lib/gsap";

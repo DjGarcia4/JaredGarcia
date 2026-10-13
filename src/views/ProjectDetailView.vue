@@ -797,6 +797,7 @@ import { useProjects } from "@/stores/projects";
 import { statusStyle } from "@/lib/status";
 import PostRow from "@/components/blog/PostRow.vue";
 import { postsForProject } from "@/lib/blog";
+import "@/lib/blog-descriptions";
 import { techName } from "@/data/skills";
 import { projectSrc, projectSrcset } from "@/lib/img";
 import { getCase } from "@/data/localized";

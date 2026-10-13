@@ -159,7 +159,7 @@ To measure this I changed how I run Lighthouse: real applied throttling (`--thro
 
 There's one effect worth understanding: the home page's TBT went up from about 530 ms to 1.4 s. The site isn't doing more work (total main-thread time dropped from 4.3 to 3.8 s); there's now content painted before JavaScript runs, and TBT only counts what blocks after the first paint.
 
-And one consequence for how I measure: with prerendering, `index.html` also preloads the home page's chunks. Measured the same way as before, the home page's initial JavaScript is 197.9 KB gzip with 25 published posts. Still within budget, but very close to the limit: every new post adds its title and excerpt, in both languages, to the initial load.
+And one consequence for how I measure: with prerendering, `index.html` also preloads the home page's chunks. Measured the same way as before, the home page's initial JavaScript reached 197.9 KB gzip with 25 published posts: 2 KB from the limit, because every new post added its title and excerpt, in both languages, to the initial load. I moved the excerpts out of the index into a separate module that only the pages showing them load (the home keeps the three it displays), and it went back to 194.7 KB. Now each new post adds about 0.15 KB instead of 0.7.
 
 ## What's left
 

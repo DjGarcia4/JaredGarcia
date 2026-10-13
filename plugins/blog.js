@@ -6,7 +6,11 @@
 // El mismo <slug> en es/ y en/ es el mismo artículo traducido.
 //
 // - `virtual:blog` exporta los metadatos de todos los artículos (sin cuerpo)
-//   para listados, paleta ⌘K, SEO, etc.
+//   para listados, paleta ⌘K, SEO, etc. Va en el bundle principal, así que
+//   lleva el resumen (`description`) solo de los HOME_DESCRIPTIONS más
+//   nuevos de cada idioma, los que muestra la home.
+// - `virtual:blog/descriptions` exporta todos los resúmenes; lo importan las
+//   rutas que los muestran (ver src/lib/blog-descriptions.js).
 // - Importar un .md devuelve { html, toc }: el cuerpo ya renderizado, con
 //   código resaltado por Shiki. Cada artículo queda en su propio chunk.
 // - En el build se generan rss.xml (es) y en/rss.xml (en).
@@ -20,6 +24,10 @@ import { createHighlighter } from "shiki";
 const LANGS = ["es", "en"];
 const VIRTUAL_ID = "virtual:blog";
 const RESOLVED_ID = "\0" + VIRTUAL_ID;
+const DESC_ID = "virtual:blog/descriptions";
+const RESOLVED_DESC_ID = "\0" + DESC_ID;
+// Cuántos resúmenes por idioma viajan en el índice (la home muestra 3).
+const HOME_DESCRIPTIONS = 3;
 const SHIKI_THEME = "github-dark-default";
 
 const UI = {
@@ -236,12 +244,29 @@ ${items}
     },
     resolveId(id) {
       if (id === VIRTUAL_ID) return RESOLVED_ID;
+      if (id === DESC_ID) return RESOLVED_DESC_ID;
     },
     load(id) {
-      if (id === RESOLVED_ID) {
+      if (id === RESOLVED_ID || id === RESOLVED_DESC_ID) {
         // Que el dev server recargue el índice al cambiar cualquier .md.
         listFiles().forEach(({ file }) => this.addWatchFile(file));
-        return `export const posts = ${JSON.stringify(allPosts())};`;
+      }
+      if (id === RESOLVED_ID) {
+        const kept = new Map(LANGS.map((lang) => [lang, 0]));
+        const posts = allPosts().map((p) => {
+          if (!p.draft && kept.get(p.lang) < HOME_DESCRIPTIONS) {
+            kept.set(p.lang, kept.get(p.lang) + 1);
+            return p;
+          }
+          const rest = { ...p };
+          delete rest.description;
+          return rest;
+        });
+        return `export const posts = ${JSON.stringify(posts)};`;
+      }
+      if (id === RESOLVED_DESC_ID) {
+        const map = Object.fromEntries(allPosts().map((p) => [`${p.lang}/${p.slug}`, p.description]));
+        return `export const descriptions = ${JSON.stringify(map)};`;
       }
     },
     async transform(code, id) {
@@ -255,8 +280,10 @@ ${items}
     },
     handleHotUpdate({ file, server }) {
       if (!isPostFile(file)) return;
-      const mod = server.moduleGraph.getModuleById(RESOLVED_ID);
-      if (mod) server.moduleGraph.invalidateModule(mod);
+      for (const vid of [RESOLVED_ID, RESOLVED_DESC_ID]) {
+        const mod = server.moduleGraph.getModuleById(vid);
+        if (mod) server.moduleGraph.invalidateModule(mod);
+      }
       server.ws.send({ type: "full-reload" });
     },
     generateBundle() {

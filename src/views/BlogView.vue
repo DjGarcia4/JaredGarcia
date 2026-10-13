@@ -64,6 +64,7 @@ import { useRoute, useRouter } from "vue-router";
 
 import PostCard from "@/components/blog/PostCard.vue";
 import { getPosts, getTags } from "@/lib/blog";
+import "@/lib/blog-descriptions";
 import { useI18n } from "@/i18n";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 

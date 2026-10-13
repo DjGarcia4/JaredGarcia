@@ -159,7 +159,7 @@ Para medir esto cambié la forma de correr Lighthouse: throttling aplicado de ve
 
 Hay un efecto que conviene entender: el TBT de la home subió de unos 530 ms a 1,4 s. No es que el sitio haga más trabajo (el tiempo total del hilo principal bajó de 4,3 a 3,8 s), sino que ahora hay contenido pintado antes de que corra el JavaScript, y el TBT solo cuenta lo que bloquea después del primer paint.
 
-Y una consecuencia para mi forma de medir: con el prerender, el `index.html` también precarga los chunks de la home. Medido igual que antes, el JavaScript inicial de la home queda en 197,9 KB gzip con 25 artículos publicados. Sigue dentro del presupuesto, pero muy cerca del límite: cada artículo nuevo suma su título y su resumen, en los dos idiomas, a la carga inicial.
+Y una consecuencia para mi forma de medir: con el prerender, el `index.html` también precarga los chunks de la home. Medido igual que antes, el JavaScript inicial de la home llegó a 197,9 KB gzip con 25 artículos publicados: a 2 KB del límite, porque cada artículo nuevo sumaba su título y su resumen, en los dos idiomas, a la carga inicial. Saqué los resúmenes del índice a un módulo aparte que solo cargan las páginas que los muestran (la home se queda con los tres que enseña), y volvió a 194,7 KB. Ahora cada artículo nuevo suma unos 0,15 KB en lugar de 0,7.
 
 ## Lo que falta
 

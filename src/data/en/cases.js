@@ -98,6 +98,50 @@ export const casesEn = {
       "An internal dashboard is a product too. Listening to the pain points of the people who use it every day —including me— taught me more than any requirements list, and monitoring proves it: every version existed because someone needed to answer a new question.",
   },
 
+  "wink-studio": {
+    draft: true,
+    tldr: {
+      problem: "Wink's screens mostly showed videos and images; they lacked live content —weather, queues, menus, orders— that any company could add without coding.",
+      role: "Head of Development: app design, SDK, simulator and certification.",
+      outcome: "10 finished, certified apps, ready for Wink's catalog as soon as the back end lands.",
+    },
+    context:
+      "Wink apps are static sites that run inside the player: an iframe on a Raspberry Pi with Chromium, plugged into a screen nobody touches. Each app is hosted on RapiSites and published to the Wink dashboard's catalog, where a company adds it to its layouts and tailors it with its own copy, colors and logo.",
+    problem:
+      "The same app has to look right on a full screen, a portrait one, a 1920×360 strip and a 60×30 box; keep working if the network drops, and run for weeks without a restart on modest hardware. And it couldn't rely on someone testing every size by hand before publishing.",
+    decisions: [
+      {
+        title: "One app, eleven screens",
+        body: "Every app is designed for all the sizes a layout can give it, not just one: the strip keeps the essentials, portrait reflows, and the small box shows only the data that matters. Text that doesn't fit is shortened deliberately, never cut off with a stray “…”.",
+        media: { type: "image", src: "/img/projects/wink-studio/sizes.webp", caption: "Daily Menu in 8 of the 11 sizes certification checks (true scale between them)." },
+      },
+      {
+        title: "Read from afar, never touched",
+        body: "Nobody interacts with these screens: they're read in passing, from several meters away. So each app has one big thing —the called ticket, the order that's ready, today's deal— and everything else supports it. When something changes, the app announces it: a ready order appears large with a chime and a voice, then leaves on its own.",
+        media: { type: "image", src: "/img/projects/wink-studio/04.webp", caption: "Order Ready: in progress on the left, ready for pickup in large type." },
+      },
+      {
+        title: "The app declares its settings; the dashboard builds the form",
+        body: "Each app ships a manifest with its settings —text, color, font, date, time, lists— and the dashboard generates the form the client sees from it. The SDK hands those settings to the app without reloading it, using the screen's date and time rather than the browser's.",
+      },
+      {
+        title: "A simulator that plays the player",
+        body: "To avoid testing on the Pi after every change, I built a simulator: it loads the app in all 11 real sizes at once, from a different origin just like the player, with live settings, network drops, scene changes and transitions. What you see there is what the screen will show.",
+      },
+      {
+        title: "If it doesn't pass certification, it doesn't ship",
+        body: "Every app goes through an automated certification in Chrome before publishing: overflow and clipped text at every size, loading in under a second with a 4× slower CPU, reopening offline, 20 scene changes in a row and 24 hours of fast-forwarded clock without memory growth. It produces a report with screenshots, and CI only certifies the apps that changed.",
+      },
+    ],
+    outcome: [
+      { value: "10", label: "finished, certified apps, ready for the catalog" },
+      { value: "11", label: "sizes checked per app, from 60×30 to 4K" },
+      { value: "24 h", label: "of simulated use in every certification, with no memory growth" },
+    ],
+    learnings:
+      "Putting the rules into a certification instead of a to-do list changed how I design: a mistake shows up in the report before it shows up on a client's screen. It also pushed me to be honest about which apps can ship now and which wait for the back end, instead of launching half-finished apps.",
+  },
+
   "wink-site": {
     draft: false,
     tldr: {

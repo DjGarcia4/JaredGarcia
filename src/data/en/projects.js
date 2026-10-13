@@ -46,6 +46,28 @@ export const projectsEn = {
       "Real-time data sync with Firebase.",
     ],
   },
+  "wink-studio": {
+    category: "Platform",
+    role: "Head of Development",
+    team: "Wink Digital S.A.",
+    summary: "An HTML app generator for Wink's screens: SDK, player simulator, automated certification and 10 apps ready for the catalog.",
+    headline: "The workshop where the apps for Wink's screens are made: each one looks right from 60×30 to 4K and doesn't ship without passing certification.",
+    highlights: [
+      "10 finished, certified apps: Weather, Daily Menu, Queue…",
+      "SDK and player simulator with all 11 sizes at once",
+      "Automated certification: sizes, offline, slow CPU and 24 h of memory",
+    ],
+    description:
+      "Wink Studio is the monorepo where the HTML apps that run on Wink's screens are designed, tested and packaged: Weather, Daily Menu, Queue, Departures Board, Clock, Order Ready, Notices, Agenda, Birthdays and Countdown. Each app is a static site (Vite + TypeScript) hosted on RapiSites and published to the Wink dashboard's catalog, where any company can add it to its layouts. An app declares its settings in a manifest and the dashboard builds the form to edit them; the SDK handles settings, the screen's time zone and communication with the player. For development there's a simulator that acts as the player and shows the app in all 11 real sizes at once, and before shipping every app goes through an automated certification in Chrome: overflow and clipped text at every size, loading in under a second with a 4× slower CPU, working offline, 20 scene changes in a row and 24 hours of fast-forwarded clock without memory growth. CI only certifies the apps that changed.",
+    features: [
+      "10 apps for screens, each with its settings, scenarios and catalog listing.",
+      "SDK: per-instance settings, the screen's time zone and communication with the player.",
+      "Settings manifest (text, color, date, time, lists…) from which the dashboard generates the form.",
+      "Player simulator: all 11 sizes at once, live settings, network drops and scene changes.",
+      "Automated certification in Chrome with a report and screenshots; CI only certifies what changed.",
+      "Built for a Raspberry Pi: offline-ready, no memory leaks and anti burn-in animations.",
+    ],
+  },
   "wink-site": {
     category: "Website",
     role: "Head of Development",

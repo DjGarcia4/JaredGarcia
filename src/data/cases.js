@@ -114,6 +114,53 @@ export const cases = {
       "Un panel interno también es un producto. Escuchar los dolores de quienes lo usan todos los días —incluido yo— me enseñó más que cualquier lista de requisitos, y el monitoreo es la prueba: cada versión existió porque alguien necesitaba responder una pregunta nueva.",
   },
 
+  "wink-studio": {
+    // Borrador (2026-10-12): el qué sale del repo de Wink Studio; el por qué
+    // hay que validarlo con el autor. El repo es privado: solo descripción y
+    // capturas de las apps.
+    draft: true,
+    tldr: {
+      problem: "Las pantallas de Wink mostraban sobre todo videos e imágenes; faltaba contenido vivo —clima, turnos, menús, pedidos— que cualquier empresa pudiera agregar sin programar.",
+      role: "Head of Development: diseño de las apps, SDK, simulador y certificación.",
+      outcome: "10 apps terminadas y certificadas, listas para el catálogo de Wink en cuanto esté el backend.",
+    },
+    context:
+      "Las apps de Wink son sitios estáticos que corren dentro del player: un iframe en una Raspberry Pi con Chromium, conectada a una pantalla que nadie toca. Cada app se hospeda en RapiSites y se publica al catálogo del panel de Wink, donde la empresa la agrega a sus layouts y la ajusta con sus textos, colores y logo.",
+    problem:
+      "Una misma app tiene que verse bien en una pantalla completa, en una vertical, en una tira de 1920×360 y en un recuadro de 60×30; seguir funcionando si se cae la red y correr semanas sin reiniciarse en un equipo modesto. Y no podía depender de que alguien la probara a mano en cada tamaño antes de publicarla.",
+    decisions: [
+      {
+        title: "Una app, once pantallas",
+        body: "Cada app se diseña para todos los tamaños donde la puede poner un layout, no para uno solo: en la tira queda lo esencial, en la vertical se reordena y en el recuadro chico solo el dato que importa. El texto que no entra se acorta con criterio, nunca con «…» a medias.",
+        media: { type: "image", src: "/img/projects/wink-studio/sizes.webp", caption: "Menú del día en 8 de los 11 tamaños que revisa la certificación (escala real entre ellos)." },
+      },
+      {
+        title: "Para leer de lejos, sin tocar",
+        body: "Nadie interactúa con estas pantallas: se leen de pasada, a varios metros. Por eso cada app tiene una sola cosa en grande —el turno llamado, el pedido listo, la oferta del día— y lo demás acompaña. Cuando algo cambia, la app lo anuncia: el pedido listo sale en grande con timbre y voz, y se va solo.",
+        media: { type: "image", src: "/img/projects/wink-studio/04.webp", caption: "Pedido listo: en preparación a la izquierda, listos para recoger en grande." },
+      },
+      {
+        title: "La app declara sus ajustes; el panel arma el formulario",
+        body: "Cada app trae un manifiesto con sus ajustes —texto, color, fuente, fecha, hora, listas— y el panel genera a partir de él el formulario que ve el cliente. El SDK entrega esos ajustes a la app sin recargarla, con la fecha y la hora de la pantalla y no las del navegador.",
+      },
+      {
+        title: "Un simulador que hace de player",
+        body: "Para no probar en la Pi a cada cambio, armé un simulador: carga la app en los 11 tamaños reales a la vez, desde otro origen como lo haría el player, con los ajustes en vivo, cortes de red, cambios de escena y transiciones. Lo que se ve ahí es lo que va a ver la pantalla.",
+      },
+      {
+        title: "Si no pasa la certificación, no se sube",
+        body: "Cada app pasa una certificación automática en Chrome antes de publicarse: desbordes y texto cortado en cada tamaño, que cargue en menos de un segundo con la CPU 4× más lenta, que vuelva a abrir sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. Deja un reporte con capturas, y el CI solo certifica las apps que cambiaron.",
+      },
+    ],
+    outcome: [
+      { value: "10", label: "apps terminadas y certificadas, listas para el catálogo" },
+      { value: "11", label: "tamaños revisados por app, de 60×30 a 4K" },
+      { value: "24 h", label: "de uso simulado en cada certificación, sin que crezca la memoria" },
+    ],
+    learnings:
+      "Poner las reglas en una certificación y no en una lista de pendientes cambió cómo diseño: el error aparece en el reporte antes que en la pantalla de un cliente. También me obligó a separar con honestidad qué apps se pueden publicar ya y cuáles esperan al backend, en vez de lanzar apps a medias.",
+  },
+
   "wink-site": {
     // Validado con el autor (2026-10-09).
     draft: false,

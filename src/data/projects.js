@@ -109,6 +109,52 @@ export const projects = [
     liveUrl: "",
   },
   {
+    id: "wink-studio",
+    // Una línea de valor para la card de la home.
+    headline:
+      "El taller donde se hacen las apps para las pantallas de Wink: cada una se ve bien de 60×30 a 4K y no se publica sin pasar la certificación.",
+    highlights: [
+      "10 apps terminadas y certificadas: Clima, Menú del día, Turnero…",
+      "SDK y simulador del player con los 11 tamaños a la vez",
+      "Certificación automática: tamaños, sin red, CPU lenta y 24 h de memoria",
+    ],
+    color: "#F59E0B",
+    slug: "wink-studio",
+    title: "Wink Studio",
+    summary:
+      "Generador de apps HTML para pantallas de Wink: SDK, simulador del player, certificación automática y 10 apps listas para el catálogo.",
+    description:
+      "Wink Studio es el monorepo donde se diseñan, prueban y empaquetan las apps HTML que corren en las pantallas de Wink: Clima, Menú del día, Turnero, Tablero de salidas, Reloj, Pedido listo, Avisos, Agenda, Cumpleaños y Cuenta regresiva. Cada app es un sitio estático (Vite + TypeScript) que se hospeda en RapiSites y se publica al catálogo del panel de Wink, donde cualquier empresa la agrega a sus layouts. Una app declara sus ajustes en un manifiesto y el panel arma solo el formulario para editarlos; el SDK resuelve los ajustes, la zona horaria y la comunicación con el player. Para desarrollar hay un simulador que hace de player y muestra la app en los 11 tamaños reales a la vez, y antes de subirse cada app pasa una certificación automática en Chrome: desbordes y texto cortado en cada tamaño, carga en menos de un segundo con la CPU 4× más lenta, funcionamiento sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. El CI solo certifica las apps que cambiaron.",
+    category: "Plataforma",
+    role: "Head of Development",
+    year: 2026,
+    status: "En desarrollo",
+    team: "Wink Digital S.A.",
+    featured: true,
+    order: 2,
+    images: {
+      cover: "/img/projects/wink-studio/cover.webp",
+      gallery: [
+        "/img/projects/wink-studio/01.webp",
+        "/img/projects/wink-studio/02.webp",
+        "/img/projects/wink-studio/03.webp",
+        "/img/projects/wink-studio/04.webp",
+      ],
+    },
+    techStack: ["ts", "vite", "node", "html", "css"],
+    features: [
+      "10 apps para pantallas, cada una con sus ajustes, escenarios y ficha para el catálogo.",
+      "SDK: ajustes por instancia, zona horaria de la pantalla y comunicación con el player.",
+      "Manifiesto de ajustes (texto, color, fecha, hora, listas…) del que el panel genera el formulario.",
+      "Simulador del player: los 11 tamaños a la vez, ajustes en vivo, cortes de red y cambios de escena.",
+      "Certificación automática en Chrome con reporte y capturas; el CI solo certifica lo que cambió.",
+      "Pensadas para una Raspberry Pi: sin red, sin fugas de memoria y con animaciones anti burn-in.",
+    ],
+    tags: ["digital-signage", "typescript", "vite", "sdk", "testing"],
+    repoUrl: "",
+    liveUrl: "",
+  },
+  {
     id: "wink-site",
     // Una línea de valor para la card de la home.
     headline:
@@ -131,7 +177,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 2,
+    order: 3,
     images: {
       cover: "/img/projects/wink-site/cover.webp",
       mobile: "/img/projects/wink-site/mobile.webp",
@@ -178,7 +224,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto cliente",
     featured: true,
-    order: 4,
+    order: 5,
     images: {
       cover: "/img/projects/honduras-medical-center/cover.webp",
       mobile: "/img/projects/honduras-medical-center/mobile.webp",
@@ -223,7 +269,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto personal",
     featured: true,
-    order: 3,
+    order: 4,
     images: {
       cover: "/img/projects/swiftflow/cover.webp",
       mobile: "/img/projects/swiftflow/mobile.webp",
@@ -259,7 +305,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 5,
+    order: 6,
     images: { cover: "" },
     techStack: ["js", "react", "mongo", "node", "vite"],
     features: [
@@ -286,7 +332,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 6,
+    order: 7,
     images: { cover: "" },
     techStack: ["vite", "js", "tailwind", "vue"],
     features: [
@@ -313,7 +359,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 7,
+    order: 8,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "firebase", "vite"],
     features: [
@@ -340,7 +386,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 8,
+    order: 9,
     images: { cover: "" },
     techStack: ["vite", "js", "vue", "firebase"],
     features: [
@@ -367,7 +413,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 9,
+    order: 10,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -394,7 +440,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 10,
+    order: 11,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -421,7 +467,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 11,
+    order: 12,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -448,7 +494,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 12,
+    order: 13,
     images: { cover: "" },
     techStack: ["react", "ts", "css", "vite", "html"],
     features: [
@@ -475,7 +521,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 13,
+    order: 14,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -502,7 +548,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 14,
+    order: 15,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -529,7 +575,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 15,
+    order: 16,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -556,7 +602,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 16,
+    order: 17,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -583,7 +629,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 17,
+    order: 18,
     images: { cover: "" },
     techStack: ["html", "css", "js", "vite"],
     features: [

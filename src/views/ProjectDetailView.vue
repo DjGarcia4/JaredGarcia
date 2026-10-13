@@ -245,7 +245,7 @@
           >
             <div v-for="row in tldrRows" :key="row.label" class="bg-ink-950/90 p-5 md:p-6">
               <dt class="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-accent-light">{{ row.label }}</dt>
-              <dd class="mt-2 text-[15px] leading-relaxed text-white/80">{{ row.value }}</dd>
+              <dd class="mt-2 text-[15px] leading-relaxed text-white/80"><LinkedText :text="row.value" :self="project.slug" /></dd>
             </div>
           </dl>
 
@@ -266,7 +266,7 @@
             />
           </div>
 
-          <CaseStudy v-if="study" :study="study" class="mt-16 md:mt-24" />
+          <CaseStudy v-if="study" :study="study" :slug="project.slug" class="mt-16 md:mt-24" />
 
           <!-- Gallery: capturas adicionales del producto -->
           <section
@@ -406,7 +406,7 @@
             <p
               class="proj-description-text mt-6 max-w-3xl text-base leading-[1.8] text-white/75 md:text-lg"
             >
-              {{ project.description }}
+              <LinkedText :text="project.description" :self="project.slug" />
             </p>
           </section>
 
@@ -802,6 +802,7 @@ import { projectSrc, projectSrcset } from "@/lib/img";
 import { getCase } from "@/data/localized";
 import { t } from "@/i18n";
 import CaseStudy from "@/components/case/CaseStudy.vue";
+import LinkedText from "@/components/case/LinkedText.vue";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const route = useRoute();

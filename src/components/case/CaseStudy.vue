@@ -5,11 +5,11 @@
     <section class="grid gap-10 md:grid-cols-2 md:gap-12">
       <div>
         <h2 class="case-h">{{ t("caseStudy.context") }}</h2>
-        <p class="case-p">{{ study.context }}</p>
+        <p class="case-p"><LinkedText :text="study.context" :self="slug" /></p>
       </div>
       <div>
         <h2 class="case-h">{{ t("caseStudy.problem") }}</h2>
-        <p class="case-p">{{ study.problem }}</p>
+        <p class="case-p"><LinkedText :text="study.problem" :self="slug" /></p>
       </div>
     </section>
 
@@ -20,7 +20,7 @@
           <span class="font-mono text-sm font-bold text-accent-light">{{ String(i + 1).padStart(2, "0") }}</span>
           <div>
             <h3 class="text-2xl font-bold tracking-tight">{{ d.title }}</h3>
-            <p class="mt-3 max-w-3xl leading-relaxed text-white/75 md:text-lg">{{ d.body }}</p>
+            <p class="mt-3 max-w-3xl leading-relaxed text-white/75 md:text-lg"><LinkedText :text="d.body" :self="slug" /></p>
 
             <figure v-if="d.media" class="mt-7">
               <WizardDemo v-if="d.media.type === 'orbs'" />
@@ -123,7 +123,7 @@
 
     <section v-if="study.learnings">
       <h2 class="case-h">{{ t("caseStudy.learnings") }}</h2>
-      <p class="case-p max-w-3xl">{{ study.learnings }}</p>
+      <p class="case-p max-w-3xl"><LinkedText :text="study.learnings" :self="slug" /></p>
     </section>
   </div>
 </template>
@@ -131,6 +131,7 @@
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted, ref } from "vue";
 import WizardDemo from "@/components/case/WizardDemo.vue";
+import LinkedText from "@/components/case/LinkedText.vue";
 import { t } from "@/i18n";
 import { projectSrc, projectSrcset } from "@/lib/img";
 // La demo 3D (y three.js) se cargan aparte, solo en el caso que la usa.
@@ -138,6 +139,8 @@ const SignageDemo = defineAsyncComponent(() => import("@/components/case/Signage
 
 defineProps({
   study: { type: Object, required: true },
+  // Slug del caso, para no enlazarlo a sí mismo en el texto.
+  slug: { type: String, default: "" },
 });
 
 // El video se reproduce solo (muted) cuando está en pantalla y se pausa al

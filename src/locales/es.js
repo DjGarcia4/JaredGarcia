@@ -69,6 +69,7 @@ export default {
     blogEyebrow: "Blog",
     blogTitle: "Últimos artículos",
     allPosts: "Ver todos los artículos",
+    blogLead: "Lo que aprendo construyendo RapiSites, Wink y SwiftFlow: decisiones, errores y números reales, contados en detalle.",
   },
   cases: {
     view: "Ver caso",

@@ -70,7 +70,7 @@
     <!-- Palabra clave del post -->
     <span
       v-if="keyword"
-      class="post-cover__keyword relative font-display text-[clamp(2.25rem,5.5vw,4.25rem)] font-bold leading-[0.95] tracking-tight"
+      class="post-cover__keyword relative font-display font-bold leading-[0.95] tracking-tight"
     >
       {{ keyword }}
     </span>
@@ -113,6 +113,9 @@ const brand = computed(() => BRANDS[props.project?.id] ?? { accent: props.projec
 
 <style scoped>
 .post-cover {
+  /* La palabra clave se mide con el ancho de la tarjeta, no de la ventana:
+     en la grilla de 3 de la home las tarjetas son angostas. */
+  container-type: inline-size;
   background:
     radial-gradient(90% 120% at 100% 50%, color-mix(in srgb, var(--brand) 22%, transparent), transparent 65%),
     radial-gradient(60% 80% at 0% 100%, color-mix(in srgb, var(--brand) 10%, transparent), transparent 70%),
@@ -153,6 +156,8 @@ const brand = computed(() => BRANDS[props.project?.id] ?? { accent: props.projec
   transform: translateY(-6px) scale(1.02);
 }
 .post-cover__keyword {
+  font-size: clamp(1.75rem, 10cqi, 4.25rem);
+  overflow-wrap: anywhere;
   color: color-mix(in srgb, var(--brand) 35%, #fff);
 }
 @media (prefers-reduced-motion: reduce) {

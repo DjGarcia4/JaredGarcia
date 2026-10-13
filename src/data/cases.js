@@ -54,7 +54,7 @@ export const cases = {
     outcome: [
       { value: "+80", label: "sitios generados en RapiSites" },
       { value: "API", label: "en uso por Wink para hospedar los sitios de sus clientes" },
-      { value: "< 30 s", label: "para generar un sitio completo, con 33 secciones sin JS" },
+      { value: "< 30 s", label: "para generar un sitio completo, con 57 componentes sin JS" },
     ],
     learnings:
       "Diseñar el flujo antes que la interfaz me obligó a decidir qué no preguntar, y qué no animar. Cada pregunta que saqué del onboarding se convirtió en una decisión que el sistema toma bien por defecto y que el usuario puede cambiar después.",

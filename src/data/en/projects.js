@@ -15,13 +15,13 @@ export const projectsEn = {
       "Visual editor with autosave, undo/redo and drag & drop",
     ],
     description:
-      "RapiSites is my main personal project: a multi-tenant website builder where anyone answers four questions and gets a complete site —structure, content and SEO metadata— generated with the Claude API in under thirty seconds. Each site is served on its own subdomain or on the client's domain with automatic HTTPS, and it's published atomically: a pre-publish SEO audit, a frozen snapshot and a version history with one-click rollback. It includes a visual editor with autosave, undo/redo and drag & drop sections, a catalog of 33 sections that ship no JavaScript on the public site (performance is SEO) and bilingual sites. I design and build it end to end, from product to infrastructure: Nuxt 4 with SSR, PostgreSQL + Drizzle, pg-boss queues, Cloudflare R2, Caddy with wildcard and on-demand certificates, Docker deployments on a hardened VPS, encrypted backups and observability with Sentry and BetterStack. It's live and under active development.",
+      "RapiSites is my main personal project: a multi-tenant website builder where anyone answers four questions and gets a complete site —structure, content and SEO metadata— generated with the Claude API in under thirty seconds. Each site is served on its own subdomain or on the client's domain with automatic HTTPS, and it's published atomically: a pre-publish SEO audit, a frozen snapshot and a version history with one-click rollback. It includes a visual editor with autosave, undo/redo and drag & drop sections, a catalog of 57 components that ship no JavaScript on the public site (performance is SEO) and bilingual sites. I design and build it end to end, from product to infrastructure: Nuxt 4 with SSR, PostgreSQL + Drizzle, pg-boss queues, Cloudflare R2, Caddy with wildcard and on-demand certificates, Docker deployments on a hardened VPS, encrypted backups and observability with Sentry and BetterStack. It's live and under active development.",
     features: [
       "4-question wizard that generates structure, content and SEO with the Claude API.",
       "Multi-tenant sites on subdomains and custom domains with automatic HTTPS.",
       "Atomic publishing with SEO audit, version history and rollback.",
       "Visual editor with autosave, undo/redo and drag & drop sections.",
-      "33 sections with no JavaScript on the public site, in Spanish and English.",
+      "57 components with no JavaScript on the public site, in Spanish and English.",
       "Own infrastructure: Docker, Caddy, PostgreSQL, R2, encrypted backups and monitoring.",
     ],
   },

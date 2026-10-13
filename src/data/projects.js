@@ -33,7 +33,7 @@ export const projects = [
     summary:
       "SaaS para crear sitios web con IA: respondes 4 preguntas y tu sitio queda publicado, con SEO técnico, en minutos.",
     description:
-      "RapiSites es mi proyecto personal principal: un constructor de sitios web multi-tenant donde cualquier persona responde cuatro preguntas y obtiene su sitio completo —estructura, contenido y metadatos SEO— generado con la API de Claude en menos de treinta segundos. Cada sitio se sirve en su propio subdominio o en el dominio del cliente con HTTPS automático, y se publica de forma atómica: auditoría SEO previa, snapshot congelado e historial de versiones con rollback en un click. Incluye un editor visual con autosave, undo/redo y secciones con drag & drop, un catálogo de 33 secciones que no cargan JavaScript en el sitio público (el rendimiento es SEO) y sitios bilingües. Lo diseño y desarrollo de punta a punta, desde el producto hasta la infraestructura: Nuxt 4 con SSR, PostgreSQL + Drizzle, colas con pg-boss, Cloudflare R2, Caddy con certificados wildcard y on-demand, despliegue con Docker en un VPS endurecido, backups cifrados y observabilidad con Sentry y BetterStack. Está en producción y en desarrollo activo.",
+      "RapiSites es mi proyecto personal principal: un constructor de sitios web multi-tenant donde cualquier persona responde cuatro preguntas y obtiene su sitio completo —estructura, contenido y metadatos SEO— generado con la API de Claude en menos de treinta segundos. Cada sitio se sirve en su propio subdominio o en el dominio del cliente con HTTPS automático, y se publica de forma atómica: auditoría SEO previa, snapshot congelado e historial de versiones con rollback en un click. Incluye un editor visual con autosave, undo/redo y secciones con drag & drop, un catálogo de 57 componentes que no cargan JavaScript en el sitio público (el rendimiento es SEO) y sitios bilingües. Lo diseño y desarrollo de punta a punta, desde el producto hasta la infraestructura: Nuxt 4 con SSR, PostgreSQL + Drizzle, colas con pg-boss, Cloudflare R2, Caddy con certificados wildcard y on-demand, despliegue con Docker en un VPS endurecido, backups cifrados y observabilidad con Sentry y BetterStack. Está en producción y en desarrollo activo.",
     category: "SaaS",
     role: "Fundador y desarrollador fullstack",
     year: 2026,
@@ -56,7 +56,7 @@ export const projects = [
       "Sitios multi-tenant por subdominio y dominios propios con HTTPS automático.",
       "Publicación atómica con auditoría SEO, historial de versiones y rollback.",
       "Editor visual con autosave, undo/redo y secciones con drag & drop.",
-      "33 secciones sin JavaScript en el sitio público, en español e inglés.",
+      "57 componentes sin JavaScript en el sitio público, en español e inglés.",
       "Infra propia: Docker, Caddy, PostgreSQL, R2, backups cifrados y monitoreo.",
     ],
     tags: ["saas", "nuxt", "ia", "multi-tenant", "seo", "typescript"],

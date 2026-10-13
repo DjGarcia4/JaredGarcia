@@ -39,7 +39,7 @@ export const casesEn = {
     outcome: [
       { value: "80+", label: "sites generated on RapiSites" },
       { value: "API", label: "used by Wink to host its clients' websites" },
-      { value: "< 30 s", label: "to generate a complete site, with 33 no-JS sections" },
+      { value: "< 30 s", label: "to generate a complete site, with 57 no-JS components" },
     ],
     learnings:
       "Designing the flow before the interface forced me to decide what not to ask, and what not to animate. Every question I removed from onboarding became a decision the system makes well by default and the user can change later.",

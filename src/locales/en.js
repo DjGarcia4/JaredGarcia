@@ -374,6 +374,9 @@ export default {
     notFound: "Post not found.",
     rss: "Subscribe via RSS",
     draft: "Draft",
+    kinds: { learning: "Lessons", guide: "Guides" },
+    kind: { learning: "Lesson", guide: "Guide" },
+    thisSite: "This portfolio",
   },
   lab: {
     eyebrow: "Lab",

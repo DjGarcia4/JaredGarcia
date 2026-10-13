@@ -375,6 +375,9 @@ export default {
     notFound: "No se encontró el artículo.",
     rss: "Suscribirse por RSS",
     draft: "Borrador",
+    kinds: { learning: "Aprendizajes", guide: "Guías" },
+    kind: { learning: "Aprendizaje", guide: "Guía" },
+    thisSite: "Este portafolio",
   },
   lab: {
     eyebrow: "Lab",

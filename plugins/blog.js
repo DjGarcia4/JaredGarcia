@@ -2,7 +2,7 @@
 //
 // Cada artículo es src/content/blog/<lang>/<slug>.md con frontmatter YAML:
 //   title, description, date (AAAA-MM-DD)       → obligatorios
-//   updated, tags[], cover, projects[], draft   → opcionales
+//   updated, tags[], cover, projects[], kind, keyword, draft → opcionales
 // El mismo <slug> en es/ y en/ es el mismo artículo traducido.
 //
 // - `virtual:blog` exporta los metadatos de todos los artículos (sin cuerpo)
@@ -89,6 +89,10 @@ export default function blog({ dir = "src/content/blog", siteUrl = "", siteName 
       tags: data.tags || [],
       cover: data.cover || null,
       projects: data.projects || [],
+      // "learning" (lo que aprendí) | "guide" (cómo usar algo): filtro del listado.
+      kind: data.kind === "guide" ? "guide" : "learning",
+      // Palabra de la portada de marca cuando el artículo no tiene cover.
+      keyword: data.keyword ? String(data.keyword) : null,
       draft: !!data.draft,
       readingTime: readingTime(body),
     };

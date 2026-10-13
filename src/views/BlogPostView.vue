@@ -397,7 +397,28 @@ onUnmounted(() => {
   border-bottom: 1px solid rgb(255 255 255 / 0.08);
   padding: 0.6em 0.9em;
   text-align: left;
+  vertical-align: top;
+}
+.prose-blog th {
   white-space: nowrap;
+}
+/* Celdas con texto: que corten línea, pero sin quedar en una columna
+   angosta (la tabla scrollea en horizontal si no entra). */
+.prose-blog td {
+  min-width: 9rem;
+  line-height: 1.55;
+}
+.prose-blog figure img {
+  width: 100%;
+}
+.prose-blog figcaption,
+.prose-blog .tbl-note {
+  margin-top: 0.75em;
+  font-size: 0.85em;
+  color: rgb(255 255 255 / 0.55);
+}
+.prose-blog .tbl-note {
+  margin-top: 0.6em;
 }
 .prose-blog th {
   font-family: "Space Mono", ui-monospace, monospace;

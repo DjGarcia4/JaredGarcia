@@ -106,7 +106,7 @@ export const casesEn = {
       outcome: "10 finished, certified apps, ready for Wink's catalog as soon as the back end lands.",
     },
     context:
-      "Wink apps are static sites that run inside the player: an iframe on a Raspberry Pi with Chromium, plugged into a screen nobody touches. Each app is hosted on RapiSites and published to the Wink dashboard's catalog, where a company adds it to its layouts and tailors it with its own copy, colors and logo.",
+      "Wink apps are static sites that run inside the player: an iframe on a Raspberry Pi with Chromium, plugged into a screen nobody touches. Each app will be hosted on RapiSites and published to the Wink dashboard's catalog, where a company adds it to its layouts and tailors it with its own copy, colors and logo.",
     problem:
       "The same app has to look right on a full screen, a portrait one, a 1920×360 strip and a 60×30 box; keep working if the network drops, and run for weeks without a restart on modest hardware. And it couldn't rely on someone testing every size by hand before publishing.",
     decisions: [
@@ -121,8 +121,8 @@ export const casesEn = {
         media: { type: "image", src: "/img/projects/wink-studio/04.webp", caption: "Order Ready: in progress on the left, ready for pickup in large type." },
       },
       {
-        title: "The app declares its settings; the dashboard builds the form",
-        body: "Each app ships a manifest with its settings —text, color, font, date, time, lists— and the dashboard generates the form the client sees from it. The SDK hands those settings to the app without reloading it, using the screen's date and time rather than the browser's.",
+        title: "The app declares its settings; the form builds itself",
+        body: "Each app ships a manifest with its settings —text, color, font, date, time, lists— and the form to edit them is generated from it. Today the simulator builds it, with the dashboard's own components; the dashboard will do the same once the back end reads the manifest at publish time. The SDK hands those settings to the app without reloading it, using the screen's date and time rather than the browser's.",
       },
       {
         title: "A simulator that plays the player",

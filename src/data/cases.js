@@ -125,7 +125,7 @@ export const cases = {
       outcome: "10 apps terminadas y certificadas, listas para el catálogo de Wink en cuanto esté el backend.",
     },
     context:
-      "Las apps de Wink son sitios estáticos que corren dentro del player: un iframe en una Raspberry Pi con Chromium, conectada a una pantalla que nadie toca. Cada app se hospeda en RapiSites y se publica al catálogo del panel de Wink, donde la empresa la agrega a sus layouts y la ajusta con sus textos, colores y logo.",
+      "Las apps de Wink son sitios estáticos que corren dentro del player: un iframe en una Raspberry Pi con Chromium, conectada a una pantalla que nadie toca. Cada app se va a hospedar en RapiSites y a publicar en el catálogo del panel de Wink, donde la empresa la agrega a sus layouts y la ajusta con sus textos, colores y logo.",
     problem:
       "Una misma app tiene que verse bien en una pantalla completa, en una vertical, en una tira de 1920×360 y en un recuadro de 60×30; seguir funcionando si se cae la red y correr semanas sin reiniciarse en un equipo modesto. Y no podía depender de que alguien la probara a mano en cada tamaño antes de publicarla.",
     decisions: [
@@ -140,8 +140,8 @@ export const cases = {
         media: { type: "image", src: "/img/projects/wink-studio/04.webp", caption: "Pedido listo: en preparación a la izquierda, listos para recoger en grande." },
       },
       {
-        title: "La app declara sus ajustes; el panel arma el formulario",
-        body: "Cada app trae un manifiesto con sus ajustes —texto, color, fuente, fecha, hora, listas— y el panel genera a partir de él el formulario que ve el cliente. El SDK entrega esos ajustes a la app sin recargarla, con la fecha y la hora de la pantalla y no las del navegador.",
+        title: "La app declara sus ajustes; el formulario se arma solo",
+        body: "Cada app trae un manifiesto con sus ajustes —texto, color, fuente, fecha, hora, listas— y el formulario para editarlos se genera a partir de él. Hoy lo arma el simulador, con los mismos componentes del panel; el panel lo va a hacer igual cuando el backend lea el manifiesto al publicar. El SDK entrega esos ajustes a la app sin recargarla, con la fecha y la hora de la pantalla y no las del navegador.",
       },
       {
         title: "Un simulador que hace de player",

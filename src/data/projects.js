@@ -124,7 +124,7 @@ export const projects = [
     summary:
       "Generador de apps HTML para pantallas de Wink: SDK, simulador del player, certificación automática y 10 apps listas para el catálogo.",
     description:
-      "Wink Studio es el monorepo donde se diseñan, prueban y empaquetan las apps HTML que corren en las pantallas de Wink: Clima, Menú del día, Turnero, Tablero de salidas, Reloj, Pedido listo, Avisos, Agenda, Cumpleaños y Cuenta regresiva. Cada app es un sitio estático (Vite + TypeScript) que se hospeda en RapiSites y se publica al catálogo del panel de Wink, donde cualquier empresa la agrega a sus layouts. Una app declara sus ajustes en un manifiesto y el panel arma solo el formulario para editarlos; el SDK resuelve los ajustes, la zona horaria y la comunicación con el player. Para desarrollar hay un simulador que hace de player y muestra la app en los 11 tamaños reales a la vez, y antes de subirse cada app pasa una certificación automática en Chrome: desbordes y texto cortado en cada tamaño, carga en menos de un segundo con la CPU 4× más lenta, funcionamiento sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. El CI solo certifica las apps que cambiaron.",
+      "Wink Studio es el monorepo donde se diseñan, prueban y empaquetan las apps HTML que corren en las pantallas de Wink: Clima, Menú del día, Turnero, Tablero de salidas, Reloj, Pedido listo, Avisos, Agenda, Cumpleaños y Cuenta regresiva. Cada app es un sitio estático (Vite + TypeScript) que se va a hospedar en RapiSites y a publicar en el catálogo del panel de Wink, donde cualquier empresa la agrega a sus layouts; están terminadas y certificadas, y la publicación espera el backend. Una app declara sus ajustes en un manifiesto y el formulario para editarlos se arma solo; el SDK resuelve los ajustes, la zona horaria y la comunicación con el player. Para desarrollar hay un simulador que hace de player y muestra la app en los 11 tamaños reales a la vez, y antes de subirse cada app pasa una certificación automática en Chrome: desbordes y texto cortado en cada tamaño, carga en menos de un segundo con la CPU 4× más lenta, funcionamiento sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. El CI solo certifica las apps que cambiaron.",
     category: "Plataforma",
     role: "Head of Development",
     year: 2026,
@@ -145,7 +145,7 @@ export const projects = [
     features: [
       "10 apps para pantallas, cada una con sus ajustes, escenarios y ficha para el catálogo.",
       "SDK: ajustes por instancia, zona horaria de la pantalla y comunicación con el player.",
-      "Manifiesto de ajustes (texto, color, fecha, hora, listas…) del que el panel genera el formulario.",
+      "Manifiesto de ajustes (texto, color, fecha, hora, listas…) del que se genera el formulario para editarlos (hoy en el simulador; en el panel cuando el backend lea el manifiesto).",
       "Simulador del player: los 11 tamaños a la vez, ajustes en vivo, cortes de red y cambios de escena.",
       "Certificación automática en Chrome con reporte y capturas; el CI solo certifica lo que cambió.",
       "Pensadas para una Raspberry Pi: sin red, sin fugas de memoria y con animaciones anti burn-in.",

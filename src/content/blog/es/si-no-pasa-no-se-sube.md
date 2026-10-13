@@ -4,7 +4,6 @@ description: "Desbordes, CPU lenta, sin red y 24 horas de reloj acelerado: la ce
 date: 2026-10-12
 tags: [testing, playwright, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/report.webp
 kind: learning
 keyword: "certificación"
 ---

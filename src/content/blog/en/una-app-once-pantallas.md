@@ -4,7 +4,6 @@ description: "How I design Wink apps so the same app looks right on a full scree
 date: 2026-10-12
 tags: [design, css, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/sizes.webp
 kind: learning
 keyword: "11 sizes"
 ---

@@ -4,7 +4,6 @@ description: "Cada app de Wink declara sus ajustes en un JSON y el formulario pa
 date: 2026-10-12
 tags: [arquitectura, dx, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/sim-one.webp
 kind: learning
 keyword: "manifiesto"
 ---

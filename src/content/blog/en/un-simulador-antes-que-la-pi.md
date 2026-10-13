@@ -4,7 +4,6 @@ description: "Why I built a player simulator before building the apps: eleven si
 date: 2026-10-12
 tags: [tooling, dx, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/sim-all.webp
 kind: learning
 keyword: "simulator"
 ---

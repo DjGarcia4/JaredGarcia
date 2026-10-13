@@ -4,7 +4,6 @@ description: "Every Wink app declares its settings in a JSON file and the form t
 date: 2026-10-12
 tags: [architecture, dx, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/sim-one.webp
 kind: learning
 keyword: "manifest"
 ---

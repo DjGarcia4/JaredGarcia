@@ -4,7 +4,6 @@ description: "No clicks, no scrolling, read from meters away: what changes when 
 date: 2026-10-12
 tags: [ux, design, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/turnero.webp
 kind: learning
 keyword: "signage"
 ---

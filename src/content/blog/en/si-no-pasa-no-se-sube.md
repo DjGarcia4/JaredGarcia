@@ -4,7 +4,6 @@ description: "Overflow, a slow CPU, no network and 24 hours of fast-forwarded cl
 date: 2026-10-12
 tags: [testing, playwright, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/report.webp
 kind: learning
 keyword: "certification"
 ---

@@ -4,7 +4,6 @@ description: "Cómo diseño las apps de Wink para que la misma app se vea bien e
 date: 2026-10-12
 tags: [diseño, css, wink]
 projects: [wink-studio]
-cover: /img/projects/wink-studio/sizes.webp
 kind: learning
 keyword: "11 tamaños"
 ---

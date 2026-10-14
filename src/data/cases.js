@@ -115,13 +115,13 @@ export const cases = {
   },
 
   "wink-studio": {
-    // Borrador (2026-10-12): el qué sale del repo de Wink Studio; el por qué
+    // Borrador (2026-10-12, al día con el estudio el 2026-10-14): el qué sale del repo de Wink Studio; el por qué
     // hay que validarlo con el autor. El repo es privado: solo descripción y
     // capturas de las apps.
     draft: true,
     tldr: {
       problem: "Las pantallas de Wink mostraban sobre todo videos e imágenes; faltaba contenido vivo —clima, turnos, menús, pedidos— que cualquier empresa pudiera agregar sin programar.",
-      role: "Head of Development: diseño de las apps, SDK, simulador y certificación.",
+      role: "Head of Development: diseño de las apps, SDK, simulador, certificación y el estudio.",
       outcome: "10 apps terminadas y certificadas, listas para el catálogo de Wink en cuanto esté el backend.",
     },
     context:
@@ -141,15 +141,23 @@ export const cases = {
       },
       {
         title: "La app declara sus ajustes; el formulario se arma solo",
-        body: "Cada app trae un manifiesto con sus ajustes —texto, color, fuente, fecha, hora, listas— y el formulario para editarlos se genera a partir de él. Hoy lo arma el simulador, con los mismos componentes del panel; el panel lo va a hacer igual cuando el backend lea el manifiesto al publicar. El SDK entrega esos ajustes a la app sin recargarla, con la fecha y la hora de la pantalla y no las del navegador.",
+        body: "Cada app trae un manifiesto con sus ajustes —texto, color, fuente, fecha, hora, listas— y el formulario para editarlos se genera a partir de él. Hoy lo arman el simulador y el editor de ajustes del estudio, con los mismos componentes del panel; el panel lo va a hacer igual cuando el backend lea el manifiesto al publicar. El SDK entrega esos ajustes a la app sin recargarla, con la fecha y la hora de la pantalla y no las del navegador.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-ajustes.webp", caption: "Editor de ajustes de Menú del día: el manifiesto con formulario y, al lado, cómo lo ve el cliente en el panel." },
       },
       {
         title: "Un simulador que hace de player",
-        body: "Para no probar en la Pi a cada cambio, armé un simulador: carga la app en los 11 tamaños reales a la vez, desde otro origen como lo haría el player, con los ajustes en vivo, cortes de red, cambios de escena y transiciones. Lo que se ve ahí es lo que va a ver la pantalla.",
+        body: "Para no probar en la Pi a cada cambio, armé un simulador: carga la app en los 11 tamaños reales a la vez, desde otro origen como lo haría el player, con los ajustes en vivo, cortes de red, cambios de escena y transiciones. Lo que se ve ahí es lo que va a ver la pantalla. Y los mismos escenarios que prueba la certificación —una marca clara, textos al máximo, la API sin responder— se abren con un clic, con su hora y sus datos.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-escenarios.webp", caption: "Escenarios de Pedido listo: cada uno con su hora fija, los ajustes que cambia y la app en vivo al lado." },
       },
       {
         title: "Si no pasa la certificación, no se sube",
-        body: "Cada app pasa una certificación automática en Chrome antes de publicarse: desbordes y texto cortado en cada tamaño, que cargue en menos de un segundo con la CPU 4× más lenta, que vuelva a abrir sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. Deja un reporte con capturas, y el CI solo certifica las apps que cambiaron.",
+        body: "Cada app pasa una certificación automática en Chrome antes de publicarse: desbordes y texto cortado en cada tamaño, que cargue en menos de un segundo con la CPU 4× más lenta, que vuelva a abrir sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. Deja un reporte con capturas, y el CI solo certifica las apps que cambiaron. Desde el estudio se certifica en cola, con el avance en vivo y el historial de cada app.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-certificar.webp", caption: "Certificación de Avisos desde el estudio: 48 revisiones bien, ninguna para revisar." },
+      },
+      {
+        title: "Un estudio, no una lista de comandos",
+        body: "Al principio todo eran comandos: crear, levantar, certificar, sacar capturas. Funcionaba, pero había que saberlos. Wink Studio los convirtió en un estudio con una puerta de entrada: todas las apps con su captura, su versión, si están certificadas o cambiaron después y qué esperan del backend. Desde ahí se crea una app con un asistente, se escribe la ficha del catálogo viendo cómo queda en el panel y, al final, «Preparar para subir» revisa que todo esté en orden —certificada, el paquete es el certificado, versión y nota en el CHANGELOG, logo y capturas— y arma la carpeta que se arrastra a App Web. Cada pantalla trae su ayuda, y el manual vive adentro.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-home.webp", caption: "Inicio de Wink Studio: las 10 apps, su estado y los filtros por revisar o esperando al backend." },
       },
     ],
     outcome: [

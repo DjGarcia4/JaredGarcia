@@ -10,7 +10,7 @@ keyword: "manifest"
 
 Every [Wink](/project/wink-app) app can be configured: the Menu has its dishes, Queue its counters and Weather its city. If each app brought its own form, Wink's dashboard would have ten different forms to maintain, and each one would look a little different.
 
-Instead, the app declares which settings it has, and the form builds itself from that declaration. Today it's built by the Wink Studio simulator, with the dashboard's components ported over; the dashboard will do the same once the backend reads the manifest at publish time, which is one of the pieces still waiting on the backend.
+Instead, the app declares which settings it has, and the form builds itself from that declaration. Today it's built by Wink Studio's simulator and settings editor, with the dashboard's components ported over; the dashboard will do the same once the backend reads the manifest at publish time, which is one of the pieces still waiting on the backend.
 
 ## The manifest
 

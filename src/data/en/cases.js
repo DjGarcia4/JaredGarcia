@@ -102,7 +102,7 @@ export const casesEn = {
     draft: true,
     tldr: {
       problem: "Wink's screens mostly showed videos and images; they lacked live content —weather, queues, menus, orders— that any company could add without coding.",
-      role: "Head of Development: app design, SDK, simulator and certification.",
+      role: "Head of Development: app design, SDK, simulator, certification and the studio.",
       outcome: "10 finished, certified apps, ready for Wink's catalog as soon as the back end lands.",
     },
     context:
@@ -122,15 +122,23 @@ export const casesEn = {
       },
       {
         title: "The app declares its settings; the form builds itself",
-        body: "Each app ships a manifest with its settings —text, color, font, date, time, lists— and the form to edit them is generated from it. Today the simulator builds it, with the dashboard's own components; the dashboard will do the same once the back end reads the manifest at publish time. The SDK hands those settings to the app without reloading it, using the screen's date and time rather than the browser's.",
+        body: "Each app ships a manifest with its settings —text, color, font, date, time, lists— and the form to edit them is generated from it. Today the simulator and the studio's settings editor build it, with the dashboard's own components; the dashboard will do the same once the back end reads the manifest at publish time. The SDK hands those settings to the app without reloading it, using the screen's date and time rather than the browser's.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-ajustes.webp", caption: "Daily Menu's settings editor: the manifest as a form and, alongside, how the client sees it in the dashboard." },
       },
       {
         title: "A simulator that plays the player",
-        body: "To avoid testing on the Pi after every change, I built a simulator: it loads the app in all 11 real sizes at once, from a different origin just like the player, with live settings, network drops, scene changes and transitions. What you see there is what the screen will show.",
+        body: "To avoid testing on the Pi after every change, I built a simulator: it loads the app in all 11 real sizes at once, from a different origin just like the player, with live settings, network drops, scene changes and transitions. What you see there is what the screen will show. And the same scenarios certification tests —a light brand, text at its longest, an API that doesn't answer— open with one click, with their own time and data.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-escenarios.webp", caption: "Order Ready's scenarios: each with its fixed time, the settings it changes and the live app alongside." },
       },
       {
         title: "If it doesn't pass certification, it doesn't ship",
-        body: "Every app goes through an automated certification in Chrome before publishing: overflow and clipped text at every size, loading in under a second with a 4× slower CPU, reopening offline, 20 scene changes in a row and 24 hours of fast-forwarded clock without memory growth. It produces a report with screenshots, and CI only certifies the apps that changed.",
+        body: "Every app goes through an automated certification in Chrome before publishing: overflow and clipped text at every size, loading in under a second with a 4× slower CPU, reopening offline, 20 scene changes in a row and 24 hours of fast-forwarded clock without memory growth. It produces a report with screenshots, and CI only certifies the apps that changed. From the studio, certification runs in a queue, with live progress and each app's history.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-certificar.webp", caption: "Certifying Notices from the studio: 48 checks passed, none to review." },
+      },
+      {
+        title: "A studio, not a list of commands",
+        body: "At first everything was a command: create, run, certify, take screenshots. It worked, but you had to know them. Wink Studio turned them into a studio with a front door: every app with its screenshot, its version, whether it's certified or changed since, and what it's waiting on from the back end. From there you create an app with a wizard, write its catalog listing while seeing how it looks in the dashboard and, at the end, “Prepare for upload” checks everything is in order —certified, the package is the certified one, version and note in the CHANGELOG, logo and screenshots— and builds the folder you drag into Web App. Every screen has its own help, and the manual lives inside.",
+        media: { type: "image", src: "/img/projects/wink-studio/studio-home.webp", caption: "Wink Studio's home: all 10 apps, their status and filters for what needs review or is waiting on the back end." },
       },
     ],
     outcome: [

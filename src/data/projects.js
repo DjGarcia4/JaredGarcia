@@ -112,19 +112,19 @@ export const projects = [
     id: "wink-studio",
     // Una línea de valor para la card de la home.
     headline:
-      "El taller donde se hacen las apps para las pantallas de Wink: cada una se ve bien de 60×30 a 4K y no se publica sin pasar la certificación.",
+      "El estudio donde se hacen las apps para las pantallas de Wink: se crean, se ajustan, se certifican y se preparan para subir desde una sola pantalla.",
     highlights: [
       "10 apps terminadas y certificadas: Clima, Menú del día, Turnero…",
-      "SDK y simulador del player con los 11 tamaños a la vez",
-      "Certificación automática: tamaños, sin red, CPU lenta y 24 h de memoria",
+      "Un estudio con todas las apps: ajustes, escenarios, ficha, certificar y subir",
+      "Simulador del player y certificación automática en los 11 tamaños",
     ],
     color: "#F59E0B",
     slug: "wink-studio",
     title: "Wink Studio",
     summary:
-      "Generador de apps HTML para pantallas de Wink: SDK, simulador del player, certificación automática y 10 apps listas para el catálogo.",
+      "Estudio de apps HTML para las pantallas de Wink: SDK, simulador del player, certificación automática y 10 apps listas para el catálogo.",
     description:
-      "Wink Studio es el monorepo donde se diseñan, prueban y empaquetan las apps HTML que corren en las pantallas de Wink: Clima, Menú del día, Turnero, Tablero de salidas, Reloj, Pedido listo, Avisos, Agenda, Cumpleaños y Cuenta regresiva. Cada app es un sitio estático (Vite + TypeScript) que se va a hospedar en RapiSites y a publicar en el catálogo del panel de Wink, donde cualquier empresa la agrega a sus layouts; están terminadas y certificadas, y la publicación espera el backend. Una app declara sus ajustes en un manifiesto y el formulario para editarlos se arma solo; el SDK resuelve los ajustes, la zona horaria y la comunicación con el player. Para desarrollar hay un simulador que hace de player y muestra la app en los 11 tamaños reales a la vez, y antes de subirse cada app pasa una certificación automática en Chrome: desbordes y texto cortado en cada tamaño, carga en menos de un segundo con la CPU 4× más lenta, funcionamiento sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. El CI solo certifica las apps que cambiaron.",
+      "Wink Studio es el estudio donde se diseñan, prueban y empaquetan las apps HTML que corren en las pantallas de Wink: Clima, Menú del día, Turnero, Tablero de salidas, Reloj, Pedido listo, Avisos, Agenda, Cumpleaños y Cuenta regresiva. Cada app es un sitio estático (Vite + TypeScript) que se va a hospedar en RapiSites y a publicar en el catálogo del panel de Wink, donde cualquier empresa la agrega a sus layouts; están terminadas y certificadas, y la publicación espera el backend. Una app declara sus ajustes en un manifiesto y el formulario para editarlos se arma solo; el SDK resuelve los ajustes, la zona horaria y la comunicación con el player. Para desarrollar hay un simulador que hace de player y muestra la app en los 11 tamaños reales a la vez, y antes de subirse cada app pasa una certificación automática en Chrome: desbordes y texto cortado en cada tamaño, carga en menos de un segundo con la CPU 4× más lenta, funcionamiento sin red, 20 cambios de escena seguidos y 24 horas de reloj acelerado sin que crezca la memoria. El CI solo certifica las apps que cambiaron. Todo se maneja desde el inicio del estudio: cada app con su captura, su versión y si está certificada o cambió después; desde ahí se crea una app nueva con un asistente, se editan sus ajustes y sus escenarios con la app en vivo al lado, se escribe la ficha del catálogo viendo cómo queda en el panel, se certifica con el avance en vivo y se prepara para subir, con una revisión final y la carpeta lista para arrastrar.",
     category: "Plataforma",
     role: "Head of Development",
     year: 2026,
@@ -135,6 +135,8 @@ export const projects = [
     images: {
       cover: "/img/projects/wink-studio/cover.webp",
       gallery: [
+        "/img/projects/wink-studio/studio.webp",
+        "/img/projects/wink-studio/studio-ficha.webp",
         "/img/projects/wink-studio/01.webp",
         "/img/projects/wink-studio/02.webp",
         "/img/projects/wink-studio/03.webp",
@@ -144,10 +146,13 @@ export const projects = [
     techStack: ["ts", "vite", "node", "html", "css"],
     features: [
       "10 apps para pantallas, cada una con sus ajustes, escenarios y ficha para el catálogo.",
+      "Inicio del estudio con todas las apps: versión, si está certificada o cambió después y qué espera del backend.",
+      "Asistente «Nueva app», editor de ajustes y de escenarios, y ficha del catálogo con la vista previa del panel al lado.",
+      "Preparar para subir: revisa que todo esté en orden y arma la carpeta para App Web y la de la ficha.",
       "SDK: ajustes por instancia, zona horaria de la pantalla y comunicación con el player.",
-      "Manifiesto de ajustes (texto, color, fecha, hora, listas…) del que se genera el formulario para editarlos (hoy en el simulador; en el panel cuando el backend lea el manifiesto).",
-      "Simulador del player: los 11 tamaños a la vez, ajustes en vivo, cortes de red y cambios de escena.",
-      "Certificación automática en Chrome con reporte y capturas; el CI solo certifica lo que cambió.",
+      "Manifiesto de ajustes (texto, color, fecha, hora, listas…) del que se genera el formulario para editarlos (hoy en el estudio y el simulador; en el panel cuando el backend lea el manifiesto).",
+      "Simulador del player: los 11 tamaños a la vez, ajustes en vivo, escenarios con un clic, cortes de red y cambios de escena.",
+      "Certificación automática en Chrome, desde el estudio con el avance en vivo e historial; el CI solo certifica lo que cambió.",
       "Pensadas para una Raspberry Pi: sin red, sin fugas de memoria y con animaciones anti burn-in.",
     ],
     tags: ["digital-signage", "typescript", "vite", "sdk", "testing"],

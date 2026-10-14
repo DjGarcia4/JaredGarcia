@@ -10,7 +10,7 @@ keyword: "manifiesto"
 
 Cada app de [Wink](/project/wink-app) se puede ajustar: el Menú tiene sus platillos, el Turnero sus ventanillas y el Clima su ciudad. Si cada app trajera su propio formulario, el panel de Wink tendría diez formularios distintos que mantener, y cada uno se vería un poco diferente.
 
-En vez de eso, la app declara qué ajustes tiene, y el formulario se arma solo a partir de esa declaración. Hoy lo arma el simulador de Wink Studio, con los componentes del panel portados; el panel va a hacer lo mismo cuando el backend lea el manifiesto al publicar, que es una de las piezas que todavía esperan al backend.
+En vez de eso, la app declara qué ajustes tiene, y el formulario se arma solo a partir de esa declaración. Hoy lo arman el simulador y el editor de ajustes de Wink Studio, con los componentes del panel portados; el panel va a hacer lo mismo cuando el backend lea el manifiesto al publicar, que es una de las piezas que todavía esperan al backend.
 
 ## El manifiesto
 

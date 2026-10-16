@@ -304,7 +304,7 @@ export const projects = [
     highlights: [
       "En uso por Wink y 10 empresas más",
       "Gantt propio: arrastrar para mover y estirar para cambiar fechas",
-      "Permisos por rol en reglas de Firestore, con 77 tests",
+      "Permisos por rol en reglas de Firestore, con más de 70 tests",
     ],
     color: "#059669",
     slug: "gantthub",

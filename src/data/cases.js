@@ -234,7 +234,7 @@ export const cases = {
       },
       {
         title: "Los permisos viven en el servidor",
-        body: "Cuando empezaron a entrar otras empresas, esconder botones ya no alcanzaba. Cada proyecto guarda quién es miembro y con qué rol (owner, admin, editor o viewer), y las reglas de Firestore y Storage solo confían en eso: un viewer puede comentar pero no editar, un editor no toca el equipo ni el presupuesto. Las reglas tienen 77 tests en el emulador, con casos permitidos y denegados, y una migración que se puede repetir sin riesgo para pasar los proyectos existentes al modelo nuevo.",
+        body: "Cuando empezaron a entrar otras empresas, esconder botones ya no alcanzaba. Cada proyecto guarda quién es miembro y con qué rol (owner, admin, editor o viewer), y las reglas de Firestore y Storage solo confían en eso: un viewer puede comentar pero no editar, un editor no toca el equipo ni el presupuesto. Las reglas tienen más de 70 tests en el emulador, con casos permitidos y denegados, y una migración que se puede repetir sin riesgo para pasar los proyectos existentes al modelo nuevo.",
       },
       {
         title: "Mi propia librería de componentes",
@@ -249,7 +249,7 @@ export const cases = {
     ],
     outcome: [
       { value: "Wink + 10", label: "empresas usándolo" },
-      { value: "77", label: "tests de reglas de seguridad por rol" },
+      { value: "+70", label: "tests de reglas de seguridad por rol" },
       { value: "ES / EN", label: "interfaz bilingüe, instalable como PWA", source: { label: "gantt-hub.com", href: "https://gantt-hub.com" } },
     ],
   },

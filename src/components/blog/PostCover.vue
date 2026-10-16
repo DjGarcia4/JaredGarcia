@@ -96,6 +96,7 @@ const BRANDS = {
   "wink-studio": { accent: "#00d2ea", wink: true },
   "wink-app": { accent: "#00d2ea", wink: true },
   "wink-site": { accent: "#00d2ea", wink: true },
+  gantthub: { accent: "#34d399" },
   portfolio: { accent: "#22c55e", logoMark: true },
 };
 

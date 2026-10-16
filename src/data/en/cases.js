@@ -211,7 +211,7 @@ export const casesEn = {
       },
       {
         title: "Permissions live on the server",
-        body: "Once other companies came in, hiding buttons wasn't enough. Each project stores who's a member and with which role (owner, admin, editor or viewer), and the Firestore and Storage rules trust only that: a viewer can comment but not edit, an editor can't touch the team or the budget. The rules have 77 tests in the emulator, with allowed and denied cases, plus a migration that can be re-run safely to move existing projects to the new model.",
+        body: "Once other companies came in, hiding buttons wasn't enough. Each project stores who's a member and with which role (owner, admin, editor or viewer), and the Firestore and Storage rules trust only that: a viewer can comment but not edit, an editor can't touch the team or the budget. The rules have 70+ tests in the emulator, with allowed and denied cases, plus a migration that can be re-run safely to move existing projects to the new model.",
       },
       {
         title: "My own component library",
@@ -226,7 +226,7 @@ export const casesEn = {
     ],
     outcome: [
       { value: "Wink + 10", label: "companies using it" },
-      { value: "77", label: "security-rule tests by role" },
+      { value: "70+", label: "security-rule tests by role" },
       { value: "ES / EN", label: "bilingual interface, installable as a PWA", source: { label: "gantt-hub.com", href: "https://gantt-hub.com" } },
     ],
   },

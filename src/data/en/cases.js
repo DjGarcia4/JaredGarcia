@@ -192,6 +192,45 @@ export const casesEn = {
       "After launch, the way people see us changed: the walkthrough makes it clear this isn't ‘just any product’. And in demos it's easier to show the scrollytelling than a slide; clients are impressed. Animating fewer things, but with a purpose, communicated far more.",
   },
 
+  gantthub: {
+    draft: true,
+    tldr: {
+      problem: "My projects' tasks, dates, budget and meetings lived in different tools, and none of them gave me the order I wanted.",
+      role: "My own project, full stack: product, design, front end, Firebase and Cloud Functions.",
+      outcome: "What started for my own tasks now organizes the work of Wink and 10 other companies.",
+    },
+    context:
+      "I like to keep my projects organized. GanttHub was born to track my own tasks; then I used it to run Wink, later RapiSites and SwiftFlow, and every new project asked for something it didn't have. That's how it grew into a product other teams use today.",
+    problem:
+      "A Kanban board tells you what's in progress, but not whether you'll hit the date or how much you've spent. The goal was to bring the day-to-day (tasks, mentions, meetings), the plan (Gantt) and the money (budget) into one place, and make it safe to let clients and teammates in with different permissions.",
+    decisions: [
+      {
+        title: "A hand-built Gantt",
+        body: "The timeline uses the same tasks as the board: no planning twice. Bars are dragged to move them and stretched to change dates, with day, week or month views, milestones and grouping by assignee or status. Building it myself instead of using a library let me control how it looks and responds, and keep it in the same visual language as the rest of the app.",
+        media: { type: "image", src: "/img/projects/gantthub/02.webp", caption: "A project's timeline: tasks, assignees, milestones and the today line." },
+      },
+      {
+        title: "Permissions live on the server",
+        body: "Once other companies came in, hiding buttons wasn't enough. Each project stores who's a member and with which role (owner, admin, editor or viewer), and the Firestore and Storage rules trust only that: a viewer can comment but not edit, an editor can't touch the team or the budget. The rules have 77 tests in the emulator, with allowed and denied cases, plus a migration that can be re-run safely to move existing projects to the new model.",
+      },
+      {
+        title: "My own component library",
+        body: "With so many screens —board, Gantt, finances, meetings, flows— each one was starting to look different. I rebuilt the app on my own component library (buttons, fields, modals, tabs, toasts) with design tokens and per-project theming. Now a new screen is consistent from day one.",
+        media: { type: "image", src: "/img/projects/gantthub/03.webp", caption: "Task detail: content on the left, properties editable in place on the right." },
+      },
+      {
+        title: "A home screen that answers “what's on me”",
+        body: "The dashboard isn't a wall of charts: it opens with what needs attention, what changed since your last visit, what's assigned to you and your mentions, and leaves project health and team workload further down.",
+        media: { type: "image", src: "/img/projects/gantthub/01.webp", caption: "Home dashboard: indicators, today and what was assigned to you." },
+      },
+    ],
+    outcome: [
+      { value: "Wink + 10", label: "companies using it" },
+      { value: "77", label: "security-rule tests by role" },
+      { value: "ES / EN", label: "bilingual interface, installable as a PWA", source: { label: "gantt-hub.com", href: "https://gantt-hub.com" } },
+    ],
+  },
+
   swiftflow: {
     draft: false,
     tldr: {

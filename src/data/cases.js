@@ -212,6 +212,48 @@ export const cases = {
       "Después del lanzamiento cambió cómo nos perciben: el recorrido deja claro que no es ‘cualquier producto’. Y en las demos es más fácil mostrar el scrollytelling que una diapositiva; los clientes quedan impresionados. Animar menos cosas, pero con un propósito, comunicó mucho más.",
   },
 
+  gantthub: {
+    // Borrador (2026-10-16): el por qué de origen y los usuarios los dio el
+    // autor; el por qué de cada decisión está redactado a partir del repo y
+    // hay que validarlo. Capturas del emulador local con datos de ejemplo.
+    draft: true,
+    tldr: {
+      problem: "Las tareas, las fechas, el presupuesto y las reuniones de mis proyectos vivían en herramientas distintas, y ninguna me daba el orden que quería.",
+      role: "Proyecto propio, full stack: producto, diseño, frontend, Firebase y Cloud Functions.",
+      outcome: "Lo que empezó para mis tareas hoy organiza el trabajo de Wink y de 10 empresas más.",
+    },
+    context:
+      "Me gusta ser ordenado con mis proyectos. GanttHub nació para llevar el tracking de mis propias tareas; después lo usé para controlar Wink, luego RapiSites y SwiftFlow, y cada proyecto nuevo le pedía algo que no tenía. Así fue creciendo hasta ser un producto que hoy usan otros equipos.",
+    problem:
+      "Un tablero Kanban dice qué está en curso, pero no si vas a llegar a la fecha ni cuánto llevas gastado. Había que juntar en un solo lugar el día a día (tareas, menciones, reuniones), el plan (Gantt) y el dinero (presupuesto), y que fuera seguro dejar entrar a clientes y compañeros con distintos permisos.",
+    decisions: [
+      {
+        title: "Un Gantt hecho a mano",
+        body: "El cronograma usa las mismas tareas que el tablero: no hay que planificar dos veces. Las barras se arrastran para moverlas y se estiran para cambiar fechas, con vista por día, semana o mes, hitos y agrupación por responsable o estado. Hacerlo propio en lugar de usar una librería me dejó controlar cómo se ve y cómo responde, y que hable el mismo lenguaje visual que el resto de la app.",
+        media: { type: "image", src: "/img/projects/gantthub/02.webp", caption: "Cronograma de un proyecto: tareas, responsables, hitos y la línea de hoy." },
+      },
+      {
+        title: "Los permisos viven en el servidor",
+        body: "Cuando empezaron a entrar otras empresas, esconder botones ya no alcanzaba. Cada proyecto guarda quién es miembro y con qué rol (owner, admin, editor o viewer), y las reglas de Firestore y Storage solo confían en eso: un viewer puede comentar pero no editar, un editor no toca el equipo ni el presupuesto. Las reglas tienen 77 tests en el emulador, con casos permitidos y denegados, y una migración que se puede repetir sin riesgo para pasar los proyectos existentes al modelo nuevo.",
+      },
+      {
+        title: "Mi propia librería de componentes",
+        body: "Con tantas pantallas —tablero, Gantt, finanzas, reuniones, flujos— cada una empezaba a verse distinta. Rehice la app sobre una librería de componentes propia (botones, campos, modales, pestañas, toasts) con tokens de diseño y tema por proyecto. Ahora una pantalla nueva sale coherente desde el primer día.",
+        media: { type: "image", src: "/img/projects/gantthub/03.webp", caption: "Detalle de una tarea: contenido a la izquierda, propiedades editables en el lugar a la derecha." },
+      },
+      {
+        title: "Un inicio que responde «qué me toca»",
+        body: "El panel no es una pared de gráficos: abre con lo que requiere atención, lo que cambió desde tu última visita, lo asignado a ti y tus menciones, y deja para abajo la salud de los proyectos y la carga del equipo.",
+        media: { type: "image", src: "/img/projects/gantthub/01.webp", caption: "Panel de inicio: indicadores, lo de hoy y lo que te asignaron." },
+      },
+    ],
+    outcome: [
+      { value: "Wink + 10", label: "empresas usándolo" },
+      { value: "77", label: "tests de reglas de seguridad por rol" },
+      { value: "ES / EN", label: "interfaz bilingüe, instalable como PWA", source: { label: "gantt-hub.com", href: "https://gantt-hub.com" } },
+    ],
+  },
+
   swiftflow: {
     // Validado con el autor (2026-10-09).
     draft: false,

@@ -229,7 +229,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto cliente",
     featured: true,
-    order: 5,
+    order: 6,
     images: {
       cover: "/img/projects/honduras-medical-center/cover.webp",
       mobile: "/img/projects/honduras-medical-center/mobile.webp",
@@ -297,6 +297,56 @@ export const projects = [
     liveUrl: "https://swiftflowtyping.netlify.app",
   },
   {
+    id: "gantthub",
+    // Una línea de valor para la card de la home.
+    headline:
+      "Tablero, Gantt, presupuesto y reuniones en un solo lugar: nació para ordenar mis proyectos y hoy lo usan Wink y 10 empresas más.",
+    highlights: [
+      "En uso por Wink y 10 empresas más",
+      "Gantt propio: arrastrar para mover y estirar para cambiar fechas",
+      "Permisos por rol en reglas de Firestore, con 77 tests",
+    ],
+    color: "#059669",
+    slug: "gantthub",
+    title: "GanttHub",
+    summary:
+      "Gestor de proyectos colaborativo: Kanban, Gantt, presupuesto, reuniones e ideas en un solo lugar. Vue 3 + Firebase.",
+    description:
+      "GanttHub empezó como mi herramienta para llevar el control de mis propias tareas; después la usé para organizar Wink, RapiSites y SwiftFlow, y así terminó siendo un producto. Junta en un solo lugar lo que normalmente vive en varias herramientas: un tablero Kanban con drag & drop, un diagrama de Gantt hecho a mano (arrastrar para mover, estirar para cambiar fechas, vista por día, semana o mes e hitos), presupuesto y finanzas por proyecto en varias monedas, reuniones con videollamada integrada (Jitsi) y resumen, ideas, y flujos de procesos que se pueden generar con IA. El panel de inicio responde «qué cambió y qué me toca»: proyectos que requieren atención, lo asignado a ti, menciones y la carga del equipo. Cada proyecto tiene roles (owner, admin, editor y viewer) que se aplican en las reglas de Firestore y Storage, no solo en la interfaz, y que están cubiertos por tests en el emulador. La interfaz está construida sobre una librería de componentes propia, con tokens, tema por proyecto, español e inglés, y funciona como PWA. Las notificaciones —menciones, recordatorios de vencimiento, invitaciones y reportes diarios y semanales— salen por correo desde Cloud Functions. Lo diseño y desarrollo de punta a punta: Vue 3, TypeScript, Pinia, Tailwind CSS 4 y Firebase (Auth con 2FA, Firestore, Storage, Functions y Hosting).",
+    category: "SaaS",
+    role: "Creador y desarrollador fullstack",
+    year: 2026,
+    status: "Producción",
+    team: "Proyecto personal",
+    featured: true,
+    order: 5,
+    images: {
+      cover: "/img/projects/gantthub/cover.webp",
+      mobile: "/img/projects/gantthub/mobile.webp",
+      gallery: [
+        "/img/projects/gantthub/01.webp",
+        "/img/projects/gantthub/02.webp",
+        "/img/projects/gantthub/03.webp",
+        "/img/projects/gantthub/04.webp",
+        "/img/projects/gantthub/site.webp",
+      ],
+    },
+    techStack: ["vue", "ts", "firebase", "pinia", "tailwind", "vite"],
+    features: [
+      "Tablero Kanban con drag & drop, subtareas, archivos, notas con menciones y actividad.",
+      "Diagrama de Gantt propio: mover y estirar barras, vista por día, semana o mes, hitos y agrupación.",
+      "Presupuesto y finanzas por proyecto (USD, HNL, EUR), por horas o precio fijo, con exportación a CSV.",
+      "Reuniones con videollamada integrada (Jitsi), invitaciones por correo y resumen.",
+      "Roles owner, admin, editor y viewer aplicados en las reglas de Firestore y Storage, con tests.",
+      "Panel de inicio con lo que cambió, lo asignado a ti, menciones y salud de los proyectos.",
+      "Correos de menciones, vencimientos, invitaciones y reportes diarios y semanales (Cloud Functions).",
+      "Librería de componentes propia, 2FA (TOTP), español e inglés y PWA.",
+    ],
+    tags: ["saas", "vue", "firebase", "gestion-de-proyectos", "typescript"],
+    repoUrl: "",
+    liveUrl: "https://gantt-hub.com",
+  },
+  {
     id: "tasksphere",
     slug: "tasksphere",
     title: "TaskSphere",
@@ -310,7 +360,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 6,
+    order: 7,
     images: { cover: "" },
     techStack: ["js", "react", "mongo", "node", "vite"],
     features: [
@@ -337,7 +387,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 7,
+    order: 8,
     images: { cover: "" },
     techStack: ["vite", "js", "tailwind", "vue"],
     features: [
@@ -364,7 +414,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 8,
+    order: 9,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "firebase", "vite"],
     features: [
@@ -391,7 +441,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 9,
+    order: 10,
     images: { cover: "" },
     techStack: ["vite", "js", "vue", "firebase"],
     features: [
@@ -418,7 +468,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 10,
+    order: 11,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -445,7 +495,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 11,
+    order: 12,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -472,7 +522,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 12,
+    order: 13,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -499,7 +549,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 13,
+    order: 14,
     images: { cover: "" },
     techStack: ["react", "ts", "css", "vite", "html"],
     features: [
@@ -526,7 +576,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 14,
+    order: 15,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -553,7 +603,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 15,
+    order: 16,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -580,7 +630,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 16,
+    order: 17,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -607,7 +657,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 17,
+    order: 18,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -634,7 +684,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 18,
+    order: 19,
     images: { cover: "" },
     techStack: ["html", "css", "js", "vite"],
     features: [

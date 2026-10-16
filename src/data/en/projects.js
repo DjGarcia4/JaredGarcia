@@ -113,6 +113,30 @@ export const projectsEn = {
       "Responsive, mobile-first site.",
     ],
   },
+  gantthub: {
+    category: "SaaS",
+    role: "Creator and full-stack developer",
+    team: "Personal project",
+    summary: "A collaborative project manager: Kanban, Gantt, budget, meetings and ideas in one place. Vue 3 + Firebase.",
+    headline: "Board, Gantt, budget and meetings in one place: it started as a way to organize my own projects and today Wink and 10 other companies use it.",
+    highlights: [
+      "Used by Wink and 10 other companies",
+      "A custom Gantt: drag to move, stretch to change dates",
+      "Role permissions in Firestore rules, with 77 tests",
+    ],
+    description:
+      "GanttHub started as my tool for keeping track of my own tasks; then I used it to organize Wink, RapiSites and SwiftFlow, and that's how it became a product. It brings together what usually lives in several tools: a Kanban board with drag & drop, a hand-built Gantt chart (drag to move, stretch to change dates, day, week or month views and milestones), per-project budget and finances in several currencies, meetings with built-in video calls (Jitsi) and a summary, ideas, and process flows that can be generated with AI. The home dashboard answers “what changed and what's on me”: projects that need attention, what's assigned to you, mentions and team workload. Every project has roles (owner, admin, editor and viewer) enforced in the Firestore and Storage rules, not just in the UI, and covered by tests in the emulator. The interface is built on my own component library, with tokens, per-project theming, Spanish and English, and it works as a PWA. Notifications —mentions, due-date reminders, invitations and daily and weekly reports— go out by email from Cloud Functions. I design and build it end to end: Vue 3, TypeScript, Pinia, Tailwind CSS 4 and Firebase (Auth with 2FA, Firestore, Storage, Functions and Hosting).",
+    features: [
+      "Kanban board with drag & drop, subtasks, files, notes with mentions and activity.",
+      "A custom Gantt chart: move and stretch bars, day, week or month views, milestones and grouping.",
+      "Per-project budget and finances (USD, HNL, EUR), hourly or fixed price, with CSV export.",
+      "Meetings with built-in video calls (Jitsi), email invitations and a summary.",
+      "Owner, admin, editor and viewer roles enforced in the Firestore and Storage rules, with tests.",
+      "Home dashboard with what changed, what's assigned to you, mentions and project health.",
+      "Emails for mentions, due dates, invitations and daily and weekly reports (Cloud Functions).",
+      "Own component library, 2FA (TOTP), Spanish and English, and PWA.",
+    ],
+  },
   swiftflow: {
     category: "Tool",
     role: "Creator and developer",

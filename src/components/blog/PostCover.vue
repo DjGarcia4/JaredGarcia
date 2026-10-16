@@ -3,7 +3,8 @@
        palabra clave del post en grande. RapiSites usa su logo (dos chevrons
        sobre un cuadrado redondeado, variante oscura de su decisión 033) y
        sus chevrons de fondo; SwiftFlow, su rayo blanco sobre naranja; Wink
-       (App, Site y Studio), su wordmark con la sonrisa; este portafolio, su J. -->
+       (App, Site y Studio), su wordmark con la sonrisa; GanttHub, su cohete
+       (de fondo, como máscara teñida con su color); este portafolio, su J. -->
   <div
     class="post-cover relative flex aspect-video h-full w-full flex-col justify-between overflow-hidden p-6 md:p-8"
     :style="{ '--brand': brand.accent }"
@@ -41,6 +42,12 @@
       <path :d="SMILE" />
     </svg>
 
+    <span
+      v-else-if="brand.rocket"
+      class="post-cover__bg post-cover__rocket absolute -right-[6%] top-1/2 h-[135%] aspect-[512/487] -translate-y-1/2"
+      :style="{ '--logo': `url(${gantthubLogo})` }"
+    ></span>
+
     <!-- Marca -->
     <span class="relative inline-flex items-center gap-2.5">
       <span v-if="brand.chevrons" class="post-cover__mark grid h-8 w-8 place-items-center">
@@ -61,6 +68,7 @@
         <svg viewBox="0 0 24 24" class="h-[1.1rem] w-[1.1rem]" fill="currentColor"><path :d="BOLT" /></svg>
       </span>
       <img v-else-if="brand.wink" :src="winkLogo" alt="" class="-my-2 h-11 w-auto" />
+      <img v-else-if="brand.rocket" :src="gantthubLogo" alt="" class="h-8 w-auto" />
       <LogoMark v-else-if="brand.logoMark" class="h-8 w-8" />
       <span v-else class="h-2.5 w-2.5 rounded-full bg-[var(--brand)]"></span>
       <!-- Con el wordmark de Wink, solo lo que va después de «Wink» (Studio, App…) -->
@@ -82,6 +90,8 @@ import { computed } from "vue";
 import LogoMark from "@/components/LogoMark.vue";
 // Logo de Wink (packages/theme de Wink Studio): wordmark + sonrisa.
 import winkLogo from "@/assets/brands/wink-logo.svg";
+// Logo de GanttHub (src/assets/GHC.webp del repo de GanttHub, a 512 px).
+import gantthubLogo from "@/assets/brands/gantthub-logo.webp";
 
 const props = defineProps({
   // Proyecto del post: { id, title, color } (ver postProject en lib/posts).
@@ -96,7 +106,7 @@ const BRANDS = {
   "wink-studio": { accent: "#00d2ea", wink: true },
   "wink-app": { accent: "#00d2ea", wink: true },
   "wink-site": { accent: "#00d2ea", wink: true },
-  gantthub: { accent: "#34d399" },
+  gantthub: { accent: "#3be29a", rocket: true },
   portfolio: { accent: "#22c55e", logoMark: true },
 };
 
@@ -139,6 +149,15 @@ const brand = computed(() => BRANDS[props.project?.id] ?? { accent: props.projec
   background: var(--brand);
   color: #1a1030;
   box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--brand) 55%, transparent);
+}
+.post-cover__rocket {
+  background: currentColor;
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .post-cover__rocket {
+  transform: translateY(-50%) translate(4%, -4%);
 }
 .post-cover__mark--bolt {
   color: #fff;

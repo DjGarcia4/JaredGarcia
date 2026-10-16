@@ -131,7 +131,7 @@ export const projects = [
     status: "En desarrollo",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 2,
+    order: 3,
     images: {
       cover: "/img/projects/wink-studio/cover.webp",
       gallery: [
@@ -182,7 +182,7 @@ export const projects = [
     status: "Producción",
     team: "Wink Digital S.A.",
     featured: true,
-    order: 4,
+    order: 5,
     images: {
       cover: "/img/projects/wink-site/cover.webp",
       mobile: "/img/projects/wink-site/mobile.webp",
@@ -274,7 +274,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto personal",
     featured: true,
-    order: 3,
+    order: 4,
     images: {
       cover: "/img/projects/swiftflow/cover.webp",
       mobile: "/img/projects/swiftflow/mobile.webp",
@@ -319,7 +319,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto personal",
     featured: true,
-    order: 5,
+    order: 2,
     images: {
       cover: "/img/projects/gantthub/cover.webp",
       mobile: "/img/projects/gantthub/mobile.webp",

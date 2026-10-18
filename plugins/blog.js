@@ -26,6 +26,8 @@ const VIRTUAL_ID = "virtual:blog";
 const RESOLVED_ID = "\0" + VIRTUAL_ID;
 const DESC_ID = "virtual:blog/descriptions";
 const RESOLVED_DESC_ID = "\0" + DESC_ID;
+const SEARCH_ID = "virtual:blog/search"; // + "/<lang>"
+const RESOLVED_SEARCH_ID = "\0" + SEARCH_ID;
 // Cuántos resúmenes por idioma viajan en el índice (la home muestra 3).
 const HOME_DESCRIPTIONS = 3;
 const SHIKI_THEME = "github-dark-default";
@@ -52,6 +54,23 @@ const splitFrontmatter = (raw, file) => {
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (!m) throw new Error(`[blog] ${file}: falta el frontmatter (--- ... ---).`);
   return { data: parseYaml(m[1]) || {}, body: m[2] };
+};
+
+// Texto plano del artículo para el buscador: encabezados aparte (pesan más)
+// y el cuerpo sin sintaxis Markdown ni bloques de código.
+const searchText = (body) => {
+  const headings = [...body.matchAll(/^#{2,3}\s+(.+)$/gm)].map((m) => m[1].replace(/[`*_]/g, "").trim());
+  const text = body
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/^#{1,6}\s+.*$/gm, " ")
+    .replace(/^\s*(?:[-*+]|\d+\.|>|\|)\s?/gm, " ")
+    .replace(/[`*_|#~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return { h: headings.join(" · "), b: text };
 };
 
 const readingTime = (body) => {
@@ -245,9 +264,10 @@ ${items}
     resolveId(id) {
       if (id === VIRTUAL_ID) return RESOLVED_ID;
       if (id === DESC_ID) return RESOLVED_DESC_ID;
+      if (id.startsWith(SEARCH_ID + "/")) return "\0" + id;
     },
     load(id) {
-      if (id === RESOLVED_ID || id === RESOLVED_DESC_ID) {
+      if ([RESOLVED_ID, RESOLVED_DESC_ID].includes(id) || id.startsWith(RESOLVED_SEARCH_ID + "/")) {
         // Que el dev server recargue el índice al cambiar cualquier .md.
         listFiles().forEach(({ file }) => this.addWatchFile(file));
       }
@@ -268,6 +288,22 @@ ${items}
         const map = Object.fromEntries(allPosts().map((p) => [`${p.lang}/${p.slug}`, p.description]));
         return `export const descriptions = ${JSON.stringify(map)};`;
       }
+      if (id.startsWith(RESOLVED_SEARCH_ID + "/")) {
+        // Índice de texto completo, uno por idioma (virtual:blog/search/es…):
+        // lo descarga /blog recién cuando alguien busca.
+        const lang = id.slice(RESOLVED_SEARCH_ID.length + 1);
+        const files = new Map(listFiles().map((f) => [`${f.lang}/${f.slug}`, f.file]));
+        const map = Object.fromEntries(
+          allPosts()
+            .filter((p) => p.lang === lang)
+            .map((p) => {
+            const key = `${p.lang}/${p.slug}`;
+            const { body } = splitFrontmatter(fs.readFileSync(files.get(key), "utf8"), key);
+              return [key, searchText(body)];
+            })
+        );
+        return `export const index = ${JSON.stringify(map)};`;
+      }
     },
     async transform(code, id) {
       if (!isPostFile(id)) return;
@@ -280,7 +316,7 @@ ${items}
     },
     handleHotUpdate({ file, server }) {
       if (!isPostFile(file)) return;
-      for (const vid of [RESOLVED_ID, RESOLVED_DESC_ID]) {
+      for (const vid of [RESOLVED_ID, RESOLVED_DESC_ID, ...LANGS.map((l) => `${RESOLVED_SEARCH_ID}/${l}`)]) {
         const mod = server.moduleGraph.getModuleById(vid);
         if (mod) server.moduleGraph.invalidateModule(mod);
       }

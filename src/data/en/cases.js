@@ -255,6 +255,11 @@ export const casesEn = {
         title: "No ads, no account, no server",
         body: "What made me leave the other platform was the ads. SwiftFlow has none, needs no account and keeps data in the browser; it installs as a PWA and works offline. Zero friction to get started and zero personal data on a server.",
       },
+      {
+        title: "Let the song set the speed",
+        body: "In the other modes you go at your own pace; in Rhythm the music sets it. Letters fall down the lane of the finger that types them and are graded by how many milliseconds early or late you hit them. The four tracks are synthesized in the browser with Web Audio, no files and nobody else's rights, and the game runs on the audio clock, not the page's. A twelve-click calibration corrects for your keyboard's and speakers' delay.",
+        media: { type: "image", src: "/img/projects/swiftflow/ritmo-juego.webp", caption: "Rhythm: each letter falls down its finger's lane and is graded as it reaches the line." },
+      },
     ],
     outcome: [
       { value: "50+", label: "people use it" },

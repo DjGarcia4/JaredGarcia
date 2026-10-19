@@ -279,6 +279,11 @@ export const cases = {
         title: "Sin anuncios, sin cuenta, sin servidor",
         body: "Lo que me hizo dejar la otra plataforma fueron los anuncios. SwiftFlow no tiene, no pide cuenta y los datos viven en el navegador; se instala como PWA y funciona offline. Cero fricción para empezar y cero datos personales en un servidor.",
       },
+      {
+        title: "Que la velocidad la ponga la canción",
+        body: "En los otros modos vas a tu ritmo; en Ritmo lo marca la música. Las letras caen por el carril del dedo que las toca y se califican por cuántos milisegundos llegaste antes o después del tiempo. Las cuatro pistas se sintetizan en el navegador con Web Audio, sin archivos ni derechos de nadie, y el juego corre sobre el reloj del audio, no el de la página. Una calibración de doce clics corrige el retraso de tu teclado y tus parlantes.",
+        media: { type: "image", src: "/img/projects/swiftflow/ritmo-juego.webp", caption: "Ritmo: cada letra cae por el carril de su dedo y se califica al llegar a la línea." },
+      },
     ],
     outcome: [
       { value: "+50", label: "personas lo usan" },

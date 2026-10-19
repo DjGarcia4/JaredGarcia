@@ -267,7 +267,7 @@ export const projects = [
     summary:
       "Test de mecanografía en español e inglés que no solo te mide: te dice en qué fallás y te arma la práctica para arreglarlo.",
     description:
-      "SwiftFlow es mi proyecto hobby, que sigo mejorando constantemente: un test de mecanografía en español e inglés que va más allá de medir la velocidad. Analiza cada pulsación para decirte qué teclas, qué dedos y qué combinaciones te frenan, y arma práctica a medida alrededor de tus puntos débiles. Tiene 13 modos —tiempo, palabras, números, citas, clásicos de la literatura, dictado por voz, código en 8 lenguajes, zen, entrenamiento por teclas y por dedos—, un curso de 24 lecciones para aprender a escribir sin mirar adaptado a tu distribución de teclado, logros, retos diarios y semanales, y un historial con mapa de errores, tendencias, constancia y consejos personalizados. Todo funciona sin cuenta ni servidor: los datos viven en el navegador, se instala como PWA y anda sin conexión. Está construido con Vue 3, Pinia y Tailwind CSS 4, organizado por features, con tests unitarios en Vitest, end-to-end en Playwright y chequeos de accesibilidad con axe.",
+      "SwiftFlow es mi proyecto hobby, que sigo mejorando constantemente: un test de mecanografía en español e inglés que va más allá de medir la velocidad. Analiza cada pulsación para decirte qué teclas, qué dedos y qué combinaciones te frenan, y arma práctica a medida alrededor de tus puntos débiles. Tiene 13 modos —tiempo, palabras, números, citas, clásicos de la literatura, dictado por voz, código en 8 lenguajes, zen, entrenamiento por teclas y por dedos, y Ritmo, un juego para escribir al compás de música sintetizada en el navegador—, un curso de 24 lecciones para aprender a escribir sin mirar adaptado a tu distribución de teclado, logros, retos diarios y semanales, y un historial con mapa de errores, tendencias, constancia y consejos personalizados. Todo funciona sin cuenta ni servidor: los datos viven en el navegador, se instala como PWA y anda sin conexión. Está construido con Vue 3, Pinia y Tailwind CSS 4, organizado por features, con tests unitarios en Vitest, end-to-end en Playwright y chequeos de accesibilidad con axe.",
     category: "Herramienta",
     role: "Creador y desarrollador",
     year: 2026,
@@ -281,18 +281,20 @@ export const projects = [
       gallery: [
         "/img/projects/swiftflow/01.webp",
         "/img/projects/swiftflow/02.webp",
+        "/img/projects/swiftflow/ritmo-juego.webp",
+        "/img/projects/swiftflow/ritmo-resultado.webp",
       ],
     },
     techStack: ["vue", "tailwind", "pinia", "vite", "js"],
     features: [
-      "13 modos de práctica, incluyendo dictado por voz y código en 8 lenguajes.",
+      "13 modos de práctica, incluyendo dictado por voz, código en 8 lenguajes y Ritmo: las letras caen al compás de la música.",
       "Análisis de errores por tecla, dedo y combinación, con consejos personalizados.",
       "Curso de 24 lecciones para escribir sin mirar, adaptado a 5 distribuciones de teclado.",
       "Logros, retos diarios y semanales, y resúmenes mensuales para compartir.",
       "Interfaz y textos en español e inglés, manejable 100% con el teclado.",
       "PWA sin cuenta ni servidor: funciona offline y guarda todo en el navegador.",
     ],
-    tags: ["vue", "pwa", "typing", "i18n", "accesibilidad", "frontend"],
+    tags: ["vue", "pwa", "typing", "i18n", "accesibilidad", "web-audio", "frontend"],
     repoUrl: "",
     liveUrl: "https://swiftflowtyping.netlify.app",
   },

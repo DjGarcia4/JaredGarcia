@@ -149,9 +149,9 @@ export const projectsEn = {
       "100% keyboard-operable, checked with axe",
     ],
     description:
-      "SwiftFlow is my hobby project, and I keep improving it: a typing test in Spanish and English that goes beyond measuring speed. It analyzes every keystroke to show which keys, fingers and combinations slow you down, and builds practice around your weak spots. It has 13 modes —time, words, numbers, quotes, literature classics, voice dictation, code in 8 languages, zen, key and finger training—, a 24-lesson touch-typing course adapted to your keyboard layout, achievements, daily and weekly challenges, and a history with an error map, trends, streaks and personalized tips. Everything works without an account or a server: data lives in the browser, it installs as a PWA and works offline. It's built with Vue 3, Pinia and Tailwind CSS 4, organized by feature, with unit tests in Vitest, end-to-end tests in Playwright and accessibility checks with axe.",
+      "SwiftFlow is my hobby project, and I keep improving it: a typing test in Spanish and English that goes beyond measuring speed. It analyzes every keystroke to show which keys, fingers and combinations slow you down, and builds practice around your weak spots. It has 13 modes —time, words, numbers, quotes, literature classics, voice dictation, code in 8 languages, zen, key and finger training, and Rhythm, a game for typing to the beat of music synthesized in the browser—, a 24-lesson touch-typing course adapted to your keyboard layout, achievements, daily and weekly challenges, and a history with an error map, trends, streaks and personalized tips. Everything works without an account or a server: data lives in the browser, it installs as a PWA and works offline. It's built with Vue 3, Pinia and Tailwind CSS 4, organized by feature, with unit tests in Vitest, end-to-end tests in Playwright and accessibility checks with axe.",
     features: [
-      "13 practice modes, including voice dictation and code in 8 languages.",
+      "13 practice modes, including voice dictation, code in 8 languages and Rhythm: letters fall to the beat of the music.",
       "Error analysis by key, finger and combination, with personalized tips.",
       "24-lesson touch-typing course, adapted to 5 keyboard layouts.",
       "Achievements, daily and weekly challenges, and shareable monthly recaps.",

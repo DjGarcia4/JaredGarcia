@@ -21,6 +21,8 @@ export const skills = [
   { name: "Axios", image: "axios" },
   { name: "Docker", image: "docker" },
   { name: "Balena", image: "balena" },
+  { name: "Swift", image: "swift" },
+  { name: "SwiftUI", image: "swiftui" },
 ];
 
 // Nombre legible de una tecnología a partir de su clave (el nombre del SVG

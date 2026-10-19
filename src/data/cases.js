@@ -288,4 +288,47 @@ export const cases = {
     learnings:
       "Diseñar para mí mismo fue la mejor investigación: cada decisión salió de algo que me molestaba como usuario, desde los anuncios hasta tener que soltar el teclado.",
   },
+
+  hacecuanto: {
+    // Borrador (2026-10-19): el qué está tomado del código (../HaceCuanto);
+    // el por qué de origen y de cada decisión está redactado a partir del
+    // repo y hay que validarlo con el autor. Capturas del simulador con los
+    // datos de demo (-seedDemo).
+    draft: true,
+    tldr: {
+      problem: "«¿Hace cuánto me corté el pelo?» No hay una app que responda eso rápido sin convertirlo en una lista de tareas.",
+      role: "Proyecto propio: diseño y desarrollo nativo para iPhone y Apple Watch.",
+      outcome: "Una app que registra con un tap desde donde estés y te avisa cuando ya toca.",
+    },
+    context:
+      "Hay cosas que no son tareas ni hábitos de todos los días: cortarme el pelo, lavar el carro, cambiar el aceite, ir al doctor. Lo único que quiero saber es hace cuánto fue la última vez, y que alguien me avise cuando ya toca. Hace Cuánto empezó para eso y fue creciendo hacia los hábitos (leer, orar, tomar agua) y el Apple Watch.",
+    problem:
+      "Registrar tiene que costar menos que olvidarse: si hay que abrir la app, buscar el item y llenar un formulario, no se registra. Y los avisos tienen que entender que «cada 28 días», «8 vasos al día» y «normalmente voy al súper cada semana» son tres preguntas distintas.",
+    decisions: [
+      {
+        title: "Tres tipos de cosas, un solo tap",
+        body: "Cada item es un evento (solo hace cuánto y cuántas veces), un hábito (meta por día o por semana, con racha) o algo que toca cada X días. Los tres se registran igual, con un tap y un aviso para deshacer; el detalle (cuánto costó, qué libro), otra fecha o el cronómetro son opcionales. Todo lo demás —rachas, lo que falta, el promedio, «lo haces más los domingos por la noche»— se calcula a partir de las fechas, así que no hay datos derivados que se desincronicen.",
+        media: { type: "image", src: "/img/projects/hacecuanto/01.webp", caption: "Inicio con lo que ya toca y tu semana; el detalle de un hábito con sus números y su calendario." },
+      },
+      {
+        title: "Registrar sin abrir la app",
+        body: "La mejor forma de registrar es la que ya tienes enfrente. Hay una sola acción de «registrar» (App Intents) que usan los widgets de la pantalla de inicio y de bloqueo, el Centro de Control, Siri, el botón «Registrar ✓» de los avisos y el cronómetro de la Dynamic Island. Está declarada para que corra dentro de la app aunque la dispare un widget, así la pantalla se actualiza al momento. La base de datos vive en un App Group que comparten la app, los widgets y Siri.",
+        media: { type: "image", src: "/img/projects/hacecuanto/03.webp", caption: "Widgets de varios items, de uno solo y de pantalla de bloqueo, y la app del Apple Watch." },
+      },
+      {
+        title: "Avisos que entienden el ritmo",
+        body: "Cada tipo avisa distinto: lo de cada X días, el día que vence; un hábito diario, a tu hora si aún no lo hiciste; un evento con historial, cuando ya pasó una vez y media su intervalo promedio. Los hábitos con meta diaria pueden recordarte cada cierto tiempo dentro de un horario, contando desde tu último registro y callándose al llegar a la meta. Y un item puede tener un lugar: al llegar te pregunta si lo registra, salvo que lo hayas hecho en las últimas 6 horas. Los permisos se piden solo al activar algo que los necesita.",
+        media: { type: "image", src: "/img/projects/hacecuanto/02.webp", caption: "Crear un item desde una plantilla: meta de 8 vasos, recordatorios durante el día y lugar." },
+      },
+      {
+        title: "El Watch no espera al iPhone",
+        body: "En la muñeca el tap se aplica al momento y se manda al iPhone con la hora original; si el iPhone no está cerca, queda en cola y se registra cuando vuelva. Mientras tanto, el Watch vuelve a aplicar sus taps pendientes sobre cualquier lista que le llegue, para que nada desaparezca de la pantalla antes de confirmarse. El iPhone es la única fuente de verdad.",
+      },
+    ],
+    outcome: [
+      { value: "3", label: "tipos de item: evento, hábito y cada X días" },
+      { value: "6", label: "formas de registrar sin abrir la app (widgets, bloqueo, Centro de Control, Siri, avisos y Watch)" },
+      { value: "29", label: "pruebas de la lógica, más una captura de cada widget en cada tamaño" },
+    ],
+  },
 };

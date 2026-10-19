@@ -161,6 +161,31 @@ export const projectsEn = {
   },
 
   // Practice
+  hacecuanto: {
+    category: "Mobile app",
+    role: "iOS design and development",
+    team: "Personal project",
+    summary: "A native iOS and watchOS app to know how long ago you did something: events, habits with streaks and things due every X days.",
+    headline: "How long ago was the last time? One tap to log it and the app tells you when it's due, from the iPhone, widgets, Siri or the Apple Watch.",
+    highlights: [
+      "Native iPhone and Apple Watch app in SwiftUI + SwiftData",
+      "Log without opening the app: widgets, Siri, Control Center and notifications",
+      "Reminders that learn your rhythm and places that ask when you arrive",
+    ],
+    description:
+      "Hace Cuánto (Spanish for “how long ago”) answers a question I kept asking myself: how long ago was the last time I…? Got a haircut, washed the car, went grocery shopping, read. Each thing is an item of one of three kinds: an event (just how long ago and how many times), a habit (with a daily or weekly goal and a streak) or something due every X days (it tells you how long until it's due or how overdue it is). Logging is one tap, with a toast to undo; if you want, you add a detail (text, a number or choices), another date or a timer that shows in the Dynamic Island. Home opens with what's due and a summary of your week, and every item has its numbers, an 18-week calendar, a monthly count and its patterns (“You do it most on Sunday nights”). You can log without opening the app: single-item, multi-item and to-do widgets, the Lock Screen, Control Center, Siri and the “Log ✓” button on notifications. Reminders learn your rhythm, habits with a daily goal can nudge you every so often within a time window, and an item can have a place: when you get to the store it asks whether to log it. The Apple Watch has its own app and complication, and logs even when the iPhone isn't nearby. There are automatic JSON backups, and restoring never duplicates anything. I built it end to end in Swift: SwiftUI, SwiftData shared through an App Group, App Intents, WidgetKit, ActivityKit, Core Location and WatchConnectivity, with tests for the logic and for every widget at every size.",
+    features: [
+      "Three item kinds: event, habit with a goal and streak, and “every X days” that tells you when it's due.",
+      "One tap to log, with undo; optional detail (text, number or choices), another date or a timer.",
+      "Home with what's due and your week; per item: numbers, calendar, monthly count and patterns.",
+      "Single-item, multi-item and to-do widgets, Lock Screen and Control Center.",
+      "Siri and Shortcuts: “Log Reading in Hace Cuánto”, “How long ago Haircut?”.",
+      "A live timer in the Dynamic Island and on the Lock Screen.",
+      "Reminders that learn your rhythm, nudges during the day and places that ask when you arrive.",
+      "Apple Watch app and complication that log even when the iPhone isn't nearby.",
+      "Searchable history, 14 templates, archiving and automatic JSON backups.",
+    ],
+  },
   tasksphere: { category: "Practice", summary: "App to manage tasks, assign owners and track project progress." },
   "patient-management": { category: "Practice", summary: "Veterinary clinic system with records, appointments, treatments and billing." },
   "real-state": { category: "Practice", summary: "Real estate search with advanced filters. Vue + Firebase." },

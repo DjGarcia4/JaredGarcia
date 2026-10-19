@@ -26,6 +26,7 @@ export const stack = [
       { name: "Pinia", icon: "pinia" },
       { name: "Vite", icon: "vite" },
       { name: "PWA" },
+      { name: "Swift · SwiftUI (iOS y watchOS)", icon: "swift" },
     ],
   },
   {

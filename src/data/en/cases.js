@@ -264,4 +264,43 @@ export const casesEn = {
     learnings:
       "Designing for myself was the best research: every decision came from something that bugged me as a user, from the ads to having to take my hands off the keyboard.",
   },
+
+  hacecuanto: {
+    draft: true,
+    tldr: {
+      problem: "“How long ago did I get a haircut?” No app answers that quickly without turning it into a to-do list.",
+      role: "Personal project: design and native development for iPhone and Apple Watch.",
+      outcome: "An app that logs with one tap from wherever you are and lets you know when it's due.",
+    },
+    context:
+      "Some things aren't tasks or everyday habits: getting a haircut, washing the car, changing the oil, going to the doctor. All I want to know is how long ago the last time was, and for something to tell me when it's due again. Hace Cuánto started for that and grew into habits (reading, praying, drinking water) and the Apple Watch.",
+    problem:
+      "Logging has to cost less than forgetting: if you have to open the app, find the item and fill in a form, it doesn't get logged. And reminders have to understand that “every 28 days”, “8 glasses a day” and “I usually go grocery shopping every week” are three different questions.",
+    decisions: [
+      {
+        title: "Three kinds of things, one tap",
+        body: "Every item is an event (just how long ago and how many times), a habit (a daily or weekly goal, with a streak) or something due every X days. All three are logged the same way, with one tap and a toast to undo; the detail (how much it cost, which book), another date or the timer are optional. Everything else —streaks, what's left, the average, “you do it most on Sunday nights”— is computed from the dates, so there's no derived data to fall out of sync.",
+        media: { type: "image", src: "/img/projects/hacecuanto/01.webp", caption: "Home with what's due and your week; a habit's detail with its numbers and calendar." },
+      },
+      {
+        title: "Log without opening the app",
+        body: "The best way to log is whatever is already in front of you. There's a single “log” action (App Intents) used by the Home Screen and Lock Screen widgets, Control Center, Siri, the “Log ✓” button on notifications and the timer in the Dynamic Island. It's declared so it runs inside the app even when a widget triggers it, so the screen updates right away. The database lives in an App Group shared by the app, the widgets and Siri.",
+        media: { type: "image", src: "/img/projects/hacecuanto/03.webp", caption: "Multi-item, single-item and Lock Screen widgets, and the Apple Watch app." },
+      },
+      {
+        title: "Reminders that get the rhythm",
+        body: "Each kind reminds you differently: something every X days, on the day it's due; a daily habit, at your time if you haven't done it yet; an event with history, once one and a half times its average interval has gone by. Habits with a daily goal can nudge you every so often within a time window, counting from your last entry and going quiet once you hit the goal. And an item can have a place: when you arrive it asks whether to log it, unless you did in the last 6 hours. Permissions are only requested when you turn on something that needs them.",
+        media: { type: "image", src: "/img/projects/hacecuanto/02.webp", caption: "Creating an item from a template: a goal of 8 glasses, nudges during the day and a place." },
+      },
+      {
+        title: "The Watch doesn't wait for the iPhone",
+        body: "On the wrist, a tap applies right away and is sent to the iPhone with its original time; if the iPhone isn't nearby, it's queued and logged when it's back. Meanwhile the Watch re-applies its pending taps on top of any list it receives, so nothing disappears from the screen before it's confirmed. The iPhone is the single source of truth.",
+      },
+    ],
+    outcome: [
+      { value: "3", label: "item kinds: event, habit and every X days" },
+      { value: "6", label: "ways to log without opening the app (widgets, Lock Screen, Control Center, Siri, notifications and Watch)" },
+      { value: "29", label: "logic tests, plus a snapshot of every widget at every size" },
+    ],
+  },
 };

@@ -229,7 +229,7 @@ export const projects = [
     status: "Producción",
     team: "Proyecto cliente",
     featured: true,
-    order: 6,
+    order: 7,
     images: {
       cover: "/img/projects/honduras-medical-center/cover.webp",
       mobile: "/img/projects/honduras-medical-center/mobile.webp",
@@ -347,6 +347,56 @@ export const projects = [
     liveUrl: "https://gantt-hub.com",
   },
   {
+    id: "hacecuanto",
+    // Una línea de valor para la card de la home.
+    headline:
+      "¿Hace cuánto fue la última vez? Un tap para registrarlo y la app te dice cuándo ya toca, desde el iPhone, los widgets, Siri o el Apple Watch.",
+    highlights: [
+      "App nativa para iPhone y Apple Watch en SwiftUI + SwiftData",
+      "Registrar sin abrir la app: widgets, Siri, Centro de Control y notificaciones",
+      "Avisos que aprenden tu ritmo y lugares que te preguntan al llegar",
+    ],
+    color: "#F97316",
+    slug: "hacecuanto",
+    title: "Hace Cuánto",
+    summary:
+      "App nativa de iOS y watchOS para saber hace cuánto hiciste algo: eventos, hábitos con rachas y cosas que tocan cada X días.",
+    description:
+      "Hace Cuánto responde una pregunta que me hacía todo el tiempo: ¿hace cuánto fue la última vez que…? Me corté el pelo, lavé el carro, fui al súper, leí. Cada cosa es un item de uno de tres tipos: un evento (solo saber hace cuánto y cuántas veces), un hábito (con meta por día o por semana y racha) o algo que toca cada X días (te dice cuánto falta o hace cuánto se venció). Registrar es un tap, con aviso para deshacer; si quieres, le agregas un detalle (texto, número u opciones), otra fecha o un cronómetro que se ve en la Dynamic Island. El inicio abre con lo que ya toca y un resumen de tu semana, y cada item tiene sus números, un calendario de 18 semanas, el conteo por mes y sus patrones («Lo haces más los domingos por la noche»). Se puede registrar sin abrir la app: widgets de un item, de varios y de pendientes, la pantalla de bloqueo, el Centro de Control, Siri y el botón «Registrar ✓» de los avisos. Los avisos aprenden tu ritmo, los hábitos con meta diaria pueden recordarte cada cierto tiempo dentro de un horario, y un item puede tener un lugar: al llegar al súper te pregunta si lo registra. El Apple Watch tiene su app y su complicación, y registra aunque el iPhone no esté cerca. Hay respaldos automáticos en JSON y restaurar no duplica nada. La hice de punta a punta en Swift: SwiftUI, SwiftData compartido por App Group, App Intents, WidgetKit, ActivityKit, Core Location y WatchConnectivity, con pruebas de la lógica y de cada widget en cada tamaño.",
+    category: "App móvil",
+    role: "Diseño y desarrollo iOS",
+    year: 2026,
+    status: "En desarrollo",
+    team: "Proyecto personal",
+    featured: true,
+    order: 6,
+    images: {
+      cover: "/img/projects/hacecuanto/cover.webp",
+      mobile: "/img/projects/hacecuanto/mobile.webp",
+      gallery: [
+        "/img/projects/hacecuanto/01.webp",
+        "/img/projects/hacecuanto/02.webp",
+        "/img/projects/hacecuanto/03.webp",
+        "/img/projects/hacecuanto/04.webp",
+      ],
+    },
+    techStack: ["swift", "swiftui"],
+    features: [
+      "Tres tipos de item: evento, hábito con meta y racha, y «cada X días» que te dice cuándo ya toca.",
+      "Un tap para registrar, con deshacer; detalle opcional (texto, número u opciones), otra fecha o cronómetro.",
+      "Inicio con lo que ya toca y tu semana; por item: números, calendario, conteo por mes y patrones.",
+      "Widgets de un item, de varios y de pendientes, pantalla de bloqueo y Centro de Control.",
+      "Siri y Atajos: «Registra Leer en Hace Cuánto», «¿Hace cuánto Corte de pelo?».",
+      "Cronómetro en vivo en la Dynamic Island y la pantalla de bloqueo.",
+      "Avisos que aprenden tu ritmo, recordatorios durante el día y lugares que te preguntan al llegar.",
+      "App y complicación para Apple Watch que registran aunque el iPhone no esté cerca.",
+      "Historial con búsqueda, 14 plantillas, archivar y respaldos automáticos en JSON.",
+    ],
+    tags: ["ios", "swift", "swiftui", "watchos", "widgets", "app-nativa"],
+    repoUrl: "",
+    liveUrl: "",
+  },
+  {
     id: "tasksphere",
     slug: "tasksphere",
     title: "TaskSphere",
@@ -360,7 +410,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 7,
+    order: 8,
     images: { cover: "" },
     techStack: ["js", "react", "mongo", "node", "vite"],
     features: [
@@ -387,7 +437,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 8,
+    order: 9,
     images: { cover: "" },
     techStack: ["vite", "js", "tailwind", "vue"],
     features: [
@@ -414,7 +464,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 9,
+    order: 10,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "firebase", "vite"],
     features: [
@@ -441,7 +491,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 10,
+    order: 11,
     images: { cover: "" },
     techStack: ["vite", "js", "vue", "firebase"],
     features: [
@@ -468,7 +518,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 11,
+    order: 12,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -495,7 +545,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 12,
+    order: 13,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -522,7 +572,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 13,
+    order: 14,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -549,7 +599,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 14,
+    order: 15,
     images: { cover: "" },
     techStack: ["react", "ts", "css", "vite", "html"],
     features: [
@@ -576,7 +626,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 15,
+    order: 16,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -603,7 +653,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 16,
+    order: 17,
     images: { cover: "" },
     techStack: ["vue", "js", "tailwind", "vite"],
     features: [
@@ -630,7 +680,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 17,
+    order: 18,
     images: { cover: "" },
     techStack: ["vue", "js", "vuetify", "vite"],
     features: [
@@ -657,7 +707,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 18,
+    order: 19,
     images: { cover: "" },
     techStack: ["vite", "react", "ts", "tailwind"],
     features: [
@@ -684,7 +734,7 @@ export const projects = [
     status: "Práctica",
     team: "Proyecto individual",
     featured: false,
-    order: 19,
+    order: 20,
     images: { cover: "" },
     techStack: ["html", "css", "js", "vite"],
     features: [

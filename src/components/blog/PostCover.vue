@@ -4,7 +4,8 @@
        sobre un cuadrado redondeado, variante oscura de su decisión 033) y
        sus chevrons de fondo; SwiftFlow, su rayo blanco sobre naranja; Wink
        (App, Site y Studio), su wordmark con la sonrisa; GanttHub, su cohete
-       (de fondo, como máscara teñida con su color); este portafolio, su J. -->
+       (de fondo, como máscara teñida con su color); Hace Cuánto, su ícono y
+       el cronómetro con la palomita de fondo; este portafolio, su J. -->
   <div
     class="post-cover relative flex aspect-video h-full w-full flex-col justify-between overflow-hidden p-6 md:p-8"
     :style="{ '--brand': brand.accent }"
@@ -48,6 +49,21 @@
       :style="{ '--logo': `url(${gantthubLogo})` }"
     ></span>
 
+    <svg
+      v-else-if="brand.stopwatch"
+      class="post-cover__bg post-cover__stopwatch absolute -right-[6%] top-1/2 h-[140%] -translate-y-1/2"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M10 2h4M12 2v2.5" />
+      <circle cx="12" cy="13.5" r="8" />
+      <path class="post-cover__check" d="M8.5 13.5l2.4 2.4l4.6-4.8" />
+    </svg>
+
     <!-- Marca -->
     <span class="relative inline-flex items-center gap-2.5">
       <span v-if="brand.chevrons" class="post-cover__mark grid h-8 w-8 place-items-center">
@@ -69,6 +85,7 @@
       </span>
       <img v-else-if="brand.wink" :src="winkLogo" alt="" class="-my-2 h-11 w-auto" />
       <img v-else-if="brand.rocket" :src="gantthubLogo" alt="" class="h-8 w-auto" />
+      <img v-else-if="brand.stopwatch" :src="hacecuantoIcon" alt="" class="h-8 w-8 rounded-[22%]" />
       <LogoMark v-else-if="brand.logoMark" class="h-8 w-8" />
       <span v-else class="h-2.5 w-2.5 rounded-full bg-[var(--brand)]"></span>
       <!-- Con el wordmark de Wink, solo lo que va después de «Wink» (Studio, App…) -->
@@ -92,6 +109,8 @@ import LogoMark from "@/components/LogoMark.vue";
 import winkLogo from "@/assets/brands/wink-logo.svg";
 // Logo de GanttHub (src/assets/GHC.webp del repo de GanttHub, a 512 px).
 import gantthubLogo from "@/assets/brands/gantthub-logo.webp";
+// Ícono de Hace Cuánto (design/icon-v2.png del repo de la app, a 512 px).
+import hacecuantoIcon from "@/assets/brands/hacecuanto-icon.webp";
 
 const props = defineProps({
   // Proyecto del post: { id, title, color } (ver postProject en lib/posts).
@@ -107,6 +126,7 @@ const BRANDS = {
   "wink-app": { accent: "#00d2ea", wink: true },
   "wink-site": { accent: "#00d2ea", wink: true },
   gantthub: { accent: "#3be29a", rocket: true },
+  hacecuanto: { accent: "#fb923c", stopwatch: true },
   portfolio: { accent: "#22c55e", logoMark: true },
 };
 
@@ -168,11 +188,23 @@ const brand = computed(() => BRANDS[props.project?.id] ?? { accent: props.projec
 .group:hover .post-cover__bolt {
   transform: translateY(-50%) translateX(-6px) rotate(-4deg);
 }
+.post-cover__stopwatch {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .post-cover__stopwatch {
+  transform: translateY(-50%) rotate(8deg);
+}
 .post-cover__smile {
   color: color-mix(in srgb, #fec101 30%, transparent);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.group:hover .post-cover__smile {
+.group:hover .post-cover__stopwatch {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .post-cover__stopwatch {
+  transform: translateY(-50%) rotate(8deg);
+}
+.post-cover__smile {
   transform: translateY(-6px) scale(1.02);
 }
 .post-cover__keyword {
@@ -183,7 +215,13 @@ const brand = computed(() => BRANDS[props.project?.id] ?? { accent: props.projec
 @media (prefers-reduced-motion: reduce) {
   .post-cover__chev,
   .post-cover__bolt,
-  .post-cover__smile {
+  .post-cover__stopwatch {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .post-cover__stopwatch {
+  transform: translateY(-50%) rotate(8deg);
+}
+.post-cover__smile {
     transition: none;
   }
 }

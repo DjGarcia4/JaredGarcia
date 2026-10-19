@@ -24,6 +24,7 @@ export const stackEn = [
       { name: "Pinia", icon: "pinia" },
       { name: "Vite", icon: "vite" },
       { name: "PWA" },
+      { name: "Swift · SwiftUI (iOS and watchOS)", icon: "swift" },
     ],
   },
   {
